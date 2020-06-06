@@ -4,21 +4,17 @@ import { Link } from 'react-router-dom';
 const Nav = () => {
 
     return (
-        <nav>
-            <ul>
-                <li>
-                    <Link to ="/">Home</Link>
-                </li>
-                <li>
-                    <Link to ="/about">About Us</Link>
-                </li>
-                <li>
-                    <Link to ="/involvement">Get Involved</Link>
-                </li>
-                <li>
-                    <Link to ="/contact">Contact</Link>
-                </li>
-            </ul>
+        <nav id="navbar">
+            <img
+                id="nav-image"
+                src="images/logo.png"
+                width="40"
+                height="40"
+            />
+            <Link to ="/">HOME</Link>
+            <Link to ="/about">ABOUT US</Link>
+            <Link to ="/involvement">GET INVOLVED</Link>
+            <Link to ="/contact">CONTACT</Link>
         </nav>
     );
 };
