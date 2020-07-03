@@ -12,6 +12,7 @@ import Home from './components/Home';
 import About from './components/About';
 import Involvement from './components/Involvement';
 import Contact from './components/Contact';
+import FAQ from './components/FAQ';
 
 function App() {
   return (
@@ -28,6 +29,9 @@ function App() {
             </Route>
             <Route path="/contact">
               <Contact/>
+            </Route>
+            <Route path="/faq">
+              <FAQ/>
             </Route>
             <Route path="/">
               <Home/>
