@@ -1,26 +1,23 @@
 import React from 'react';
-import { Grid } from '@material-ui/core';
+import { Grid, Container } from '@material-ui/core';
 
 const Footer = () => {
 
     return (
-        <div id="footer-wrapper">
-            <Grid container>
-                <Grid item xs>
-                    Example
+        <footer class="site-footer">
+          <nav>
+            <Container>
+              <Grid container>
+                <Grid item xs={7}>
+                  <span> Hello </span>
                 </Grid>
-                <Grid item xs>
-                    <img
-                        id="footer-image"
-                        src="images/logo_full.png"
-                        height="80px"
-                    />
+                <Grid item xs={5}>
+                  <span> World </span>
                 </Grid>
-                <Grid item xs>
-                    Example
-                </Grid>
-            </Grid>
-        </div>
+              </Grid>
+            </Container>
+          </nav>
+        </footer>
     );
 };
 

@@ -1,11 +1,14 @@
 import React from 'react';
+import { Container, Typography } from '@material-ui/core';
 
 const Involvement = () => {
 
     return (
-        <div>
-            Involvement
-        </div>
+        <Container>
+            <Typography variant="h5">
+                Involvement
+            </Typography>
+        </Container>
     );
 }
 
