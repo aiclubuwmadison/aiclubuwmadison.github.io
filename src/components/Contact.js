@@ -1,13 +1,14 @@
 import React from 'react';
 import { Container, Typography } from '@material-ui/core';
+import Header from './typographic/Header';
 
 const Contact = () => {
 
     return (
         <Container>
-            <Typography variant="h5">
+            <Header>
                 Contact Us
-            </Typography>
+            </Header>
         </Container>
     );
 }

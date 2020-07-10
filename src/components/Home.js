@@ -1,13 +1,14 @@
 import React from 'react';
 import { Typography, Container } from '@material-ui/core';
+import Header from './typographic/Header';
 
 const Home = () => {
 
     return (
         <Container>
-            <Typography variant="h5">
+            <Header>
                 AI @ UW
-            </Typography>
+            </Header>
         </Container>
     );
 }

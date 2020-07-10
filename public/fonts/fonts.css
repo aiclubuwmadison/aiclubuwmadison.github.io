@@ -1,0 +1,32 @@
+/* Fonts */
+@font-face {
+    font-family: 'NeueMontreal-LightItalic';
+    src: url('NeueMontreal-LightItalic.ttf') format('truetype'),
+            url('NeueMontreal-LightItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'NeueMontreal-Light';
+    src: url('NeueMontreal-Light.ttf') format('truetype'),
+            url('NeueMontreal-Light.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'NeueMontreal-BoldItalic';
+    src: url('NeueMontreal-BoldItalic.ttf') format('truetype'),
+            url('NeueMontreal-BoldItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'NeueMontreal-Bold';
+    src: url('NeueMontreal-Bold.ttf') format('truetype'),
+            url('NeueMontreal-Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}  

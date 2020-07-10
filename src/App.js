@@ -4,7 +4,7 @@ import {
   Route,
   Switch
 } from 'react-router-dom';
-import { Paper } from '@material-ui/core';
+import { Paper, Container } from '@material-ui/core';
 import './App.css';
 import Nav from './components/Nav'
 import Footer from './components/Footer';
@@ -19,7 +19,7 @@ function App() {
     <div>
       <Router>
         <Nav/>
-        <Paper>
+        <div id="body-wrapper">
           <Switch>
             <Route path="/about">
               <About/>
@@ -37,7 +37,7 @@ function App() {
               <Home/>
             </Route>
           </Switch>
-        </Paper>
+        </div>
       </Router>
       <Footer></Footer>
     </div>
