@@ -4,13 +4,13 @@ import {
   Route,
   Switch
 } from 'react-router-dom';
-import { Paper, Container } from '@material-ui/core';
 import './App.css';
 import Nav from './components/Nav'
 import Footer from './components/Footer';
 import Home from './components/Home';
 import About from './components/About';
 import Involvement from './components/Involvement';
+import Leadership from './components/Leadership';
 import Contact from './components/Contact';
 import FAQ from './components/FAQ';
 
@@ -26,6 +26,9 @@ function App() {
             </Route>
             <Route path="/involvement">
               <Involvement/>
+            </Route>
+            <Route path="/leadership">
+              <Leadership/>
             </Route>
             <Route path="/contact">
               <Contact/>
