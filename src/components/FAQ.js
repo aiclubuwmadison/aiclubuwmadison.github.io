@@ -22,10 +22,10 @@ const FAQ = () => {
             <BodyText>Our intent is for individual groups (i.e. study groups &amp; project groups) to set up their own regular meeting times. Contact <a href="leadership.html">group leaders</a> for their regular meeting schedule. In addition to these meetings, we have org-wide meetings scheduled every month, socials, and occassional guest speakers that give tech talks (if you want a platform to present your ideas/research, let us know and we might be able to arrange something). Be sure to check out our website’s ‘calendar’ tab for event details. There’s an option to add the calendar to your current Google Calendar on that page (click the plus button).</BodyText>
             
             <Subheader>How do I join AI@UW’s official mailing list?</Subheader>
-            <BodyText>Our email list is moderated through Slack–If you’d like to receive emails regarding club events and projects, please join the Slack group (see ‘Slack’ tab on homepage of our website)!</BodyText>
+            <BodyText>Our email list is moderated through Slack &mdash; If you’d like to receive emails regarding club events and projects, please join the Slack group (see the 'Contact' section)!</BodyText>
             
             <Subheader>How much are dues? How do I pay them?</Subheader>
-            <BodyText>You can pass the dues onto a member of the executive team or venmo our head of finance, @RakshithPadmanabha.<br/><br/> Dues: 1 Semester: $15, 2 Semesters: $20, 2 Semesters + Shirt: $40</BodyText>
+            <BodyText>You can pass the dues onto a member of the executive team or Venmo our head of finance, @RakshithPadmanabha.<br/><br/> Dues: 1 Semester: $15, 2 Semesters: $20, 2 Semesters + Shirt: $40</BodyText>
             
             <Subheader>I am an AI at UW Alumni. How do I stay in touch?</Subheader>
             <BodyText>Join our Alumni network on <a href="https://www.linkedin.com/groups/13562652/">LinkedIn</a>.</BodyText>
