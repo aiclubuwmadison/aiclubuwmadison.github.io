@@ -9,7 +9,7 @@ const Footer = () => {
             <Container>
               <img
                 src={`${process.env.PUBLIC_URL}/images/logo_full.png`}
-                width={256}
+                width={192}
               />
             </Container>
           </nav>

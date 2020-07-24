@@ -13,6 +13,7 @@ import Involvement from './components/Involvement';
 import Leadership from './components/Leadership';
 import Contact from './components/Contact';
 import FAQ from './components/FAQ';
+import Projects from './components/Projects';
 
 function App() {
   return (
@@ -39,6 +40,10 @@ function App() {
             </Route>
             <Route path="/faq">
               <FAQ/>
+              <Footer></Footer>
+            </Route>
+            <Route path="/projects">
+              <Projects/>
               <Footer></Footer>
             </Route>
             <Route path="/">

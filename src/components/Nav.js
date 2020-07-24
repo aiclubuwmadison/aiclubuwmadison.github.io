@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { slide as Menu } from 'react-burger-menu';
 import { useMediaQuery } from '@material-ui/core';
@@ -67,6 +67,7 @@ const Nav = () => {
                         <Link to ="/leadership">LEADERSHIP</Link>
                         <Link to ="/faq">FAQ</Link>
                         <Link to ="/involvement">GET INVOLVED</Link>
+                        <Link to ="/projects">PROJECTS</Link>
                         <Link to ="/contact">CONTACT</Link>
                     </> 
                 ) : (
@@ -83,6 +84,7 @@ const Nav = () => {
                         <Link to ="/leadership">LEADERSHIP</Link>
                         <Link to ="/faq">FAQ</Link>
                         <Link to ="/involvement">GET INVOLVED</Link>
+                        <Link to ="/projects">PROJECTS</Link>
                         <Link to ="/contact">CONTACT</Link>
                     </Menu>
                 )

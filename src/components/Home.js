@@ -7,9 +7,12 @@ const Home = () => {
     return (
         <>
             <div id="gradient">
-                <h1 id="welcome-text">
-                    AI at UW.
-                </h1>
+                <div id="welcome-text">
+                    <img
+                        src={`${process.env.PUBLIC_URL}/images/logo_full.png`}
+                        width={"50%"}
+                    />
+                </div>
             </div>
         </>
     );
