@@ -28,24 +28,35 @@ const Leadership = () => {
                 </Grid>
                 <Grid container direction="row">
                     <Grid item xs>
-                        
+                        <Portrait file="abhay.jpg"/>
                     </Grid>
                     <Grid item xs>
-                        
+                        <Portrait file="dane.png"/>
                     </Grid>
                     <Grid item xs>
-                        
+                        <Portrait file="dandi.png"/>
                     </Grid>   
                 </Grid>
                 <Grid container direction="row">
                     <Grid item xs>
-                        
+                        <Portrait file="eric.jpg"/>
                     </Grid>
                     <Grid item xs>
-                        
+                        <Portrait file="jinman.jpg"/>
                     </Grid>
                     <Grid item xs>
-                        
+                        <Portrait file="keshav.png"/>
+                    </Grid>   
+                </Grid>
+                <Grid container direction="row">
+                    <Grid item xs>
+                        <Portrait file="nick.jpg"/>
+                    </Grid>
+                    <Grid item xs>
+                        <Portrait file="rakshith.jpg"/>
+                    </Grid>
+                    <Grid item xs>
+                        <Portrait file="richard.jpg"/>
                     </Grid>   
                 </Grid>
             </Grid>

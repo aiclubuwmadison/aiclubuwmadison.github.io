@@ -4,9 +4,11 @@ const Portrait = ({file}) => {
 
     return (
         <>
-            <img src="">
-
-            </img>
+            <img
+                src={`${process.env.PUBLIC_URL}/images/portraits/${file}`}
+                width={300}
+                height={300}
+            />
         </>
     )
 };
