@@ -4,7 +4,7 @@ import { Grid, Container } from '@material-ui/core';
 const Footer = () => {
 
     return (
-        <footer class="site-footer">
+        <footer className="site-footer">
           <nav>
             <Container>
               <Grid container>

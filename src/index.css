@@ -51,9 +51,10 @@ code {
   -webkit-box-shadow: 0px 4px 60px -5px rgba(0,0,0,0.53);
   -moz-box-shadow: 0px 4px 60px -5px rgba(0,0,0,0.53);
   box-shadow: 0px 4px 60px -5px rgba(0,0,0,0.53);
+  z-index: 99999;
 }
 
-#navbar > a {
+#navbar a {
   display: inline-block;
   line-height: 2.5;
   font-family: Verdana, sans-serif;
@@ -66,6 +67,15 @@ code {
   -webkit-transition: all 0.4s ease;
 	transition: all 0.4s ease;
   padding: 15px;
+}
+
+.burger-menu a {
+  color: #d1d1d1 !important;
+  border-left: 2px solid #9a0400;
+}
+.burger-menu a:hover {
+  color: white !important;
+  border-left: 2px solid white;
 }
 
 #navbar > a:after {
@@ -83,11 +93,11 @@ code {
   	transition: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) all;
 }
 
-#navbar > a:hover {
+#navbar a:hover {
 	color: #31081F;
 }
 
-#navbar > a:hover:after {
+#navbar a:hover:after {
 	width: 100%;
 }
 
