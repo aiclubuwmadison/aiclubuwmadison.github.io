@@ -8,7 +8,7 @@ const Home = () => {
         <>
             <div id="gradient">
                 <h1 id="welcome-text">
-                    Artificial Intelligence at the University of Wisconsin.
+                    AI at UW.
                 </h1>
             </div>
         </>

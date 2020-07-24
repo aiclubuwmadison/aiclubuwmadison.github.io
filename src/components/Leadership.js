@@ -11,16 +11,16 @@ const Leadership = () => {
             <Header>
                 Our Leadership
             </Header>
-            <Grid container direction="column">
-                <Grid container direction="row">
-                    <Grid item xs>
+            <Grid container direction="column" justify="center" alignItems="center">
+                <Grid container direction="row" justify="center" alignItems="center">
+                    <Grid item xs={4}>
                         <Portrait 
                             file="declan.jpg"
                             title="Co-President"
                             name="Declan Campbell"
                         />
                     </Grid>
-                    <Grid item xs>
+                    <Grid item xs={4}>
                         <Portrait
                             file="chris.jpg"
                             title="Co-President"
@@ -28,7 +28,7 @@ const Leadership = () => {
                             link="https://www.linkedin.com/in/chris-endemann"
                         />
                     </Grid>
-                    <Grid item xs>
+                    <Grid item xs={4}>
                         <Portrait
                             file="soham.jpg"
                             title="Vice President"
@@ -37,7 +37,7 @@ const Leadership = () => {
                         />
                     </Grid>                   
                 </Grid>
-                <Grid container direction="row">
+                <Grid container direction="row" justify="center" alignItems="center">
                     <Grid item xs={4}>
                         <Portrait
                             file="dane.jpg"

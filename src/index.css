@@ -163,6 +163,12 @@ code {
   width: 300px;
 }
 
+.card-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .card:hover {
 	transform: translateY(-0.5rem) scale(1.0125);
 	box-shadow: 0 0.5em 3rem -1rem rgba(0,0,0,0.5);
@@ -205,7 +211,7 @@ code {
 /* Gradient home page */
 
 #welcome-text{
-  font-size: 52px;
+  font-size: 72px;
   text-align: center;
   margin-top: 256px;
   color:white;
