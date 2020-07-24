@@ -23,18 +23,23 @@ function App() {
           <Switch>
             <Route path="/about">
               <About/>
+              <Footer></Footer>
             </Route>
             <Route path="/involvement">
               <Involvement/>
+              <Footer></Footer>
             </Route>
             <Route path="/leadership">
               <Leadership/>
+              <Footer></Footer>
             </Route>
             <Route path="/contact">
               <Contact/>
+              <Footer></Footer>
             </Route>
             <Route path="/faq">
               <FAQ/>
+              <Footer></Footer>
             </Route>
             <Route path="/">
               <Home/>
@@ -42,7 +47,7 @@ function App() {
           </Switch>
         </div>
       </Router>
-      <Footer></Footer>
+
     </div>
   );
 }

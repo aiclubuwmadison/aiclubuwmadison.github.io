@@ -201,3 +201,53 @@ code {
   from {opacity: .4} 
   to {opacity: 1}
 }
+
+/* Gradient home page */
+
+#welcome-text{
+  font-size: 52px;
+  text-align: center;
+  margin-top: 256px;
+  color:white;
+  font-weight: 900;
+  font-family: 'NeueMontreal-Bold', 'Helvetica Neue', sans-serif;
+}
+
+#gradient { 
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  left:0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  position: absolute;
+  opacity: 0.85;
+background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #d37620, #136e22, #197a7e, #2014be, #9d13aa, #b31583);
+background-size: 1800% 1800%;
+/*ORIG-GRADIENT: background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3); */
+-webkit-animation: rainbow 18s ease infinite;
+-z-animation: rainbow 18s ease infinite;
+-o-animation: rainbow 18s ease infinite;
+  animation: rainbow 18s ease infinite;}
+
+@-webkit-keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+@-moz-keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+@-o-keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+@keyframes rainbow { 
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}

@@ -7,14 +7,10 @@ const Footer = () => {
         <footer className="site-footer">
           <nav>
             <Container>
-              <Grid container>
-                <Grid item xs={7}>
-                  <span> Hello </span>
-                </Grid>
-                <Grid item xs={5}>
-                  <span> World </span>
-                </Grid>
-              </Grid>
+              <img
+                src={`${process.env.PUBLIC_URL}/images/logo_full.png`}
+                width={256}
+              />
             </Container>
           </nav>
         </footer>

@@ -5,11 +5,13 @@ import Header from './typographic/Header';
 const Home = () => {
 
     return (
-        <Container>
-            <Header>
-                AI @ UW
-            </Header>
-        </Container>
+        <>
+            <div id="gradient">
+                <h1 id="welcome-text">
+                    Artificial Intelligence at the University of Wisconsin.
+                </h1>
+            </div>
+        </>
     );
 }
 
