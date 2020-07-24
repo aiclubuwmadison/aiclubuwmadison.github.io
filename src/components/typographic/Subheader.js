@@ -1,7 +1,6 @@
-import React, { Children } from 'react';
-import { Typography } from '@material-ui/core';
+import React from 'react';
 
-const SubheaderText = ({ children }) => {
+const Subheader = ({ children }) => {
 
     return (
         <div className="subheader-text">
@@ -10,4 +9,4 @@ const SubheaderText = ({ children }) => {
     );
 }
 
-export default SubheaderText;
+export default Subheader;
