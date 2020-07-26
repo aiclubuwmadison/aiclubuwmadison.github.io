@@ -3,48 +3,109 @@ import { Typography, Container } from '@material-ui/core';
 import Header from './typographic/Header';
 import Subheader from './typographic/Subheader';
 import BodyText from './typographic/BodyText';
+import Project from './display/Project';
 
 const Projects = () => {
 
     return (
         <Container>
             <Header>
-                Projects
+                Student-Led Projects
             </Header>
+            <Project name="Algorithmic Trading Team">
+                This applied AI project’s goal is to model stock market trends and create a decision-making bot that leverages that info for automated trading. The project features opportunities to work on and learn more about feature-mining, database management, NLP & text-analysis, change-point detection, time-series forecasting, deep learning, and reinforcement learning. Highly motivated students may take part in leading one of these subgroups.
+                Time-Commitment: 3 hours/week
+                Contact Info: @Chris Endemann (Slack), endemann@wisc.edu
+                Prereqs: Anyone with some basic coding experience is welcome to join the team! If you’re more experienced, I am actively seeking subgroup leaders for NLP, reinforcement learning and deep learning components of the project.
+                Meeting time/location: Tuesdays @6:30pm
+            </Project>
+            <Project name="Engr-Auto Team">
+                The engr-auto group is an exciting new collaboration between the Formula SAE Autonomous team and AI@UW! Project members will have the opportunity to use state-of-the-art computer vision algorithms to detect obstacles and generate a path for a ⅓ scale Formula style race car to drive at the 2021 Formula Student Germany competition. Experience developed over the course of the project will include convolutional neural networks, algorithm implementation, ROS, localization, and data collection. If you are interested in using AI to solve the real-world engineering problem of autonomous driving, join the #engr-auto group on Slack for future updates!
+                Time-Commitment: 3 hours/week
+                Contact Info:@Alex Vesel (Slack), @Adam Shedivy (slack), @Declan (slack)
+                Prereqs: Anyone with some basic coding experience is welcome to join the team! Knowledge of basic neural networks, python or tensorFlow is recommended
+                Meeting time/location: Sundays @12pm
+            </Project>
+            <Project name="MelodiCoding Team">
+                This team will be developing an application (MelodiCode) that uses artificial intelligence to take on the complex task of musical composition. To create complex, beautiful music we will incorporate various elements of music (pitch, dynamics, tempo, chord progressions, etc.) into the training and song creation by implementing machine learning algorithms and neural networks. This project is an opportunity to gain experience in deep learning, supervised classification, time-series analysis, Markov chain algorithms, and user interface in collaboration with others who share a passion for music and machine learning. Join the #engr-melodicoding-team group on Slack for future updates!
+                Time-Commitment: 1.5 hours/week
+                Contact Info: @Atulya Reddy (Slack), @Levi Redlin (Slack)
+                Prereqs: Anyone with basic knowledge of Java is welcome to join the team!
+                Meeting time/location: TBD
+            </Project>
+            <br></br>
+            <Header>
+                For Credit/Pay Projects
+            </Header>
+            <Project name="Application of Machine Learning to Analyze Molecular Dynamics Simulations">
+                We are currently developing machine learning methods to predict the thermodynamic properties of interfaces in liquid-phase environments. Our datasets consist of hundreds of thousands of atomic positions obtained from classical molecular dynamics (MD) simulations. An MD simulation predicts the motion of atoms and molecules at molecular length and timescales (nm and ps respectively). Typically, simulation data are analyzed using techniques based on statistical mechanics, but we have demonstrated that machine learning can drastically reduce the simulation time required to make predictions of one particular thermodynamic property that is critical for predicting interfacial hydrophobicity – the hydration free energy - which is relevant to the design of biological materials. In our present work, we have used LeNet5, a 2D convolutional neural network architecture developed by LeCun et al. The project would involve using already curated datasets and testing the effect of different machine learning algorithms on prediction accuracy. Students are also free to extend the scope of the project and try other machine learning models, such as 3-D CNNs or graph neural networks, which would require modification of the input data representation.
 
-            <Subheader>I am a Freshman in CS. Is this club for me?</Subheader>
-            <BodyText>Absolutely! We jump-start freshmen into their AI careers by providing study-groups, workshops, tutorials, and hands-on learning opportunities.</BodyText>
-            
-            <Subheader>What study groups are recommended for a freshman to join?</Subheader>
-            <BodyText>Getting the basics down for both machine learning and deep learning will go a long way to prepare you for more challenging engineering project work in the future. We recommend beginners in AI/ML start with #study-ml, #study-dl, and/or #study-tensorflow as one of the core beginner groups. In study-ml, students will work through coursera’s ML course together. In study-dl, students will learn the basics of deep learning theory (also using coursera as the primary learning material). In study-tensorflow, students will learn how to build deep neural nets using specialized software (tensorflow) with the help of our club president, Declan. <br/><br/>If you have to choose only one group to join as a beginner in the field, choose one of the above study groups. <br/><br/>After that, you’re welcome to check out some of the engineering groups we have available. Prerequisites to join these groups can be found in the channel descriptions for each group as well as the projects page on our website. In general, you should contact group leaders for clarification regarding a specific group/project.</BodyText>
-            
-            <Subheader>When are the meetings?</Subheader>
-            <BodyText>Our intent is for individual groups (i.e. study groups &amp; project groups) to set up their own regular meeting times. Contact <a href="leadership.html">group leaders</a> for their regular meeting schedule. In addition to these meetings, we have org-wide meetings scheduled every month, socials, and occassional guest speakers that give tech talks (if you want a platform to present your ideas/research, let us know and we might be able to arrange something). Be sure to check out our website’s ‘calendar’ tab for event details. There’s an option to add the calendar to your current Google Calendar on that page (click the plus button).</BodyText>
-            
-            <Subheader>How do I join AI@UW’s official mailing list?</Subheader>
-            <BodyText>Our email list is moderated through Slack &mdash; If you’d like to receive emails regarding club events and projects, please join the Slack group (see the 'Contact' section)!</BodyText>
-            
-            <Subheader>How much are dues? How do I pay them?</Subheader>
-            <BodyText>You can pass the dues onto a member of the executive team or Venmo our head of finance, @RakshithPadmanabha.<br/><br/> Dues: 1 Semester: $15, 2 Semesters: $20, 2 Semesters + Shirt: $40</BodyText>
-            
-            <Subheader>I am an AI at UW Alumni. How do I stay in touch?</Subheader>
-            <BodyText>Join our Alumni network on <a href="https://www.linkedin.com/groups/13562652/">LinkedIn</a>.</BodyText>
-            <Subheader>If I have a project idea, how can I find people to help me?</Subheader>
-            <BodyText>The best way to get your project off the ground is to email us a week or two before the semester starts. This way, we can help you create a couple of slides to pitch your project at our kickoff meeting. If you want to start a project mid-semester, you can try to find support for your idea via describing it in our #group-ideas channel on Slack.</BodyText>
-            
-            <Subheader>How much time per week should I expect to spend on the project or the study groups? (Is every meeting mandatory? )</Subheader>
-            <BodyText>It depends on which groups you are in. Generally speaking, if you are in study groups, the expected time commitment would be 2-3 hours weekly (if there is a programming assignment, you might expect to spend more time working on that). However, project groups might be slightly more time-consuming. We don’t recommend getting involved in more than two groups in a given semester</BodyText>
-            
-            <Subheader>How do I know if I am qualified to join in the project groups? </Subheader>
-            <BodyText>Project groups will be advertised in our newsletters at the start of each semester as well as during our kickoff meetings. In addition, we try to keep our website up-to-date with all ongoing projects. Prerequisites will be listed next to each project description (on newsletter/website/kickoff slides).</BodyText>
-            
-            <Subheader>If I missed the first several meetings, can I still join in the groups? (Can I join in the groups halfway through the semester?)</Subheader>
-            <BodyText>You should message the group leader to find out. Some groups progress in content, while some have meetings which act as standalone events (and don’t depend on past meetings).</BodyText>
-            
-            <Subheader>Can I join multiple groups?</Subheader>
-            <BodyText>We strongly recommend students do not attempt to be involved with more than two project groups.</BodyText>
-            
-    
+                AI/ML Methods & Tools: Supervised classification; Deep Learning; Linear Regression; Dimensionality Reduction (e.g. PCA, diffusion map embedding)
+                Department: Chemical and Biological Engineering
+                Prereqs: Proficiency in Python is required. Some machine learning experience with toolboxes like Tensorflow/PyTorch is preferred. Courses in physical chemistry or thermodynamics are preferred but not necessary.
+                Number of Open Positions: 2 to 4
+                Time-Commitment: 10 hrs / week (for credits)
+                Contact Info: Reid Van Lehn, vanlehn@wisc.edu
+            </Project>
+            <Project name="Exploring the Neural Basis of Consciousness">
+                We seek to identify changes in brain activity and connectivity that underlie changes in arousal state using imaging and electrophysiology data recorded from neurosurgical patients. In this project, students will use machine learning tools to track the dynamics of brain network configuration with the goals of (a) identifying subsets of network configurations that associate with specific arousal states (wake, sleep, anesthesia), (b) building Markov models to identify and quantify state transitions, (c) developing analgorithm to predict arousal state in real-time, and (d) developing and applying matrix-completion algorithms to facilitate summarizing data across subjects.
+
+                AI/ML Methods & Tools: Supervised classification; Unsupervised classification (e.g.clustering); Time-Series Analysis; Deep Learning; Linear Regression; Markov Models; Dimensionality Reduction (e.g. PCA, diffusion map embedding)
+                Department: Anesthesiology & Neuroscience
+                Prereqs: Proficiency in Python and/ or Matlab is required. Some signal processing background is desirable.
+                Number of Open Positions: 2
+                Time-Commitment: 10 hrs/week minimum (either for credits or wage)
+                Contact Info: Matthew Banks,​​ mibanks@wisc.edu
+            </Project>
+            <Project name="Building an Automated Machine Learning Algorithm for Characterization of Anxiety-related Vocalizations in Non-human Primates">
+                Anxiety disorders (ADs) are among the most common psychiatric illnesses in the world and cause significant psychosocial, emotional, and physical distress. ADs typically emerge early in childhood and follow a chronic course. A primary interest of the Kalin Lab is to characterize the neurodevelopmental origins of anxiety, both in human andmonkey models. Due to their extensive behavioral and neuroanatomical similarities to humans, primate models play a critical role in psychopathology research. Specifically, they allow for mechanistic studies of underlying alterations in neural circuitry. Primates display a variety of behaviors when exposed to threatening stimuli, many of which contribute to an anxious temperament. Of these, a key indicator of an anxious phenotype is the frequency and quality of vocalizations. In a large sample of preadolescent monkeys, we hope to build and train an unsupervised ML algorithm that can detect and differentiate a range of anxiety-related vocal events.
+
+                AI/ML Methods & Tools: Supervised classification; Unsupervised classification (e.g.clustering); Deep Learning
+                Department: Psychiatry, SMPH
+                Prereqs: Proficiency in Python/Git and/ or familiarity with R is required. Experience with bash/command line is also required. Some machine learning experience with Tensorflow and audio processing is preferred.
+                Number of Open Positions: 1 to 2
+                Time-Commitment: 10 hrs / week (for credits)
+                Contact Info: Rachel Puralewski,​​ puralewski@wisc.edu
+            </Project>
+            <Project name="Identifying Active Extravasation on Arteriograms using Machine Learning">
+                Interventional radiologists perform angiograms to identify bleeding before embolization. Bleeding on angiograms is mimicked by artifacts and can be difficult to recognize. This project pairs experts in interventional radiology with experts in computer science and engineering, in order to develop deep learning machine learning tools to identify sites of bleeding on angiograms. We use supervised learning trained on a database of labeled images with bleed sites identified. We have already used ResNet-152 as the first stage classifier and Faster R-CNN as the second stage object detector, and we evaluated images rather than series. We subsequently explored the CNN YOLO with multi-channel preprocessing using time-weighted image aggregation and difference image aggregation to infuse temporal information to emphasize the sites of bleeding. We propose to use more advanced deep learning models in our next stage of modeling development. The first approach will use “attention” to help the object detection model focus on the bleeding region that is of interest, an approach used effectively in similar problems. The second approach will use temporal object detection neural networks that can extract temporal and spatial relation between bleeding sites automatically. We will also explore using machine learning techniques with un-subtracted series, which we suspect will increase our accuracy as machine learning techniques are not limited by human contrast perceptual issues and the raw images avoid motion artifacts associated with subtraction.
+
+                Contact: Dane Morgan, PhD (UW MS&E, ddmorgan@wisc.edu)
+                Team leads: Mark Kleedehn, MD (UW Radiology, mkleedehn@uwhealth.org), Dane Morgan, PhD (UW MS&E, ddmorgan@wisc.edu), Mingren Shen (UW, Graduate Student, mshen32@wisc.edu).
+                Positions: 4-8 UG students
+                Funding: None at present. Can work for credits.
+                Requirements: 10h/wk.
+            </Project>
+            <Project name="Application of Machine Learning to CT Characterization of Renal Cell Carcinoma">
+                Characterization of renal cell carcinoma (RCC) using classical radiomics has shown association with pathologic features. This project applies advanced machine-learning analysis or deep learning models to tumor segmentations with pathologic data to identify clinically relevant associations. The models will be tested/refined on ex vivo RCC specimens with direct radiologic-pathologic correlation. We have data on approximately 150 RCCs and about 300 radiomics features (anatomic, texture) from each. This imaging data has previously demonstrated some association with pathologic features (e.g. histologic subtype) with basic statistical analysis but we were unable to identify aggressive tumors (nuclear grade 3-4, +sarcomatoid features). We have a second group of segmented tumors from a sarcomatoid rich cohort (approximately 95 patients, with size matched controls) where we were also unable to identify a consistent imaging signature using a classical radiomics approach. These problems may be dramatically improved by application of machine or deep-learning-based methods due to their strong ability to learn the hierarchical latent features of complex data in high dimensional space. We will explore cluster analysis and Random Forest modeling on the present set of radiomics features. Then we will build a deep learning to build a tumor nuclear grade classifier system for CT images. Tumor nuclear grade consists of discrete values 1,2,3,4 and unknown if not applicable. A similar study has been conducted in staging liver fibrosis but no robust demonstration of a deep learning system for classifying tumor nuclear grades in renal masses currently exists. We plan to use U-Net architecture to segment the tumor from the input CT images and then the segmented tumors will be put into a 3D Convolutional Neural Network (CNN) to generate the final tumor nuclear grades for each tumor. We will also consider attention and CNNs to directly link tumor CT images to nuclear grades.
+
+                Contact: Dane Morgan, PhD (UW MS&E, ddmorgan@wisc.edu)
+                Team leads: Meghan G. Lubner, MD (UW Radiology, mlubner@uwhealth.org), Dane Morgan, PhD (UW MS&E, ddmorgan@wisc.edu), Mingren Shen (UW, Graduate Student, mshen32@wisc.edu).
+                Positions: 4-8 UG students
+                Funding: None at present. Can work for credits.
+                Requirements: 10h/wk.
+            </Project>
+            <Project name="Categorizing Dendritic Spine Morphology">
+                We seek to use the machine learning or AI to categorize dendritic spine morphology as a measure of synapse maturity. Since we have just begun discussing how ML/AI might be incorporated into our project aims, we are open to new ideas.
+
+                AI/ML Methods & Tools: Supervised classification; Unsupervised classification (e.g.clustering); Categorizing Dendritic Spine Morphology (Neuroscience)
+                Department: Neuroscience
+                Prereqs: ​Anyone with a strong knowledge of Machine Learning is desirable.
+                Number of Open Positions: 1 to 2
+                Time-Commitment: 5 hrs / credit (for credits)
+                Contact Info: Erik Dent P.I., ​​tenpas@wisc.edu
+            </Project>
+            <Project name="Exploring Error and Model Domains in Materials Machine Learning">
+                I am interested in working with public data and models with natural error estimation methods (e.g., Bayesian approaches like Gaussian Process Regression or ensembles of neural networks) to explore their accuracy. The detailed approaches are not yet worked out and would be part of the team's initial activities.
+
+                <ul>
+                    <li>Department: MS &amp; E</li>
+                    <li>Prereqs: No background necessary but some machine learning experience preferred.</li>
+                    <li>Number of open positions: 4-8</li>
+                    <li>Requirements: 10 hrs per week (for credits)</li>
+                    <li>Contact: Dane Morgan, PhD (UW MS &amp; E, ddmorgan@wisc.edu)</li>
+                </ul>
+            </Project>
         </Container>
     );
 }
