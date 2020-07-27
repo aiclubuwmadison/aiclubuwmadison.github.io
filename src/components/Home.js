@@ -10,7 +10,7 @@ const Home = () => {
                 <div id="welcome-text">
                     <img
                         src={`${process.env.PUBLIC_URL}/images/logo_full.png`}
-                        width={"50%"}
+                        width={"40%"}
                     />
                 </div>
             </div>
