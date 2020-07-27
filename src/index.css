@@ -228,14 +228,14 @@ code {
   top: 0;
   bottom: 0;
   position: absolute;
-  opacity: 0.85;
-background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #d37620, #136e22, #197a7e, #2014be, #9d13aa, #b31583);
+  opacity: 1;
+background: radial-gradient(circle,  #F71735, #FF9F1C, #225560,#157a59, #310D20, #332ab1, #0c574d, #43134b,#9a0400,#931621);
 background-size: 1800% 1800%;
 /*ORIG-GRADIENT: background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3); */
--webkit-animation: rainbow 18s ease infinite;
--z-animation: rainbow 18s ease infinite;
--o-animation: rainbow 18s ease infinite;
-  animation: rainbow 18s ease infinite;}
+-webkit-animation: rainbow 50s ease infinite;
+-z-animation: rainbow 50s ease infinite;
+-o-animation: rainbow 50s ease infinite;
+  animation: rainbow 50s ease infinite;}
 
 @-webkit-keyframes rainbow {
     0%{background-position:0% 82%}
