@@ -14,24 +14,31 @@ const Projects = () => {
             </Header>
             <Project name="Algorithmic Trading Team">
                 This applied AI project’s goal is to model stock market trends and create a decision-making bot that leverages that info for automated trading. The project features opportunities to work on and learn more about feature-mining, database management, NLP & text-analysis, change-point detection, time-series forecasting, deep learning, and reinforcement learning. Highly motivated students may take part in leading one of these subgroups.
-                Time-Commitment: 3 hours/week
-                Contact Info: @Chris Endemann (Slack), endemann@wisc.edu
-                Prereqs: Anyone with some basic coding experience is welcome to join the team! If you’re more experienced, I am actively seeking subgroup leaders for NLP, reinforcement learning and deep learning components of the project.
-                Meeting time/location: Tuesdays @6:30pm
+                <ul>
+                    <li>Time-Commitment: 3 hours/week</li>
+                    <li>Contact Info: @Chris Endemann (Slack), endemann@wisc.edu</li>
+                    <li>Prereqs: Anyone with some basic coding experience is welcome to join the team! If you’re more experienced, I am actively seeking subgroup leaders for NLP, reinforcement learning and deep learning components of the project.</li>
+                    <li>Meeting time/location: Tuesdays @6:30pm</li>
+                </ul>
             </Project>
             <Project name="Engr-Auto Team">
                 The engr-auto group is an exciting new collaboration between the Formula SAE Autonomous team and AI@UW! Project members will have the opportunity to use state-of-the-art computer vision algorithms to detect obstacles and generate a path for a ⅓ scale Formula style race car to drive at the 2021 Formula Student Germany competition. Experience developed over the course of the project will include convolutional neural networks, algorithm implementation, ROS, localization, and data collection. If you are interested in using AI to solve the real-world engineering problem of autonomous driving, join the #engr-auto group on Slack for future updates!
-                Time-Commitment: 3 hours/week
-                Contact Info:@Alex Vesel (Slack), @Adam Shedivy (slack), @Declan (slack)
-                Prereqs: Anyone with some basic coding experience is welcome to join the team! Knowledge of basic neural networks, python or tensorFlow is recommended
-                Meeting time/location: Sundays @12pm
+                <ul>
+                    <li>Time-Commitment: 3 hours/week</li>
+                    <li>Contact Info:@Alex Vesel (Slack), @Adam Shedivy (slack), @Declan (slack)</li>
+                    <li>Prereqs: Anyone with some basic coding experience is welcome to join the team! Knowledge of basic neural networks, python or tensorFlow is recommended</li>
+                    <li>Meeting time/location: Sundays @12pm</li>
+                </ul>
             </Project>
             <Project name="MelodiCoding Team">
                 This team will be developing an application (MelodiCode) that uses artificial intelligence to take on the complex task of musical composition. To create complex, beautiful music we will incorporate various elements of music (pitch, dynamics, tempo, chord progressions, etc.) into the training and song creation by implementing machine learning algorithms and neural networks. This project is an opportunity to gain experience in deep learning, supervised classification, time-series analysis, Markov chain algorithms, and user interface in collaboration with others who share a passion for music and machine learning. Join the #engr-melodicoding-team group on Slack for future updates!
-                Time-Commitment: 1.5 hours/week
-                Contact Info: @Atulya Reddy (Slack), @Levi Redlin (Slack)
-                Prereqs: Anyone with basic knowledge of Java is welcome to join the team!
-                Meeting time/location: TBD
+                
+                <ul>
+                    <li>Time-Commitment: 1.5 hours/week </li>
+                    <li>Contact Info: @Atulya Reddy (Slack), @Levi Redlin (Slack) </li>
+                    <li>Prereqs: Anyone with basic knowledge of Java is welcome to join the team!</li>
+                    <li>Meeting time/location: TBD</li>
+                </ul>
             </Project>
             <br></br>
             <Header>
