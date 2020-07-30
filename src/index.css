@@ -109,15 +109,38 @@ code {
 /* #9a0400 */
 
 /* Footer */
+
+@import url('http://weloveiconfonts.com/api/?family=entypo');
+
 .site-footer
 {
   background-color:#26272b;
   padding:45px 0 20px;
   font-size:15px;
-  line-height:24px;
+  line-height:70px;
   color:#737373;
 }
 
+.social {
+  display: inline-block;
+  width: 70px;
+  height: 70px;
+  margin: 0 10px;
+  line-height: 70px;
+  font-family: Entypo;
+  font-size: 35px;
+  text-align: center;
+  color: #bbb;
+  border-radius: 50%;
+  background: #eee;
+  overflow: hidden;
+  transition: color .3s;
+}
+
+.social:hover {
+  color: #9a0400;
+  cursor: pointer;
+}
 /* Carousel */
 
 .slideshow-container {
@@ -268,3 +291,4 @@ background-size: 1800% 1800%;
   font-family: 'NeueMontreal-Bold', 'Helvetica Neue', sans-serif;
   font-weight: 100;
 }
+
