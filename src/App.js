@@ -14,6 +14,7 @@ import Leadership from './components/Leadership';
 import Contact from './components/Contact';
 import FAQ from './components/FAQ';
 import Projects from './components/Projects';
+import Calendar from './components/Calendar';
 
 function App() {
   return (
@@ -44,6 +45,10 @@ function App() {
             </Route>
             <Route path="/projects">
               <Projects/>
+              <Footer></Footer>
+            </Route>
+            <Route path="/calendar">
+              <Calendar/>
               <Footer></Footer>
             </Route>
             <Route path="/">

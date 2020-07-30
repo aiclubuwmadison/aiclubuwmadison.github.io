@@ -1,7 +1,7 @@
 import React, { Children } from 'react';
 import { Typography } from '@material-ui/core';
 
-const HeaderText = ({ children }) => {
+const Header = ({ children }) => {
 
     return (
         <div className="header-text">
@@ -11,4 +11,4 @@ const HeaderText = ({ children }) => {
     );
 }
 
-export default HeaderText;
+export default Header;
