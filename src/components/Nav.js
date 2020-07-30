@@ -68,8 +68,9 @@ const Nav = () => {
                         <Link to ="/faq">FAQ</Link>
                         <Link to ="/involvement">GET INVOLVED</Link>
                         <Link to ="/projects">PROJECTS</Link>
+                        <Link to ="/study">STUDY GROUPS</Link>
+                        <Link to ="/calendar">CALENDAR</Link>
                         <Link to ="/contact">CONTACT</Link>
-                        <Link to ="/calendar">Calendar</Link>
                     </> 
                 ) : (
                     <Menu
@@ -86,8 +87,9 @@ const Nav = () => {
                         <Link to ="/faq">FAQ</Link>
                         <Link to ="/involvement">GET INVOLVED</Link>
                         <Link to ="/projects">PROJECTS</Link>
+                        <Link to ="/study">STUDY GROUPS</Link>
+                        <Link to ="/calendar">CALENDAR</Link>
                         <Link to ="/contact">CONTACT</Link>
-                        <Link to ="/calendar">Calendar</Link>
                     </Menu>
                 )
             }

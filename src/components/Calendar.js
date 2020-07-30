@@ -6,7 +6,7 @@ import BodyText from './typographic/BodyText';
 const Calendar = () => {
     return (
         <Container>
-            <Header> Calendar </Header>
+            <Header> Event Calendar </Header>
             <BodyText>
                 Stay up to date on all AI@UW events! Click the "+GoogleCalendar" button in the bottom right to add this to your personal calendar.
             </BodyText>

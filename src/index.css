@@ -257,3 +257,14 @@ background-size: 1800% 1800%;
     50%{background-position:100% 19%}
     100%{background-position:0% 82%}
 }
+
+/* Lists */
+
+.no-bullet-list {
+  list-style-type: none;
+}
+
+.no-bullet-list b {
+  font-family: 'NeueMontreal-Bold', 'Helvetica Neue', sans-serif;
+  font-weight: 100;
+}
