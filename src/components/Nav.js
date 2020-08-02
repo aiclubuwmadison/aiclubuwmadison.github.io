@@ -53,16 +53,17 @@ const Nav = () => {
     
     return (
         <nav id="navbar">
-            <img
-                id="nav-image"
-                src="images/logo.png"
-                width="40"
-                height="40"
-            />
+            <Link id="icon-link" to="/">
+                <img
+                    id="nav-image"
+                    src="images/logo.png"
+                    width="40"
+                    height="40"
+                />
+            </Link>
             { isLargeScreen ? 
                 (
                     <>
-                        <Link to ="/">HOME</Link>
                         <Link to ="/about">ABOUT US</Link>
                         <Link to ="/leadership">LEADERSHIP</Link>
                         <Link to ="/faq">FAQ</Link>
@@ -81,7 +82,6 @@ const Nav = () => {
                         className="burger-menu"
                         noOverlay
                     >
-                        <Link to ="/">HOME</Link>
                         <Link to ="/about">ABOUT US</Link>
                         <Link to ="/leadership">LEADERSHIP</Link>
                         <Link to ="/faq">FAQ</Link>

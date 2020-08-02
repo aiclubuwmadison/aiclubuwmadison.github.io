@@ -3,6 +3,7 @@ import { Container, Typography } from '@material-ui/core';
 import Header from './typographic/Header';
 import BodyText from './typographic/BodyText';
 import Subheader from './typographic/Subheader';
+import ArticleImage from './display/ArticleImage';
 
 let slideIndex;
 
@@ -77,9 +78,11 @@ const About = () => {
             </div>
 
             <BodyText>
-                We are committed to building an excellent community for the members of the AI club and should you join us, you will join a group of driven individuals
-                and form relationships with your fellow AI club members that will last a lifetime. Please <a href="mailto:aiclubuwmadison@gmail.com">contact</a> us if you have any questions.
+                We are committed to building an excellent community for the members of the AI club. Should you join us, you will join a group of driven individuals
+                and form relationships with your fellow AI club members that will last a lifetime. Please <a className="link-text" href="mailto:aiclubuwmadison@gmail.com">contact us</a> if you have any questions.
             </BodyText>
+
+            <ArticleImage file="sem2.jpg" caption="Our 2019 kick-off seminar" />
         </Container>
     );
 }
