@@ -84,6 +84,9 @@ code {
   border-left: 2px solid white;
 }
 
+.burger-menu a:after {
+  display: none;
+}
 
 #navbar a:not(#icon-link):after {
 	content: "";
