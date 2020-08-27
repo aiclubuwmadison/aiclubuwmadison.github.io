@@ -48,10 +48,6 @@ function App() {
               <Projects/>
               <Footer></Footer>
             </Route>
-            <Route path="/calendar">
-              <Calendar/>
-              <Footer></Footer>
-            </Route>
             <Route path="/study">
               <StudyGroups/>
               <Footer></Footer>

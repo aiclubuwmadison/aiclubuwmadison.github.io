@@ -13,14 +13,14 @@ const Leadership = () => {
             </Header>
             <Grid container direction="column" justify="center" alignItems="center">
                 <Grid container direction="row" justify="center" alignItems="center">
-                    <Grid item xs={4}>
+                    <Grid item xs>
                         <Portrait 
                             file="declan.jpg"
                             title="Co-President"
                             name="Declan Campbell"
                         />
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs>
                         <Portrait
                             file="chris.jpg"
                             title="Co-President"
@@ -28,7 +28,7 @@ const Leadership = () => {
                             link="https://www.linkedin.com/in/chris-endemann"
                         />
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs>
                         <Portrait
                             file="soham.jpg"
                             title="Vice President"
@@ -38,7 +38,7 @@ const Leadership = () => {
                     </Grid>                   
                 </Grid>
                 <Grid container direction="row" justify="center" alignItems="center">
-                    <Grid item xs={4}>
+                    <Grid item xs>
                         <Portrait
                             file="dane.jpg"
                             title="Advisor, Harvey D. Spangler Professor of Engineering"
@@ -46,6 +46,22 @@ const Leadership = () => {
                             link="https://directory.engr.wisc.edu/mse/faculty/morgan_dane"
                         />
                     </Grid>
+                    <Grid item xs>
+                        <Portrait
+                            file="atulya.jpg"
+                            title="Leader"
+                            name="Atulya Reddy"
+                            link="https://www.linkedin.com/in/atulyareddy"
+                        />
+                    </Grid>
+                    <Grid item xs>
+                        <Portrait
+                            file="joash.jpg"
+                            title="Leader"
+                            name="Joash Shankar"
+                            link="https://www.linkedin.com/in/joash-shankar/"
+                        />
+                    </Grid>     
                 </Grid>
             </Grid>
         </Container>
