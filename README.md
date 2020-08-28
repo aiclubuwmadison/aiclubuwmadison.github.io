@@ -1,1 +1,1 @@
-AI @ UW
+AI@UW

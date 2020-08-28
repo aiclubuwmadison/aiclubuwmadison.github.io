@@ -15,7 +15,7 @@ const Contact = () => {
                 &bull; Join our <a className="link-text" target="_blank" href="https://wisconsinai.slack.com">Slack workspace</a> to communicate with other students, engage with study groups, and coordinate with project group members!
             </Subheader>
             <Subheader>
-                &bull; <a className="link-text" target="_blank" href="http://eepurl.com/dMyKlQ">Sign up</a> for our email newsletter to stay up-to-date on all AI @ UW events!
+                &bull; <a className="link-text" target="_blank" href="http://eepurl.com/dMyKlQ">Sign up</a> for our email newsletter to stay up-to-date on all AI@UW events!
             </Subheader>
             <Subheader>
                 &bull; <a className="link-text" target="_blank" href="mailto:aiclubuwmadison@gmail.com">Shoot us an email</a> if you have any questions or if you'd like to reach out to our leadership!

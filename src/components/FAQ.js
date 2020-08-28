@@ -27,7 +27,7 @@ const FAQ = () => {
             <Subheader>How much are dues? How do I pay them?</Subheader>
             <BodyText>You can pass the dues onto a member of the executive team or Venmo our head of finance, @RakshithPadmanabha.<br/><br/> Dues: 1 Semester: $15, 2 Semesters: $20, 2 Semesters + Shirt: $40</BodyText>
             
-            <Subheader>I am an AI at UW Alumni. How do I stay in touch?</Subheader>
+            <Subheader>I am an AI@UW Alumni. How do I stay in touch?</Subheader>
             <BodyText>Join our Alumni network on <a href="https://www.linkedin.com/groups/13562652/">LinkedIn</a>.</BodyText>
             <Subheader>If I have a project idea, how can I find people to help me?</Subheader>
             <BodyText>The best way to get your project off the ground is to email us a week or two before the semester starts. This way, we can help you create a couple of slides to pitch your project at our kickoff meeting. If you want to start a project mid-semester, you can try to find support for your idea via describing it in our #group-ideas channel on Slack.</BodyText>
