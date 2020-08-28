@@ -12,6 +12,13 @@ const Projects = () => {
             <Header>
                 Student-Led Projects
             </Header>
+            <Subheader variant="alert-subheader"> COVID-19 Update </Subheader>
+            <BodyText>
+                Due to the COVID-19 pandemic, project groups will be temporarily suspended for the foreseeable future. 
+                Pending their resumption, this page will be updated with new information.
+                For now, the previous semester's project group descriptions remain below for your reference.
+            </BodyText>
+            <hr></hr>
             <Project name="Algorithmic Trading Team">
                 This applied AI project’s goal is to model stock market trends and create a decision-making bot that leverages that info for automated trading. The project features opportunities to work on and learn more about feature-mining, database management, NLP & text-analysis, change-point detection, time-series forecasting, deep learning, and reinforcement learning. Highly motivated students may take part in leading one of these subgroups.
                 <ul className="no-bullet-list">

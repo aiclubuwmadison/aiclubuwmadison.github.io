@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Subheader = ({ children }) => {
+const Subheader = ({ children, variant}) => {
 
     return (
-        <div className="subheader-text">
+        <div className={`subheader-text ${variant || ""}`}>
             { children }
         </div>
     );

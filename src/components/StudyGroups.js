@@ -11,6 +11,13 @@ const StudyGroups = () => {
             <Header>
                 Study Groups
             </Header>
+            <Subheader variant="alert-subheader"> COVID-19 Update </Subheader>
+            <BodyText>
+                Due to the COVID-19 pandemic, study groups will be temporarily suspended for the foreseeable future. 
+                Pending their resumption, this page will be updated with new information.
+                For now, the previous semester's study group descriptions remain below for your reference.
+            </BodyText>
+            <hr></hr>
             <Project name= "Deep Learning Study Group">
                 This study group will be focusing on working through Andrew Ng’s Deep Learning specialization on Coursera. This study group is a good way to break into the world of AI. In the five courses in the specialization, you will learn the foundations of Deep Learning, understand how to build neural networks, and learn how to lead successful machine learning projects. You will learn about Convolutional networks, RNNs, LSTM, Adam, Dropout, BatchNorm, Xavier/He initialization, and more. You will work on case studies from healthcare, autonomous driving, sign language reading, music generation, and natural language processing. You will master not only the theory, but also see how it is applied in industry. You will practice all these ideas in Python and in TensorFlow, which the courses will teach.
                 <ul className="no-bullet-list">

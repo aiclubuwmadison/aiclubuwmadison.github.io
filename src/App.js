@@ -14,7 +14,6 @@ import Leadership from './components/Leadership';
 import Contact from './components/Contact';
 import FAQ from './components/FAQ';
 import Projects from './components/Projects';
-import Calendar from './components/Calendar';
 import StudyGroups from './components/StudyGroups';
 
 function App() {
