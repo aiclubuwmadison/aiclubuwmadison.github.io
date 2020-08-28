@@ -66,7 +66,6 @@ const Nav = () => {
                     <>
                         <Link to ="/about">ABOUT US</Link>
                         <Link to ="/leadership">LEADERSHIP</Link>
-                        <Link to ="/faq">FAQ</Link>
                         <Link to ="/involvement">GET INVOLVED</Link>
                         <Link to ="/projects">PROJECTS</Link>
                         <Link to ="/study">STUDY GROUPS</Link>
@@ -83,7 +82,6 @@ const Nav = () => {
                     >
                         <Link to ="/about">ABOUT US</Link>
                         <Link to ="/leadership">LEADERSHIP</Link>
-                        <Link to ="/faq">FAQ</Link>
                         <Link to ="/involvement">GET INVOLVED</Link>
                         <Link to ="/projects">PROJECTS</Link>
                         <Link to ="/study">STUDY GROUPS</Link>

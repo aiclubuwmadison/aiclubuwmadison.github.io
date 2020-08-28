@@ -12,7 +12,6 @@ import About from './components/About';
 import Involvement from './components/Involvement';
 import Leadership from './components/Leadership';
 import Contact from './components/Contact';
-import FAQ from './components/FAQ';
 import Projects from './components/Projects';
 import StudyGroups from './components/StudyGroups';
 
@@ -37,10 +36,6 @@ function App() {
             </Route>
             <Route path="/contact">
               <Contact/>
-              <Footer></Footer>
-            </Route>
-            <Route path="/faq">
-              <FAQ/>
               <Footer></Footer>
             </Route>
             <Route path="/projects">
