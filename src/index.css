@@ -347,3 +347,22 @@ background-size: 1800% 1800%;
   text-align: center;
   background-color: white;
 }
+
+/* Seminar styling */
+
+.seminar-card {
+  background-color: #000123;
+  color: whitesmoke;
+  display: block;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+	font-size: 1rem;
+	box-shadow: 0 0 3rem -1rem rgba(0,0,0,0.5);
+  transition: transform 0.1s ease-in-out, box-shadow 0.1s;
+  border-radius: 8px;
+  height: 400px !important;
+}
+
+.seminar-content{
+  padding: 1.5rem;
+}

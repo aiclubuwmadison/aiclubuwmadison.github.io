@@ -48,6 +48,31 @@ const Leadership = () => {
                     </Grid>
                     <Grid item xs>
                         <Portrait
+                            file="katherine.jpg"
+                            title="Leader"
+                            name="Katherine Fu"
+                            link="https://www.linkedin.com/in/JiaruFu/"
+                        />
+                    </Grid>
+                    <Grid item xs>
+                        <Portrait
+                            file="vishnu.jpg"
+                            title="Leader"
+                            name="Vishnu Yarlagadda"
+                            link="https://www.linkedin.com/in/vishnu-yarlagadda-3b9b52183/"
+                        />
+                    </Grid>
+                </Grid>
+                <Grid container direction="row" justify="center" alignItems="center">
+                    <Grid item xs>
+                        <Portrait
+                            file="alex.jpg"
+                            title="Leader"
+                            name="Alex Vesel"
+                        />
+                    </Grid>
+                    <Grid item xs>
+                        <Portrait
                             file="atulya.jpg"
                             title="Leader"
                             name="Atulya Reddy"
@@ -61,7 +86,17 @@ const Leadership = () => {
                             name="Joash Shankar"
                             link="https://www.linkedin.com/in/joash-shankar/"
                         />
-                    </Grid>     
+                    </Grid>
+                </Grid>
+                <Grid container direction="row" justify="center" alignItems="center">
+                    <Grid item xs>
+                        <Portrait
+                            file="richard.jpg"
+                            title="Leader"
+                            name="Richard Horn"
+                            link="https://www.linkedin.com/in/richardhorn1/"
+                        />
+                    </Grid>
                 </Grid>
             </Grid>
         </Container>

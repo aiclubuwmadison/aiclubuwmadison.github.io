@@ -69,6 +69,7 @@ const Nav = () => {
                         <Link to ="/involvement">GET INVOLVED</Link>
                         <Link to ="/projects">PROJECTS</Link>
                         <Link to ="/study">STUDY GROUPS</Link>
+                        <Link to ="/seminars">SEMINARS</Link>
                         <Link to ="/contact">CONTACT</Link>
                     </> 
                 ) : (
@@ -85,6 +86,7 @@ const Nav = () => {
                         <Link to ="/involvement">GET INVOLVED</Link>
                         <Link to ="/projects">PROJECTS</Link>
                         <Link to ="/study">STUDY GROUPS</Link>
+                        <Link to ="/seminars">SEMINARS</Link>
                         <Link to ="/contact">CONTACT</Link>
                     </Menu>
                 )

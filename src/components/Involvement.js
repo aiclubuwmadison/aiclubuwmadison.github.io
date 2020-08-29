@@ -17,7 +17,7 @@ const Involvement = () => {
                     We have the following positions available for members to choose from. Feel free to post any questions to our Slack channel, #fyi-help, if you can’t find your question on our Q&A page.
                 </BodyText>
                 <hr></hr>
-                <Subheader> Executive </Subheader>
+                <Subheader> Leader </Subheader>
                 <BodyText>
                     <p>Far from just a resume booster, this is a great opportunity to:
                     <ul>
@@ -26,7 +26,7 @@ const Involvement = () => {
                         <li>Contribute to something larger than yourself and leave your mark at UW-Madison</li>
                     </ul>
                     <h4>Responsibilities</h4>
-                    If you're part of the exec team, you're part of shaping the org. As one of our club's leaders, you'll be expected to
+                    If you're part of the leadership team, you're part of shaping the org. As one of our club's leaders, you'll be expected to
                     bring new ideas to our regular meetings that help contribute to:
                     <ul>
                         <li>AI-related learning opportunities (e.g. assisting project managers and study group leaders)</li>

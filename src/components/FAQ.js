@@ -25,7 +25,7 @@ const FAQ = () => {
             <BodyText>Our email list is moderated through Slack &mdash; If you’d like to receive emails regarding club events and projects, please join the Slack group (see the 'Contact' section)!</BodyText>
             
             <Subheader>How much are dues? How do I pay them?</Subheader>
-            <BodyText>You can pass the dues onto a member of the executive team or Venmo our head of finance, @RakshithPadmanabha.<br/><br/> Dues: 1 Semester: $15, 2 Semesters: $20, 2 Semesters + Shirt: $40</BodyText>
+            <BodyText>You can pass the dues onto a member of the leadership team or Venmo our head of finance, @RakshithPadmanabha.<br/><br/> Dues: 1 Semester: $15, 2 Semesters: $20, 2 Semesters + Shirt: $40</BodyText>
             
             <Subheader>I am an AI@UW Alumni. How do I stay in touch?</Subheader>
             <BodyText>Join our Alumni network on <a href="https://www.linkedin.com/groups/13562652/">LinkedIn</a>.</BodyText>
@@ -44,7 +44,6 @@ const FAQ = () => {
             <Subheader>Can I join multiple groups?</Subheader>
             <BodyText>We strongly recommend students do not attempt to be involved with more than two project groups.</BodyText>
             
-    
         </Container>
     );
 }

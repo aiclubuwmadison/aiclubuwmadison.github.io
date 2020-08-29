@@ -32,7 +32,7 @@ const Projects = () => {
                 The engr-auto group is an exciting new collaboration between the Formula SAE Autonomous team and AI@UW! Project members will have the opportunity to use state-of-the-art computer vision algorithms to detect obstacles and generate a path for a ⅓ scale Formula style race car to drive at the 2021 Formula Student Germany competition. Experience developed over the course of the project will include convolutional neural networks, algorithm implementation, ROS, localization, and data collection. If you are interested in using AI to solve the real-world engineering problem of autonomous driving, join the #engr-auto group on Slack for future updates!
                 <ul className="no-bullet-list">
                     <li><b>Time-Commitment:</b> 3 hours/week</li>
-                    <li><b>Contact Info:</b>@Alex Vesel (Slack), @Adam Shedivy (slack), @Declan (slack)</li>
+                    <li><b>Contact Info:</b>@Alex Vesel (Slack), @Adam Shedivy (Slack), @Declan (Slack)</li>
                     <li><b>Prereqs:</b> Anyone with some basic coding experience is welcome to join the team! Knowledge of basic neural networks, python or tensorFlow is recommended</li>
                     <li><b>Meeting Time:</b> Sundays @12pm</li>
                 </ul>
@@ -123,7 +123,6 @@ const Projects = () => {
             </Project>
             <Project name="Exploring Error and Model Domains in Materials Machine Learning">
                 I am interested in working with public data and models with natural error estimation methods (e.g., Bayesian approaches like Gaussian Process Regression or ensembles of neural networks) to explore their accuracy. The detailed approaches are not yet worked out and would be part of the team's initial activities.
-
                 <ul className="no-bullet-list">
                     <li><b>Department:</b> MS &amp; E</li>
                     <li><b>Prereqs:</b> No background necessary but some machine learning experience preferred.</li>
