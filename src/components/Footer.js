@@ -13,9 +13,9 @@ const Footer = () => {
               />
               <div style={{float: "right"}}>
                 <div class="social"><a style={{textDecoration: "none", color: "#bbb"}} href="https://www.facebook.com/AIatUW/" target="_blank">&#62232;</a></div>
+                <div class="social"><a title="Suggestions Box" style={{textDecoration: "none", color: "#bbb"}} href="https://forms.gle/cKfuybyBQzv9vc8d8" target="_blank">&#x260E;</a></div>
                 <div class="social"><a style={{textDecoration: "none", color: "#bbb"}} href="https://www.linkedin.com/company/ai-at-uw/" target="_blank">&#62220;</a></div>
               </div>
-
             </Container>
           </nav>
         </footer>
