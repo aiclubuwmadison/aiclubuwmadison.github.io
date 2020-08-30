@@ -340,16 +340,22 @@ background-size: 1800% 1800%;
 
 .image {
   text-align: center;
-  -webkit-box-shadow: 0px 4px 60px -5px rgba(0,0,0,0.53);
-  -moz-box-shadow: 0px 4px 60px -5px rgba(0,0,0,0.53);
-  box-shadow: 0px 4px 60px -5px rgba(0,0,0,0.53);
+  -webkit-box-shadow: 0px 4px 15px 0px rgba(0,0,0,0.53);
+  -moz-box-shadow: 0px 4px 15px 0px rgba(0,0,0,0.53);
+  box-shadow: 0px 4px 15px 0px rgba(0,0,0,0.53);
+  border-radius: 10px;
+}
+
+.image img {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .image-caption {
   font-family: 'NeueMontreal-Bold', 'Helvetica Neue', sans-serif;
-
   text-align: center;
   background-color: white;
+  border-radius: 10px;
 }
 
 /* Seminar styling */
