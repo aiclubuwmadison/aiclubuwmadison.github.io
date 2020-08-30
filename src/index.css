@@ -184,9 +184,7 @@ code {
 }
 
 .slide-item img {
-  -webkit-box-shadow: 0px 4px 60px -5px rgba(0,0,0,0.33);
-  -moz-box-shadow: 0px 4px 60px -5px rgba(0,0,0,0.33);
-  box-shadow: 0px 4px 60px -5px rgba(0,0,0,0.33);
+
 }
 
 .dot {
@@ -221,6 +219,7 @@ code {
 	box-shadow: 0 0 3rem -1rem rgba(0,0,0,0.5);
   transition: transform 0.1s ease-in-out, box-shadow 0.1s;
   width: 300px;
+  border-radius: 8px;
 }
 
 .card-wrapper {

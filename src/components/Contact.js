@@ -20,6 +20,9 @@ const Contact = () => {
             <Subheader>
                 &bull; <a className="link-text" target="_blank" href="mailto:aiclubuwmadison@gmail.com">Shoot us an email</a> if you have any questions or if you'd like to reach out to our leadership!
             </Subheader>
+            <Subheader>
+                &bull; <a className="link-text" target="_blank" href="https://forms.gle/cKfuybyBQzv9vc8d8">Send us your thoughts</a> if there's anything else you want to say!
+            </Subheader>
             <br></br>
             <ArticleImage file="sem3.jpg" caption="Our 2019 kickoff meeting"/>
         </Container>
