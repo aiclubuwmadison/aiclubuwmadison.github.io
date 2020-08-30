@@ -137,7 +137,7 @@ code {
 
 .site-footer
 {
-  background-color:#26272b;
+  background-color:#000123;
   padding:45px 0 20px;
   font-size:15px;
   line-height:70px;
@@ -161,8 +161,12 @@ code {
   transition: color .3s;
 }
 
-.social:hover {
-  color: #9a0400;
+.social a {
+  transition: color .3s;
+}
+
+.social:hover, .social a:hover{
+  color: #9a0400 !important;
   cursor: pointer;
 }
 /* Carousel */

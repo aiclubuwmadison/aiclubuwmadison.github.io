@@ -12,9 +12,8 @@ const Footer = () => {
                 width={192}
               />
               <div style={{float: "right"}}>
-                <div class="social">&#62220;</div>
-                <div class="social">&#62217;</div>
-                <div class="social">&#62232;</div>
+                <div class="social"><a style={{textDecoration: "none", color: "#bbb"}} href="https://www.facebook.com/AIatUW/" target="_blank">&#62232;</a></div>
+                <div class="social"><a style={{textDecoration: "none", color: "#bbb"}} href="https://www.linkedin.com/company/ai-at-uw/" target="_blank">&#62220;</a></div>
               </div>
 
             </Container>
