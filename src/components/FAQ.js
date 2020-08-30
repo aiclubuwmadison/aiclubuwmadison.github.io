@@ -13,7 +13,9 @@ const FAQ = () => {
             </Header>
 
             <Subheader>I am a Freshman in CS. Is this club for me?</Subheader>
-            <BodyText>Absolutely! We jump-start freshmen into their AI careers by providing workshops, tutorials, and hands-on learning opportunities.</BodyText>
+            <BodyText>Absolutely! We jump-start freshmen into their AI careers by providing workshops, tutorials, and hands-on learning opportunities.
+                 This school year will be new for all of us, so we encourage freshmen to join our Slack at <a href="https://wisconsinai.slack.com" target="_blank"> wisconsinai.slack.com </a> to stay in the loop on upcoming workshops and other virtual events.
+            </BodyText>
             
             <Subheader>When are the meetings?</Subheader>
             <BodyText>Our intent is for individual groups (i.e. study groups &amp; project groups) to set up their own regular meeting times. Contact <a href="leadership.html">group leaders</a> for their regular meeting schedule. In addition to these meetings, we have org-wide meetings scheduled every month, socials, and occassional guest speakers that give tech talks (if you want a platform to present your ideas/research, let us know and we might be able to arrange something). Be sure to check out our website’s ‘calendar’ tab for event details. There’s an option to add the calendar to your current Google Calendar on that page (click the plus button).</BodyText>
