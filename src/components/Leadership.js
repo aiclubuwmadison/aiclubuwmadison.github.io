@@ -22,10 +22,10 @@ const Leadership = () => {
                     </Grid>
                     <Grid item xs>
                         <Portrait
-                            file="chris.jpg"
-                            title="Co-President"
-                            name="Chris Endemann"
-                            link="https://www.linkedin.com/in/chris-endemann"
+                            file="atulya.jpg"
+                            title="Leader"
+                            name="Atulya Reddy"
+                            link="https://www.linkedin.com/in/atulyareddy"
                         />
                     </Grid>
                     <Grid item xs>
@@ -40,10 +40,10 @@ const Leadership = () => {
                 <Grid container direction="row" justify="center" alignItems="center">
                     <Grid item xs>
                         <Portrait
-                            file="dane.jpg"
-                            title="Advisor, Harvey D. Spangler Professor of Engineering"
-                            name="Dane Morgan"
-                            link="https://directory.engr.wisc.edu/mse/faculty/morgan_dane"
+                            file="jules.png"
+                            title="Leader"
+                            name="Jules Vigy"
+                            link="https://www.linkedin.com/in/julesvigy/"
                         />
                     </Grid>
                     <Grid item xs>
@@ -73,10 +73,10 @@ const Leadership = () => {
                     </Grid>
                     <Grid item xs>
                         <Portrait
-                            file="atulya.jpg"
+                            file="adam.png"
                             title="Leader"
-                            name="Atulya Reddy"
-                            link="https://www.linkedin.com/in/atulyareddy"
+                            name="Adam Shedivy"
+                            link="https://www.linkedin.com/in/adam-shedivy-2619a1166/"
                         />
                     </Grid>
                     <Grid item xs>
@@ -91,10 +91,10 @@ const Leadership = () => {
                 <Grid container direction="row" justify="center" alignItems="center">
                     <Grid item xs>
                         <Portrait
-                            file="richard.jpg"
-                            title="Leader"
-                            name="Richard Horn"
-                            link="https://www.linkedin.com/in/richardhorn1/"
+                            file="dane.jpg"
+                            title="Advisor, Harvey D. Spangler Professor of Engineering"
+                            name="Dane Morgan"
+                            link="https://directory.engr.wisc.edu/mse/faculty/morgan_dane"
                         />
                     </Grid>
                 </Grid>
