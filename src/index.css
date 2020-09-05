@@ -39,6 +39,10 @@ code {
   border-radius: 20px;
 }
 
+.subheader-footer {
+  color: white;
+}
+
 .body-text {
   font-family: 'NeueMontreal-Light', 'Helvetica Neue', sans-serif;
   font-weight: bold;
@@ -54,7 +58,7 @@ code {
 }
 
 /* Navbar */
-#navbar {
+.navbar {
   width: 100%;
   height: 60px;
   display: flex;
@@ -65,10 +69,10 @@ code {
   -webkit-box-shadow: 0px 4px 60px -5px rgba(0,0,0,0.53);
   -moz-box-shadow: 0px 4px 60px -5px rgba(0,0,0,0.53);
   box-shadow: 0px 4px 60px -5px rgba(0,0,0,0.53);
-  z-index: 99999;
+  z-index: 9;
 }
 
-#navbar a:not(#icon-link) {
+.navbar a:not(#icon-link) {
   display: inline-block;
   line-height: 2.5;
   font-family: Verdana, sans-serif;
@@ -83,6 +87,12 @@ code {
   padding: 15px;
 }
 
+.navbar-static {
+  position: static !important;
+}
+.burger-menu {
+  z-index: 999999;
+}
 .burger-menu a {
   color: #d1d1d1 !important;
   border-left: 2px solid #9a0400;
@@ -96,7 +106,7 @@ code {
   display: none;
 }
 
-#navbar a:not(#icon-link):after {
+.navbar a:not(#icon-link):after {
 	content: "";
 	position: absolute;
 	height: 2px;
@@ -111,11 +121,11 @@ code {
   	transition: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) all;
 }
 
-#navbar a:not(#icon-link):hover {
+.navbar a:not(#icon-link):hover {
 	color: #31081F;
 }
 
-#navbar a:not(#icon-link):hover:after {
+.navbar a:not(#icon-link):hover:after {
 	width: 100%;
 }
 
@@ -143,30 +153,30 @@ code {
   line-height:70px;
   color:#737373;
   margin-top: 36px;
+  text-align: center;
 }
 
 .social {
   display: inline-block;
-  width: 70px;
-  height: 70px;
   margin: 0 10px;
-  line-height: 70px;
-  font-family: Entypo;
-  font-size: 35px;
+  font-size: 24px;
   text-align: center;
   color: #bbb;
-  border-radius: 50%;
-  background: #eee;
   overflow: hidden;
-  transition: color .3s;
+  transition: ease-in-out .3s;
+  font-weight: bolder;
 }
 
 .social a {
-  transition: color .3s;
+  padding: 10px;
+  transition: ease-in-out .3s;
+  border: 1px solid #bbb;
 }
 
-.social:hover, .social a:hover{
-  color: #9a0400 !important;
+.social a:hover{
+  border: 1px solid white;
+  color: black !important;
+  background-color: white;
   cursor: pointer;
 }
 /* Carousel */
@@ -183,9 +193,6 @@ code {
   text-align: center;
 }
 
-.slide-item img {
-
-}
 
 .dot {
   height: 15px;

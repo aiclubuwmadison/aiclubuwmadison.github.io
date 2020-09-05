@@ -9,7 +9,7 @@ let styles = {
         width: '18px',
         height: '18px',
         right: '30px',
-        top: '22px'
+        top: '22px',
     },
     bmBurgerBars: {
         background: '#831c09'
@@ -18,7 +18,7 @@ let styles = {
         background: '#9a0400'
     },
     bmCrossButton: {
-        position: 'fixed',
+        position: 'absolute',
         width: '18px',
         height: '18px',
         right: '30px',
@@ -34,7 +34,8 @@ let styles = {
     bmMenu: {
         background: '#9a0400',
         padding: '2.5em 1.5em 0',
-        fontSize: '1.15em'
+        fontSize: '1.15em',
+        borderLeft: '2px solid whitesmoke'
     },
     bmItemList: {
         color: 'whitesmoke',
@@ -49,10 +50,10 @@ let styles = {
 };
 
 const Nav = () => {
-    const isLargeScreen = useMediaQuery('(min-width: 800px)');
+    const isLargeScreen = useMediaQuery('(min-width: 880px)');
     
     return (
-        <nav id="navbar">
+        <nav className={isLargeScreen ? "navbar" : "navbar navbar-static"}>
             <Link id="icon-link" to="/">
                 <img
                     id="nav-image"
