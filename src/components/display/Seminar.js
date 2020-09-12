@@ -1,15 +1,16 @@
 import React from 'react';
 import Subheader from '../typographic/Subheader';
 import BodyText from '../typographic/BodyText';
-import { Grid } from '@material-ui/core';
+import { Grid, useMediaQuery } from '@material-ui/core';
 
 const Seminar = ({file, date, title, children}) => {
 
+    const isLargeScreen = useMediaQuery('(min-width: 900px)');
+
     return (
-        <div className="seminar-card">
-            <Grid container>
-                <Grid item xs={9}>
-                    <div className="seminar-content">
+        <Grid container>
+                <Grid item xs={isLargeScreen ? 8 : null}>
+                    <div className="seminar-content seminar-card">
                         <Subheader> {title} </Subheader>
                         <h2> {date} </h2>
                         <BodyText>
@@ -17,21 +18,19 @@ const Seminar = ({file, date, title, children}) => {
                         </BodyText>
                     </div>
                 </Grid>
+                { isLargeScreen ? (
                 <Grid item xs={3}>
-                    <img
-                        style={{
-                            float: "right",
-                            borderTopRightRadius: "5px",
-                            borderBottomRightRadius: "5px"
-                        }}
-                        height={400}
-                        width={300}
-                        src={`${process.env.PUBLIC_URL}/images/seminarSpeakers/${file}`}
-                    />
-                </Grid>
+                    <div className= "image-container" style={{marginRight: 10}}>
+                        <img
+                            className="image"
+                            width={300}
+                            height={375}
+                            src={`${process.env.PUBLIC_URL}/images/seminarSpeakers/${file}`}
+                        />
+                    </div>
+                </Grid> ) : (<></>)}
             </Grid>
-        </div>
-    )
+    );
 };
 
 export default Seminar;

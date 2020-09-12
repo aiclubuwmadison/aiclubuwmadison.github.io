@@ -16,7 +16,7 @@ const Leadership = () => {
                     <Grid item xs>
                         <Portrait 
                             file="declan.jpg"
-                            title="Co-President"
+                            title="President"
                             name="Declan Campbell"
                         />
                     </Grid>
