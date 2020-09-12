@@ -1,1 +1,1 @@
-AI@UW
+UW-Madison Artificial Intelligence Club website
