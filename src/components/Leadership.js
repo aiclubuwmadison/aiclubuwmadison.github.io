@@ -14,21 +14,23 @@ const Leadership = () => {
             <Grid container direction="column" justify="center" alignItems="center">
                 <Grid container direction="row" justify="center" alignItems="center">
                     <Grid item xs>
-                        <Portrait 
-                            file="declan.jpg"
-                            title="President"
-                            name="Declan Campbell"
+                        <Portrait
+                            file="katherine.jpg"
+                            title="Co-President"
+                            name="Katherine Fu"
+                            link="https://www.linkedin.com/in/JiaruFu/"
                         />
                     </Grid>
                     <Grid item xs>
                         <Portrait
                             file="atulya.jpg"
-                            title="Leader"
+                            title="Co-President"
                             name="Atulya Reddy"
                             link="https://www.linkedin.com/in/atulyareddy"
                         />
                     </Grid>
                     <Grid item xs>
+
                         <Portrait
                             file="soham.jpg"
                             title="Vice President"
@@ -39,19 +41,18 @@ const Leadership = () => {
                 </Grid>
                 <Grid container direction="row" justify="center" alignItems="center">
                     <Grid item xs>
+                        <Portrait 
+                            file="declan.jpg"
+                            title="Leader"
+                            name="Declan Campbell"
+                        />
+                    </Grid>
+                    <Grid item xs>
                         <Portrait
                             file="jules.png"
                             title="Leader"
                             name="Jules Vigy"
                             link="https://www.linkedin.com/in/julesvigy/"
-                        />
-                    </Grid>
-                    <Grid item xs>
-                        <Portrait
-                            file="katherine.jpg"
-                            title="Leader"
-                            name="Katherine Fu"
-                            link="https://www.linkedin.com/in/JiaruFu/"
                         />
                     </Grid>
                     <Grid item xs>
