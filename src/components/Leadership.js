@@ -93,7 +93,7 @@ const Leadership = () => {
                     <Grid item xs>
                         <Portrait
                             file="dane.jpg"
-                            title="Advisor Harvey D. Spangler Professor of Engineering"
+                            title="Advisor, Harvey D. Spangler Professor of Engineering"
                             name="Dane Morgan" 
                             link="https://directory.engr.wisc.edu/mse/faculty/morgan_dane"
                         />
