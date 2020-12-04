@@ -92,6 +92,13 @@ const Leadership = () => {
                 <Grid container direction="row" justify="center" alignItems="center">
                     <Grid item xs>
                         <Portrait
+                            file="sarah.jpg"
+                            title="Graphic Designer"
+                            name="Sarah Worthington" 
+                        />
+                    </Grid>
+                    <Grid item xs>
+                        <Portrait
                             file="dane.jpg"
                             title="Advisor, Harvey D. Spangler Professor of Engineering"
                             name="Dane Morgan" 
