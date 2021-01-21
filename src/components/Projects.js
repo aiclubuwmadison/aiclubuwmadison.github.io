@@ -131,6 +131,10 @@ const Projects = () => {
                     <li><b>Contact:</b> Dane Morgan, PhD (UW MS &amp; E, ddmorgan@wisc.edu)</li>
                 </ul>
             </Project>
+            <Header> Misc. Projects </Header>
+            <Project name="Informatics Skunkworks">
+                Skunkworks members are working on a range of projects which can be viewed in the table <a target="_blank" href="https://skunkworks.engr.wisc.edu/projects/">here</a>.
+            </Project>
         </Container>
     );
 }
