@@ -48,7 +48,7 @@ const Leadership = () => {
                     <Grid item xs>
                         <Portrait
                             file="taha.jpg"
-                            title="Head of Club Relations"
+                            title="Head of Club Relations and Public Relations"
                             name="Taha Sawar"
                             link="https://www.linkedin.com/in/sawar/"
                         />
