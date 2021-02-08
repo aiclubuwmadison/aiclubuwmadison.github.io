@@ -86,7 +86,24 @@ const About = () => {
                 and form relationships with your fellow AI club members that will last a lifetime. Please <a className="link-text" href="mailto:aiclubuwmadison@gmail.com">contact us</a> if you have any questions.
             </BodyText>
 
+            <Subheader> 2021 Kickoff Recording </Subheader>
+
+            <div className="image-container">
+                <div className="image">
+                    <video controls width="100%">
+                        <source src={`${process.env.PUBLIC_URL}/videos/zoom_0.mp4`} type="video/mp4"/>
+                        Sorry, your browser doesn't support embedded videos.
+                    </video>
+                    <div className="image-caption">
+                        <BodyText>
+                            Recording of our 2021 virtual kickoff
+                        </BodyText>
+                    </div>
+                </div>
+            </div>
+
             <ArticleImage file="sem2.jpg" caption="Our 2019 kick-off seminar" />
+
         </Container>
     );
 }
