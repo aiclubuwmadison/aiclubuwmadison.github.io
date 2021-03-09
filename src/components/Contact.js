@@ -25,9 +25,6 @@ const Contact = () => {
                 &bull; <a className="link-text" target="_blank" href="https://forms.gle/cKfuybyBQzv9vc8d8">Send us your thoughts</a> if there's anything else you want to say, either via the linked form or the submission fields below.
             </Subheader>
             <br/>
-            <Header>
-                Students
-            </Header>
             <Grid container xs>
                 <Grid item xs>
                     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdNX40SfpC-WOpe6rg56338ZD5-YaNeuTeb0B2Y5cVoZPW8tw/viewform?embedded=true" width="640" height="434" frameborder="0" marginheight="0" marginwidth="0" scrolling="no">Loading…</iframe>
