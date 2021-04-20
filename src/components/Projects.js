@@ -19,15 +19,6 @@ const Projects = () => {
                 For now, the previous semester's project group descriptions remain below for your reference.
             </BodyText>
             <hr></hr>
-            <Project name="Algorithmic Trading Team">
-                This applied AI project’s goal is to model stock market trends and create a decision-making bot that leverages that info for automated trading. The project features opportunities to work on and learn more about feature-mining, database management, NLP & text-analysis, change-point detection, time-series forecasting, deep learning, and reinforcement learning. Highly motivated students may take part in leading one of these subgroups.
-                <ul className="no-bullet-list">
-                    <li><b>Time-Commitment:</b> 3 hours/week</li>
-                    <li><b>Contact Info:</b> @Chris Endemann (Slack), endemann@wisc.edu</li>
-                    <li><b>Prereqs:</b> Anyone with some basic coding experience is welcome to join the team! If you’re more experienced, I am actively seeking subgroup leaders for NLP, reinforcement learning and deep learning components of the project.</li>
-                    <li><b>Meeting Time:</b> Tuesdays @6:30pm</li>
-                </ul>
-            </Project>
             <Project name="Engr-Auto Team">
                 The engr-auto group is an exciting new collaboration between the Formula SAE Autonomous team and AI@UW! Project members will have the opportunity to use state-of-the-art computer vision algorithms to detect obstacles and generate a path for a ⅓ scale Formula style race car to drive at the 2021 Formula Student Germany competition. Experience developed over the course of the project will include convolutional neural networks, algorithm implementation, ROS, localization, and data collection. If you are interested in using AI to solve the real-world engineering problem of autonomous driving, join the #engr-auto group on Slack for future updates!
                 <ul className="no-bullet-list">
