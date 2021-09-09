@@ -39,16 +39,8 @@ const Leadership = () => {
                 <Grid container direction="row" justify="center" alignItems="center">
                     <Grid item xs>
                         <Portrait
-                            file="katherine.jpg"
-                            title="Head of Research"
-                            name="Katherine Fu"
-                            link="https://www.linkedin.com/in/JiaruFu/"
-                        />
-                    </Grid>
-                    <Grid item xs>
-                        <Portrait
                             file="taha.jpg"
-                            title="Head of Club Relations and Public Relations"
+                            title="Student Relations"
                             name="Taha Sawar"
                             link="https://www.linkedin.com/in/sawar/"
                         />
@@ -61,8 +53,6 @@ const Leadership = () => {
                             link="https://www.linkedin.com/in/sohdas"
                         />
                     </Grid>                   
-                    </Grid>
-                    <Grid container direction="row" justify="center" alignItems="center">
                     <Grid item xs>
                         <Portrait
                             file="vishnu.jpg"
@@ -71,10 +61,12 @@ const Leadership = () => {
                             link="https://www.linkedin.com/in/vishnu-yarlagadda-3b9b52183/"
                         />
                     </Grid>
+                </Grid>
+                <Grid container direction="row" justify="center" alignItems="center">
                     <Grid item xs>
                         <Portrait
                             file="alex.jpg"
-                            title="Head of Department Relations"
+                            title="Department Relations"
                             name="Alex Vesel"
                         />
                     </Grid>
