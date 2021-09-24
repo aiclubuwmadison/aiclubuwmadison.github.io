@@ -28,16 +28,6 @@ const Projects = () => {
                     <li><b>Meeting Time:</b> Sundays @12pm</li>
                 </ul>
             </Project>
-            <Project name="MelodiCoding Team">
-                This team will be developing an application (MelodiCode) that uses artificial intelligence to take on the complex task of musical composition. To create complex, beautiful music we will incorporate various elements of music (pitch, dynamics, tempo, chord progressions, etc.) into the training and song creation by implementing machine learning algorithms and neural networks. This project is an opportunity to gain experience in deep learning, supervised classification, time-series analysis, Markov chain algorithms, and user interface in collaboration with others who share a passion for music and machine learning. Join the #engr-melodicoding-team group on Slack for future updates!
-                
-                <ul className="no-bullet-list">
-                    <li><b>Time-Commitment:</b> 1.5 hours/week </li>
-                    <li><b>Contact Info:</b> @Atulya Reddy (Slack), @Levi Redlin (Slack) </li>
-                    <li><b>Prereqs:</b> Anyone with basic knowledge of Java is welcome to join the team!</li>
-                    <li><b>Meeting Time:</b> TBD</li>
-                </ul>
-            </Project>
             <br></br>
             <Header>
                 For Credit/Pay Projects
