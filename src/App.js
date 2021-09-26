@@ -43,10 +43,6 @@ function App() {
               <Seminars/>
               <Footer></Footer>
             </Route>
-            <Route path="/projects">
-              <Projects/>
-              <Footer></Footer>
-            </Route>
             <Route path="/study">
               <StudyGroups/>
               <Footer></Footer>
