@@ -23,21 +23,11 @@ const Leadership = () => {
                     <Grid item xs>
                         <Portrait
                             file="taha.jpg"
-                            title="Director of Project & Study Groups, Pr and Finances"
+                            title="Head of Project Groups,  and Finances"
                             name="Taha Sawar"
                             link="https://www.linkedin.com/in/sawar/"
                         />
                     </Grid>
-                </Grid>
-                <Grid container direction="row" justify="center" alignItems="center">
-                    <Grid item xs>
-                        <Portrait
-                            file="ethan.jpg"
-                            title="Webmaster"
-                            name="Ethan Wheeler"
-                            link="https://www.linkedin.com/in/ethan-wheeler-abcdef/"
-                        />
-                    </Grid>                   
                     <Grid item xs>
                         <Portrait
                             file="alex.jpg"
@@ -45,6 +35,33 @@ const Leadership = () => {
                             name="Alex Vesel"
                         />
                     </Grid>
+                </Grid>
+                <Grid container direction="row" justify="center" alignItems="center">
+                    <Grid item xs>
+                        <Portrait
+                            file="arun.jpg"
+                            title="Event Head"
+                            name="Arun Sivarajah" 
+                        />
+                    </Grid>
+                    <Grid item xs>
+                        <Portrait
+                            file="rishi.jpg"
+                            title="Event Head"
+                            name="Rishi Gummella"
+                            link=""
+                        />
+                    </Grid>
+                    <Grid item xs>
+                        <Portrait
+                            file="ethan.jpg"
+                            title="Webmaster"
+                            name="Ethan Wheeler"
+                            link="https://www.linkedin.com/in/ethan-wheeler-abcdef/"
+                        />
+                    </Grid>      
+                </Grid>
+                <Grid container direction="row" justify="center" alignItems="center">
                     <Grid item xs>
                         <Portrait
                             file="dane.jpg"

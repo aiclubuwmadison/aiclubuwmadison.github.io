@@ -13,7 +13,7 @@ const Contact = () => {
                 Contact Us
             </Header>
             <Subheader>
-                &bull; Join our <a className="link-text" target="_blank" href="https://wisconsinai.slack.com">Slack workspace</a> to communicate with other students, engage with study groups, and coordinate with project group members!
+                &bull; Join our <a className="link-text" target="_blank" href="http://wisconsinai.slack.com/">Slack workspace</a> to communicate with other students, engage with study groups, and coordinate with project group members!
             </Subheader>
             <Subheader>
                 &bull; <a className="link-text" target="_blank" href="http://eepurl.com/dMyKlQ">Sign up</a> for our email newsletter to stay up-to-date on all AI@UW events!
