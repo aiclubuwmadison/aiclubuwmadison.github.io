@@ -9,7 +9,7 @@ const Projects = () => {
 
     return (
         <Container>
-            <Header>
+            {/* <Header>
                 Student-Led Projects
             </Header>
             <Subheader variant="alert-subheader"> COVID-19 Update </Subheader>
@@ -17,9 +17,16 @@ const Projects = () => {
                 Due to the COVID-19 pandemic, project groups will be temporarily suspended for the foreseeable future. 
                 Pending their resumption, this page will be updated with new information.
                 For now, the previous semester's project group descriptions remain below for your reference.
+            </BodyText> */}
+            <Header>
+                Projects
+            </Header>
+            <Subheader variant="alert-subheader"> Spring 2022 Update </Subheader>
+            <BodyText>
+                Currently, there are no ongoing projects in AI@UW. Please reach out to Tanish Nahata, Anniruddh Kumar, or Taha Sawar in our slack channel in regards to forming one.
             </BodyText>
             <hr></hr>
-            <Project name="Engr-Auto Team">
+            {/* <Project name="Engr-Auto Team">
                 The engr-auto group is an exciting new collaboration between the Formula SAE Autonomous team and AI@UW! Project members will have the opportunity to use state-of-the-art computer vision algorithms to detect obstacles and generate a path for a ⅓ scale Formula style race car to drive at the 2021 Formula Student Germany competition. Experience developed over the course of the project will include convolutional neural networks, algorithm implementation, ROS, localization, and data collection. If you are interested in using AI to solve the real-world engineering problem of autonomous driving, join the #engr-auto group on Slack for future updates!
                 <ul className="no-bullet-list">
                     <li><b>Time-Commitment:</b> 3 hours/week</li>
@@ -27,12 +34,12 @@ const Projects = () => {
                     <li><b>Prereqs:</b> Anyone with some basic coding experience is welcome to join the team! Knowledge of basic neural networks, python or tensorFlow is recommended</li>
                     <li><b>Meeting Time:</b> Sundays @12pm</li>
                 </ul>
-            </Project>
+            </Project> */}
             <br></br>
-            <Header>
+            {/* <Header>
                 For Credit/Pay Projects
-            </Header>
-            <Project name="Application of Machine Learning to Analyze Molecular Dynamics Simulations">
+            </Header> */}
+            {/* <Project name="Application of Machine Learning to Analyze Molecular Dynamics Simulations">
                 We are currently developing machine learning methods to predict the thermodynamic properties of interfaces in liquid-phase environments. Our datasets consist of hundreds of thousands of atomic positions obtained from classical molecular dynamics (MD) simulations. An MD simulation predicts the motion of atoms and molecules at molecular length and timescales (nm and ps respectively). Typically, simulation data are analyzed using techniques based on statistical mechanics, but we have demonstrated that machine learning can drastically reduce the simulation time required to make predictions of one particular thermodynamic property that is critical for predicting interfacial hydrophobicity – the hydration free energy - which is relevant to the design of biological materials. In our present work, we have used LeNet5, a 2D convolutional neural network architecture developed by LeCun et al. The project would involve using already curated datasets and testing the effect of different machine learning algorithms on prediction accuracy. Students are also free to extend the scope of the project and try other machine learning models, such as 3-D CNNs or graph neural networks, which would require modification of the input data representation.
 
                 <ul className="no-bullet-list">
@@ -43,8 +50,8 @@ const Projects = () => {
                     <li><b>Time-Commitment:</b> 10 hrs / week (for credits)</li>
                     <li><b>Contact Info:</b> Reid Van Lehn, vanlehn@wisc.edu</li>
                 </ul>
-            </Project>
-            <Project name="Exploring the Neural Basis of Consciousness">
+            </Project> */}
+            {/* <Project name="Exploring the Neural Basis of Consciousness">
                 We seek to identify changes in brain activity and connectivity that underlie changes in arousal state using imaging and electrophysiology data recorded from neurosurgical patients. In this project, students will use machine learning tools to track the dynamics of brain network configuration with the goals of (a) identifying subsets of network configurations that associate with specific arousal states (wake, sleep, anesthesia), (b) building Markov models to identify and quantify state transitions, (c) developing analgorithm to predict arousal state in real-time, and (d) developing and applying matrix-completion algorithms to facilitate summarizing data across subjects.
 
                 <ul className="no-bullet-list">
@@ -55,8 +62,8 @@ const Projects = () => {
                     <li><b>Time-Commitment:</b> 10 hrs/week minimum (either for credits or wage)</li>
                     <li><b>Contact Info:</b> Matthew Banks,​​ mibanks@wisc.edu</li>
                 </ul>
-            </Project>
-            <Project name="Building an Automated Machine Learning Algorithm for Characterization of Anxiety-related Vocalizations in Non-human Primates">
+            </Project> */}
+            {/* <Project name="Building an Automated Machine Learning Algorithm for Characterization of Anxiety-related Vocalizations in Non-human Primates">
                 Anxiety disorders (ADs) are among the most common psychiatric illnesses in the world and cause significant psychosocial, emotional, and physical distress. ADs typically emerge early in childhood and follow a chronic course. A primary interest of the Kalin Lab is to characterize the neurodevelopmental origins of anxiety, both in human andmonkey models. Due to their extensive behavioral and neuroanatomical similarities to humans, primate models play a critical role in psychopathology research. Specifically, they allow for mechanistic studies of underlying alterations in neural circuitry. Primates display a variety of behaviors when exposed to threatening stimuli, many of which contribute to an anxious temperament. Of these, a key indicator of an anxious phenotype is the frequency and quality of vocalizations. In a large sample of preadolescent monkeys, we hope to build and train an unsupervised ML algorithm that can detect and differentiate a range of anxiety-related vocal events.
 
                 <ul className="no-bullet-list">
@@ -115,7 +122,7 @@ const Projects = () => {
             <Header> Misc. Projects </Header>
             <Project name="Informatics Skunkworks">
                 Skunkworks members are working on a range of projects which can be viewed in the table <a target="_blank" href="https://skunkworks.engr.wisc.edu/projects/">here</a>.
-            </Project>
+            </Project> */}
         </Container>
     );
 }
