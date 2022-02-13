@@ -11,11 +11,10 @@ const StudyGroups = () => {
             <Header>
                 Study Groups
             </Header>
-            <Subheader variant="alert-subheader"> COVID-19 Update </Subheader>
+            <Subheader variant="alert-subheader"> Spring-22 Update </Subheader>
             <BodyText>
-                Due to the COVID-19 pandemic, study groups will be temporarily suspended for the foreseeable future. 
-                Pending their resumption, this page will be updated with new information.
-                For now, the previous semester's study group descriptions remain below for your reference.
+               Study Groups have temporarily been paused while feedback is gathered and student's preferencees are heard. Pending their resumption, this website will be 
+               updated with the new information. For now, the Spring 2019 study groups remain below for your reference.
             </BodyText>
             <hr></hr>
             <Project name= "Deep Learning Study Group">

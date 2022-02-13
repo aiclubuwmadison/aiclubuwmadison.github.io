@@ -31,6 +31,10 @@ function App() {
               <Involvement/>
               <Footer></Footer>
             </Route>
+            {/* <Route path = "/projects"> // Uncomment to bring in projects page
+              <Projects />
+              <Footer></Footer>
+            </Route> */}
             <Route path="/leadership">
               <Leadership/>
               <Footer></Footer>
