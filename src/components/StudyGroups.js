@@ -11,22 +11,22 @@ const StudyGroups = () => {
             <Header>
                 Study Groups
             </Header>
-            <Subheader variant="alert-subheader"> Spring-22 Update </Subheader>
-            <BodyText>
+            {/* <Subheader variant="alert-subheader"> Spring-22 Update </Subheader> */}
+            {/* <BodyText>
                Study Groups have temporarily been paused while feedback is gathered and student's preferencees are heard. Pending their resumption, this website will be 
                updated with the new information. For now, the Spring 2019 study groups remain below for your reference.
-            </BodyText>
-            <hr></hr>
+            </BodyText> */}
             <Project name= "Deep Learning Study Group">
-                This study group will be focusing on working through Andrew Ng’s Deep Learning specialization on Coursera. This study group is a good way to break into the world of AI. In the five courses in the specialization, you will learn the foundations of Deep Learning, understand how to build neural networks, and learn how to lead successful machine learning projects. You will learn about Convolutional networks, RNNs, LSTM, Adam, Dropout, BatchNorm, Xavier/He initialization, and more. You will work on case studies from healthcare, autonomous driving, sign language reading, music generation, and natural language processing. You will master not only the theory, but also see how it is applied in industry. You will practice all these ideas in Python and in TensorFlow, which the courses will teach.
+            This study group will be working through online deep learning courses, such as Andrew Ng’s Deep Learning specialization on Coursera. If you want to break into the world of AI or are already working on an online course of interest, this study group will be a place for you to collaborate, find answers to questions, and help others learn more effectively. The Deep Learning Specialization on Coursera is the recommended starting point for beginners. In the five courses in this specialization, you will learn the foundations of deep learning, learn to optimize and improve your deep learning models, practice structuring and successfully leading machine learning projects, and learn to build convolutional neural networks as well as RNN and LSTM sequence models. You will work on case studies from healthcare, autonomous driving, sign language reading, music generation, and natural language processing. You will not only master theory but also understand how it is applied in the industry. You will implement these ideas using the Python programming language and TensorFlow framework, which the courses will teach.
                 <ul className="no-bullet-list">
-                    <li><b>Time-Commitment:</b> 2-3 hours/week</li>
+                    <li><b>Time-Commitment:</b> 2-4 hours/week</li>
                     <li><b>Contact Info:</b> #sg-deep-learning on Slack</li>
-                    <li><b>Prereqs:</b> Previous experience with basic linear algebra is helpful, but not required</li>
-                    <li><b>Meeting time:</b> Tuesdays @ 7:30pm </li>
+                    <li><b>Prereqs:</b> Previous experience with basic linear algebra and derivatives is helpful, but not required.</li>
+                    <li><b>Meeting time:</b> Wednesdays and Saturdays @ 6:00 pm </li>
+                    <li><b>Meeting Location: Union South: 1308 W Dayton St, Madison, WI 53715 (meeting room will be released on Slack in advance of each meeting)</b></li>
                 </ul>
             </Project>
-            <Project name="Causal Architecture Study Group">
+            {/* <Project name="Causal Architecture Study Group">
                     To effectively engage with the world, AI must reckon with information and causality. Further, the design of
                     innovative artificially intelligent systems may improve by drawing inspiration from the remarkable causal
                     architecture of some of the systems it seeks to imitate: living organisms and conscious minds. As such, we
@@ -67,7 +67,7 @@ const StudyGroups = () => {
                     <li><b>Prereqs:</b> Some background in calculus helpful, but no hard prerequisite knowledge requirements </li>
                     <li><b>Meeting time:</b> Sundays @ 6:00pm</li>
                 </ul>
-            </Project>
+            </Project> */}
         </Container>
     );
 }
