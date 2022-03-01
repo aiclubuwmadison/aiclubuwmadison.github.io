@@ -31,7 +31,7 @@ const Leadership = () => {
                     <Grid item xs>
                         <Portrait
                             file="taha.jpg"
-                            title="Head of Project & Study Groups and PR"
+                            title="Head of PR"
                             name="Taha Sawar"
                             link="https://www.linkedin.com/in/sawar/"
                         />
@@ -45,10 +45,11 @@ const Leadership = () => {
                             title="Event Head"
                             name="Arun Sivarajah"
                         />
-                    </Grid><Grid item xs>
+                    </Grid>
+                    <Grid item xs>
                         <Portrait
                             file="alexey.jpg"
-                            title="Undetermined"
+                            title="Head of Project and Study Groups"
                             name="Alexey Gorbunov"
                             link="https://www.linkedin.com/in/alexey-gorbunov-b2153a19a/"
                         />

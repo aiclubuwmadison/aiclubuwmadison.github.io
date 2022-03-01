@@ -25,6 +25,7 @@ const Seminar = ({file, date, title, children}) => {
                             className="image"
                             width={300}
                             height={375}
+                            alt="seminar"
                             src={`${process.env.PUBLIC_URL}/images/seminarSpeakers/${file}`}
                         />
                     </div>
