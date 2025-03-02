@@ -90,7 +90,7 @@ const Leadership = () => {
             { file: "vardaan.jpg", title: "Secretary", name: "Vardaan Kapoor" },
         ],
         [
-            { file: "debopaul.jpg", title: "Events Manager", name: "Debo Jyoti Paul" },
+            { file: "debo.jpg", title: "Events Manager", name: "Debo Jyoti Paul" },
             { file: "Ira.png", title: "Club Meetings Manager", name: "Ira Hande" },
             { file: "boy.jpg", title: "Treasurer", name: "Akash Goda" },
         ],
@@ -102,7 +102,7 @@ const Leadership = () => {
     const CurrentLeadershipData = [
         [
             { file: "vardaan.jpg", title: "President", name: "Vardaan Kapoor" },
-            { file: "debopaul.jpg", title: "Vice President", name: "Debo Jyoti Paul" },
+            { file: "debo.jpg", title: "Vice President", name: "Debo Jyoti Paul" },
             { file: "Ira.png", title: "Club Meetings Manager", name: "Ira Hande" },
         ],
         [   
