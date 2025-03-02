@@ -1,0 +1,40 @@
+AI@UW Website Master Building Guide for new peeps and/or webmasters.
+
+Overall: Edit website in dev branch, push it and then build the file,  and push it to masters:
+
+clone, then npm install and npm start in parent dir(dont worry abt backend). and test/debug/update.
+
+after everything works npm run build and npx serve -s build to check if build it loading properly. then below steps to push to master.
+
+- first push commit dev if everything is working as expected(ensure proper add files).
+
+b23b133e1cb252791a9c1b7c4e07eea213804e5f
+b23b133e1cb252791a9c1b7c4e07eea213804e5f (ignore these)
+
+to save hash before pushing to master. save hash
+git rev-parse origin/master 
+
+1. in master copy build into prevous dir:
+cp -r build/ ../temp_build/
+
+2. go to master
+git checkout master
+
+3. rem all files:
+rm -rf *
+
+4. cp the build file into the branch
+cp -r ../temp_build/* .
+
+5. then commit push
+git add . 
+git commit -m "Update built files" 
+	check branch then normal git push. if that dont work then below:
+git push origin master
+
+6. remove temp build if you want.
+rm -rf ../temp_build/
+
+(feel free to ignore this as well - its how i kept store of the hash's. you can git's built in feature as well.)
+0. 63bbde8ce1637191b79c8ce3ea5ca1f797d5b94a (before my pic didnt work)
+1. d1323ff106dba839c8fe6de70051ea636e7d09e6 (before amfam pic didnt load on Contact pg)
