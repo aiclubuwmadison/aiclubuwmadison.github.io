@@ -13,7 +13,7 @@ const Contact = () => {
                 Contact Us
             </Header>
             <Subheader>
-                &bull; Join our <a className="link-text" target="_blank" href="http://wisconsinai.slack.com/">Slack workspace</a> to communicate with other students, engage with study groups, and coordinate with project group members!
+                &bull; Join our <a className="link-text" target="_blank" href="https://discord.gg/TTSykcZAg4"> Discord workspace</a> to communicate with other students, engage with study groups, and coordinate with project group members!
             </Subheader>
             <Subheader>
                 &bull; <a className="link-text" target="_blank" href="http://eepurl.com/dMyKlQ">Sign up</a> for our email newsletter to stay up-to-date on all AI@UW events!
@@ -31,7 +31,9 @@ const Contact = () => {
                 </Grid>
             </Grid>
             <br></br>
-            <ArticleImage file="sem3.jpg" caption="Our 2019 kickoff meeting"/>
+            {/* <ArticleImage file="sem3.jpg" caption="Our 2019 kickoff meeting"/> */}
+            <ArticleImage file="FiresideChat AmFam 24'(2).jpg" caption="Our 2024 Fireside Chat Night w/ American Family Insurance (AmFam)" />
+
         </Container>
     );
 }

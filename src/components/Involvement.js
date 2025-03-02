@@ -14,7 +14,7 @@ const Involvement = () => {
                     Involvement
                 </Header>
                 <BodyText>
-                    We have the following positions available for members to choose from. Feel free to post any questions to our Slack channel, #fyi-help, if you can’t find your question on our Q&A page.
+                    We have the following positions available for members to choose from. Feel free to post any questions to our Discord channel, #fyi-help, if you can’t find your question on our Q&A page.
                 </BodyText>
                 <hr></hr>
                 <Subheader> Leader </Subheader>

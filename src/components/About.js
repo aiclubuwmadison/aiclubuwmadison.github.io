@@ -40,17 +40,18 @@ const About = () => {
                 About Us
             </Header>
             <Subheader> Who We Are</Subheader>
-            <BodyText>
-                AI@UW is a student organization at the University of Wisconsin-Madison. We aim to build a community of students from all backgrounds united by a shared interest in AI. Starting as just 7 undergrads in 2017, we have since expanded our reach to over 500 undergrads, graduate students, and faculty. We pride ourselves on our interdisciplinary approach to learning and building -- people of all backgrounds and academic interests have a place in our organization.            </BodyText>
+            <BodyText>AI@UW is a student organization at the University of Wisconsin-Madison. We aim to build a community of students from all backgrounds united 
+                by a shared interest in AI. Starting as just 7 undergrads in 2017, we have since expanded our reach to over 500 undergrads, graduate students, 
+                and faculty. We pride ourselves on our interdisciplinary approach to learning and building -- people of all backgrounds and academic interests 
+                have a place in our organization.</BodyText>
             <Subheader> What We Do</Subheader>
-            <BodyText>
-                AI@UW offers regular events which are the perfect opportunity to learn more about AI-related topics or to meet other people with a shared interest in AI.
-                Members who want to gain experience using machine learning tools or simply want to add to their project portfolios will benefit from joining this organization.
-                Past project groups have built tools to identify skin tumors using computer vision, predict the movement of the stock market using reinforcement learning, generate novel music using recurrent neural networks, and more!
-                If you don’t have much programming experience or are unfamiliar with machine learning but want to learn more, consider joining some of our study groups / workshops.
-                Past study groups have worked through Andrew Ng’s Machine Learning course, discussed the relationship between neuroscience and AI, and read Sutton’s reinforcement learning textbook.
-                It doesn't matter where you're at with background knowledge or experience. So long as you have an interest in AI, we welcome you with open arms!
-            </BodyText>
+            <BodyText>AI@UW focuses on organizing groups for interested students to work on AI projects or to research AI topics. Members who want to gain 
+                experience using machine learning tools or simply want to add to their project portfolios will benefit from joining this organization. Past 
+                project groups have built tools to identify skin tumors using computer vision, predict the movement of the stock market using reinforcement 
+                learning, generate novel music using recurrent neural networks, and more! We also help students organize study groups for AI related classes. 
+                Past study groups have worked through Andrew Ng’s Machine Learning course, discussed the relationship between neuroscience and AI, and read 
+                utton’s reinforcement learning textbook. It doesn't matter where you're at with background knowledge or experience. So long as you have an 
+                interest in AI, we welcome you with open arms!</BodyText>
             <div class="slideshow-container">
                 <div class="slide-item fade">
                     <img src="images/logos/google.png" height={150} alt="Google"/>
@@ -102,7 +103,9 @@ const About = () => {
                 </div>
             </div>
 
-            <ArticleImage file="sem2.jpg" caption="Our 2019 kick-off seminar" />
+            {/* <ArticleImage files={["FiresideChat AmFam 24'(1).jpg", "sem2.jpg",]} captions={["Our 2024 Fireside Chat Night w/ American Family Insurance (AmFam)", "Our 2019 kick-off seminar"]}/> */}
+            {/* <ArticleImage file="sem2.jpg" caption="Our 2019 kick-off seminar" /> */}
+            <ArticleImage file="FiresideChat AmFam 24'(1).jpg" caption="Our 2024 Fireside Chat Night w/ American Family Insurance (AmFam)" />
 
         </Container>
     );
