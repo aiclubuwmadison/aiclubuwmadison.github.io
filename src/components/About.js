@@ -105,7 +105,7 @@ const About = () => {
 
             {/* <ArticleImage files={["FiresideChat AmFam 24'(1).jpg", "sem2.jpg",]} captions={["Our 2024 Fireside Chat Night w/ American Family Insurance (AmFam)", "Our 2019 kick-off seminar"]}/> */}
             {/* <ArticleImage file="sem2.jpg" caption="Our 2019 kick-off seminar" /> */}
-            <ArticleImage file="FiresideChat AmFam 24'(1).jpg" caption="Our 2024 Fireside Chat Night w/ American Family Insurance (AmFam)" />
+            <ArticleImage file="amfam1.jpg" caption="Our 2024 Fireside Chat Night w/ American Family Insurance (AmFam)" />
 
         </Container>
     );

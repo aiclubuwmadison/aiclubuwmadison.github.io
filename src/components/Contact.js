@@ -32,7 +32,7 @@ const Contact = () => {
             </Grid>
             <br></br>
             {/* <ArticleImage file="sem3.jpg" caption="Our 2019 kickoff meeting"/> */}
-            <ArticleImage file="FiresideChat AmFam 24'(2).jpg" caption="Our 2024 Fireside Chat Night w/ American Family Insurance (AmFam)" />
+            <ArticleImage file="amfam2.jpg" caption="Our 2024 Fireside Chat Night w/ American Family Insurance (AmFam)" />
 
         </Container>
     );
