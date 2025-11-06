@@ -20,3 +20,5 @@ export NODE_OPTIONS=--openssl-legacy-provider
 npm start 
 
 to actually start the application on your own localhost(own computer)
+
+NOTES: i have currently used deployment from the dev branch and used an action from github-> we can either deploy the website from dev branch or the master branch-> branch master can be deployed directly but for deploying from dev branch, I used github actions file in the /github/workflows folder
