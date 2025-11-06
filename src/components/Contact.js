@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Grid, Typography } from '@material-ui/core';
+import { Container, Grid, Typography, Card, CardContent, Button, TextField } from '@material-ui/core';
 import Header from './typographic/Header';
 import Subheader from './typographic/Subheader';
 import ArticleImage from './display/ArticleImage';
@@ -8,7 +8,43 @@ import SubmissionBox from './SubmissionBox';
 const Contact = () => {
 
     return (
-        <Container>
+        <>
+            <section className="page-hero gradient-bg">
+                <div className="home-hero-overlay" />
+                <Container className="page-hero-content">
+                    <Typography variant="h3" className="home-hero-title">Contact Us</Typography>
+                    <Typography variant="body1" className="home-hero-subtitle">Questions, partnerships, or speaking? We’d love to hear from you.</Typography>
+                </Container>
+            </section>
+
+            <Container className="page-section">
+                <Grid container spacing={3}>
+                    <Grid item xs={12} md={6}>
+                        <Card className="home-card">
+                            <CardContent>
+                                <Typography variant="h6" className="home-card-title">Send a message</Typography>
+                                <form className="contact-form" onSubmit={(e)=>e.preventDefault()}>
+                                    <TextField fullWidth variant="outlined" label="Name" margin="dense" />
+                                    <TextField fullWidth variant="outlined" label="Email" type="email" margin="dense" />
+                                    <TextField fullWidth variant="outlined" label="Message" margin="dense" multiline rows={5} />
+                                    <Button style={{ marginTop: 8 }} variant="contained" color="primary" type="submit">Send</Button>
+                                </form>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                        <Card className="home-card">
+                            <CardContent>
+                                <Typography variant="h6" className="home-card-title">Reach us directly</Typography>
+                                <Typography variant="body2" className="home-card-desc">Email: aiclubuwmadison@gmail.com</Typography>
+                                <Typography variant="body2" className="home-card-desc">Location: UW–Madison</Typography>
+                                <Button style={{ marginTop: 8 }} href="mailto:aiclubuwmadison@gmail.com" color="secondary" variant="outlined">Email us</Button>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                </Grid>
+            </Container>
+
             <Header>
                 Contact Us
             </Header>
@@ -34,7 +70,7 @@ const Contact = () => {
             {/* <ArticleImage file="sem3.jpg" caption="Our 2019 kickoff meeting"/> */}
             <ArticleImage file="amfam2.jpg" caption="Our 2024 Fireside Chat Night w/ American Family Insurance (AmFam)" />
 
-        </Container>
+        </>
     );
 }
 

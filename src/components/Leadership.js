@@ -5,7 +5,7 @@ import Portrait from './display/Portrait';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
-    expandableRow: { // Dynamic(past ldrship) row style.
+    expandableRow: {
         cursor: 'pointer',
         padding: theme.spacing(2),
         borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
             backgroundColor: '#EEEDED',
         },
     },
-    staticRow: { // Static row style.
+    staticRow: {
         padding: theme.spacing(2),
         borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
     },
@@ -22,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Leadership = () => {
     const classes = useStyles();
-    // To add a new collapse section, just add the name here, remember to update it at bottom, and have a new list.
     const [expandedSections, setExpandedSections] = useState({
         currentLeaders: false,
         pastLeaders: false,
@@ -31,125 +30,101 @@ const Leadership = () => {
         currentLeaders: '►',
         pastLeaders: '►',
     });
-    // const [expanded, setExpanded] = useState(false);
-    // const [arrowDirection, setArrowDirection] = useState('►');
 
     const handleToggle = (section) => {
         setExpandedSections(prevState => ({
             ...prevState,
             [section]: !prevState[section]
         }));
-        
         setArrowDirections(prevState => ({
             ...prevState,
             [section]: prevState[section] === '►' ? '▼' : '►'
         }));
     };
+
     const PastLeadershipData = [
         [
-            { file: "anniruddh.jpg", title: "President", name: "Anniruddh Kumar" },
-            { file: "tanish.jpg", title: "Vice President", name: "Tanish Nahata", link: "https://www.linkedin.com/in/tanish-nahata" },
-            { file: "taha.jpg", title: "Head of PR", name: "Taha Sawar", link: "https://www.linkedin.com/in/sawar/" },
+            { file: 'anniruddh.jpg', title: 'President', name: 'Anniruddh Kumar' },
+            { file: 'tanish.jpg', title: 'Vice President', name: 'Tanish Nahata', link: 'https://www.linkedin.com/in/tanish-nahata' },
+            { file: 'taha.jpg', title: 'Head of PR', name: 'Taha Sawar', link: 'https://www.linkedin.com/in/sawar/' },
         ],
         [
-            { file: "arun.jpg", title: "Event Head", name: "Arun Sivarajah" },
-            { file: "alexey.jpg", title: "Head of Project and Study Groups", name: "Alexey Gorbunov", link: "https://www.linkedin.com/in/alexey-gorbunov-b2153a19a/" },
-            { file: "ethan.jpg", title: "Webmaster", name: "Ethan Wheeler", link: "https://www.linkedin.com/in/ethan-wheeler-abcdef/" },
+            { file: 'arun.jpg', title: 'Event Head', name: 'Arun Sivarajah' },
+            { file: 'alexey.jpg', title: 'Head of Project and Study Groups', name: 'Alexey Gorbunov', link: 'https://www.linkedin.com/in/alexey-gorbunov-b2153a19a/' },
+            { file: 'ethan.jpg', title: 'Webmaster', name: 'Ethan Wheeler', link: 'https://www.linkedin.com/in/ethan-wheeler-abcdef/' },
         ],
         [
-            { file: "dane.jpg", title: "Advisor, Harvey D. Spangler Professor of Engineering", name: "Dane Morgan", link: "https://directory.engr.wisc.edu/mse/faculty/morgan_dane" },
+            { file: 'dane.jpg', title: 'Advisor, Harvey D. Spangler Professor of Engineering', name: 'Dane Morgan', link: 'https://directory.engr.wisc.edu/mse/faculty/morgan_dane' },
         ],
     ];
 
-    // const staticLeadershipData = [
-    //     [
-    //         { file: "vardaan.jpg", title: "Co-President", name: "Vardaan Kapoor" },
-    //         { file: "Monish.jpg", title: "Co-President", name: "Monish Vijay Kumar"},
-    //         { file: "debopaul2.jpg", title: "Treasurer", name: "Akash"},
-    //     ],
-    //     [
-    //         { file: "debopaul.jpg", title: "Events Manager", name: "Debo Jyoti Paul" },
-    //         { file: "anniruddh.jpg", title: "Communications and Event Manager", name: "kashish"},
-    //         { file: "Ira.png", title: "Club Meetings Manager", name: "Ira" },
-    //     ],
-    //     [
-    //         { file: "anniruddh.jpg", title: "Editorial Assistant", name: "Rohun"},
-    //         { file: "tanish.jpg", title: "Social Media Manager", name: "Shikha"},
-    //         { file: "Monyka.jpeg", title: "Director of Marketing", name: "Monyka"},
-    //     ],
-    //     [
-    //         { file: "taha.jpg", title: "Secretary", name: "Charith"},
-    //         { file: "tanish.jpg", title: "Webmaster", name: "Brennen"},
-    //         { file: "taha.jpg", title: "Webmaster", name: "JOHN"},
-    //     ],
-    // ];
     const SeptDec24LeadershipData = [
         [
-            { file: "Monish.jpg", title: "President", name: "Monish Vijay Kumar"},
-            { file: "Monyka.jpeg", title: "Director of Marketing", name: "Ratcheny (Monyka) Lee"},
-            { file: "vardaan.jpg", title: "Secretary", name: "Vardaan Kapoor" },
+            { file: 'Monish.jpg', title: 'President', name: 'Monish Vijay Kumar', link: 'https://www.linkedin.com/in/monish-bangalore-vijay-kumar-a0411720a/' },
+            { file: 'Monyka.jpeg', title: 'Director of Marketing', name: "Ratcheny (Monyka) Lee",link: 'https://www.linkedin.com/in/ratchenymonycalee/' },
+            { file: 'vardaan.jpg', title: 'Secretary', name: 'Vardaan Kapoor', link: 'https://www.linkedin.com/in/vardaankapoor/' },
         ],
         [
-            { file: "debo.jpg", title: "Events Manager", name: "Debo Jyoti Paul" },
-            { file: "Ira.png", title: "Club Meetings Manager", name: "Ira Hande" },
-            { file: "boy.jpg", title: "Treasurer", name: "Akash Goda" },
+            { file: 'debo.jpg', title: 'Events Manager', name: 'Debo Jyoti Paul',link:'https://www.linkedin.com/in/debojp/' },
+            { file: 'Ira.png', title: 'Club Meetings Manager', name: 'Ira Hande', link:'https://www.linkedin.com/in/ira-hande/' },
+            { file: 'akash.jpeg', title: 'Treasurer', name: 'Akash Goda' ,link:'https://www.linkedin.com/in/akashgoda/'},
         ],
         [
-            { file: "boy.jpg", title: "Editorial Assistant", name: "Rohun Bakshi" },
+            { file: 'rohun.jpeg', title: 'Editorial Assistant', name: 'Rohun Bakshi' ,link:'https://www.linkedin.com/in/rohun-bakshi/'},
         ],
     ];
 
     const CurrentLeadershipData = [
         [
-            { file: "vardaan.jpg", title: "President", name: "Vardaan Kapoor" },
-            { file: "debo.jpg", title: "Vice President", name: "Debo Jyoti Paul" },
-            { file: "Ira.png", title: "Club Meetings Manager", name: "Ira Hande" },
-        ],
-        [   
-            { file: "girl.jpg", title: "Communications Manager", name: "Kashish Agarwal" },
-            { file: "boy.jpg", title: "Treasurer", name: "Akash Goda" },
-            { file: "boy.jpg", title: "Secretary", name: "Charith Reddy Pareddy" },
+            { file: 'vardaan.jpg', title: 'President', name: 'Vardaan Kapoor' , link: 'https://www.linkedin.com/in/vardaankapoor/'},
+            { file: 'debo.jpg', title: 'Vice President', name: 'Debo Jyoti Paul', link: 'https://www.linkedin.com/in/debojp/' },
+            { file: 'Ira.png', title: 'Club Meetings Manager', name: 'Ira Hande', link:'https://www.linkedin.com/in/ira-hande/'},
         ],
         [
-            { file: "boy.jpg", title: "Editorial Assistant", name: "Rohun Bakshi" },
-            { file: "girl.jpg", title: "Social Media Manager", name: "Shikha Ashara" },
-            { file: "boy.jpg", title: "Webmaster", name: "Pranav Gullapalli" },
+            { file: 'kashish.jpeg', title: 'Communications Manager', name: 'Kashish Agarwal',link:'https://www.linkedin.com/in/kashishuw/' },
+            { file: 'akash.jpeg', title: 'Treasurer', name: 'Akash Goda',link:'https://www.linkedin.com/in/akashgoda/' },
+            { file: 'charith.png', title: 'Secretary', name: 'Charith Reddy Pareddy',link:'https://www.linkedin.com/in/charith-reddy-pareddy-61252b329/' },
         ],
         [
-            { file: "girl.jpg", title: "Student Tech Advisor", name: "Sukrut Chikodikar" },
+            { file: 'rohun.jpeg', title: 'Editorial Assistant', name: 'Rohun Bakshi', link:'https://www.linkedin.com/in/rohun-bakshi/'},
+            { file: 'shikha.jpeg', title: 'Social Media Manager', name: 'Shikha Ashara',link:'https://www.linkedin.com/in/shikha-ashara/' },
+           
+        
+            { file: 'sukrut.jpeg', title: 'Student Tech Advisor', name: 'Sukrut Chikodikar',link:'https://www.linkedin.com/in/schikodikar/' },
         ],
     ];
 
 
     return (
-        <Container>
-            <Header>
-                Our Leadership
-            </Header>
+        <>
+            <section className="page-hero gradient-bg">
+                <div className="home-hero-overlay" />
+                <Container className="page-hero-content">
+                    <Typography variant="h3" className="home-hero-title">Leadership</Typography>
+                    <Typography variant="body1" className="home-hero-subtitle">Students and mentors guiding AI@UW across projects, research, and community.</Typography>
+                </Container>
+            </section>
 
-              {/* Always Shown Section with similar styling but non-interactive: Think of as Current leaders. */}
-              {/* <div className={classes.staticRow}> */}
-                    {/* <Typography variant="h6">Academic Year 2024-2025</Typography> */}
-                {/* </div> */}
-                <Grid container direction="column" justify="center" alignItems="center">
-                    {CurrentLeadershipData.map((row, rowIndex) => (
-                        <Grid container direction="row" justify="center" alignItems="center" key={`static-${rowIndex}`}>
-                            {row.map((member, memberIndex) => (
-                                <Grid item xs key={`static-${memberIndex}`}>
-                                    <Portrait
-                                        file={member.file}
-                                        title={member.title}
-                                        name={member.name}
-                                        link={member.link}
-                                    />
-                                </Grid>
-                            ))}
-                        </Grid>
-                    ))}
-                </Grid>
+            {/* Current leaders grid (static) */}
+            <Grid container direction="column" justify="center" alignItems="center">
+                {CurrentLeadershipData.map((row, rowIndex) => (
+                    <Grid container direction="row" justify="center" alignItems="center" key={`static-${rowIndex}`}>
+                        {row.map((member, memberIndex) => (
+                            <Grid item xs key={`static-${memberIndex}`}>
+                                <Portrait
+                                    file={member.file}
+                                    title={member.title}
+                                    name={member.name}
+                                    link={member.link}
+                                />
+                            </Grid>
+                        ))}
+                    </Grid>
+                ))}
+            </Grid>
 
-            {/* Example for adding new collapseable. onClick, indide Topography, and the 'in' section Collapse, and update mapping data. */}
-            <div className={classes.expandableRow} onClick={() => handleToggle("currentLeaders")}>  
+            {/* September - December 24 */}
+            <div className={classes.expandableRow} onClick={() => handleToggle('currentLeaders')}>
                 <Typography variant="h6">
                     September - December 24' {arrowDirections.currentLeaders}
                 </Typography>
@@ -173,7 +148,8 @@ const Leadership = () => {
                 </Grid>
             </Collapse>
 
-            <div className={classes.expandableRow} onClick={() => handleToggle("pastLeaders")}>
+            {/* Past leadership */}
+            <div className={classes.expandableRow} onClick={() => handleToggle('pastLeaders')}>
                 <Typography variant="h6">
                     Past Leadership {arrowDirections.pastLeaders}
                 </Typography>
@@ -196,7 +172,7 @@ const Leadership = () => {
                     ))}
                 </Grid>
             </Collapse>
-        </Container>
+        </>
     );
 }
 
