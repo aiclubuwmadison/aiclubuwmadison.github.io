@@ -2,15 +2,17 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta http-equiv="refresh" content="0; url=/#/" />
     <title>Redirecting…</title>
     <script>
-      // Redirect any path to hash-based routing to avoid 404 on refresh
+      // Single Page Apps for GitHub Pages
+      // This script takes the current path and redirects to index.html while
+      // preserving the pathname in a query string so the app can restore it.
       (function () {
         var l = window.location;
-        var path = l.pathname + l.search + l.hash;
-        if (!path.startsWith('/#/')) {
-          l.replace('/#' + path);
+        var redirect = '/index.html?redirect=' + encodeURIComponent(l.pathname + l.search + l.hash);
+        // Avoid infinite redirect loops
+        if (!l.search.includes('redirect=')) {
+          l.replace(redirect);
         }
       })();
     </script>

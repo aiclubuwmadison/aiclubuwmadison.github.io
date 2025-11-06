@@ -30,6 +30,16 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>AI@UW</title>
+    <script>
+      (function() {
+        var params = new URLSearchParams(window.location.search);
+        var r = params.get('redirect');
+        if (r) {
+          var url = new URL(r, window.location.origin);
+          window.history.replaceState(null, '', url.pathname + url.search + url.hash);
+        }
+      })();
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

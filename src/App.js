@@ -2,7 +2,7 @@ import React from 'react';
 import {
   Route,
   Switch,
-  HashRouter as Router
+  BrowserRouter as Router
 } from 'react-router-dom';
 import './App.css';
 import Nav from './components/Nav'
