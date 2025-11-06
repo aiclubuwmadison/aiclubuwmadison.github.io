@@ -60,6 +60,7 @@ const Nav = () => {
                     src="images/logo.png"
                     width="40"
                     height="40"
+                    alt="AI@UW logo"
                 />
             </Link>
             { isLargeScreen ? 
