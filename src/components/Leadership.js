@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Container, Grid, Collapse, Typography } from '@material-ui/core';
-import Header from './typographic/Header';
 import Portrait from './display/Portrait';
 import { makeStyles } from '@material-ui/core/styles';
 

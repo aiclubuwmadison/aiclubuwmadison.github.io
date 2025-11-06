@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Container } from '@material-ui/core';
-import Header from './typographic/Header';
+// Removed unused Header import
 import BodyText from './typographic/BodyText';
 import Subheader from './typographic/Subheader';
 import ArticleImage from './display/ArticleImage';
