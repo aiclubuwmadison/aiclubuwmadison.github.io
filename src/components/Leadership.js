@@ -22,10 +22,12 @@ const useStyles = makeStyles((theme) => ({
 const Leadership = () => {
     const classes = useStyles();
     const [expandedSections, setExpandedSections] = useState({
+        dec24Dec25Leaders: false,
         currentLeaders: false,
         pastLeaders: false,
     });
     const [arrowDirections, setArrowDirections] = useState({
+        dec24Dec25Leaders: '►',
         currentLeaders: '►',
         pastLeaders: '►',
     });
@@ -74,22 +76,33 @@ const Leadership = () => {
     ];
 
     const CurrentLeadershipData = [
+        [   
+            { file: 'hriday.png', title: 'President', name: 'Hriday Sethi', link: 'https://www.linkedin.com/in/hridyanshsethi/' },
+            { file: 'samarth.png', title: 'Secretary', name: 'Samarth Bhargava', link: 'https://www.linkedin.com/in/samarth010/' },
+            { file: 'rishabh.jpeg', title: 'Head Of Operations', name: 'Rishabh Aggarwal', link: 'https://www.linkedin.com/in/rishabh-aggarwal-b03ab8211' }
+        ],
         [
-            { file: 'vardaan.jpg', title: 'President', name: 'Vardaan Kapoor' , link: 'https://www.linkedin.com/in/vardaankapoor/'},
+            { file: 'shikha.jpeg', title: 'Marketing Head', name: 'Shikha Ashara', link: 'https://www.linkedin.com/in/shikha-ashara/' },
+            { file: 'kashish.jpeg', title: 'Event Organiser', name: 'Kashish Agarwal', link: 'https://www.linkedin.com/in/kashishuw/' },
+            { file: 'akash.jpeg', title: 'Campus Relations Coordinator', name: 'Akash Goda', link: 'https://www.linkedin.com/in/akashgoda/' }
+        ]
+    ];
+
+    const Dec24Dec25LeadershipData = [
+        [
+            { file: 'vardaan.jpg', title: 'President', name: 'Vardaan Kapoor', link: 'https://www.linkedin.com/in/vardaankapoor/' },
             { file: 'debo.jpg', title: 'Vice President', name: 'Debo Jyoti Paul', link: 'https://www.linkedin.com/in/debojp/' },
-            { file: 'Ira.png', title: 'Club Meetings Manager', name: 'Ira Hande', link:'https://www.linkedin.com/in/ira-hande/'},
+            { file: 'Ira.png', title: 'Club Meetings Manager', name: 'Ira Hande', link: 'https://www.linkedin.com/in/ira-hande/' },
         ],
         [
-            { file: 'kashish.jpeg', title: 'Communications Manager', name: 'Kashish Agarwal',link:'https://www.linkedin.com/in/kashishuw/' },
-            { file: 'akash.jpeg', title: 'Treasurer', name: 'Akash Goda',link:'https://www.linkedin.com/in/akashgoda/' },
-            { file: 'charith.png', title: 'Secretary', name: 'Charith Reddy Pareddy',link:'https://www.linkedin.com/in/charith-reddy-pareddy-61252b329/' },
+            { file: 'kashish.jpeg', title: 'Communications Manager', name: 'Kashish Agarwal', link: 'https://www.linkedin.com/in/kashishuw/' },
+            { file: 'akash.jpeg', title: 'Treasurer', name: 'Akash Goda', link: 'https://www.linkedin.com/in/akashgoda/' },
+            { file: 'charith.png', title: 'Secretary', name: 'Charith Reddy Pareddy', link: 'https://www.linkedin.com/in/charith-reddy-pareddy-61252b329/' },
         ],
         [
-            { file: 'rohun.jpeg', title: 'Editorial Assistant', name: 'Rohun Bakshi', link:'https://www.linkedin.com/in/rohun-bakshi/'},
-            { file: 'shikha.jpeg', title: 'Social Media Manager', name: 'Shikha Ashara',link:'https://www.linkedin.com/in/shikha-ashara/' },
-           
-        
-            { file: 'sukrut.jpeg', title: 'Student Tech Advisor', name: 'Sukrut Chikodikar',link:'https://www.linkedin.com/in/schikodikar/' },
+            { file: 'rohun.jpeg', title: 'Editorial Assistant', name: 'Rohun Bakshi', link: 'https://www.linkedin.com/in/rohun-bakshi/' },
+            { file: 'shikha.jpeg', title: 'Social Media Manager', name: 'Shikha Ashara', link: 'https://www.linkedin.com/in/shikha-ashara/' },
+            { file: 'sukrut.jpeg', title: 'Student Tech Advisor', name: 'Sukrut Chikodikar', link: 'https://www.linkedin.com/in/schikodikar/' },
         ],
     ];
 
@@ -121,6 +134,31 @@ const Leadership = () => {
                     </Grid>
                 ))}
             </Grid>
+
+            {/* December 2024 - December 2025 */}
+            <div className={classes.expandableRow} onClick={() => handleToggle('dec24Dec25Leaders')}>
+                <Typography variant="h6">
+                    December 2024 - December 2025 {arrowDirections.dec24Dec25Leaders}
+                </Typography>
+            </div>
+            <Collapse in={expandedSections.dec24Dec25Leaders} timeout="auto" unmountOnExit>
+                <Grid container direction="column" justify="center" alignItems="center">
+                    {Dec24Dec25LeadershipData.map((row, rowIndex) => (
+                        <Grid container direction="row" justify="center" alignItems="center" key={`dec-${rowIndex}`}>
+                            {row.map((member, memberIndex) => (
+                                <Grid item xs key={`dec-${memberIndex}`}>
+                                    <Portrait
+                                        file={member.file}
+                                        title={member.title}
+                                        name={member.name}
+                                        link={member.link}
+                                    />
+                                </Grid>
+                            ))}
+                        </Grid>
+                    ))}
+                </Grid>
+            </Collapse>
 
             {/* September - December 24 */}
             <div className={classes.expandableRow} onClick={() => handleToggle('currentLeaders')}>
