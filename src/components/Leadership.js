@@ -85,9 +85,16 @@ const Leadership = () => {
             { file: 'shikha.jpeg', title: 'Marketing Head', name: 'Shikha Ashara', link: 'https://www.linkedin.com/in/shikha-ashara/' },
             { file: 'kashish.jpeg', title: 'Event Organiser', name: 'Kashish Agarwal', link: 'https://www.linkedin.com/in/kashishuw/' },
             { file: 'akash.jpeg', title: 'Campus Relations Coordinator', name: 'Akash Goda', link: 'https://www.linkedin.com/in/akashgoda/' }
-        ]
+        ],
         [
-            {}
+            
+            {file: 'sam.jpg', title: 'Project Manager', name: 'Sam Avramov', link: 'https://www.linkedin.com/in/samavramov/'},
+            {file: 'yug.jpg', title: 'Project Manager', name: 'Yug Marwaha', link: 'https://www.linkedin.com/in/yug-marwaha-881b53321?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app'},
+            {file: 'kartik.jpg', title: 'Project Manager', name: 'Kartik Gangwar', link: 'https://www.linkedin.com/in/kartik-gangwar?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app'},
+        ],
+        [
+            {file: 'jack.png', title: 'Project Manager', name: 'Jack Koteles', link: 'https://www.linkedin.com/in/jackkoteles/'},
+    
         ]
     ];
 
