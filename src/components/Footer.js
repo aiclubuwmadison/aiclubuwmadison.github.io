@@ -15,7 +15,7 @@ const Footer = () => {
                   />
                 </Grid>
                 <Grid item xs>
-                  <Subheader variant="subheader-footer"> UW-Madison Artificial Intelligence Club </Subheader>
+                  <Subheader variant="subheader-footer"> Artificial Intelligence Club at UW-Madison </Subheader>
                   <div class="social"><a style={{textDecoration: "none", color: "#bbb"}} href="https://www.instagram.com/aiclubuw/" target="_blank">Instagram</a></div>
                   <div class="social"><a title="Suggestions Box" style={{textDecoration: "none", color: "#bbb"}} href="https://forms.gle/cKfuybyBQzv9vc8d8" target="_blank">Suggestions</a></div>
                   <div class="social"><a style={{textDecoration: "none", color: "#bbb"}} href="https://www.linkedin.com/company/aiclub-uwmadison" target="_blank">LinkedIn</a></div>
