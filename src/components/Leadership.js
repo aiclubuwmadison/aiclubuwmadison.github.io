@@ -86,6 +86,9 @@ const Leadership = () => {
             { file: 'kashish.jpeg', title: 'Event Organiser', name: 'Kashish Agarwal', link: 'https://www.linkedin.com/in/kashishuw/' },
             { file: 'akash.jpeg', title: 'Campus Relations Coordinator', name: 'Akash Goda', link: 'https://www.linkedin.com/in/akashgoda/' }
         ]
+        [
+            {}
+        ]
     ];
 
     const Dec24Dec25LeadershipData = [
