@@ -78,13 +78,13 @@ const Leadership = () => {
     const CurrentLeadershipData = [
         [   
             { file: 'hriday.png', title: 'President', name: 'Hriday Sethi', link: 'https://www.linkedin.com/in/hridyanshsethi/' },
-            { file: 'samarth.png', title: 'Secretary', name: 'Samarth Bhargava', link: 'https://www.linkedin.com/in/samarth010/' },
-            { file: 'rishabh.jpeg', title: 'Head Of Operations', name: 'Rishabh Aggarwal', link: 'https://www.linkedin.com/in/rishabh-aggarwal-b03ab8211' }
+            { file: 'rishabh.jpeg', title: 'Vice President', name: 'Rishabh Aggarwal', link: 'https://www.linkedin.com/in/rishabh-aggarwal-b03ab8211' },
+            { file: 'samarth.png', title: 'Secretary', name: 'Samarth Bhargava', link: 'https://www.linkedin.com/in/samarth010/' }
         ],
         [
             { file: 'shikha.jpeg', title: 'Marketing Head', name: 'Shikha Ashara', link: 'https://www.linkedin.com/in/shikha-ashara/' },
-            { file: 'kashish.jpeg', title: 'Event Organiser', name: 'Kashish Agarwal', link: 'https://www.linkedin.com/in/kashishuw/' },
-            { file: 'akash.jpeg', title: 'Campus Relations Coordinator', name: 'Akash Goda', link: 'https://www.linkedin.com/in/akashgoda/' }
+            { file: 'arnav.jpg', title: 'Communications Manager', name: 'Arnav Batra', link: 'https://www.linkedin.com/in/batraarnav/' },
+            { file: 'swati.jpg', title: 'Event Organizer', name: 'Swati Banwani', link: 'https://matias.ma/nsfw/' },
         ],
         [
             
@@ -94,6 +94,7 @@ const Leadership = () => {
         ],
         [
             {file: 'jack.png', title: 'Project Manager', name: 'Jack Koteles', link: 'https://www.linkedin.com/in/jackkoteles/'},
+            {file: 'sukrut.jpeg', title: 'Project Manager', name: 'Adhyot Singh', link: 'https://www.linkedin.com/in/adhyotsingh/'},
     
         ]
     ];
@@ -173,7 +174,7 @@ const Leadership = () => {
             {/* September - December 24 */}
             <div className={classes.expandableRow} onClick={() => handleToggle('currentLeaders')}>
                 <Typography variant="h6">
-                    September - December 24' {arrowDirections.currentLeaders}
+                    September 2024 - December 2024 {arrowDirections.currentLeaders}
                 </Typography>
             </div>
             <Collapse in={expandedSections.currentLeaders} timeout="auto" unmountOnExit>

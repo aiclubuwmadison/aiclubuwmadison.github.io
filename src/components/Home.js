@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Container, Typography, Grid, Button, Card, CardContent, Chip, Tabs, Tab, Box } from '@material-ui/core';
+import { Container, Typography, Grid, Button, Card, CardContent } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+
 
 // Interactive particle background
 const ParticleField = () => {
@@ -185,31 +186,7 @@ const features = [
   { title: 'Community', desc: 'Hack nights, socials, and collaborations across disciplines.', to: '/about' },
 ];
 
-const domainData = [
-  { label: 'Machine Learning', chips: ['Supervised', 'Unsupervised', 'Evaluation'], text: 'From regression and classification to clustering and model selection, build strong ML foundations.', to: '/study' },
-  { label: 'Deep Learning', chips: ['CNNs', 'Transformers', 'Multimodal'], text: 'Neural architectures for images, text, audio, and multi-sensor learning with state-of-the-art techniques.', to: '/involvement' },
-  { label: 'NLP', chips: ['LLMs', 'Prompting', 'RAG'], text: 'Language models, retrieval, and responsible deployment for real applications.', to: '/involvement' },
-  { label: 'Computer Vision', chips: ['Detection', 'Segmentation', '3D'], text: 'Perception systems powering robotics, assistive tech, and scientific discovery.', to: '/involvement' },
-  { label: 'Reinforcement Learning', chips: ['Policy Gradients', 'Model-based', 'Bandits'], text: 'Decision-making under uncertainty, from simulation to the real world.', to: '/study' },
-  { label: 'Robotics', chips: ['Control', 'SLAM', 'Embodied AI'], text: 'Integrating perception, control, and planning for autonomous systems.', to: '/involvement' },
-  { label: 'AI Ethics', chips: ['Fairness', 'Privacy', 'Safety'], text: 'Critical perspectives on impact, bias, and governance of AI systems.', to: '/seminars' },
-  { label: 'AI + Health', chips: ['Medical Imaging', 'Clinical NLP', 'Wearables'], text: 'Collaborations on diagnostics, outcomes modeling, and equitable health insights.', to: '/involvement' },
-  { label: 'AI + Finance', chips: ['Forecasting', 'Risk', 'Fraud'], text: 'Time series, anomaly detection, and decision support for markets and fintech.', to: '/involvement' },
-  { label: 'AI + Climate', chips: ['Remote Sensing', 'Forecasting', 'Optimization'], text: 'Models for climate resilience, energy efficiency, and sustainability.', to: '/involvement' },
-  { label: 'AI + Social Good', chips: ['Civic Tech', 'Accessibility', 'Education'], text: 'Human-centered AI projects that positively impact communities.', to: '/involvement' },
-  { label: 'MLOps', chips: ['Data', 'Deployment', 'Monitoring'], text: 'From notebooks to production: versioning, serving, and continuous evaluation.', to: '/involvement' },
-];
-
-const partners = [
-  { src: 'images/logos/google.png', alt: 'Google' },
-  { src: 'images/logos/amazon.png', alt: 'Amazon' },
-  { src: 'images/logos/facebook.png', alt: 'Facebook' },
-  { src: 'images/logos/stanford.png', alt: 'Stanford' },
-  { src: 'images/logos/acm.png', alt: 'ACM' },
-];
-
 const Home = () => {
-  const [tab, setTab] = useState(0);
 
   return (
     <div className="home-root">
@@ -232,11 +209,6 @@ const Home = () => {
             ]} />
             {' '}at UW–Madison
           </Typography>
-          <div className="home-hero-ctas">
-            <Button size="large" color="primary" variant="contained" component={Link} to="/involvement">Join a Project</Button>
-            <Button size="large" color="secondary" variant="outlined" component={Link} to="/study">Learn & Study</Button>
-            <Button size="large" variant="outlined" component={Link} to="/seminars">Attend Events</Button>
-          </div>
         </Container>
       </section>
 
@@ -244,44 +216,14 @@ const Home = () => {
       <section className="home-section">
         <Container>
           <div className="stats-grid">
-            <Stat label="Members" target={2000} />
-            <Stat label="Projects" target={100} />
-            <Stat label="Events / yr" target={40} />
+            <Stat label="Members" target={150} />
+            <Stat label="Projects" target={5} />
+            <Stat label="Events / yr" target={10} />
             <Stat label="Partners" target={10} />
           </div>
         </Container>
       </section>
 
-      {/* DOMAIN EXPLORER */}
-      <section className="home-section glass" id="domains">
-        <Container>
-          <Typography variant="h4" className="home-section-title">Explore AI Domains</Typography>
-          <Tabs
-            value={tab}
-            onChange={(_, v) => setTab(v)}
-            variant="scrollable"
-            scrollButtons="on"
-            className="home-tabs"
-          >
-            {domainData.map((d, i) => (
-              <Tab label={d.label} key={d.label} />
-            ))}
-          </Tabs>
-          <Box className="domain-panel">
-            <Typography variant="subtitle1" className="domain-text">{domainData[tab].text}</Typography>
-            <div className="home-chips">
-              {domainData[tab].chips.map((c) => (
-                <Chip key={c} label={c} className="home-chip" />
-              ))}
-            </div>
-            <div className="domain-cta">
-              <Button size="small" color="primary" variant="contained" component={Link} to={domainData[tab].to}>
-                Explore {domainData[tab].label}
-              </Button>
-            </div>
-          </Box>
-        </Container>
-      </section>
 
       {/* FEATURES */}
       <section className="home-section">
@@ -305,65 +247,6 @@ const Home = () => {
         </Container>
       </section>
 
-      {/* HIGHLIGHTS */}
-      <section className="home-section" id="highlights">
-        <Container>
-          <Typography variant="h4" className="home-section-title">Recent Highlights</Typography>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={4}>
-              <Card className="home-card">
-                <CardContent>
-                  <Typography variant="subtitle1" className="home-card-title">Fireside Chat w/ AmFam</Typography>
-                  <Typography variant="body2" className="home-card-desc">Industry perspectives on GenAI, ethics, and real-world deployment.</Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Card className="home-card">
-                <CardContent>
-                  <Typography variant="subtitle1" className="home-card-title">Research Reading Group</Typography>
-                  <Typography variant="body2" className="home-card-desc">Weekly papers across LLMs, RL, multimodal models, and interpretability.</Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Card className="home-card">
-                <CardContent>
-                  <Typography variant="subtitle1" className="home-card-title">Project Showcases</Typography>
-                  <Typography variant="body2" className="home-card-desc">Student demos spanning healthcare, finance, climate, and the arts.</Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          </Grid>
-        </Container>
-      </section>
-
-      {/* PARTNERS */}
-      <section className="home-section glass">
-        <Container>
-          <Typography variant="h5" className="home-section-title">Partners & Friends</Typography>
-          <div className="partners-marquee">
-            <div className="partners-track">
-              {partners.concat(partners).map((p, i) => (
-                <div className="partner-item" key={`${p.alt}-${i}`}>
-                  <img src={p.src} alt={p.alt} height="40" />
-                </div>
-              ))}
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      {/* CTA */}
-      <section className="home-section home-cta">
-        <Container>
-          <Typography variant="h4" className="home-section-title">Ready to build the future of AI?</Typography>
-          <div className="home-hero-ctas">
-            <Button size="large" color="primary" variant="contained" component={Link} to="/involvement">Get Involved</Button>
-            <Button size="large" color="secondary" variant="outlined" component={Link} to="/contact">Contact Us</Button>
-          </div>
-        </Container>
-      </section>
     </div>
   );
 };

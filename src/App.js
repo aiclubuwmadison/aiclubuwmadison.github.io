@@ -13,7 +13,6 @@ import Involvement from './components/Involvement';
 import Leadership from './components/Leadership';
 import Contact from './components/Contact';
 import Projects from './components/Projects';
-import StudyGroups from './components/StudyGroups';
 import Seminars from './components/Seminars';
 
 function App() {
@@ -45,10 +44,6 @@ function App() {
             </Route>
             <Route path="/seminars">
               <Seminars/>
-              <Footer></Footer>
-            </Route>
-            <Route path="/study">
-              <StudyGroups/>
               <Footer></Footer>
             </Route>
             <Route path="/">

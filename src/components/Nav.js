@@ -68,10 +68,9 @@ const Nav = () => {
                     <>
                         <Link to ="/about">ABOUT US</Link>
                         <Link to ="/leadership">LEADERSHIP</Link>
-                        <Link to ="/involvement">GET INVOLVED</Link>
-                        <Link to ="/study">STUDY GROUPS</Link>
-                        {/* <Link to ="/projects">PROJECT GROUPS</Link> 
-                        // Uncomment to bring in projects page*/} 
+                        <Link to ="/involvement">FAQ</Link>
+                        {/* <Link to ="/projects">PROJECT GROUPS</Link>
+                        // Uncomment to bring in projects page*/}
                         <Link to ="/seminars">SEMINARS</Link>
                         <Link to ="/contact">CONTACT</Link>
                     </> 
@@ -86,9 +85,8 @@ const Nav = () => {
                     >
                         <Link to ="/about">ABOUT US</Link>
                         <Link to ="/leadership">LEADERSHIP</Link>
-                        <Link to ="/involvement">GET INVOLVED</Link>
-                        <Link to ="/study">STUDY GROUPS</Link>
-                        {/* <Link to ="/projects">PROJECT GROUPS</Link> 
+                        <Link to ="/involvement">FAQ</Link>
+                        {/* <Link to ="/projects">PROJECT GROUPS</Link>
                         // Uncomment to bring in projects page*/}
                         <Link to ="/seminars">SEMINARS</Link>
                         <Link to ="/contact">CONTACT</Link>
