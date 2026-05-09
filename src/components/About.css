@@ -1,0 +1,238 @@
+/* =========================================================
+   ATMOSPHERIC MODERN — About page
+   Page-scoped styles. Reuses tokens + classes from App.css.
+   ========================================================= */
+
+.atmos-about {
+  padding: clamp(56px, 9vw, 120px) 0 clamp(72px, 10vw, 140px);
+}
+
+/* Override legacy MUI Container so it can sit inside atmos-shell */
+.atmos-about .about-page.MuiContainer-root {
+  max-width: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Reset legacy global rules from App.css that paint everything */
+.atmos-about .about-page,
+.atmos-about .about-page * {
+  color: inherit !important;
+}
+
+/* HERO META — eyebrow + italic index */
+.atmos-about-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: clamp(28px, 4vw, 44px);
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--atmos-hairline-soft);
+}
+.atmos-about-meta-left {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--atmos-sans);
+  font-size: 11.5px;
+  color: var(--atmos-ink-mute);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* PAGE TITLE — oversized italic Fraunces statement */
+.atmos-about-title {
+  font-family: var(--atmos-serif);
+  font-weight: 320;
+  font-style: normal;
+  font-size: clamp(56px, 10vw, 148px);
+  line-height: 0.92;
+  letter-spacing: -0.025em;
+  color: var(--atmos-ink);
+  margin: 0;
+  font-variation-settings: "opsz" 144, "SOFT" 30, "WONK" 1;
+}
+.atmos-about-title em {
+  font-style: italic;
+  font-weight: 300;
+  color: var(--atmos-ink);
+  position: relative;
+}
+.atmos-about-title em::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0.04em;
+  bottom: 0.06em;
+  height: 1px;
+  background: var(--atmos-badger);
+}
+
+.atmos-about-lede {
+  margin-top: clamp(28px, 4vw, 44px);
+  font-family: var(--atmos-serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(20px, 2.2vw, 28px);
+  line-height: 1.35;
+  color: var(--atmos-ink);
+  max-width: 28ch;
+  letter-spacing: -0.005em;
+}
+
+/* SECTION ROW — asymmetric two-column */
+.atmos-about-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 2fr);
+  gap: clamp(24px, 5vw, 88px);
+  align-items: start;
+  padding: clamp(56px, 7vw, 96px) 0 clamp(40px, 5vw, 64px);
+  border-top: 1px solid var(--atmos-hairline);
+}
+.atmos-about-section:last-of-type {
+  border-bottom: 1px solid var(--atmos-hairline);
+  padding-bottom: clamp(56px, 7vw, 88px);
+}
+
+.atmos-about-section-head {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  position: sticky;
+  top: 24px;
+}
+.atmos-about-section-num {
+  font-family: var(--atmos-sans);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--atmos-ink-mute);
+  border-bottom: 1px solid var(--atmos-ink-mute);
+  padding-bottom: 4px;
+  align-self: flex-start;
+}
+.atmos-about-section-title {
+  font-family: var(--atmos-serif);
+  font-weight: 350;
+  font-size: clamp(34px, 4vw, 52px);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: var(--atmos-ink);
+  font-variation-settings: "opsz" 144, "SOFT" 30;
+}
+.atmos-about-section-title em {
+  font-style: italic;
+  font-weight: 300;
+}
+
+/* Body column — overrides default subcomponent styles via wrapper */
+.atmos-about-section-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.atmos-about-section-body .body-text {
+  font-family: var(--atmos-sans);
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--atmos-ink-soft);
+  letter-spacing: 0;
+  margin: 0;
+  max-width: 64ch;
+}
+.atmos-about-section-body .body-text + .body-text {
+  margin-top: 0;
+}
+.atmos-about-section-body .body-text a,
+.atmos-about-section-body .body-text a.link-text {
+  color: var(--atmos-ink) !important;
+  text-decoration: none;
+  border-bottom: 1px solid var(--atmos-badger);
+  padding-bottom: 1px;
+  transition: color 200ms ease;
+}
+.atmos-about-section-body .body-text a:hover {
+  color: var(--atmos-badger) !important;
+}
+
+/* Hide the legacy subheader rendered by the Subheader subcomponent —
+   we render our own typographic title alongside it. The component is
+   still used to preserve content; we just neutralize its visual. */
+.atmos-about-section-body .subheader-text {
+  display: none;
+}
+
+/* Marginalia — small italic pull-quote */
+.atmos-about-aside {
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid var(--atmos-hairline-soft);
+  font-family: var(--atmos-sans);
+  font-size: 11.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--atmos-ink-mute);
+}
+.atmos-about-aside em {
+  display: block;
+  margin-top: 6px;
+  font-family: var(--atmos-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 13.5px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--atmos-ink-soft);
+}
+
+/* FOOT */
+.atmos-about-foot {
+  margin-top: clamp(56px, 8vw, 96px);
+  padding-top: 24px;
+  border-top: 1px solid var(--atmos-hairline);
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  font-size: 11.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--atmos-ink-mute);
+}
+.atmos-about-foot em {
+  font-family: var(--atmos-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 13px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--atmos-ink-soft);
+}
+
+/* RESPONSIVE */
+@media (max-width: 980px) {
+  .atmos-about-section {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .atmos-about-section-head {
+    position: static;
+  }
+}
+@media (max-width: 768px) {
+  .atmos-about-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .atmos-about-foot {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .atmos-about-lede {
+    font-size: 18px;
+  }
+}
