@@ -8,7 +8,7 @@
   background: var(--atmos-paper-deep);
   color: var(--atmos-ink);
   font-family: var(--atmos-sans);
-  margin-top: clamp(72px, 10vw, 120px);
+  margin-top: 0;
   position: relative;
   z-index: 2;
   border-top: 1px solid var(--atmos-hairline);

@@ -31,10 +31,10 @@
 /* General */
 body {
   margin: 0;
-  font-family: 'NeueMontreal-Light', 'Helvetica Neue', sans-serif;
+  font-family: 'Manrope', 'NeueMontreal-Light', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f9f8f8;
+  background-color: #f1ebdf;
 }
 
 #body-wrapper {
