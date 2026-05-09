@@ -583,24 +583,24 @@ body, #root { background: var(--bg); color: var(--text); }
 }
 .atmos-glyph {
   opacity: 0;
-  animation: atmosGlyphIn 900ms cubic-bezier(.2,.7,.2,1) forwards;
+  animation: atmosGlyphIn 480ms cubic-bezier(.2,.7,.2,1) forwards;
 }
 .atmos-wordmark::before {
   opacity: 0;
-  animation: atmosShadowIn 700ms ease 1100ms forwards;
+  animation: atmosShadowIn 320ms ease 380ms forwards;
 }
-.atmos-g1 { animation-delay: 80ms; }
-.atmos-g2 { animation-delay: 200ms; }
-.atmos-g3 { animation-delay: 360ms; }
-.atmos-g4 { animation-delay: 500ms; }
-.atmos-g5 { animation-delay: 640ms; }
+.atmos-g1 { animation-delay: 0ms; }
+.atmos-g2 { animation-delay: 50ms; }
+.atmos-g3 { animation-delay: 100ms; }
+.atmos-g4 { animation-delay: 150ms; }
+.atmos-g5 { animation-delay: 200ms; }
 .atmos-reveal {
   opacity: 0;
-  animation: atmosLineRise 800ms cubic-bezier(.2,.7,.2,1) forwards;
+  animation: atmosLineRise 420ms cubic-bezier(.2,.7,.2,1) forwards;
 }
-.atmos-d2 { animation-delay: 900ms; }
-.atmos-d3 { animation-delay: 1050ms; }
-.atmos-d4 { animation-delay: 1180ms; }
+.atmos-d2 { animation-delay: 120ms; }
+.atmos-d3 { animation-delay: 180ms; }
+.atmos-d4 { animation-delay: 240ms; }
 
 @media (prefers-reduced-motion: reduce) {
   .atmos-glyph,
