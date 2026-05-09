@@ -66,7 +66,7 @@ const Leadership = () => {
     ],
     [
       { file: 'jack.png', title: 'Project Manager', name: 'Jack Koteles', link: 'https://www.linkedin.com/in/jackkoteles/' },
-      { file: 'sukrut.jpeg', title: 'Project Manager', name: 'Adhyot Singh', link: 'https://www.linkedin.com/in/adhyotsingh/' },
+      { file: '_placeholder.svg', title: 'Project Manager', name: 'Adhyot Singh', link: 'https://www.linkedin.com/in/adhyotsingh/' },
     ],
   ];
 
