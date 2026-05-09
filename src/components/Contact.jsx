@@ -1,73 +1,143 @@
-import { Container, Grid, Typography, Card, CardContent, Button } from '@mui/material';
-import Header from './typographic/Header';
+import './Contact.css';
 
 const Contact = () => {
   return (
-    <>
-      <section className="page-hero gradient-bg">
-        <div className="home-hero-overlay" />
-        <Container className="page-hero-content">
-          <Typography variant="h3" className="home-hero-title">Contact Us</Typography>
-          <Typography variant="body1" className="home-hero-subtitle">
-            Questions, partnerships, or speaking? We’d love to hear from you.
-          </Typography>
-        </Container>
-      </section>
+    <div className="atmos-root atmos-contact">
+      <section className="atmos-contact-hero">
+        <div className="atmos-shell">
+          <div className="atmos-hero-meta">
+            <span className="atmos-dot" />
+            <span>Contact</span>
+            <span className="atmos-hero-meta-index">vi. say hello</span>
+          </div>
 
-      <Container className="page-section" style={{ display: 'flex', justifyContent: 'center' }}>
-        <Grid container justifyContent="center">
-          <Grid xs={12} md={8}>
-            <Card className="home-card" style={{ textAlign: 'center', padding: '32px 0' }}>
-              <CardContent>
-                <Typography variant="h5" className="home-card-title">Reach us directly</Typography>
-                <Typography variant="body1" className="home-card-desc" style={{ marginTop: 8 }}>
-                  Email: aiclubuwmadison@gmail.com
-                </Typography>
-                <Typography variant="body1" className="home-card-desc">Location: UW–Madison</Typography>
-                <Button
-                  style={{ marginTop: 16 }}
-                  href="mailto:aiclubuwmadison@gmail.com"
-                  color="secondary"
-                  variant="outlined"
+          <div className="atmos-contact-row">
+            <div className="atmos-contact-left">
+              <h1 className="atmos-contact-title">
+                Get in
+                <br />
+                touch<span className="atmos-contact-amp">.</span>
+              </h1>
+
+              <p className="atmos-contact-lede">
+                Join our{' '}
+                <a target="_blank" rel="noopener noreferrer" href="https://discord.gg/TTSykcZAg4">
+                  Discord workspace
+                </a>{' '}
+                to communicate with other students, engage with study groups, and coordinate with
+                project group members.{' '}
+                <a target="_blank" rel="noopener noreferrer" href="http://eepurl.com/dMyKlQ">
+                  Sign up
+                </a>{' '}
+                for our email newsletter to stay up-to-date on all AI@UW events. Or{' '}
+                <a target="_blank" rel="noopener noreferrer" href="mailto:aiclubuwmadison@gmail.com">
+                  shoot us an email
+                </a>{' '}
+                if you have any questions or if you'd like to reach out to our leadership.
+              </p>
+
+              <ul className="atmos-channel-list">
+                <li className="atmos-channel">
+                  <span className="atmos-channel-label">Email</span>
+                  <span className="atmos-channel-text">
+                    <a className="atmos-channel-link" href="mailto:aiclubuwmadison@gmail.com">
+                      aiclubuwmadison@gmail.com
+                    </a>
+                  </span>
+                  <span className="atmos-channel-arr">
+                    <span className="atmos-arr">→</span>
+                  </span>
+                </li>
+                <li className="atmos-channel">
+                  <span className="atmos-channel-label">Discord</span>
+                  <span className="atmos-channel-text">
+                    <a
+                      className="atmos-channel-link"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://discord.gg/TTSykcZAg4"
+                    >
+                      Join the workspace
+                    </a>
+                  </span>
+                  <span className="atmos-channel-arr">
+                    <span className="atmos-arr">→</span>
+                  </span>
+                </li>
+                <li className="atmos-channel">
+                  <span className="atmos-channel-label">Newsletter</span>
+                  <span className="atmos-channel-text">
+                    <a
+                      className="atmos-channel-link"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="http://eepurl.com/dMyKlQ"
+                    >
+                      Subscribe
+                    </a>
+                  </span>
+                  <span className="atmos-channel-arr">
+                    <span className="atmos-arr">→</span>
+                  </span>
+                </li>
+                <li className="atmos-channel">
+                  <span className="atmos-channel-label">Location</span>
+                  <span className="atmos-channel-text">UW–Madison</span>
+                  <span className="atmos-channel-arr">WI</span>
+                </li>
+              </ul>
+            </div>
+
+            <div className="atmos-contact-right">
+              <div className="atmos-form-head">
+                <span className="atmos-form-eyebrow">Send us your thoughts</span>
+                <span className="atmos-form-roman">vi.i — submission</span>
+              </div>
+
+              <p className="atmos-contact-lede" style={{ margin: 0 }}>
+                If there's anything else you want to say, share it via the form below or our{' '}
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSdpbz1I_cmMtlJIx5LDufsIFybab7qvBPqHW42fXVBLcDGZNQ/viewform?usp=publish-editor"
                 >
-                  Email us
-                </Button>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
-      </Container>
+                  full-page version
+                </a>
+                .
+              </p>
 
-      <div style={{ margin: '0 1in' }}>
-        <Header>Contact Us</Header>
-        <p style={{ fontFamily: "'NeueMontreal-Light', 'Helvetica Neue', sans-serif", fontWeight: 'bold', fontSize: '18px', letterSpacing: '1px', lineHeight: '2', color: '#000' }}>
-          Join our <a target="_blank" rel="noopener noreferrer" href="https://discord.gg/TTSykcZAg4" style={{ color: '#8b0000', fontWeight: 'normal', textDecoration: 'underline' }}>Discord workspace</a> to communicate with other students, engage with study groups, and coordinate with project group members!
-          <br />
-          <a target="_blank" rel="noopener noreferrer" href="http://eepurl.com/dMyKlQ" style={{ color: '#8b0000', fontWeight: 'normal', textDecoration: 'underline' }}>Sign up</a> for our email newsletter to stay up-to-date on all AI@UW events!
-          <br />
-          <a target="_blank" rel="noopener noreferrer" href="mailto:aiclubuwmadison@gmail.com" style={{ color: '#8b0000', fontWeight: 'normal', textDecoration: 'underline' }}>Shoot us an email</a> if you have any questions or if you'd like to reach out to our leadership!
-          <br />
-          <a target="_blank" rel="noopener noreferrer" href="https://docs.google.com/forms/d/e/1FAIpQLSdpbz1I_cmMtlJIx5LDufsIFybab7qvBPqHW42fXVBLcDGZNQ/viewform?usp=publish-editor" style={{ color: '#8b0000', fontWeight: 'normal', textDecoration: 'underline' }}>Send us your thoughts</a> if there's anything else you want to say, either via the linked form or the submission fields below.
-        </p>
-        <br />
-        <Grid container>
-          <Grid xs>
-            <iframe
-              title="contact-embed"
-              src="https://docs.google.com/forms/d/e/1FAIpQLSdpbz1I_cmMtlJIx5LDufsIFybab7qvBPqHW42fXVBLcDGZNQ/viewform?embedded=true"
-              width="640"
-              height="434"
-              frameBorder="0"
-              marginHeight="0"
-              marginWidth="0"
-              scrolling="no"
-            >
-              Loading…
-            </iframe>
-          </Grid>
-        </Grid>
-      </div>
-    </>
+              <div className="atmos-form-frame">
+                <iframe
+                  className="atmos-form-iframe"
+                  title="contact-embed"
+                  src="https://docs.google.com/forms/d/e/1FAIpQLSdpbz1I_cmMtlJIx5LDufsIFybab7qvBPqHW42fXVBLcDGZNQ/viewform?embedded=true"
+                  width="640"
+                  height="640"
+                  frameBorder="0"
+                  marginHeight="0"
+                  marginWidth="0"
+                  scrolling="auto"
+                >
+                  Loading…
+                </iframe>
+              </div>
+
+              <div className="atmos-form-foot">
+                <span className="atmos-dot" />
+                <span>Hosted on Google Forms</span>
+                <em>— responses go to the AI@UW board.</em>
+              </div>
+            </div>
+          </div>
+
+          <div className="atmos-contact-foot">
+            <span>AI@UW · Contact</span>
+            <em>Madison, Wisconsin</em>
+            <span>vi / vii</span>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 };
 
