@@ -14,7 +14,7 @@ import App from './App.jsx';
     if (redirect) {
       window.history.replaceState({}, '', decodeURIComponent(redirect));
     }
-  } catch (e) {
+  } catch {
     // ignore
   }
 })();

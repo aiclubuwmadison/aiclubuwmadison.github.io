@@ -2,6 +2,52 @@ import { useState } from 'react';
 import Portrait from './display/Portrait';
 import './Leadership.css';
 
+// Flatten the row-of-rows structure into a single roster.
+const flatten = (rows) => rows.flat();
+
+const Roster = ({ data, keyPrefix }) => (
+  <div className="atmos-roster">
+    {flatten(data).map((member, i) => (
+      <div className="atmos-roster-tile" key={`${keyPrefix}-${i}`}>
+        <Portrait
+          file={member.file}
+          title={member.title}
+          name={member.name}
+          link={member.link}
+        />
+      </div>
+    ))}
+  </div>
+);
+
+const ArchiveSection = ({ id, num, title, meta, data, isOpen, onToggle }) => (
+  <div className="atmos-archive">
+    <button
+      type="button"
+      className="atmos-archive-toggle"
+      onClick={() => onToggle(id)}
+      aria-expanded={isOpen}
+      aria-controls={`${id}-panel`}
+    >
+      <span className="atmos-archive-label">
+        <span className="atmos-archive-num">{num}</span>
+        <span className="atmos-archive-title">{title}</span>
+      </span>
+      <span className="atmos-archive-meta">
+        <span>{meta}</span>
+        <span className={`atmos-archive-glyph${isOpen ? ' is-open' : ''}`}>›</span>
+      </span>
+    </button>
+    <div
+      id={`${id}-panel`}
+      className={`atmos-archive-panel${isOpen ? ' is-open' : ''}`}
+      role="region"
+    >
+      {isOpen && <Roster data={data} keyPrefix={id} />}
+    </div>
+  </div>
+);
+
 const Leadership = () => {
   const [expandedSections, setExpandedSections] = useState({
     dec24Dec25Leaders: false,
@@ -88,55 +134,6 @@ const Leadership = () => {
     ],
   ];
 
-  // Flatten the row-of-rows structure into a single roster.
-  const flatten = (rows) => rows.flat();
-
-  const Roster = ({ data, keyPrefix }) => (
-    <div className="atmos-roster">
-      {flatten(data).map((member, i) => (
-        <div className="atmos-roster-tile" key={`${keyPrefix}-${i}`}>
-          <Portrait
-            file={member.file}
-            title={member.title}
-            name={member.name}
-            link={member.link}
-          />
-        </div>
-      ))}
-    </div>
-  );
-
-  const ArchiveSection = ({ id, num, title, meta, data }) => {
-    const isOpen = expandedSections[id];
-    return (
-      <div className="atmos-archive">
-        <button
-          type="button"
-          className="atmos-archive-toggle"
-          onClick={() => handleToggle(id)}
-          aria-expanded={isOpen}
-          aria-controls={`${id}-panel`}
-        >
-          <span className="atmos-archive-label">
-            <span className="atmos-archive-num">{num}</span>
-            <span className="atmos-archive-title">{title}</span>
-          </span>
-          <span className="atmos-archive-meta">
-            <span>{meta}</span>
-            <span className={`atmos-archive-glyph${isOpen ? ' is-open' : ''}`}>›</span>
-          </span>
-        </button>
-        <div
-          id={`${id}-panel`}
-          className={`atmos-archive-panel${isOpen ? ' is-open' : ''}`}
-          role="region"
-        >
-          {isOpen && <Roster data={data} keyPrefix={id} />}
-        </div>
-      </div>
-    );
-  };
-
   return (
     <div className="atmos-root atmos-leadership">
       <section className="atmos-leadership-hero">
@@ -186,6 +183,8 @@ const Leadership = () => {
             title="December 2024 — December 2025"
             meta="View term"
             data={Dec24Dec25LeadershipData}
+            isOpen={expandedSections['dec24Dec25Leaders']}
+            onToggle={handleToggle}
           />
           <ArchiveSection
             id="currentLeaders"
@@ -193,6 +192,8 @@ const Leadership = () => {
             title="September 2024 — December 2024"
             meta="View term"
             data={SeptDec24LeadershipData}
+            isOpen={expandedSections['currentLeaders']}
+            onToggle={handleToggle}
           />
           <ArchiveSection
             id="pastLeaders"
@@ -200,6 +201,8 @@ const Leadership = () => {
             title="Past Leadership"
             meta="View term"
             data={PastLeadershipData}
+            isOpen={expandedSections['pastLeaders']}
+            onToggle={handleToggle}
           />
 
           <div className="atmos-leadership-foot">

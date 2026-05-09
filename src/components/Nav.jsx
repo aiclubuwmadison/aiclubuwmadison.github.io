@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './Nav.css';
 
@@ -13,11 +13,6 @@ const NAV_ITEMS = [
 const Nav = () => {
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  // Close the mobile panel when the route changes.
-  useEffect(() => {
-    setMobileOpen(false);
-  }, [location.pathname]);
 
   const isActive = (to) => location.pathname === to;
 
@@ -80,6 +75,7 @@ const Nav = () => {
           <Link
             key={item.to}
             to={item.to}
+            onClick={() => setMobileOpen(false)}
             className={
               'atmos-nav-mobile-link' +
               (isActive(item.to) ? ' atmos-nav-link-active' : '')
@@ -88,7 +84,7 @@ const Nav = () => {
             {item.label}
           </Link>
         ))}
-        <Link to="/contact" className="atmos-nav-mobile-cta">
+        <Link to="/contact" className="atmos-nav-mobile-cta" onClick={() => setMobileOpen(false)}>
           Become a Member <span className="atmos-arr" aria-hidden="true">&rarr;</span>
         </Link>
       </div>
