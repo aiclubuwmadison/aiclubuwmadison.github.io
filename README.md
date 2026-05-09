@@ -1,24 +1,16 @@
-Author: Vardaan kapoor, President, AI@UW
+# React + Vite
 
-UW-Madison Artificial Intelligence Club website
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-To run this repository:
+Currently, two official plugins are available:
 
-1) clone repository using https route
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-2) go to the dev branch(not master branch)-because the dev branch is deployed
+## React Compiler
 
-3) install npm and node package manager for your own Operating System
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-4) check that both node and npm are installed separately on your operating system
+## Expanding the ESLint configuration
 
-5) run npm install
-
-6) run these commands-
-
-export NODE_OPTIONS=--openssl-legacy-provider
-npm start 
-
-to actually start the application on your own localhost(own computer)
-
-NOTES: i have currently used deployment from the dev branch and used an action from github-> we can either deploy the website from dev branch or the master branch-> branch master can be deployed directly but for deploying from dev branch, I used github actions file in the /github/workflows folder
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
