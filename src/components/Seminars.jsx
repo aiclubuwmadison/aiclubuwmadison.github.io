@@ -1,4 +1,4 @@
-import { Container, Typography, Grid, Card, CardContent, Chip } from '@mui/material';
+import './Seminars.css';
 
 const seminars = [
   {
@@ -116,68 +116,128 @@ const workshops = [
   },
 ];
 
+// Parse "Nov 2025" → { month: "Nov.", year: "2025" }
+const splitDate = (display) => {
+  const parts = display.split(' ');
+  if (parts.length === 2) {
+    return { month: `${parts[0]}.`, year: parts[1] };
+  }
+  return { month: display, year: '' };
+};
+
 const Seminars = () => {
   const sorted = [...seminars].sort((a, b) => (a.date < b.date ? 1 : -1));
+  const yearsRange = '2024–25';
 
   return (
-    <>
-      <section className="page-hero gradient-bg">
-        <div className="home-hero-overlay" />
-      </section>
+    <div className="atmos-root atmos-seminars">
+      <div className="atmos-shell">
+        {/* HERO */}
+        <header className="atmos-sem-hero atmos-reveal">
+          <div className="atmos-sem-eyebrow">
+            <span className="atmos-section-num">III</span>
+            <span className="atmos-dot" />
+            <span>Seminars &amp; Workshops</span>
+          </div>
+          <div className="atmos-sem-hero-row">
+            <h1 className="atmos-sem-title">
+              <span className="atmos-sem-title-roman">An archive of</span>{' '}
+              talks &amp; workshops.
+            </h1>
+            <div className="atmos-sem-aside">
+              <span className="atmos-sem-aside-num">{sorted.length} talks</span>
+              {yearsRange}
+              <br />
+              {workshops.length} workshops
+            </div>
+          </div>
+        </header>
 
-      <Container className="page-section">
-        <Typography variant="h4" className="home-section-title">Past Seminars</Typography>
-        <Grid container spacing={3}>
-          {sorted.map((s) => (
-            <Grid xs={12} md={6} key={`${s.title}-${s.date}`}>
-              <Card className="home-card">
-                <CardContent>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-                    <Typography variant="subtitle1" className="home-card-title">{s.title}</Typography>
-                    <Typography variant="caption" style={{ color: '#475569' }}>{s.displayDate}</Typography>
-                  </div>
-                  <Typography variant="body2" style={{ marginBottom: 8, color: '#64748b' }}>{s.speaker}</Typography>
-                  <div style={{ marginBottom: 8 }}>
-                    {s.tags.map((t) => (
-                      <Chip key={t} label={t} size="small" className="home-chip" style={{ marginRight: 6, marginBottom: 6 }} />
-                    ))}
-                  </div>
-                  <Typography variant="body2" className="home-card-desc">{s.description}</Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
+        {/* PAST SEMINARS */}
+        <section>
+          <div className="atmos-sem-sub">
+            <div>
+              <div className="atmos-sem-sub-eyebrow">
+                Section 01 <em>Past Seminars</em>
+              </div>
+              <h2 className="atmos-sem-sub-title">Talks given by our speakers.</h2>
+            </div>
+            <div className="atmos-sem-sub-aside">{sorted.length} entries</div>
+          </div>
 
-      <Container className="page-section">
-        <Typography variant="h4" className="home-section-title">Workshops / Tutorials</Typography>
-        <Typography variant="subtitle1" className="domain-text" style={{ marginBottom: 12 }}>
-          Past Workshops/Tutorials
-        </Typography>
-        <Grid container spacing={3}>
-          {workshops.map((w) => (
-            <Grid xs={12} md={6} key={w.title}>
-              <Card className="home-card tilt">
-                <CardContent>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-                    <Typography variant="subtitle1" className="home-card-title">{w.title}</Typography>
-                    <Typography variant="caption" style={{ color: '#475569' }}>{w.displayDate}</Typography>
+          <ul className="atmos-sem-list">
+            {sorted.map((s) => {
+              const { month, year } = splitDate(s.displayDate);
+              return (
+                <li className="atmos-sem-row" key={`${s.title}-${s.date}`}>
+                  <div className="atmos-sem-grid">
+                    <div className="atmos-sem-date">
+                      {month}
+                      <span className="atmos-sem-date-year">{year}</span>
+                    </div>
+                    <div className="atmos-sem-body">
+                      <p className="atmos-sem-speaker">{s.speaker}</p>
+                      <h3 className="atmos-sem-talk">{s.title}</h3>
+                      <ul className="atmos-sem-tags">
+                        {s.tags.map((t) => (
+                          <li className="atmos-sem-tag" key={t}>{t}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    <p className="atmos-sem-abstract">{s.description}</p>
                   </div>
-                  <Typography variant="body2" style={{ marginBottom: 8, color: '#64748b' }}>{w.speaker}</Typography>
-                  <div style={{ marginBottom: 8 }}>
-                    {w.tags.map((t) => (
-                      <Chip key={t} label={t} size="small" className="home-chip" style={{ marginRight: 6, marginBottom: 6 }} />
-                    ))}
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+
+        {/* WORKSHOPS */}
+        <section>
+          <div className="atmos-sem-sub">
+            <div>
+              <div className="atmos-sem-sub-eyebrow">
+                Section 02 <em>Workshops &amp; Tutorials</em>
+              </div>
+              <h2 className="atmos-sem-sub-title">Hands-on, applied sessions.</h2>
+            </div>
+            <div className="atmos-sem-sub-aside">{workshops.length} entries</div>
+          </div>
+
+          <ul className="atmos-sem-list">
+            {workshops.map((w) => {
+              const { month, year } = splitDate(w.displayDate);
+              return (
+                <li className="atmos-sem-row" key={w.title}>
+                  <div className="atmos-sem-grid">
+                    <div className="atmos-sem-date">
+                      {month}
+                      <span className="atmos-sem-date-year">{year}</span>
+                    </div>
+                    <div className="atmos-sem-body">
+                      <p className="atmos-sem-speaker">{w.speaker}</p>
+                      <h3 className="atmos-sem-talk">{w.title}</h3>
+                      <ul className="atmos-sem-tags">
+                        {w.tags.map((t) => (
+                          <li className="atmos-sem-tag" key={t}>{t}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    <p className="atmos-sem-abstract">{w.description}</p>
                   </div>
-                  <Typography variant="body2" className="home-card-desc">{w.description}</Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
-    </>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+
+        {/* FOOT */}
+        <div className="atmos-sem-foot">
+          <span>AI@UW — Archive</span>
+          <em>Curated, recurring, free to attend.</em>
+        </div>
+      </div>
+    </div>
   );
 };
 

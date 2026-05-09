@@ -1,0 +1,352 @@
+/* =========================================================
+   ATMOSPHERIC MODERN — Seminars page
+   Editorial archive layout. Hairlines only — no shadows, no cards.
+   Scoped under .atmos-seminars.
+   ========================================================= */
+
+.atmos-seminars {
+  padding-bottom: clamp(72px, 10vw, 120px);
+}
+
+/* Override legacy .seminar-card if it sneaks in */
+.atmos-seminars .seminar-card {
+  background-color: transparent !important;
+  color: inherit !important;
+}
+
+/* HERO / SECTION HEAD */
+.atmos-seminars .atmos-sem-hero {
+  padding: clamp(72px, 11vw, 140px) 0 clamp(28px, 4vw, 48px);
+  border-bottom: 1px solid var(--atmos-hairline);
+}
+
+.atmos-seminars .atmos-sem-hero-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: clamp(24px, 4vw, 64px);
+}
+
+.atmos-seminars .atmos-sem-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--atmos-sans);
+  font-size: 11.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--atmos-ink-mute);
+  margin-bottom: clamp(18px, 2.5vw, 28px);
+}
+
+.atmos-seminars .atmos-sem-eyebrow .atmos-section-num {
+  margin-right: 0;
+}
+
+.atmos-seminars .atmos-sem-title {
+  font-family: var(--atmos-serif);
+  font-style: italic;
+  font-weight: 320;
+  font-size: clamp(48px, 9vw, 132px);
+  line-height: 0.94;
+  letter-spacing: -0.025em;
+  color: var(--atmos-ink);
+  margin: 0;
+  font-variation-settings: "opsz" 144, "SOFT" 40, "WONK" 1;
+}
+
+.atmos-seminars .atmos-sem-title-roman {
+  font-style: normal;
+  font-weight: 350;
+}
+
+.atmos-seminars .atmos-sem-aside {
+  font-family: var(--atmos-sans);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--atmos-ink-mute);
+  text-align: right;
+  line-height: 1.6;
+}
+
+.atmos-seminars .atmos-sem-aside-num {
+  font-family: var(--atmos-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 24px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--atmos-ink);
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* SUB-SECTION HEADER (Past Seminars / Workshops) */
+.atmos-seminars .atmos-sem-sub {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  padding-top: clamp(56px, 8vw, 96px);
+  padding-bottom: clamp(20px, 3vw, 32px);
+}
+
+.atmos-seminars .atmos-sem-sub-eyebrow {
+  font-family: var(--atmos-sans);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--atmos-ink-mute);
+}
+
+.atmos-seminars .atmos-sem-sub-eyebrow em {
+  font-family: var(--atmos-serif);
+  font-style: italic;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--atmos-ink-soft);
+  font-size: 14px;
+  margin-left: 10px;
+}
+
+.atmos-seminars .atmos-sem-sub-title {
+  font-family: var(--atmos-serif);
+  font-weight: 350;
+  font-style: italic;
+  font-size: clamp(28px, 3.6vw, 44px);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  color: var(--atmos-ink);
+  margin: 6px 0 0;
+}
+
+.atmos-seminars .atmos-sem-sub-aside {
+  font-family: var(--atmos-sans);
+  font-size: 11.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--atmos-ink-mute);
+  white-space: nowrap;
+}
+
+/* ARCHIVE LIST */
+.atmos-seminars .atmos-sem-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--atmos-hairline);
+}
+
+.atmos-seminars .atmos-sem-row {
+  border-bottom: 1px solid var(--atmos-hairline);
+  position: relative;
+  transition: padding-left 320ms cubic-bezier(.2,.7,.2,1), background-color 320ms ease;
+}
+
+.atmos-seminars .atmos-sem-row::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: clamp(28px, 3.4vw, 40px);
+  width: 0;
+  height: 1px;
+  background: var(--atmos-badger);
+  transition: width 320ms cubic-bezier(.2,.7,.2,1);
+}
+
+.atmos-seminars .atmos-sem-row:hover {
+  padding-left: 14px;
+}
+
+.atmos-seminars .atmos-sem-row:hover::before {
+  width: 8px;
+}
+
+.atmos-seminars .atmos-sem-grid {
+  display: grid;
+  grid-template-columns: 120px 1.4fr 1fr;
+  gap: clamp(20px, 3.5vw, 56px);
+  padding: clamp(24px, 3vw, 36px) 0;
+  align-items: baseline;
+}
+
+/* Date — italic Fraunces, left column */
+.atmos-seminars .atmos-sem-date {
+  font-family: var(--atmos-serif);
+  font-style: italic;
+  font-weight: 350;
+  font-size: clamp(20px, 1.9vw, 26px);
+  line-height: 1.1;
+  color: var(--atmos-ink);
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+  font-variation-settings: "opsz" 60, "SOFT" 50;
+}
+
+.atmos-seminars .atmos-sem-date-year {
+  display: block;
+  font-family: var(--atmos-sans);
+  font-style: normal;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--atmos-ink-mute);
+  margin-top: 8px;
+}
+
+/* Center column: title + speaker */
+.atmos-seminars .atmos-sem-body {
+  min-width: 0;
+}
+
+.atmos-seminars .atmos-sem-speaker {
+  font-family: var(--atmos-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--atmos-ink-mute);
+  margin: 0 0 10px;
+}
+
+.atmos-seminars .atmos-sem-speaker .atmos-dot {
+  margin: 0 8px;
+  vertical-align: middle;
+}
+
+.atmos-seminars .atmos-sem-talk {
+  font-family: var(--atmos-serif);
+  font-weight: 380;
+  font-size: clamp(22px, 2.4vw, 30px);
+  line-height: 1.15;
+  letter-spacing: -0.018em;
+  color: var(--atmos-ink);
+  margin: 0 0 14px;
+  font-variation-settings: "opsz" 80, "SOFT" 40;
+}
+
+.atmos-seminars .atmos-sem-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  font-family: var(--atmos-sans);
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--atmos-ink-mute);
+  margin: 0;
+}
+
+.atmos-seminars .atmos-sem-tag {
+  position: relative;
+}
+
+.atmos-seminars .atmos-sem-tag + .atmos-sem-tag::before {
+  content: "/";
+  position: absolute;
+  left: -10px;
+  color: var(--atmos-hairline);
+}
+
+/* Right column: abstract */
+.atmos-seminars .atmos-sem-abstract {
+  font-family: var(--atmos-sans);
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--atmos-ink-soft);
+  margin: 0;
+  max-width: 50ch;
+}
+
+/* Section divider between Seminars and Workshops */
+.atmos-seminars .atmos-sem-divider {
+  border-top: 1px solid var(--atmos-hairline);
+  margin-top: 0;
+}
+
+/* Footer note */
+.atmos-seminars .atmos-sem-foot {
+  margin-top: clamp(56px, 8vw, 96px);
+  padding-top: 24px;
+  border-top: 1px solid var(--atmos-hairline);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  font-family: var(--atmos-sans);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--atmos-ink-mute);
+}
+
+.atmos-seminars .atmos-sem-foot em {
+  font-family: var(--atmos-serif);
+  font-style: italic;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 13px;
+  color: var(--atmos-ink-soft);
+}
+
+/* RESPONSIVE */
+@media (max-width: 980px) {
+  .atmos-seminars .atmos-sem-grid {
+    grid-template-columns: 110px 1fr;
+    grid-template-rows: auto auto;
+    gap: 14px clamp(18px, 3vw, 32px);
+  }
+  .atmos-seminars .atmos-sem-date {
+    grid-row: 1 / 2;
+    grid-column: 1 / 2;
+  }
+  .atmos-seminars .atmos-sem-body {
+    grid-row: 1 / 2;
+    grid-column: 2 / 3;
+  }
+  .atmos-seminars .atmos-sem-abstract {
+    grid-row: 2 / 3;
+    grid-column: 2 / 3;
+    max-width: none;
+  }
+  .atmos-seminars .atmos-sem-hero-row {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: 24px;
+  }
+  .atmos-seminars .atmos-sem-aside {
+    text-align: left;
+  }
+}
+
+@media (max-width: 760px) {
+  .atmos-seminars .atmos-sem-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: clamp(20px, 4vw, 28px) 0;
+  }
+  .atmos-seminars .atmos-sem-date,
+  .atmos-seminars .atmos-sem-body,
+  .atmos-seminars .atmos-sem-abstract {
+    grid-column: 1 / 2;
+  }
+  .atmos-seminars .atmos-sem-date-year {
+    display: inline;
+    margin-left: 12px;
+    margin-top: 0;
+  }
+  .atmos-seminars .atmos-sem-sub {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .atmos-seminars .atmos-sem-foot {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
