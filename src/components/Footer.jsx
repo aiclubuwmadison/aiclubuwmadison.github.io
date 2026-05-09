@@ -10,15 +10,16 @@ const Footer = () => {
           <div className="atmos-footer-brand">
             <img
               className="atmos-footer-logo"
-              src="/images/logo_full.png"
-              alt="AI@UW logo"
+              src="/images/logo.png"
+              alt=""
+              aria-hidden="true"
             />
             <div className="atmos-footer-brand-text">
               <p className="atmos-footer-wordmark">
                 AI<span className="atmos-footer-at">@</span>UW
               </p>
               <p className="atmos-footer-eyebrow">
-                Artificial Intelligence Club &middot; UW&ndash;Madison
+                The Artificial Intelligence Club at UW&ndash;Madison
               </p>
             </div>
           </div>
