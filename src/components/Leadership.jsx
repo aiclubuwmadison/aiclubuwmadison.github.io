@@ -1,13 +1,6 @@
 import { useState } from 'react';
-import { Container, Grid, Collapse, Typography } from '@mui/material';
 import Portrait from './display/Portrait';
-
-const expandableRowStyle = {
-  cursor: 'pointer',
-  padding: '16px',
-  borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
-  backgroundColor: '#F1F1F1',
-};
+import './Leadership.css';
 
 const Leadership = () => {
   const [expandedSections, setExpandedSections] = useState({
@@ -15,20 +8,11 @@ const Leadership = () => {
     currentLeaders: false,
     pastLeaders: false,
   });
-  const [arrowDirections, setArrowDirections] = useState({
-    dec24Dec25Leaders: '►',
-    currentLeaders: '►',
-    pastLeaders: '►',
-  });
 
   const handleToggle = (section) => {
     setExpandedSections((prev) => ({
       ...prev,
       [section]: !prev[section],
-    }));
-    setArrowDirections((prev) => ({
-      ...prev,
-      [section]: prev[section] === '►' ? '▼' : '►',
     }));
   };
 
@@ -104,81 +88,127 @@ const Leadership = () => {
     ],
   ];
 
+  // Flatten the row-of-rows structure into a single roster.
+  const flatten = (rows) => rows.flat();
+
+  const Roster = ({ data, keyPrefix }) => (
+    <div className="atmos-roster">
+      {flatten(data).map((member, i) => (
+        <div className="atmos-roster-tile" key={`${keyPrefix}-${i}`}>
+          <Portrait
+            file={member.file}
+            title={member.title}
+            name={member.name}
+            link={member.link}
+          />
+        </div>
+      ))}
+    </div>
+  );
+
+  const ArchiveSection = ({ id, num, title, meta, data }) => {
+    const isOpen = expandedSections[id];
+    return (
+      <div className="atmos-archive">
+        <button
+          type="button"
+          className="atmos-archive-toggle"
+          onClick={() => handleToggle(id)}
+          aria-expanded={isOpen}
+          aria-controls={`${id}-panel`}
+        >
+          <span className="atmos-archive-label">
+            <span className="atmos-archive-num">{num}</span>
+            <span className="atmos-archive-title">{title}</span>
+          </span>
+          <span className="atmos-archive-meta">
+            <span>{meta}</span>
+            <span className={`atmos-archive-glyph${isOpen ? ' is-open' : ''}`}>›</span>
+          </span>
+        </button>
+        <div
+          id={`${id}-panel`}
+          className={`atmos-archive-panel${isOpen ? ' is-open' : ''}`}
+          role="region"
+        >
+          {isOpen && <Roster data={data} keyPrefix={id} />}
+        </div>
+      </div>
+    );
+  };
+
   return (
-    <>
-      <section className="page-hero gradient-bg">
-        <div className="home-hero-overlay" />
-        <Container className="page-hero-content">
-          <Typography variant="h3" className="home-hero-title">Leadership</Typography>
-          <Typography variant="body1" className="home-hero-subtitle">
+    <div className="atmos-root atmos-leadership">
+      <section className="atmos-leadership-hero">
+        <div className="atmos-shell">
+          <div className="atmos-hero-meta atmos-reveal">
+            <span className="atmos-dot" />
+            <span>Leadership</span>
+            <span className="atmos-hero-meta-index">— Vol. I</span>
+          </div>
+          <h1 className="atmos-leadership-title atmos-reveal atmos-d2">
+            The people <em className="atmos-leadership-amp">behind</em> AI@UW.
+          </h1>
+          <p className="atmos-leadership-lede atmos-reveal atmos-d3">
             Students and mentors guiding AI@UW across projects, research, and community.
-          </Typography>
-        </Container>
+          </p>
+        </div>
       </section>
 
-      <Grid container direction="column" justifyContent="center" alignItems="center">
-        {CurrentLeadershipData.map((row, rowIndex) => (
-          <Grid container direction="row" justifyContent="center" alignItems="center" key={`static-${rowIndex}`}>
-            {row.map((member, memberIndex) => (
-              <Grid xs key={`static-${memberIndex}`}>
-                <Portrait file={member.file} title={member.title} name={member.name} link={member.link} />
-              </Grid>
-            ))}
-          </Grid>
-        ))}
-      </Grid>
+      <section className="atmos-leadership-section">
+        <div className="atmos-shell">
+          <div className="atmos-section-head">
+            <div>
+              <span className="atmos-section-num">I</span>
+              <span className="atmos-section-eyebrow">Currently serving</span>
+            </div>
+            <h2 className="atmos-section-title">Officers &amp; Project Leads</h2>
+            <div className="atmos-section-aside">2025 — 2026</div>
+          </div>
+          <Roster data={CurrentLeadershipData} keyPrefix="current" />
+        </div>
+      </section>
 
-      <div style={expandableRowStyle} onClick={() => handleToggle('dec24Dec25Leaders')}>
-        <Typography variant="h6">December 2024 - December 2025 {arrowDirections.dec24Dec25Leaders}</Typography>
-      </div>
-      <Collapse in={expandedSections.dec24Dec25Leaders} timeout="auto" unmountOnExit>
-        <Grid container direction="column" justifyContent="center" alignItems="center">
-          {Dec24Dec25LeadershipData.map((row, rowIndex) => (
-            <Grid container direction="row" justifyContent="center" alignItems="center" key={`dec-${rowIndex}`}>
-              {row.map((member, memberIndex) => (
-                <Grid xs key={`dec-${memberIndex}`}>
-                  <Portrait file={member.file} title={member.title} name={member.name} link={member.link} />
-                </Grid>
-              ))}
-            </Grid>
-          ))}
-        </Grid>
-      </Collapse>
+      <section className="atmos-leadership-section">
+        <div className="atmos-shell">
+          <div className="atmos-section-head">
+            <div>
+              <span className="atmos-section-num">II</span>
+              <span className="atmos-section-eyebrow">Archive</span>
+            </div>
+            <h2 className="atmos-section-title">Past terms</h2>
+            <div className="atmos-section-aside">Select a term</div>
+          </div>
 
-      <div style={expandableRowStyle} onClick={() => handleToggle('currentLeaders')}>
-        <Typography variant="h6">September 2024 - December 2024 {arrowDirections.currentLeaders}</Typography>
-      </div>
-      <Collapse in={expandedSections.currentLeaders} timeout="auto" unmountOnExit>
-        <Grid container direction="column" justifyContent="center" alignItems="center">
-          {SeptDec24LeadershipData.map((row, rowIndex) => (
-            <Grid container direction="row" justifyContent="center" alignItems="center" key={rowIndex}>
-              {row.map((member, memberIndex) => (
-                <Grid xs key={memberIndex}>
-                  <Portrait file={member.file} title={member.title} name={member.name} link={member.link} />
-                </Grid>
-              ))}
-            </Grid>
-          ))}
-        </Grid>
-      </Collapse>
+          <ArchiveSection
+            id="dec24Dec25Leaders"
+            num="II.i"
+            title="December 2024 — December 2025"
+            meta="View term"
+            data={Dec24Dec25LeadershipData}
+          />
+          <ArchiveSection
+            id="currentLeaders"
+            num="II.ii"
+            title="September 2024 — December 2024"
+            meta="View term"
+            data={SeptDec24LeadershipData}
+          />
+          <ArchiveSection
+            id="pastLeaders"
+            num="II.iii"
+            title="Past Leadership"
+            meta="View term"
+            data={PastLeadershipData}
+          />
 
-      <div style={expandableRowStyle} onClick={() => handleToggle('pastLeaders')}>
-        <Typography variant="h6">Past Leadership {arrowDirections.pastLeaders}</Typography>
-      </div>
-      <Collapse in={expandedSections.pastLeaders} timeout="auto" unmountOnExit>
-        <Grid container direction="column" justifyContent="center" alignItems="center">
-          {PastLeadershipData.map((row, rowIndex) => (
-            <Grid container direction="row" justifyContent="center" alignItems="center" key={rowIndex}>
-              {row.map((member, memberIndex) => (
-                <Grid xs key={memberIndex}>
-                  <Portrait file={member.file} title={member.title} name={member.name} link={member.link} />
-                </Grid>
-              ))}
-            </Grid>
-          ))}
-        </Grid>
-      </Collapse>
-    </>
+          <div className="atmos-leadership-foot">
+            <span>End of directory</span>
+            <em>AI@UW — Madison, Wisconsin</em>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 };
 
