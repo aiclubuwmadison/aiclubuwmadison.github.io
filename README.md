@@ -20,15 +20,6 @@ AI@UW is an interdisciplinary community of over 2,000 students and faculty dedic
 - **Framework:** Express
 - **Email:** Nodemailer (Skeleton for potential contact form integration)
 
-## Features
-
-- **Home:** High-level overview of the collective's offerings.
-- **About:** The manifesto, history (est. 2017), and mission of AI@UW.
-- **Involvement:** Details on projects, research, study groups, and mentorship.
-- **Seminars:** Archive and schedule of talks from academic and industry leaders.
-- **Leadership:** Profiles of the student board and mentors.
-- **Contact:** Integration with Discord, Newsletter, and Google Forms for community engagement.
-
 ## Getting Started
 
 ### Prerequisites
@@ -38,8 +29,8 @@ AI@UW is an interdisciplinary community of over 2,000 students and faculty dedic
 ### Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/AI-UW/club_website.git
-   cd club_website
+   git clone https://github.com/aiclubuwmadison/aiclubuwmadison.github.io.git
+   cd aiclubuwmadison.github.io
    ```
 2. Install dependencies:
    ```bash
@@ -47,7 +38,7 @@ AI@UW is an interdisciplinary community of over 2,000 students and faculty dedic
    ```
 
 ### Development
-Start the development server:
+Start the development server. Ensure you are working off the `dev` branch.
 ```bash
 npm run dev
 ```
@@ -57,7 +48,47 @@ Create an optimized production build:
 ```bash
 npm run build
 ```
-The output will be in the `dist/` directory.
+The output will be generated in the `dist/` directory.
+
+## Deployment Workflow
+
+The website's live code lives on the `master` branch, while all development takes place on the `dev` branch. Once your changes on `dev` are tested and ready, follow these steps to deploy:
+
+1. Ensure your `dev` branch is pushed and up-to-date.
+2. Generate the production build:
+   ```bash
+   npm run build
+   ```
+3. Copy the compiled assets to a temporary directory outside the repo:
+   ```bash
+   cp -r dist/ ../temp_build/
+   ```
+4. Switch to the `master` branch:
+   ```bash
+   git checkout master
+   ```
+5. Clear out the old files:
+   ```bash
+   rm -rf *
+   ```
+6. Copy the new files from your temporary build directory into the branch:
+   ```bash
+   cp -r ../temp_build/* .
+   ```
+7. Commit and push the new build to production:
+   ```bash
+   git add . 
+   git commit -m "Deploy updated built files" 
+   git push origin master
+   ```
+8. Remove the temporary directory (optional):
+   ```bash
+   rm -rf ../temp_build/
+   ```
+9. Switch back to the `dev` branch to resume development:
+   ```bash
+   git checkout dev
+   ```
 
 ## Project Structure
 
