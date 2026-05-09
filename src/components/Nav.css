@@ -11,8 +11,10 @@
   left: 0;
   right: 0;
   z-index: 100;
-  background: var(--atmos-paper);
-  border-bottom: 1px solid var(--atmos-hairline-soft);
+  background: rgba(10, 10, 12, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--atmos-hairline);
   padding: 14px 0 13px;
   height: 88px;
   box-sizing: border-box;
@@ -58,7 +60,7 @@
   height: 28px;
   object-fit: contain;
   display: block;
-  filter: brightness(0) invert(1);
+  filter: brightness(0); /* Black logo on white background circle */
 }
 .atmos-nav-brand-text {
   display: inline-flex;
@@ -69,8 +71,8 @@
   letter-spacing: 0.02em;
 }
 .atmos-nav-brand-meta {
-  font-family: var(--atmos-sans);
-  font-size: 11px;
+  font-family: var(--atmos-mono);
+  font-size: 10px;
   color: var(--atmos-ink-mute);
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -90,7 +92,7 @@
   font-size: 13.5px;
   font-weight: 500;
   color: var(--atmos-ink-soft);
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   text-decoration: none;
   position: relative;
@@ -101,16 +103,19 @@
   color: var(--atmos-ink);
 }
 .atmos-nav-link-active {
-  color: var(--atmos-ink);
+  color: var(--atmos-badger);
 }
 .atmos-nav-link-active::after {
   content: "";
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -2px;
-  height: 1px;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -4px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
   background: var(--atmos-badger);
+  box-shadow: 0 0 8px var(--atmos-badger);
 }
 
 /* CTA */
