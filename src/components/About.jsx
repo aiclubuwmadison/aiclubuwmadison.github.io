@@ -3,21 +3,7 @@ import { Link } from 'react-router-dom';
 import './About.css';
 
 // Wave + particle decoration for Areas section
-const AREA_DOTS = (() => {
-  const dots = [];
-  for (let col = 0; col < 26; col++) {
-    for (let row = 0; row < 15; row++) {
-      const x = 150 + col * 20;
-      const y = 10 + row * 20;
-      // fade out toward right edge and bottom
-      const colFade = 1 - (col / 26) * 0.8;
-      const rowFade = row < 3 ? (row + 1) / 3 : 1 - Math.max(0, (row - 11) / 4);
-      const opacity = +(0.32 * colFade * rowFade).toFixed(3);
-      if (opacity > 0.02) dots.push({ x, y, opacity });
-    }
-  }
-  return dots;
-})();
+const AREA_DOTS = [];
 
 const AreasDecoration = () => (
   <svg className="about-areas-deco" viewBox="0 0 800 300" fill="none" aria-hidden="true">
@@ -332,12 +318,14 @@ const About = () => {
                 title: 'Project Teams',
                 desc: 'Join interdisciplinary teams to build real-world AI projects from idea to impact.',
                 Illus: ProjectsIllus,
+                to: '/leadership',
               },
               {
                 icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>,
                 title: 'Workshops',
                 desc: 'Hands-on sessions for all levels — learn, practice, and grow your skills.',
                 Illus: WorkshopsIllus,
+                to: '/seminars',
               },
               {
                 icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.74"/></svg>,
@@ -345,7 +333,7 @@ const About = () => {
                 desc: 'A supportive, inclusive space to meet peers, share ideas, and make lasting connections.',
                 Illus: CommunityIllus,
               },
-            ].map(({ icon, title, desc, Illus }) => (
+            ].map(({ icon, title, desc, Illus, to }) => (
               <div className="about-what-card" key={title}>
                 <div className="about-what-card-visual">
                   <div className="about-what-icon">{icon}</div>
@@ -356,7 +344,10 @@ const About = () => {
                 <div className="about-what-card-body">
                   <h3 className="about-what-card-title">{title}</h3>
                   <p className="about-what-card-desc">{desc}</p>
-                  <a className="about-what-explore" href="#">Explore <span>→</span></a>
+                  {to
+                    ? <Link className="about-what-explore" to={to}>Explore <span>→</span></Link>
+                    : <a className="about-what-explore" href="#">Explore <span>→</span></a>
+                  }
                 </div>
               </div>
             ))}
