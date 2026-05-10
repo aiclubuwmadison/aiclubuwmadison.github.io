@@ -130,11 +130,6 @@ const Contact = () => {
             </div>
           </div>
 
-          <div className="atmos-contact-foot">
-            <span>AI@UW · Contact</span>
-            <em>Madison, Wisconsin</em>
-            <span>vi / vii</span>
-          </div>
         </div>
       </section>
     </div>

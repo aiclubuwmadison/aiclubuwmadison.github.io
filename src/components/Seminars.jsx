@@ -162,34 +162,26 @@ const Seminars = () => {
               </div>
               <h2 className="atmos-sem-sub-title">Talks given by our speakers.</h2>
             </div>
-            <div className="atmos-sem-sub-aside">{sorted.length} entries</div>
+            <div className="atmos-sem-sub-aside">{sorted.length} talks</div>
           </div>
 
-          <ul className="atmos-sem-list">
-            {sorted.map((s) => {
-              const { month, year } = splitDate(s.displayDate);
-              return (
-                <li className="atmos-sem-row" key={`${s.title}-${s.date}`}>
-                  <div className="atmos-sem-grid">
-                    <div className="atmos-sem-date">
-                      {month}
-                      <span className="atmos-sem-date-year">{year}</span>
-                    </div>
-                    <div className="atmos-sem-body">
-                      <p className="atmos-sem-speaker">{s.speaker}</p>
-                      <h3 className="atmos-sem-talk">{s.title}</h3>
-                      <ul className="atmos-sem-tags">
-                        {s.tags.map((t) => (
-                          <li className="atmos-sem-tag" key={t}>{t}</li>
-                        ))}
-                      </ul>
-                    </div>
-                    <p className="atmos-sem-abstract">{s.description}</p>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
+          <div className="atmos-sem-cards">
+            {sorted.map((s) => (
+              <div className="atmos-sem-card" key={`${s.title}-${s.date}`}>
+                <div className="atmos-sem-card-head">
+                  <span className="atmos-sem-card-date">{s.displayDate}</span>
+                  <ul className="atmos-sem-tags">
+                    {s.tags.map((t) => (
+                      <li className="atmos-sem-tag" key={t}>{t}</li>
+                    ))}
+                  </ul>
+                </div>
+                <h3 className="atmos-sem-talk">{s.title}</h3>
+                <p className="atmos-sem-speaker">{s.speaker}</p>
+                <p className="atmos-sem-abstract">{s.description}</p>
+              </div>
+            ))}
+          </div>
         </section>
 
         {/* WORKSHOPS */}
@@ -201,41 +193,28 @@ const Seminars = () => {
               </div>
               <h2 className="atmos-sem-sub-title">Hands-on, applied sessions.</h2>
             </div>
-            <div className="atmos-sem-sub-aside">{workshops.length} entries</div>
+            <div className="atmos-sem-sub-aside">{workshops.length} workshops</div>
           </div>
 
-          <ul className="atmos-sem-list">
-            {workshops.map((w) => {
-              const { month, year } = splitDate(w.displayDate);
-              return (
-                <li className="atmos-sem-row" key={w.title}>
-                  <div className="atmos-sem-grid">
-                    <div className="atmos-sem-date">
-                      {month}
-                      <span className="atmos-sem-date-year">{year}</span>
-                    </div>
-                    <div className="atmos-sem-body">
-                      <p className="atmos-sem-speaker">{w.speaker}</p>
-                      <h3 className="atmos-sem-talk">{w.title}</h3>
-                      <ul className="atmos-sem-tags">
-                        {w.tags.map((t) => (
-                          <li className="atmos-sem-tag" key={t}>{t}</li>
-                        ))}
-                      </ul>
-                    </div>
-                    <p className="atmos-sem-abstract">{w.description}</p>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
+          <div className="atmos-sem-cards atmos-sem-cards--workshop">
+            {workshops.map((w) => (
+              <div className="atmos-sem-card atmos-sem-card--workshop" key={w.title}>
+                <div className="atmos-sem-card-head">
+                  <span className="atmos-sem-card-date atmos-sem-card-date--workshop">Workshop</span>
+                  <ul className="atmos-sem-tags">
+                    {w.tags.map((t) => (
+                      <li className="atmos-sem-tag" key={t}>{t}</li>
+                    ))}
+                  </ul>
+                </div>
+                <h3 className="atmos-sem-talk">{w.title}</h3>
+                <p className="atmos-sem-speaker">{w.speaker}</p>
+                <p className="atmos-sem-abstract">{w.description}</p>
+              </div>
+            ))}
+          </div>
         </section>
 
-        {/* FOOT */}
-        <div className="atmos-sem-foot">
-          <span>AI@UW — Archive</span>
-          <em>Curated, recurring, free to attend.</em>
-        </div>
       </div>
     </div>
   );

@@ -36,19 +36,20 @@
   margin: 0;
 }
 
-/* TOP ROW — brand left, social right */
+/* TOP — centered stack */
 .atmos-footer-top {
-  display: grid;
-  grid-template-columns: 1.05fr 1fr;
-  gap: clamp(32px, 6vw, 88px);
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  padding: clamp(40px, 5.5vw, 64px) 0;
+  gap: 24px;
+  padding: 32px 0;
+  text-align: center;
 }
 
 .atmos-footer-brand {
   display: flex;
   align-items: center;
-  gap: clamp(18px, 2.4vw, 28px);
+  gap: clamp(14px, 2vw, 22px);
 }
 
 .atmos-footer-logo {
@@ -67,19 +68,18 @@
 
 .atmos-footer-wordmark {
   font-family: var(--atmos-serif);
-  font-weight: 420;
+  font-weight: 800;
   font-size: clamp(28px, 3vw, 36px);
   line-height: 1;
   letter-spacing: -0.015em;
   color: var(--atmos-ink);
-  font-variation-settings: "opsz" 60, "SOFT" 30;
   margin: 0;
 }
 
 .atmos-footer-wordmark .atmos-footer-at {
   font-style: italic;
   color: var(--atmos-badger);
-  font-weight: 360;
+  font-weight: 700;
 }
 
 .atmos-footer-eyebrow {
@@ -92,33 +92,15 @@
   margin: 0;
 }
 
-/* SOCIAL — right-aligned column */
-.atmos-footer-elsewhere {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 14px;
-}
-
-.atmos-footer-elsewhere-label {
-  font-family: var(--atmos-sans);
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--atmos-ink-soft);
-  margin: 0;
-}
-
 .atmos-footer-links {
   display: inline-flex;
-  align-items: baseline;
+  align-items: center;
   flex-wrap: wrap;
-  justify-content: flex-end;
+  justify-content: center;
   gap: 0;
   font-family: var(--atmos-serif);
-  font-weight: 450;
-  font-size: clamp(18px, 1.7vw, 22px);
+  font-weight: 500;
+  font-size: clamp(15px, 1.4vw, 18px);
   line-height: 1.2;
   letter-spacing: -0.005em;
 }
@@ -129,8 +111,8 @@
   position: relative;
   padding: 4px 18px;
   display: inline-flex;
-  align-items: baseline;
-  gap: 8px;
+  align-items: center;
+  gap: 7px;
   transition: color 200ms cubic-bezier(.2,.7,.2,1);
 }
 
@@ -219,24 +201,10 @@
 /* RESPONSIVE */
 @media (max-width: 760px) {
   .atmos-footer-top {
-    grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 20px;
     padding: 36px 0;
   }
-  .atmos-footer-elsewhere {
-    align-items: flex-start;
-  }
   .atmos-footer-links {
-    justify-content: flex-start;
-  }
-  .atmos-footer-bottom {
-    grid-template-columns: 1fr;
-    gap: 12px;
-    padding: 22px 0 28px;
-  }
-  .atmos-footer-copy,
-  .atmos-footer-pag,
-  .atmos-footer-place {
-    text-align: left;
+    justify-content: center;
   }
 }
