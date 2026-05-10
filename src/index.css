@@ -31,11 +31,11 @@
 /* General */
 body {
   margin: 0;
-  font-family: 'Manrope', 'NeueMontreal-Light', 'Helvetica Neue', sans-serif;
+  font-family: 'Inter', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #0a0a0c;
-  color: #f8fafc;
+  background-color: #ffffff;
+  color: #0f172a;
 }
 
 #body-wrapper {
