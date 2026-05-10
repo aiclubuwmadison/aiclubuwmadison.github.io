@@ -10,48 +10,10 @@
 .atmos-seminars .atmos-sem-hero {
   padding-bottom: clamp(40px, 5vw, 64px);
   margin-bottom: 0;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Dotted particle wave — right side only */
-.atmos-seminars .atmos-sem-hero::before {
-  content: '';
-  position: absolute;
-  inset: -20px -20px -20px 40%;
-  background-image:
-    radial-gradient(circle, rgba(197,5,12,0.18) 1.5px, transparent 1.5px),
-    radial-gradient(circle, rgba(197,5,12,0.10) 1px, transparent 1px);
-  background-size: 18px 18px, 9px 9px;
-  background-position: 0 0, 9px 9px;
-  mask-image:
-    radial-gradient(ellipse 80% 70% at 70% 50%, rgba(0,0,0,0.7) 0%, transparent 80%),
-    linear-gradient(to left, rgba(0,0,0,0.8) 0%, transparent 55%);
-  mask-composite: intersect;
-  -webkit-mask-image:
-    radial-gradient(ellipse 80% 70% at 70% 50%, rgba(0,0,0,0.7) 0%, transparent 80%),
-    linear-gradient(to left, rgba(0,0,0,0.8) 0%, transparent 55%);
-  -webkit-mask-composite: source-in;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.atmos-seminars .atmos-sem-hero-inner {
-  position: relative;
-  z-index: 1;
+  text-align: center;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  gap: 40px;
-}
-
-.atmos-seminars .atmos-sem-hero-left {
-  flex: 1;
-  min-width: 0;
-}
-
-.atmos-seminars .atmos-sem-hero-right {
-  flex-shrink: 0;
 }
 
 .atmos-seminars .atmos-sem-eyebrow {
@@ -88,57 +50,6 @@
   max-width: 420px;
 }
 
-/* Stats card */
-.atmos-seminars .atmos-sem-stats-card {
-  background: #fff;
-  border: 1px solid var(--atmos-hairline);
-  border-radius: 14px;
-  padding: 24px 32px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 12px;
-  min-width: 200px;
-}
-
-.atmos-seminars .atmos-sem-stats-icon {
-  color: var(--atmos-badger);
-  background: rgba(197,5,12,0.07);
-  border-radius: 8px;
-  padding: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.atmos-seminars .atmos-sem-stats-main {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-  line-height: 1;
-}
-
-.atmos-seminars .atmos-sem-stats-big {
-  font-family: var(--atmos-serif);
-  font-size: clamp(42px, 4.5vw, 56px);
-  font-weight: 800;
-  color: var(--atmos-badger);
-  letter-spacing: -0.04em;
-  line-height: 1;
-}
-
-.atmos-seminars .atmos-sem-stats-label {
-  font-size: 18px;
-  font-weight: 500;
-  color: var(--atmos-ink);
-}
-
-.atmos-seminars .atmos-sem-stats-sub {
-  font-size: 13px;
-  color: var(--atmos-ink-mute);
-  line-height: 1.6;
-}
 
 /* ── FILTER BAR ─────────────────────────────────────────── */
 .atmos-seminars .atmos-sem-filter-bar {
@@ -447,11 +358,11 @@
   flex: 1;
 }
 
-.atmos-seminars .atmos-sem-card:hover .atmos-sem-abstract {
+.atmos-seminars .atmos-sem-abstract--expanded {
   -webkit-line-clamp: unset;
 }
 
-/* View details link */
+/* View details button */
 .atmos-seminars .atmos-sem-view-link {
   display: inline-flex;
   align-items: center;
@@ -459,8 +370,12 @@
   font-size: 13px;
   font-weight: 600;
   color: var(--atmos-badger);
-  text-decoration: none;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
   transition: gap 180ms ease;
+  font-family: inherit;
 }
 
 .atmos-seminars .atmos-sem-view-link:hover {
@@ -482,23 +397,6 @@
 }
 
 @media (max-width: 760px) {
-  .atmos-seminars .atmos-sem-hero-inner {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .atmos-seminars .atmos-sem-stats-card {
-    width: 100%;
-    flex-direction: row;
-    align-items: center;
-    gap: 20px;
-    padding: 18px 20px;
-  }
-
-  .atmos-seminars .atmos-sem-stats-sub {
-    margin-left: auto;
-  }
-
   .atmos-seminars .atmos-sem-filter-bar {
     flex-direction: column;
     align-items: flex-start;
