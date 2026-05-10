@@ -16,17 +16,6 @@
   align-items: center;
 }
 
-.atmos-seminars .atmos-sem-eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 20px;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--atmos-badger);
-}
 
 .atmos-seminars .atmos-sem-title {
   font-family: var(--atmos-serif);
@@ -42,13 +31,6 @@
   color: var(--atmos-badger);
 }
 
-.atmos-seminars .atmos-sem-lede {
-  font-size: 14px;
-  line-height: 1.65;
-  color: var(--atmos-ink-soft);
-  margin: 0;
-  max-width: 420px;
-}
 
 
 /* ── FILTER BAR ─────────────────────────────────────────── */
