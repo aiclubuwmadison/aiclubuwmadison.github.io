@@ -110,30 +110,25 @@ const WorkshopsIllus = () => {
 };
 
 const CommunityIllus = () => {
-  const people = [
-    // Back row — smaller, drawn first (behind)
-    { hx: 58,  hy: 45, r: 8,  bh: 28, c: '#FFFFFF', s: '#E4E4E4' },
-    { hx: 95,  hy: 43, r: 8,  bh: 28, c: '#FCEAEA', s: '#F0CCCC' },
-    { hx: 133, hy: 45, r: 8,  bh: 28, c: '#C5050C', s: '#9B0409' },
-    // Front row — larger, drawn second (in front)
-    { hx: 52,  hy: 82, r: 10, bh: 35, c: '#FFFFFF', s: '#E4E4E4' },
-    { hx: 86,  hy: 80, r: 10, bh: 35, c: '#FCEAEA', s: '#F0CCCC' },
-    { hx: 118, hy: 81, r: 11, bh: 38, c: '#C5050C', s: '#9B0409' },
-    { hx: 152, hy: 83, r: 10, bh: 35, c: '#FFFFFF', s: '#E4E4E4' },
+  const nodes = [
+    { x: 55,  y: 50,  r: 11, c: '#FFFFFF', s: '#E4E4E4' },
+    { x: 100, y: 35,  r: 13, c: '#FCEAEA', s: '#F0CCCC' },
+    { x: 145, y: 55,  r: 11, c: '#FFFFFF', s: '#E4E4E4' },
+    { x: 50,  y: 110, r: 12, c: '#FCEAEA', s: '#F0CCCC' },
+    { x: 100, y: 95,  r: 15, c: '#C5050C', s: '#9B0409' },
+    { x: 150, y: 115, r: 11, c: '#FFFFFF', s: '#E4E4E4' },
   ];
+  const edges = [[0,1],[1,2],[0,4],[2,4],[1,4],[0,3],[3,4],[4,5],[2,5]];
   return (
     <svg viewBox="0 0 200 155" fill="none" style={{width:'100%',height:'100%'}}>
-      {people.map(({ hx, hy, r, bh, c, s }, i) => {
-        const bw = r * 1.6;
-        return (
-          <g key={i}>
-            {/* Body top starts at hy — overlaps lower half of head for seamless join */}
-            <rect x={hx - bw / 2} y={hy} width={bw} height={bh} rx={bw * 0.45} fill={c} stroke={s} strokeWidth="1"/>
-            {/* Head rendered after body so it sits cleanly on top */}
-            <circle cx={hx} cy={hy} r={r} fill={c} stroke={s} strokeWidth="1"/>
-          </g>
-        );
-      })}
+      <g stroke="#DADADA" strokeWidth="1.2">
+        {edges.map(([a, b], i) => (
+          <line key={i} x1={nodes[a].x} y1={nodes[a].y} x2={nodes[b].x} y2={nodes[b].y}/>
+        ))}
+      </g>
+      {nodes.map(({ x, y, r, c, s }, i) => (
+        <circle key={i} cx={x} cy={y} r={r} fill={c} stroke={s} strokeWidth="1.2"/>
+      ))}
     </svg>
   );
 };
