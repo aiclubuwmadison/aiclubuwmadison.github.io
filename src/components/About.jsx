@@ -2,6 +2,118 @@ import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './About.css';
 
+// Isometric cube: (x,y) = center of top diamond, s = size
+const IsoCube = ({ x, y, s = 20, color = 'white' }) => {
+  const w = Math.round(s * 0.866);
+  const h = Math.round(s * 0.5);
+  const p = {
+    white: ['#FFFFFF','#F0F0F0','#E4E4E4'],
+    gray:  ['#F3F3F3','#E7E7E7','#DADADA'],
+    red:   ['#E8464E','#C5050C','#9B0409'],
+    pink:  ['#FCEAEA','#F3CCCD','#E8B3B5'],
+  }[color] || ['#FFF','#F0F0F0','#E4E4E4'];
+  const top   = `${x},${y-h} ${x+w},${y} ${x},${y+h} ${x-w},${y}`;
+  const right = `${x+w},${y} ${x},${y+h} ${x},${y+h+s} ${x+w},${y+s}`;
+  const left  = `${x-w},${y} ${x},${y+h} ${x},${y+h+s} ${x-w},${y+s}`;
+  return (
+    <>
+      <polygon points={left} fill={p[2]}/>
+      <polygon points={right} fill={p[1]}/>
+      <polygon points={top} fill={p[0]}/>
+    </>
+  );
+};
+
+// Positions cubes on an isometric grid; (di,dj,dk) = grid offset
+const G = (di, dj, dk, ox, oy, s = 20) => ({
+  x: ox + di * Math.round(s * 0.866) - dj * Math.round(s * 0.866),
+  y: oy + (di + dj) * Math.round(s * 0.5) - dk * s,
+  s,
+});
+
+const ResearchIllus = () => {
+  const O = [100, 108];
+  return (
+    <svg viewBox="0 0 200 160" fill="none" style={{width:'100%',height:'100%'}}>
+      <IsoCube {...G(-1,0,0,...O)} color="white"/>
+      <IsoCube {...G(-1,1,0,...O)} color="gray"/>
+      <IsoCube {...G(0,1,0,...O)} color="white"/>
+      <IsoCube {...G(0,0,0,...O)} color="white"/>
+      <IsoCube {...G(1,1,0,...O)} color="gray"/>
+      <IsoCube {...G(1,0,0,...O)} color="white"/>
+      <IsoCube {...G(2,0,0,...O)} color="white"/>
+      <IsoCube {...G(-1,0,1,...O)} color="pink"/>
+      <IsoCube {...G(0,0,1,...O)} color="red"/>
+      <IsoCube {...G(1,0,1,...O)} color="pink"/>
+      <IsoCube {...G(2,0,1,...O)} color="white"/>
+    </svg>
+  );
+};
+
+const ProjectsIllus = () => (
+  <svg viewBox="0 0 200 160" fill="none" style={{width:'100%',height:'100%'}}>
+    {/* Back card */}
+    <g transform="translate(110,55) rotate(-10)">
+      <rect x="-55" y="0" width="110" height="72" rx="4" fill="#F5F5F5" stroke="#E8E8E8" strokeWidth="1"/>
+      <line x1="-38" y1="22" x2="30" y2="22" stroke="#E0E0E0" strokeWidth="2.5" strokeLinecap="round"/>
+      <line x1="-38" y1="34" x2="16" y2="34" stroke="#E8E8E8" strokeWidth="2" strokeLinecap="round"/>
+      <line x1="-38" y1="46" x2="24" y2="46" stroke="#E8E8E8" strokeWidth="2" strokeLinecap="round"/>
+    </g>
+    {/* Mid card */}
+    <g transform="translate(103,68) rotate(-5)">
+      <rect x="-55" y="0" width="110" height="72" rx="4" fill="#F8F8F8" stroke="#E5E5E5" strokeWidth="1"/>
+      <line x1="-38" y1="22" x2="30" y2="22" stroke="#E0E0E0" strokeWidth="2.5" strokeLinecap="round"/>
+      <line x1="-38" y1="34" x2="20" y2="34" stroke="#E8E8E8" strokeWidth="2" strokeLinecap="round"/>
+    </g>
+    {/* Front card with red stripe */}
+    <g transform="translate(96,80)">
+      <rect x="-55" y="0" width="110" height="72" rx="4" fill="white" stroke="#EBEBEB" strokeWidth="1"/>
+      <rect x="-55" y="0" width="10" height="72" rx="3" fill="#C5050C"/>
+      <line x1="-30" y1="20" x2="35" y2="20" stroke="#EBEBEB" strokeWidth="2.5" strokeLinecap="round"/>
+      <line x1="-30" y1="32" x2="20" y2="32" stroke="#F0F0F0" strokeWidth="2" strokeLinecap="round"/>
+      <line x1="-30" y1="44" x2="28" y2="44" stroke="#F0F0F0" strokeWidth="2" strokeLinecap="round"/>
+    </g>
+  </svg>
+);
+
+const WorkshopsIllus = () => {
+  const O = [100, 115]; const s = 14;
+  return (
+    <svg viewBox="0 0 200 160" fill="none" style={{width:'100%',height:'100%'}}>
+      {/* 4×3 base grid */}
+      {[[-1,1,0,'white'],[-1,0,0,'white'],[-1,-1,0,'white'],
+        [0,1,0,'white'],[0,0,0,'white'],[0,-1,0,'pink'],
+        [1,1,0,'white'],[1,0,0,'pink'],[1,-1,0,'white'],
+        [2,1,0,'white'],[2,0,0,'white'],[2,-1,0,'white'],
+        [-1,0,1,'gray'],[0,0,1,'red'],[1,0,1,'white'],
+        [0,-1,1,'red'],[2,0,1,'pink'],
+      ].map(([di,dj,dk,c],i) => (
+        <IsoCube key={i} {...G(di,dj,dk,...O,s)} color={c}/>
+      ))}
+    </svg>
+  );
+};
+
+const CommunityIllus = () => (
+  <svg viewBox="0 0 200 160" fill="none" style={{width:'100%',height:'100%'}}>
+    {/* Person: circle head + rounded-rect body */}
+    {[
+      { x:65,  y:55,  r:14, bw:22, bh:32, hy:75,  c:'#FFFFFF', sc:'#E8E8E8' },
+      { x:95,  y:48,  r:16, bw:26, bh:36, hy:70,  c:'#FFFFFF', sc:'#E8E8E8' },
+      { x:127, y:48,  r:16, bw:26, bh:36, hy:70,  c:'#C5050C', sc:'#9B0409' },
+      { x:158, y:55,  r:14, bw:22, bh:32, hy:75,  c:'#FCEAEA', sc:'#F3CCCD' },
+      { x:80,  y:100, r:13, bw:20, bh:28, hy:118, c:'#FCEAEA', sc:'#F3CCCD' },
+      { x:110, y:96,  r:15, bw:24, bh:34, hy:116, c:'#FFFFFF', sc:'#E8E8E8' },
+      { x:140, y:100, r:13, bw:20, bh:28, hy:118, c:'#C5050C', sc:'#9B0409' },
+    ].map(({ x, y, r, bw, bh, hy, c, sc }, i) => (
+      <g key={i}>
+        <rect x={x-bw/2} y={hy} width={bw} height={bh} rx={bw/2} fill={c} stroke={sc} strokeWidth="1"/>
+        <circle cx={x} cy={y} r={r} fill={c} stroke={sc} strokeWidth="1"/>
+      </g>
+    ))}
+  </svg>
+);
+
 const About = () => {
   const canvasRef = useRef(null);
 
@@ -162,7 +274,12 @@ const About = () => {
       <section className="about-what">
         <div className="about-shell">
           <p className="about-eyebrow">What We Do</p>
-          <h2 className="about-what-title">Learn. Build. Grow. Together.</h2>
+          <h2 className="about-what-title">
+            Learn<span className="about-what-dot">.</span>{' '}
+            Build<span className="about-what-dot">.</span>{' '}
+            Grow<span className="about-what-dot">.</span>{' '}
+            Together<span className="about-what-dot">.</span>
+          </h2>
 
           <div className="about-what-cards">
             {[
@@ -170,37 +287,39 @@ const About = () => {
                 icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M12 2a7 7 0 00-4 12.9V17a1 1 0 001 1h6a1 1 0 001-1v-2.1A7 7 0 0012 2z"/><line x1="9" y1="21" x2="15" y2="21"/></svg>,
                 title: 'Research',
                 desc: 'Dive deep into cutting-edge AI through reading groups, tech talks, and collaborative research.',
-                illus: 'research',
+                Illus: ResearchIllus,
               },
               {
                 icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M16 18l6-6-6-6M8 6L2 12l6 6"/></svg>,
                 title: 'Project Teams',
                 desc: 'Join interdisciplinary teams to build real-world AI projects from idea to impact.',
-                illus: 'projects',
+                Illus: ProjectsIllus,
               },
               {
                 icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>,
                 title: 'Workshops',
                 desc: 'Hands-on sessions for all levels — learn, practice, and grow your skills.',
-                illus: 'workshops',
+                Illus: WorkshopsIllus,
               },
               {
                 icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.74"/></svg>,
                 title: 'Community',
                 desc: 'A supportive, inclusive space to meet peers, share ideas, and make lasting connections.',
-                illus: 'community',
+                Illus: CommunityIllus,
               },
-            ].map((c) => (
-              <div className="about-what-card" key={c.title}>
-                <div className="about-what-icon">{c.icon}</div>
-                <div className={`about-what-illus about-illus-${c.illus}`} aria-hidden="true">
-                  <div className="illus-shape illus-s1" />
-                  <div className="illus-shape illus-s2" />
-                  <div className="illus-shape illus-s3" />
+            ].map(({ icon, title, desc, Illus }) => (
+              <div className="about-what-card" key={title}>
+                <div className="about-what-card-visual">
+                  <div className="about-what-icon">{icon}</div>
+                  <div className="about-what-illus-wrap" aria-hidden="true">
+                    <Illus />
+                  </div>
                 </div>
-                <h3 className="about-what-card-title">{c.title}</h3>
-                <p className="about-what-card-desc">{c.desc}</p>
-                <a className="about-what-explore" href="#">Explore <span>→</span></a>
+                <div className="about-what-card-body">
+                  <h3 className="about-what-card-title">{title}</h3>
+                  <p className="about-what-card-desc">{desc}</p>
+                  <a className="about-what-explore" href="#">Explore <span>→</span></a>
+                </div>
               </div>
             ))}
           </div>

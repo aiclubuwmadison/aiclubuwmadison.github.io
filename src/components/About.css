@@ -372,104 +372,103 @@
 .about-what-title {
   font-family: var(--atmos-serif);
   font-weight: 800;
-  font-size: clamp(26px, 3vw, 38px);
-  letter-spacing: -0.02em;
+  font-size: clamp(26px, 3vw, 40px);
+  letter-spacing: -0.025em;
   color: var(--atmos-ink);
   margin: 0 0 clamp(32px, 4vw, 52px);
+  line-height: 1.1;
+}
+
+.about-what-dot {
+  color: var(--atmos-badger);
 }
 
 .about-what-cards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 18px;
+  gap: 16px;
 }
 
 .about-what-card {
   border: 1px solid var(--atmos-hairline);
   border-radius: 16px;
-  padding: 24px 20px 20px;
   display: flex;
   flex-direction: column;
-  gap: 0;
-  background: #fff;
-  transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+  background: #fafafa;
   overflow: hidden;
-}
-.about-what-card:hover {
-  border-color: rgba(197,5,12,0.2);
-  box-shadow: 0 6px 24px rgba(0,0,0,0.07);
-  transform: translateY(-3px);
+  transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
 }
 
+.about-what-card:hover {
+  border-color: rgba(197,5,12,0.18);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.08);
+  transform: translateY(-4px);
+}
+
+/* Visual area: contains icon + SVG illustration */
+.about-what-card-visual {
+  position: relative;
+  height: 190px;
+  background: #f3f3f3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Icon: rounded square, top-left */
 .about-what-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: rgba(197,5,12,0.07);
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: rgba(197,5,12,0.08);
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--atmos-badger);
-  margin-bottom: 16px;
+  z-index: 2;
   flex-shrink: 0;
 }
 .about-what-icon svg {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
 }
 
-/* Abstract CSS illustration */
-.about-what-illus {
-  position: relative;
-  height: 100px;
-  margin: 0 -20px 18px;
-  overflow: hidden;
+.about-what-illus-wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.illus-shape {
-  position: absolute;
-  border-radius: 10px;
-  transition: transform 400ms ease;
+/* Text body */
+.about-what-card-body {
+  padding: 20px 20px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
 }
-
-.about-what-card:hover .illus-shape {
-  transform: translateY(-4px) scale(1.03);
-}
-
-/* Research */
-.about-illus-research .illus-s1 { width: 56px; height: 56px; background: rgba(197,5,12,0.12); bottom: 10px; left: 50%; transform: translateX(-50%) rotate(12deg); border-radius: 12px; }
-.about-illus-research .illus-s2 { width: 40px; height: 40px; background: rgba(197,5,12,0.22); bottom: 22px; left: calc(50% + 18px); transform: translateX(-50%) rotate(-8deg); border-radius: 10px; }
-.about-illus-research .illus-s3 { width: 28px; height: 28px; background: rgba(197,5,12,0.35); bottom: 30px; left: calc(50% - 22px); transform: translateX(-50%) rotate(20deg); border-radius: 8px; }
-
-/* Projects */
-.about-illus-projects .illus-s1 { width: 70px; height: 48px; background: rgba(197,5,12,0.10); bottom: 8px; left: 50%; transform: translateX(-50%); border-radius: 8px; }
-.about-illus-projects .illus-s2 { width: 50px; height: 34px; background: rgba(197,5,12,0.20); bottom: 26px; left: 50%; transform: translateX(-50%); border-radius: 8px; }
-.about-illus-projects .illus-s3 { width: 32px; height: 22px; background: rgba(197,5,12,0.38); bottom: 40px; left: 50%; transform: translateX(-50%); border-radius: 6px; }
-
-/* Workshops */
-.about-illus-workshops .illus-s1 { width: 60px; height: 44px; background: rgba(197,5,12,0.10); bottom: 8px; left: calc(50% - 28px); border-radius: 8px; }
-.about-illus-workshops .illus-s2 { width: 44px; height: 44px; background: rgba(197,5,12,0.20); bottom: 8px; left: calc(50% + 12px); border-radius: 8px; }
-.about-illus-workshops .illus-s3 { width: 36px; height: 28px; background: rgba(197,5,12,0.36); bottom: 32px; left: 50%; transform: translateX(-50%); border-radius: 6px; }
-
-/* Community */
-.about-illus-community .illus-s1 { width: 28px; height: 44px; background: rgba(197,5,12,0.12); bottom: 8px; left: calc(50% - 36px); border-radius: 8px; }
-.about-illus-community .illus-s2 { width: 28px; height: 56px; background: rgba(197,5,12,0.24); bottom: 8px; left: calc(50% - 4px); border-radius: 8px; }
-.about-illus-community .illus-s3 { width: 28px; height: 36px; background: rgba(197,5,12,0.38); bottom: 8px; left: calc(50% + 28px); border-radius: 8px; }
 
 .about-what-card-title {
   font-family: var(--atmos-serif);
   font-size: 17px;
   font-weight: 700;
   color: var(--atmos-ink);
-  margin: 0 0 8px;
+  margin: 0;
   letter-spacing: -0.01em;
+  line-height: 1.25;
 }
 
 .about-what-card-desc {
   font-size: 13.5px;
   line-height: 1.65;
   color: var(--atmos-ink-soft);
-  margin: 0 0 14px;
+  margin: 0;
   flex: 1;
 }
 
@@ -481,10 +480,10 @@
   font-weight: 600;
   color: var(--atmos-badger);
   text-decoration: none;
-  margin-top: auto;
+  margin-top: 4px;
   transition: gap 180ms ease;
 }
-.about-what-explore:hover { gap: 7px; }
+.about-what-explore:hover { gap: 8px; }
 
 /* ── AREAS WE EXPLORE ───────────────────────────────────── */
 .about-areas {
@@ -867,6 +866,9 @@
   .about-what-cards {
     grid-template-columns: repeat(2, 1fr);
   }
+  .about-what-card-visual {
+    height: 160px;
+  }
   .about-story-stats {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -897,6 +899,9 @@
 @media (max-width: 680px) {
   .about-what-cards {
     grid-template-columns: 1fr;
+  }
+  .about-what-card-visual {
+    height: 180px;
   }
   .about-story-stats {
     grid-template-columns: repeat(2, 1fr);
