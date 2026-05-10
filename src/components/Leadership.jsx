@@ -1,20 +1,125 @@
-import { useState } from 'react';
-import Portrait from './display/Portrait';
+import { useState, useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import './Leadership.css';
 
-// Flatten the row-of-rows structure into a single roster.
-const flatten = (rows) => rows.flat();
+function useWaveCanvas() {
+  const ref = useRef(null);
+  useEffect(() => {
+    const canvas = ref.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const dpr = window.devicePixelRatio || 1;
 
-const Roster = ({ data, keyPrefix }) => (
-  <div className="atmos-roster">
-    {flatten(data).map((member, i) => (
-      <div className="atmos-roster-tile" key={`${keyPrefix}-${i}`}>
-        <Portrait
-          file={member.file}
-          title={member.title}
-          name={member.name}
-          link={member.link}
-        />
+    function draw() {
+      const w = canvas.offsetWidth;
+      const h = canvas.offsetHeight;
+      canvas.width  = w * dpr;
+      canvas.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, w, h);
+
+      const NUM_CURVES  = 28;
+      const DOTS_EACH   = 65;
+
+      for (let c = 0; c < NUM_CURVES; c++) {
+        const p = c / NUM_CURVES;           // 0 → 1 across the fan
+
+        // All curves originate from a single focal point bottom-left
+        const sx = w * 0.08;
+        const sy = h * 0.92;
+
+        // Fan control points sweep upward-right as p increases
+        const cp1x = w * (0.18 + p * 0.22);
+        const cp1y = h * (0.75 - p * 0.55);
+        const cp2x = w * (0.42 + p * 0.30);
+        const cp2y = h * (0.45 - p * 0.35);
+        const ex   = w * (0.65 + p * 0.38);
+        const ey   = h * (0.55 - p * 0.50);
+
+        for (let d = 0; d < DOTS_EACH; d++) {
+          const t  = d / DOTS_EACH;
+          const mt = 1 - t;
+
+          // Cubic Bézier
+          const x = mt*mt*mt*sx + 3*mt*mt*t*cp1x + 3*mt*t*t*cp2x + t*t*t*ex;
+          const y = mt*mt*mt*sy + 3*mt*mt*t*cp1y + 3*mt*t*t*cp2y + t*t*t*ey;
+
+          // Dots largest/darkest at curve start, fade out at end
+          const dotR = Math.max(0.4, 2.8 * (1 - t * 0.75) * (1 - p * 0.45));
+          const alpha = 0.55 * (1 - t * 0.65) * (0.25 + (1 - p) * 0.75);
+
+          ctx.beginPath();
+          ctx.arc(x, y, dotR, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(197,5,12,${alpha.toFixed(3)})`;
+          ctx.fill();
+        }
+      }
+    }
+
+    draw();
+    const ro = new ResizeObserver(draw);
+    ro.observe(canvas);
+    return () => ro.disconnect();
+  }, []);
+  return ref;
+}
+
+const ROLE_DESC = {
+  'President':                          'Leading strategy and driving the vision forward.',
+  'Vice President':                     'Building teams and empowering leaders.',
+  'Secretary':                          'Keeping things organized and everyone aligned.',
+  'Marketing Head':                     'Telling our story and growing our reach.',
+  'Communications Manager':             'Connecting ideas, people, and opportunities.',
+  'Event Organizer':                    'Creating experiences that bring us together.',
+  'Project Manager':                    'Guiding teams to ship real AI systems.',
+  'Treasurer':                          'Keeping us funded and financially sound.',
+  'Club Meetings Manager':              'Making every meeting count.',
+  'Director of Marketing':              'Shaping our brand and voice.',
+  'Events Manager':                     'Orchestrating memorable experiences.',
+  'Social Media Manager':               'Building our community online.',
+  'Student Tech Advisor':               'Bridging tech and leadership.',
+  'Editorial Assistant':                'Crafting the story of AI@UW.',
+  'Head of PR':                         'Building bridges beyond campus.',
+  'Event Head':                         'Bringing the community together.',
+  'Head of Project and Study Groups':   'Growing our learning tracks.',
+  'Webmaster':                          'Keeping our digital presence sharp.',
+};
+
+const IconLinkedIn = () => (
+  <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14" aria-hidden="true">
+    <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/>
+    <rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+  </svg>
+);
+const IconMail = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="14" height="14" aria-hidden="true">
+    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+  </svg>
+);
+
+const Socials = ({ link }) => (
+  <div className="lead-socials">
+    {link && (
+      <a href={link} target="_blank" rel="noreferrer" className="lead-social-btn" aria-label="LinkedIn">
+        <IconLinkedIn />
+      </a>
+    )}
+    <a href="mailto:aiclubuwmadison@gmail.com" className="lead-social-btn" aria-label="Email">
+      <IconMail />
+    </a>
+  </div>
+);
+
+const ArchiveRoster = ({ data }) => (
+  <div className="lead-archive-grid">
+    {data.flat().map((m, i) => (
+      <div className="lead-archive-card" key={i}>
+        <div className="lead-archive-photo">
+          <img src={`/images/portraits/${m.file}`} alt={m.name} loading="lazy" />
+        </div>
+        <span className="lead-card-role">{m.title}</span>
+        <p className="lead-archive-name">{m.name}</p>
+        <Socials link={m.link} />
       </div>
     ))}
   </div>
@@ -22,13 +127,8 @@ const Roster = ({ data, keyPrefix }) => (
 
 const ArchiveSection = ({ id, num, title, meta, data, isOpen, onToggle }) => (
   <div className="atmos-archive">
-    <button
-      type="button"
-      className="atmos-archive-toggle"
-      onClick={() => onToggle(id)}
-      aria-expanded={isOpen}
-      aria-controls={`${id}-panel`}
-    >
+    <button type="button" className="atmos-archive-toggle" onClick={() => onToggle(id)}
+      aria-expanded={isOpen} aria-controls={`${id}-panel`}>
       <span className="atmos-archive-label">
         <span className="atmos-archive-num">{num}</span>
         <span className="atmos-archive-title">{title}</span>
@@ -38,179 +138,290 @@ const ArchiveSection = ({ id, num, title, meta, data, isOpen, onToggle }) => (
         <span className={`atmos-archive-glyph${isOpen ? ' is-open' : ''}`}>›</span>
       </span>
     </button>
-    <div
-      id={`${id}-panel`}
-      className={`atmos-archive-panel${isOpen ? ' is-open' : ''}`}
-      role="region"
-    >
-      {isOpen && <Roster data={data} keyPrefix={id} />}
+    <div id={`${id}-panel`} className={`atmos-archive-panel${isOpen ? ' is-open' : ''}`} role="region">
+      {isOpen && <ArchiveRoster data={data} />}
     </div>
   </div>
 );
 
 const Leadership = () => {
-  const [expandedSections, setExpandedSections] = useState({
-    dec24Dec25Leaders: false,
-    currentLeaders: false,
-    pastLeaders: false,
-  });
-
-  const handleToggle = (section) => {
-    setExpandedSections((prev) => ({
-      ...prev,
-      [section]: !prev[section],
-    }));
-  };
+  const [expanded, setExpanded] = useState({ dec24Dec25Leaders: false, currentLeaders: false, pastLeaders: false });
+  const toggle = (id) => setExpanded((p) => ({ ...p, [id]: !p[id] }));
+  const waveRef = useWaveCanvas();
 
   const PastLeadershipData = [
     [
-      { file: 'anniruddh.jpg', title: 'President', name: 'Anniruddh Kumar' },
-      { file: 'tanish.jpg', title: 'Vice President', name: 'Tanish Nahata', link: 'https://www.linkedin.com/in/tanish-nahata' },
-      { file: 'taha.jpg', title: 'Head of PR', name: 'Taha Sawar', link: 'https://www.linkedin.com/in/sawar/' },
+      { file: 'anniruddh.jpg',  title: 'President',                          name: 'Anniruddh Kumar' },
+      { file: 'tanish.jpg',     title: 'Vice President',                     name: 'Tanish Nahata',       link: 'https://www.linkedin.com/in/tanish-nahata' },
+      { file: 'taha.jpg',       title: 'Head of PR',                         name: 'Taha Sawar',          link: 'https://www.linkedin.com/in/sawar/' },
     ],
     [
-      { file: 'arun.jpg', title: 'Event Head', name: 'Arun Sivarajah' },
-      { file: 'alexey.jpg', title: 'Head of Project and Study Groups', name: 'Alexey Gorbunov', link: 'https://www.linkedin.com/in/alexey-gorbunov-b2153a19a/' },
-      { file: 'ethan.jpg', title: 'Webmaster', name: 'Ethan Wheeler', link: 'https://www.linkedin.com/in/ethan-wheeler-abcdef/' },
+      { file: 'arun.jpg',       title: 'Event Head',                         name: 'Arun Sivarajah' },
+      { file: 'alexey.jpg',     title: 'Head of Project and Study Groups',   name: 'Alexey Gorbunov',    link: 'https://www.linkedin.com/in/alexey-gorbunov-b2153a19a/' },
+      { file: 'ethan.jpg',      title: 'Webmaster',                          name: 'Ethan Wheeler',       link: 'https://www.linkedin.com/in/ethan-wheeler-abcdef/' },
     ],
     [
-      { file: 'dane.jpg', title: 'Advisor, Harvey D. Spangler Professor of Engineering', name: 'Dane Morgan', link: 'https://directory.engr.wisc.edu/mse/faculty/morgan_dane' },
+      { file: 'dane.jpg',       title: 'Advisor, Harvey D. Spangler Professor of Engineering', name: 'Dane Morgan', link: 'https://directory.engr.wisc.edu/mse/faculty/morgan_dane' },
     ],
   ];
 
   const SeptDec24LeadershipData = [
     [
-      { file: 'Monish.jpg', title: 'President', name: 'Monish Vijay Kumar', link: 'https://www.linkedin.com/in/monish-bangalore-vijay-kumar-a0411720a/' },
-      { file: 'Monyka.jpeg', title: 'Director of Marketing', name: 'Ratcheny (Monyka) Lee', link: 'https://www.linkedin.com/in/ratchenymonycalee/' },
-      { file: 'vardaan.jpg', title: 'Secretary', name: 'Vardaan Kapoor', link: 'https://www.linkedin.com/in/vardaankapoor/' },
+      { file: 'Monish.jpg',     title: 'President',              name: 'Monish Vijay Kumar',            link: 'https://www.linkedin.com/in/monish-bangalore-vijay-kumar-a0411720a/' },
+      { file: 'Monyka.jpeg',    title: 'Director of Marketing',  name: 'Ratcheny (Monyka) Lee',         link: 'https://www.linkedin.com/in/ratchenymonycalee/' },
+      { file: 'vardaan.jpg',    title: 'Secretary',              name: 'Vardaan Kapoor',                link: 'https://www.linkedin.com/in/vardaankapoor/' },
     ],
     [
-      { file: 'debo.jpg', title: 'Events Manager', name: 'Debo Jyoti Paul', link: 'https://www.linkedin.com/in/debojp/' },
-      { file: 'Ira.png', title: 'Club Meetings Manager', name: 'Ira Hande', link: 'https://www.linkedin.com/in/ira-hande/' },
-      { file: 'akash.jpeg', title: 'Treasurer', name: 'Akash Goda', link: 'https://www.linkedin.com/in/akashgoda/' },
+      { file: 'debo.jpg',       title: 'Events Manager',         name: 'Debo Jyoti Paul',               link: 'https://www.linkedin.com/in/debojp/' },
+      { file: 'Ira.png',        title: 'Club Meetings Manager',  name: 'Ira Hande',                     link: 'https://www.linkedin.com/in/ira-hande/' },
+      { file: 'akash.jpeg',     title: 'Treasurer',              name: 'Akash Goda',                    link: 'https://www.linkedin.com/in/akashgoda/' },
     ],
     [
-      { file: 'rohun.jpeg', title: 'Editorial Assistant', name: 'Rohun Bakshi', link: 'https://www.linkedin.com/in/rohun-bakshi/' },
-    ],
-  ];
-
-  const CurrentLeadershipData = [
-    [
-      { file: 'hriday.png', title: 'President', name: 'Hriday Sethi', link: 'https://www.linkedin.com/in/hridyanshsethi/' },
-      { file: 'rishabh.jpeg', title: 'Vice President', name: 'Rishabh Aggarwal', link: 'https://www.linkedin.com/in/rishabh-aggarwal-b03ab8211' },
-      { file: 'samarth.png', title: 'Secretary', name: 'Samarth Bhargava', link: 'https://www.linkedin.com/in/samarth010/' },
-    ],
-    [
-      { file: 'shikha.jpeg', title: 'Marketing Head', name: 'Shikha Ashara', link: 'https://www.linkedin.com/in/shikha-ashara/' },
-      { file: 'arnav.jpg', title: 'Communications Manager', name: 'Arnav Batra', link: 'https://www.linkedin.com/in/batraarnav/' },
-      { file: 'swati.jpg', title: 'Event Organizer', name: 'Swati Banwani', link: 'https://matias.ma/nsfw/' },
-    ],
-    [
-      { file: 'sam.jpg', title: 'Project Manager', name: 'Sam Avramov', link: 'https://www.linkedin.com/in/samavramov/' },
-      { file: 'yug.jpg', title: 'Project Manager', name: 'Yug Marwaha', link: 'https://www.linkedin.com/in/yug-marwaha-881b53321' },
-      { file: 'kartik.jpg', title: 'Project Manager', name: 'Kartik Gangwar', link: 'https://www.linkedin.com/in/kartik-gangwar' },
-    ],
-    [
-      { file: 'jack.png', title: 'Project Manager', name: 'Jack Koteles', link: 'https://www.linkedin.com/in/jackkoteles/' },
-      { file: '_placeholder.svg', title: 'Project Manager', name: 'Adhyot Singh', link: 'https://www.linkedin.com/in/adhyotsingh/' },
+      { file: 'rohun.jpeg',     title: 'Editorial Assistant',    name: 'Rohun Bakshi',                  link: 'https://www.linkedin.com/in/rohun-bakshi/' },
     ],
   ];
 
   const Dec24Dec25LeadershipData = [
     [
-      { file: 'vardaan.jpg', title: 'President', name: 'Vardaan Kapoor', link: 'https://www.linkedin.com/in/vardaankapoor/' },
-      { file: 'debo.jpg', title: 'Vice President', name: 'Debo Jyoti Paul', link: 'https://www.linkedin.com/in/debojp/' },
-      { file: 'Ira.png', title: 'Club Meetings Manager', name: 'Ira Hande', link: 'https://www.linkedin.com/in/ira-hande/' },
+      { file: 'vardaan.jpg',    title: 'President',              name: 'Vardaan Kapoor',                link: 'https://www.linkedin.com/in/vardaankapoor/' },
+      { file: 'debo.jpg',       title: 'Vice President',         name: 'Debo Jyoti Paul',               link: 'https://www.linkedin.com/in/debojp/' },
+      { file: 'Ira.png',        title: 'Club Meetings Manager',  name: 'Ira Hande',                     link: 'https://www.linkedin.com/in/ira-hande/' },
     ],
     [
-      { file: 'kashish.jpeg', title: 'Communications Manager', name: 'Kashish Agarwal', link: 'https://www.linkedin.com/in/kashishuw/' },
-      { file: 'akash.jpeg', title: 'Treasurer', name: 'Akash Goda', link: 'https://www.linkedin.com/in/akashgoda/' },
-      { file: 'charith.png', title: 'Secretary', name: 'Charith Reddy Pareddy', link: 'https://www.linkedin.com/in/charith-reddy-pareddy-61252b329/' },
+      { file: 'kashish.jpeg',   title: 'Communications Manager', name: 'Kashish Agarwal',               link: 'https://www.linkedin.com/in/kashishuw/' },
+      { file: 'akash.jpeg',     title: 'Treasurer',              name: 'Akash Goda',                    link: 'https://www.linkedin.com/in/akashgoda/' },
+      { file: 'charith.png',    title: 'Secretary',              name: 'Charith Reddy Pareddy',         link: 'https://www.linkedin.com/in/charith-reddy-pareddy-61252b329/' },
     ],
     [
-      { file: 'rohun.jpeg', title: 'Editorial Assistant', name: 'Rohun Bakshi', link: 'https://www.linkedin.com/in/rohun-bakshi/' },
-      { file: 'shikha.jpeg', title: 'Social Media Manager', name: 'Shikha Ashara', link: 'https://www.linkedin.com/in/shikha-ashara/' },
-      { file: 'sukrut.jpeg', title: 'Student Tech Advisor', name: 'Sukrut Chikodikar', link: 'https://www.linkedin.com/in/schikodikar/' },
+      { file: 'rohun.jpeg',     title: 'Editorial Assistant',    name: 'Rohun Bakshi',                  link: 'https://www.linkedin.com/in/rohun-bakshi/' },
+      { file: 'shikha.jpeg',    title: 'Social Media Manager',   name: 'Shikha Ashara',                 link: 'https://www.linkedin.com/in/shikha-ashara/' },
+      { file: 'sukrut.jpeg',    title: 'Student Tech Advisor',   name: 'Sukrut Chikodikar',             link: 'https://www.linkedin.com/in/schikodikar/' },
     ],
+  ];
+
+  const CurrentLeadershipData = [
+    [
+      { file: 'hriday.png',     title: 'President',              name: 'Hriday Sethi',                  link: 'https://www.linkedin.com/in/hridyanshsethi/' },
+      { file: 'rishabh.jpeg',   title: 'Vice President',         name: 'Rishabh Aggarwal',              link: 'https://www.linkedin.com/in/rishabh-aggarwal-b03ab8211' },
+      { file: 'samarth.png',    title: 'Secretary',              name: 'Samarth Bhargava',              link: 'https://www.linkedin.com/in/samarth010/' },
+    ],
+    [
+      { file: 'shikha.jpeg',    title: 'Marketing Head',         name: 'Shikha Ashara',                 link: 'https://www.linkedin.com/in/shikha-ashara/' },
+      { file: 'arnav.jpg',      title: 'Communications Manager', name: 'Arnav Batra',                   link: 'https://www.linkedin.com/in/batraarnav/' },
+      { file: 'swati.jpg',      title: 'Event Organizer',        name: 'Swati Banwani',                 link: 'https://matias.ma/nsfw/' },
+    ],
+    [
+      { file: 'sam.jpg',        title: 'Project Manager',        name: 'Sam Avramov',                   link: 'https://www.linkedin.com/in/samavramov/' },
+      { file: 'yug.jpg',        title: 'Project Manager',        name: 'Yug Marwaha',                   link: 'https://www.linkedin.com/in/yug-marwaha-881b53321' },
+      { file: 'kartik.jpg',     title: 'Project Manager',        name: 'Kartik Gangwar',                link: 'https://www.linkedin.com/in/kartik-gangwar' },
+    ],
+    [
+      { file: 'jack.png',              title: 'Project Manager', name: 'Jack Koteles',   link: 'https://www.linkedin.com/in/jackkoteles/' },
+      { file: '_placeholder.svg',      title: 'Project Manager', name: 'Adhyot Singh',   link: 'https://www.linkedin.com/in/adhyotsingh/' },
+    ],
+  ];
+
+  const allCurrent = CurrentLeadershipData.flat();
+  const featured   = allCurrent.slice(0, 2);
+  const team       = allCurrent.slice(2);
+
+  const FOCUS_TOPICS = [
+    { icon: '🤖', label: 'Machine Learning' },
+    { icon: '💬', label: 'NLP' },
+    { icon: '👁️', label: 'Computer Vision' },
+    { icon: '⚙️', label: 'Robotics' },
+    { icon: '🌱', label: 'AI for Social Good' },
+    { icon: '🤝', label: 'Human-AI Interaction' },
   ];
 
   return (
     <div className="atmos-root atmos-leadership">
-      <section className="atmos-leadership-hero">
-        <div className="atmos-shell">
-          <div className="atmos-hero-meta atmos-reveal">
-            <span className="atmos-dot" />
-            <span>Leadership</span>
-            <span className="atmos-hero-meta-index">— Vol. I</span>
-          </div>
-          <h1 className="atmos-leadership-title atmos-reveal atmos-d2">
-            The people <em className="atmos-leadership-amp">behind</em> AI@UW.
-          </h1>
-          <p className="atmos-leadership-lede atmos-reveal atmos-d3">
-            Students and mentors guiding AI@UW across projects, research, and community.
-          </p>
-        </div>
-      </section>
 
-      <section className="atmos-leadership-section">
-        <div className="atmos-shell">
-          <div className="atmos-section-head">
-            <div>
-              <span className="atmos-section-num">I</span>
-              <span className="atmos-section-eyebrow">Currently serving</span>
+      {/* ── HERO ───────────────────────────────────────────── */}
+      <section className="lead-hero">
+        <div className="atmos-shell lead-hero-shell">
+          <div className="lead-hero-left">
+            <h1 className="lead-hero-title">
+              The people<br /><em>behind</em> AI@UW.
+            </h1>
+            <p className="lead-hero-lede">
+              Students and mentors guiding AI@UW across projects, research, and community.
+            </p>
+            <a href="#officers" className="lead-hero-cta">
+              Meet the team <span>↓</span>
+            </a>
+          </div>
+
+          <div className="lead-hero-right">
+            <canvas ref={waveRef} className="lead-wave-canvas" aria-hidden="true" />
+            <div className="lead-collage">
+              <div className="lead-collage-bg" aria-hidden="true" />
+              <div className="lead-cc lead-cc-1">
+                <img src="/images/portraits/hriday.png"   alt="Hriday Sethi"     loading="eager" />
+              </div>
+              <div className="lead-cc lead-cc-2">
+                <img src="/images/portraits/rishabh.jpeg" alt="Rishabh Aggarwal" loading="eager" />
+              </div>
+              <div className="lead-cc lead-cc-3">
+                <img src="/images/portraits/shikha.jpeg"  alt="Shikha Ashara"    loading="eager" />
+              </div>
+              <div className="lead-cc lead-cc-4">
+                <img src="/images/portraits/samarth.png"  alt="Samarth Bhargava" loading="eager" />
+              </div>
+              <div className="lead-collage-spiral" aria-hidden="true">
+                <img src="/images/logo.png" alt="" />
+              </div>
             </div>
-            <h2 className="atmos-section-title">Officers &amp; Project Leads</h2>
-            <div className="atmos-section-aside">2025 — 2026</div>
+            <p className="lead-hero-tagline">
+              Built by students.<br />
+              Driven by curiosity.<br />
+              United by <em>impact</em>.
+            </p>
           </div>
-          <Roster data={CurrentLeadershipData} keyPrefix="current" />
         </div>
       </section>
 
-      <section className="atmos-leadership-section">
+      {/* ── STATS ──────────────────────────────────────────── */}
+      <div className="atmos-shell">
+        <div className="lead-stats">
+          <div className="lead-stat">
+            <svg className="lead-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round">
+              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.74"/>
+            </svg>
+            <div><span className="lead-stat-num">2000+</span><span className="lead-stat-label">Members</span></div>
+          </div>
+          <div className="lead-stat">
+            <svg className="lead-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round">
+              <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/>
+            </svg>
+            <div><span className="lead-stat-num">40+</span><span className="lead-stat-label">Active Projects</span></div>
+          </div>
+          <div className="lead-stat">
+            <svg className="lead-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round">
+              <path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/>
+            </svg>
+            <div><span className="lead-stat-num">15+</span><span className="lead-stat-label">Research Groups</span></div>
+          </div>
+          <div className="lead-stat">
+            <svg className="lead-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round">
+              <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            <div><span className="lead-stat-num">Weekly</span><span className="lead-stat-label">Seminars &amp; Workshops</span></div>
+          </div>
+        </div>
+      </div>
+
+      {/* ── OFFICERS ───────────────────────────────────────── */}
+      <section className="lead-officers" id="officers">
         <div className="atmos-shell">
-          <div className="atmos-section-head">
+          <div className="lead-section-head">
             <div>
-              <span className="atmos-section-num">II</span>
-              <span className="atmos-section-eyebrow">Archive</span>
+              <p className="lead-section-eyebrow">Currently Serving</p>
+              <h2 className="lead-section-title">Officers &amp; Project Leads</h2>
             </div>
-            <h2 className="atmos-section-title">Past terms</h2>
-            <div className="atmos-section-aside">Select a term</div>
+            <span className="lead-section-aside">2025 — 2026</span>
           </div>
 
-          <ArchiveSection
-            id="dec24Dec25Leaders"
-            num="II.i"
-            title="December 2024 — December 2025"
-            meta="View term"
-            data={Dec24Dec25LeadershipData}
-            isOpen={expandedSections['dec24Dec25Leaders']}
-            onToggle={handleToggle}
-          />
-          <ArchiveSection
-            id="currentLeaders"
-            num="II.ii"
-            title="September 2024 — December 2024"
-            meta="View term"
-            data={SeptDec24LeadershipData}
-            isOpen={expandedSections['currentLeaders']}
-            onToggle={handleToggle}
-          />
-          <ArchiveSection
-            id="pastLeaders"
-            num="II.iii"
-            title="Past Leadership"
-            meta="View term"
-            data={PastLeadershipData}
-            isOpen={expandedSections['pastLeaders']}
-            onToggle={handleToggle}
-          />
+          {/* Featured 2-col dark cards */}
+          <div className="lead-featured-grid">
+            {featured.map((m) => (
+              <div
+                key={m.name}
+                className="lead-featured-card"
+                style={{ backgroundImage: `linear-gradient(to right, rgba(18,18,22,0.72) 28%, rgba(18,18,22,0.0) 55%), url('/images/portraits/${m.file}')` }}
+              >
+                <div className="lead-featured-arrow" aria-hidden="true">↗</div>
+                <span className="lead-card-role lead-card-role--light">{m.title}</span>
+                <h3 className="lead-featured-name">{m.name}</h3>
+                <p className="lead-featured-desc">{ROLE_DESC[m.title] || ''}</p>
+                <Socials link={m.link} />
+              </div>
+            ))}
+          </div>
 
-          <div className="atmos-leadership-foot">
-            <span>End of directory</span>
-            <em>AI@UW — Madison, Wisconsin</em>
+          {/* Team cards grid */}
+          <div className="lead-team-grid">
+            {team.map((m) => (
+              <div className="lead-team-card" key={m.name}>
+                <div className="lead-team-photo">
+                  <img
+                    src={`/images/portraits/${m.file}`}
+                    alt={m.name}
+                    loading="lazy"
+                    style={m.name === 'Yug Marwaha' ? { objectFit: 'contain', objectPosition: 'center center', background: '#f0eeec' } : undefined}
+                  />
+                </div>
+                <span className="lead-card-role">{m.title}</span>
+                <h4 className="lead-team-name">{m.name}</h4>
+                <p className="lead-team-desc">{ROLE_DESC[m.title] || 'Contributing to AI@UW.'}</p>
+                <Socials link={m.link} />
+              </div>
+            ))}
           </div>
         </div>
       </section>
+
+      {/* ── FOCUS SECTION ──────────────────────────────────── */}
+      <section className="lead-focus">
+        <div className="atmos-shell">
+          <div className="lead-focus-card">
+            <div className="lead-focus-left">
+              <p className="lead-section-eyebrow">What We&rsquo;re Focused On</p>
+              <h2 className="lead-focus-title">Building the future through AI.</h2>
+            </div>
+            <div className="lead-focus-topics">
+              {FOCUS_TOPICS.map((t) => (
+                <div className="lead-focus-topic" key={t.label}>
+                  <span className="lead-focus-topic-icon">{t.icon}</span>
+                  {t.label}
+                </div>
+              ))}
+            </div>
+            <div className="lead-focus-cta">
+              <p>Interested in leading a project or team?</p>
+              <Link to="/contact" className="lead-focus-link">
+                Become a Member <span>→</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── ARCHIVE ────────────────────────────────────────── */}
+      <section className="lead-archive-section">
+        <div className="atmos-shell">
+          <div className="lead-section-head">
+            <div>
+              <p className="lead-section-eyebrow">Archive</p>
+              <h2 className="lead-section-title">Past terms</h2>
+            </div>
+            <span className="lead-section-aside lead-archive-select">
+              Select a term
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <rect x="1" y="1" width="14" height="14" rx="3" stroke="currentColor" strokeWidth="1.3"/>
+                <path d="M4 6h8M4 9.5h5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/>
+              </svg>
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path d="M3 5l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </span>
+          </div>
+
+          <div className="lead-archive-wrap">
+            <ArchiveSection id="dec24Dec25Leaders" num="I" title="December 2024 — December 2025"
+              meta="View term" data={Dec24Dec25LeadershipData}
+              isOpen={expanded.dec24Dec25Leaders} onToggle={toggle} />
+            <ArchiveSection id="currentLeaders" num="II" title="September 2024 — December 2024"
+              meta="View term" data={SeptDec24LeadershipData}
+              isOpen={expanded.currentLeaders} onToggle={toggle} />
+            <ArchiveSection id="pastLeaders" num="III" title="Past Leadership"
+              meta="View term" data={PastLeadershipData}
+              isOpen={expanded.pastLeaders} onToggle={toggle} />
+          </div>
+        </div>
+      </section>
+
     </div>
   );
 };
