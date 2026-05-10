@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './Nav.css';
 
@@ -13,21 +13,37 @@ const NAV_ITEMS = [
 const Nav = () => {
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrollPct, setScrollPct] = useState(0);
 
   const isActive = (to) => location.pathname === to;
 
+  useEffect(() => {
+    const update = () => {
+      const scrolled = window.scrollY;
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollPct(total > 0 ? (scrolled / total) * 100 : 0);
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    return () => window.removeEventListener('scroll', update);
+  }, []);
+
+  // Reset progress on route change
+  useEffect(() => { setScrollPct(0); }, [location.pathname]);
+
   return (
     <>
+      <div
+        className="atmos-scroll-progress"
+        style={{ width: `${scrollPct}%` }}
+        aria-hidden="true"
+      />
       <header className="atmos-nav">
         <div className="atmos-shell atmos-nav-inner">
           <Link to="/" className="atmos-nav-brand" aria-label="AI@UW home">
             <span className="atmos-nav-brand-mark" aria-hidden="true">
               <img src="/images/logo.png" alt="" />
             </span>
-            <span className="atmos-nav-brand-text">
-              <span className="atmos-nav-brand-name">AI@UW</span>
-              <span className="atmos-nav-brand-meta">Madison &middot; Est. MMXXIII</span>
-            </span>
+            <span className="atmos-nav-brand-name">AI@UW</span>
           </Link>
 
           <nav aria-label="Primary">
