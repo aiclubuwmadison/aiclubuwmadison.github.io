@@ -45,11 +45,7 @@ const Nav = () => {
           {/* Brand */}
           <Link to="/" className="atmos-nav-brand" aria-label="AI@UW home">
             <span className="atmos-nav-brand-mark" aria-hidden="true">
-              <img src="/images/logo.png" alt="" />
-            </span>
-            <span className="atmos-nav-brand-text">
-              <span className="atmos-nav-brand-name">AI@UW</span>
-              <span className="atmos-nav-brand-meta">Madison&thinsp;&middot;&thinsp;Est.&thinsp;MMXVII</span>
+              <img src="/images/logo.png" alt="AI@UW" />
             </span>
           </Link>
 
