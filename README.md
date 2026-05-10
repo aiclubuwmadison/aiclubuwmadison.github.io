@@ -11,14 +11,13 @@ AI@UW is an interdisciplinary community of over 2,000 students and faculty dedic
 ### Frontend
 - **Framework:** [React 19](https://react.dev/)
 - **Build Tool:** [Vite](https://vitejs.dev/)
-- **UI Components:** [Material UI (MUI)](https://mui.com/)
+- **UI Components:** [Material UI (MUI)](https://mui.com/) with [Emotion](https://emotion.sh/)
 - **Routing:** [React Router 7](https://reactrouter.com/)
+- **Icons:** [lucide-react](https://lucide.dev/)
+- **Mobile Nav:** [react-burger-menu](https://github.com/negomi/react-burger-menu)
 - **Styling:** Vanilla CSS with a focus on modern, "atmospheric" design.
 
-### Backend (Minimal)
-- **Runtime:** Node.js
-- **Framework:** Express
-- **Email:** Nodemailer (Skeleton for potential contact form integration)
+The contact form is handled via an embedded Google Form, so the site is fully static — no backend required.
 
 ## Getting Started
 
@@ -43,12 +42,22 @@ Start the development server. Ensure you are working off the `dev` branch.
 npm run dev
 ```
 
+### Other Scripts
+```bash
+npm run lint       # ESLint (flat config in eslint.config.js)
+npm run preview    # Serve the production build locally for verification
+```
+
 ### Building for Production
 Create an optimized production build:
 ```bash
 npm run build
 ```
 The output will be generated in the `dist/` directory.
+
+## Hosting
+
+The site is published at **ai.cs.wisc.edu** via GitHub Pages (custom domain configured in `CNAME`). Because GitHub Pages is a static host, `src/main.jsx` contains a small SPA shim that reads `?redirect=/path` from the URL on load and rewrites `window.history` before React mounts. This pairs with a `404.html` redirect helper so deep links into client-side routes resolve correctly.
 
 ## Deployment Workflow
 
@@ -93,7 +102,6 @@ The website's live code lives on the `master` branch, while all development take
 ## Project Structure
 
 ```text
-├── backend/            # Express backend (Nodemailer setup)
 ├── public/             # Static assets (fonts, images, logos)
 ├── src/
 │   ├── components/     # React components
