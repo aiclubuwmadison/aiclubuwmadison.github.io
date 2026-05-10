@@ -1,6 +1,43 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import {
+  Mail,
+  Network,
+  MessageSquare,
+  Eye,
+  Bot,
+  HeartHandshake,
+  Users,
+  FolderGit2,
+  LayoutGrid,
+  CalendarDays,
+} from 'lucide-react';
 import './Leadership.css';
+
+const PORTRAIT_PLACEHOLDER = '/images/portraits/_placeholder.svg';
+
+function handlePortraitError(event) {
+  const img = event.currentTarget;
+  if (img.src.endsWith('_placeholder.svg')) return;
+  img.src = PORTRAIT_PLACEHOLDER;
+}
+
+function useResolvedPortrait(file) {
+  const target = `/images/portraits/${file}`;
+  const [src, setSrc] = useState(target);
+  useEffect(() => {
+    setSrc(target);
+    const probe = new Image();
+    probe.onload = () => setSrc(target);
+    probe.onerror = () => setSrc(PORTRAIT_PLACEHOLDER);
+    probe.src = target;
+    return () => {
+      probe.onload = null;
+      probe.onerror = null;
+    };
+  }, [target]);
+  return src;
+}
 
 function useWaveCanvas() {
   const ref = useRef(null);
@@ -91,12 +128,6 @@ const IconLinkedIn = () => (
     <rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
   </svg>
 );
-const IconMail = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="14" height="14" aria-hidden="true">
-    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
-  </svg>
-);
-
 const Socials = ({ link }) => (
   <div className="lead-socials">
     {link && (
@@ -105,25 +136,63 @@ const Socials = ({ link }) => (
       </a>
     )}
     <a href="mailto:aiclubuwmadison@gmail.com" className="lead-social-btn" aria-label="Email">
-      <IconMail />
+      <Mail size={14} strokeWidth={2} aria-hidden="true" />
     </a>
   </div>
 );
 
-const ArchiveRoster = ({ data }) => (
-  <div className="lead-archive-grid">
-    {data.flat().map((m, i) => (
-      <div className="lead-archive-card" key={i}>
-        <div className="lead-archive-photo">
-          <img src={`/images/portraits/${m.file}`} alt={m.name} loading="lazy" />
+const FeaturedCard = ({ m }) => {
+  const src = useResolvedPortrait(m.file);
+  return (
+    <div
+      className="lead-featured-card"
+      style={{ backgroundImage: `linear-gradient(to right, rgba(18,18,22,0.72) 28%, rgba(18,18,22,0.0) 55%), url('${src}')` }}
+    >
+      <div className="lead-featured-arrow" aria-hidden="true">↗</div>
+      <span className="lead-card-role lead-card-role--light">{m.title}</span>
+      <h3 className="lead-featured-name">{m.name}</h3>
+      <p className="lead-featured-desc">{ROLE_DESC[m.title] || ''}</p>
+      <Socials link={m.link} />
+    </div>
+  );
+};
+
+const ArchiveRoster = ({ data }) => {
+  const all = data.flat();
+  const featured = all.slice(0, 2);
+  const team = all.slice(2);
+
+  return (
+    <div className="lead-archive-roster">
+      {featured.length > 0 && (
+        <div className="lead-featured-grid">
+          {featured.map((m) => <FeaturedCard key={m.name} m={m} />)}
         </div>
-        <span className="lead-card-role">{m.title}</span>
-        <p className="lead-archive-name">{m.name}</p>
-        <Socials link={m.link} />
-      </div>
-    ))}
-  </div>
-);
+      )}
+
+      {team.length > 0 && (
+        <div className="lead-team-grid">
+          {team.map((m) => (
+            <div className="lead-team-card" key={m.name}>
+              <div className="lead-team-photo">
+                <img
+                  src={`/images/portraits/${m.file}`}
+                  alt={m.name}
+                  loading="lazy"
+                  onError={handlePortraitError}
+                />
+              </div>
+              <span className="lead-card-role">{m.title}</span>
+              <h4 className="lead-team-name">{m.name}</h4>
+              <p className="lead-team-desc">{ROLE_DESC[m.title] || 'Contributing to AI@UW.'}</p>
+              <Socials link={m.link} />
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
 
 const ArchiveSection = ({ id, num, title, meta, data, isOpen, onToggle }) => (
   <div className="atmos-archive">
@@ -226,12 +295,12 @@ const Leadership = () => {
   const team       = allCurrent.slice(2);
 
   const FOCUS_TOPICS = [
-    { icon: '🤖', label: 'Machine Learning' },
-    { icon: '💬', label: 'NLP' },
-    { icon: '👁️', label: 'Computer Vision' },
-    { icon: '⚙️', label: 'Robotics' },
-    { icon: '🌱', label: 'AI for Social Good' },
-    { icon: '🤝', label: 'Human-AI Interaction' },
+    { Icon: Network,        label: 'Machine Learning' },
+    { Icon: MessageSquare,  label: 'NLP' },
+    { Icon: Eye,            label: 'Computer Vision' },
+    { Icon: Bot,            label: 'Robotics' },
+    { Icon: HeartHandshake, label: 'AI for Social Good' },
+    { Icon: Users,          label: 'Human-AI Interaction' },
   ];
 
   return (
@@ -285,28 +354,19 @@ const Leadership = () => {
       <div className="atmos-shell">
         <div className="lead-stats">
           <div className="lead-stat">
-            <svg className="lead-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round">
-              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/>
-              <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.74"/>
-            </svg>
+            <Users className="lead-stat-icon" strokeWidth={1.7} aria-hidden="true" />
             <div><span className="lead-stat-num">2000+</span><span className="lead-stat-label">Members</span></div>
           </div>
           <div className="lead-stat">
-            <svg className="lead-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round">
-              <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/>
-            </svg>
+            <FolderGit2 className="lead-stat-icon" strokeWidth={1.7} aria-hidden="true" />
             <div><span className="lead-stat-num">40+</span><span className="lead-stat-label">Active Projects</span></div>
           </div>
           <div className="lead-stat">
-            <svg className="lead-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round">
-              <path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/>
-            </svg>
+            <LayoutGrid className="lead-stat-icon" strokeWidth={1.7} aria-hidden="true" />
             <div><span className="lead-stat-num">15+</span><span className="lead-stat-label">Research Groups</span></div>
           </div>
           <div className="lead-stat">
-            <svg className="lead-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round">
-              <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
-            </svg>
+            <CalendarDays className="lead-stat-icon" strokeWidth={1.7} aria-hidden="true" />
             <div><span className="lead-stat-num">Weekly</span><span className="lead-stat-label">Seminars &amp; Workshops</span></div>
           </div>
         </div>
@@ -325,19 +385,7 @@ const Leadership = () => {
 
           {/* Featured 2-col dark cards */}
           <div className="lead-featured-grid">
-            {featured.map((m) => (
-              <div
-                key={m.name}
-                className="lead-featured-card"
-                style={{ backgroundImage: `linear-gradient(to right, rgba(18,18,22,0.72) 28%, rgba(18,18,22,0.0) 55%), url('/images/portraits/${m.file}')` }}
-              >
-                <div className="lead-featured-arrow" aria-hidden="true">↗</div>
-                <span className="lead-card-role lead-card-role--light">{m.title}</span>
-                <h3 className="lead-featured-name">{m.name}</h3>
-                <p className="lead-featured-desc">{ROLE_DESC[m.title] || ''}</p>
-                <Socials link={m.link} />
-              </div>
-            ))}
+            {featured.map((m) => <FeaturedCard key={m.name} m={m} />)}
           </div>
 
           {/* Team cards grid */}
@@ -349,6 +397,7 @@ const Leadership = () => {
                     src={`/images/portraits/${m.file}`}
                     alt={m.name}
                     loading="lazy"
+                    onError={handlePortraitError}
                     style={m.name === 'Yug Marwaha' ? { objectFit: 'contain', objectPosition: 'center center', background: '#f0eeec' } : undefined}
                   />
                 </div>
@@ -371,10 +420,12 @@ const Leadership = () => {
               <h2 className="lead-focus-title">Building the future through AI.</h2>
             </div>
             <div className="lead-focus-topics">
-              {FOCUS_TOPICS.map((t) => (
-                <div className="lead-focus-topic" key={t.label}>
-                  <span className="lead-focus-topic-icon">{t.icon}</span>
-                  {t.label}
+              {FOCUS_TOPICS.map(({ Icon, label }) => (
+                <div className="lead-focus-topic" key={label}>
+                  <span className="lead-focus-topic-icon">
+                    <Icon size={16} strokeWidth={1.8} aria-hidden="true" />
+                  </span>
+                  {label}
                 </div>
               ))}
             </div>

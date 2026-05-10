@@ -304,12 +304,20 @@
   display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
 }
 .lead-focus-topic {
-  display: flex; align-items: center; gap: 8px;
+  display: flex; align-items: center; gap: 10px;
   font-size: 13px; font-weight: 500; color: var(--atmos-ink-soft);
   padding: 8px 12px; border-radius: 8px;
   background: var(--atmos-paper); border: 1px solid var(--atmos-hairline);
 }
-.lead-focus-topic-icon { font-size: 16px; flex-shrink: 0; }
+.lead-focus-topic-icon {
+  width: 28px; height: 28px;
+  flex-shrink: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 8px;
+  background: rgba(197, 5, 12, 0.08);
+  color: var(--atmos-badger);
+}
+.lead-focus-topic-icon svg { width: 16px; height: 16px; }
 
 .lead-focus-cta {
   display: flex; flex-direction: column; align-items: flex-start; gap: 14px;
@@ -375,6 +383,12 @@
   transition: max-height 460ms cubic-bezier(.2,.7,.2,1), opacity 300ms ease;
 }
 .atmos-archive-panel.is-open { max-height: 6000px; opacity: 1; padding-bottom: 32px; }
+
+.lead-archive-roster {
+  display: flex; flex-direction: column;
+  gap: clamp(20px, 3vw, 32px);
+  padding: 8px 28px 0;
+}
 
 .lead-archive-grid {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(140px,1fr));
