@@ -1,239 +1,551 @@
 /* =========================================================
-   ATMOSPHERIC MODERN — About page
-   Page-scoped styles. Reuses tokens + classes from App.css.
+   About page — two-column hero + two numbered section rows
+   All sizing via clamp(); references design-system tokens
+   from App.css (:root).
    ========================================================= */
 
+/* ── Page shell ─────────────────────────────────────────── */
 .atmos-about {
-  padding: clamp(56px, 9vw, 120px) 0 clamp(72px, 10vw, 140px);
+  padding-bottom: clamp(64px, 9vw, 120px);
 }
 
-/* Override legacy MUI Container so it can sit inside atmos-shell */
-.atmos-about .about-page.MuiContainer-root {
-  max-width: none;
-  padding: 0;
-  margin: 0;
-}
-
-/* Reset legacy global rules from App.css that paint everything */
-.atmos-about .about-page,
-.atmos-about .about-page * {
-  color: inherit !important;
-}
-
-/* HERO META — eyebrow + italic index */
-.atmos-about-meta {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  margin-bottom: clamp(28px, 4vw, 44px);
-  padding-bottom: 20px;
-  border-bottom: 1px solid var(--atmos-hairline-soft);
-}
-.atmos-about-meta-left {
-  display: inline-flex;
-  align-items: center;
-  gap: 14px;
-  font-family: var(--atmos-sans);
-  font-size: 11.5px;
-  color: var(--atmos-ink-mute);
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-
-/* PAGE TITLE — oversized italic Fraunces statement */
-.atmos-about-title {
-  font-family: var(--atmos-serif);
-  font-weight: 320;
-  font-style: normal;
-  font-size: clamp(56px, 10vw, 148px);
-  line-height: 0.92;
-  letter-spacing: -0.025em;
-  color: var(--atmos-ink);
-  margin: 0;
-  font-variation-settings: "opsz" 144, "SOFT" 30, "WONK" 1;
-}
-.atmos-about-title em {
-  font-style: italic;
-  font-weight: 300;
-  color: var(--atmos-ink);
-  position: relative;
-}
-.atmos-about-title em::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0.04em;
-  bottom: 0.06em;
-  height: 1px;
-  background: var(--atmos-badger);
-}
-
-.atmos-about-lede {
-  margin-top: clamp(28px, 4vw, 44px);
-  font-family: var(--atmos-serif);
-  font-style: italic;
-  font-weight: 300;
-  font-size: clamp(20px, 2.2vw, 28px);
-  line-height: 1.35;
-  color: var(--atmos-ink);
-  max-width: 28ch;
-  letter-spacing: -0.005em;
-}
-
-/* SECTION ROW — asymmetric two-column */
-.atmos-about-section {
+/* ── HERO ───────────────────────────────────────────────── */
+.about-hero {
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 2fr);
-  gap: clamp(24px, 5vw, 88px);
-  align-items: start;
-  padding: clamp(56px, 7vw, 96px) 0 clamp(40px, 5vw, 64px);
-  border-top: 1px solid var(--atmos-hairline);
-}
-.atmos-about-section:last-of-type {
-  border-bottom: 1px solid var(--atmos-hairline);
-  padding-bottom: clamp(56px, 7vw, 88px);
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(40px, 6vw, 96px);
+  max-width: var(--atmos-max);
+  margin: 0 auto;
+  padding: clamp(48px, 6vw, 80px) var(--atmos-gutter);
+  box-sizing: border-box;
 }
 
-.atmos-about-section-head {
+/* LEFT COLUMN */
+.about-hero-left {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  position: sticky;
-  top: 24px;
-}
-.atmos-about-section-num {
-  font-family: var(--atmos-sans);
-  font-weight: 600;
-  font-size: 11px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--atmos-ink-mute);
-  border-bottom: 1px solid var(--atmos-ink-mute);
-  padding-bottom: 4px;
-  align-self: flex-start;
-}
-.atmos-about-section-title {
-  font-family: var(--atmos-serif);
-  font-weight: 350;
-  font-size: clamp(34px, 4vw, 52px);
-  line-height: 1.04;
-  letter-spacing: -0.02em;
-  margin: 0;
-  color: var(--atmos-ink);
-  font-variation-settings: "opsz" 144, "SOFT" 30;
-}
-.atmos-about-section-title em {
-  font-style: italic;
-  font-weight: 300;
+  gap: clamp(20px, 2.5vw, 32px);
 }
 
-/* Body column — overrides default subcomponent styles via wrapper */
-.atmos-about-section-body {
+.about-hero-eyebrow {
+  font-family: var(--atmos-mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--atmos-badger);
+  margin: 0;
+}
+
+.about-hero-title {
+  font-family: var(--atmos-serif);
+  font-weight: 800;
+  font-size: clamp(40px, 5.5vw, 72px);
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  color: var(--atmos-ink);
+  margin: 0;
+}
+
+.about-hero-title em {
+  font-style: italic;
+  color: var(--atmos-badger);
+  text-decoration: underline;
+  text-decoration-color: var(--atmos-badger);
+  text-underline-offset: 4px;
+}
+
+.about-hero-lede {
+  font-family: var(--atmos-sans);
+  font-size: clamp(15px, 1.4vw, 18px);
+  line-height: 1.6;
+  color: var(--atmos-ink-soft);
+  margin: 0;
+  max-width: 42ch;
+}
+
+/* CTA ROW */
+.about-hero-ctas {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: clamp(4px, 1vw, 8px);
+}
+
+/* Shared button base */
+.about-btn-primary,
+.about-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--atmos-sans);
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  padding: 13px 22px 12px;
+  border-radius: 999px;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 220ms ease, color 220ms ease,
+              border-color 220ms ease, transform 220ms ease,
+              box-shadow 220ms ease;
+  white-space: nowrap;
+}
+
+.about-btn-primary {
+  background: var(--atmos-badger);
+  color: #fff;
+  border-color: var(--atmos-badger);
+  box-shadow: 0 4px 16px rgba(197, 5, 12, 0.28);
+}
+.about-btn-primary:hover {
+  background: transparent;
+  color: var(--atmos-badger);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(197, 5, 12, 0.18);
+}
+
+.about-btn-arr {
+  display: inline-block;
+  transition: transform 220ms ease;
+}
+.about-btn-primary:hover .about-btn-arr {
+  transform: translateX(3px);
+}
+
+.about-btn-ghost {
+  background: transparent;
+  color: var(--atmos-ink-soft);
+  border-color: var(--atmos-hairline);
+}
+.about-btn-ghost:hover {
+  border-color: var(--atmos-ink);
+  color: var(--atmos-ink);
+}
+
+/* RIGHT COLUMN — spiral canvas + floating cards */
+.about-hero-right {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  max-width: 500px;
+  justify-self: center;
+}
+
+.about-spiral-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ── White center circle + logo ──────────────────────────── */
+.about-spiral-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 0 56px rgba(255,255,255,1), 0 0 100px rgba(255,255,255,0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+
+.about-spiral-logo {
+  width: 62%;
+  height: 62%;
+  object-fit: contain;
+  filter: brightness(0);
+}
+
+/* ── Floating label cards ────────────────────────────────── */
+.about-float-card {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.06);
+  white-space: nowrap;
+  z-index: 10;
+  animation: fcFloat 500ms cubic-bezier(.2,.7,.2,1) both;
+}
+
+.about-float-card:nth-child(3) { animation-delay: 80ms;  }
+.about-float-card:nth-child(4) { animation-delay: 160ms; }
+.about-float-card:nth-child(5) { animation-delay: 240ms; }
+.about-float-card:nth-child(6) { animation-delay: 320ms; }
+
+@keyframes fcFloat {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
+
+.about-fc-svg {
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  color: var(--atmos-badger);
+}
+
+.about-fc-title {
+  font-family: var(--atmos-sans);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--atmos-ink);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.about-fc-sub {
+  font-family: var(--atmos-sans);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--atmos-ink-soft);
+  line-height: 1.2;
+  margin-top: 1px;
+}
+
+/* Card positions — top-left, top-right, bottom-left, bottom-right
+   relative to the .about-hero-right square */
+.about-fc-tl {
+  top: 8%;
+  left: -4%;
+}
+.about-fc-tr {
+  top: 12%;
+  right: -6%;
+}
+.about-fc-bl {
+  bottom: 16%;
+  left: -6%;
+}
+.about-fc-br {
+  bottom: 10%;
+  right: -4%;
+}
+
+/* ── SECTION ROWS (shared) ──────────────────────────────── */
+.about-section-row {
+  display: grid;
+  /* meta | body | visual */
+  grid-template-columns: 240px 1fr 280px;
+  gap: clamp(24px, 4vw, 56px);
+  align-items: start;
+  max-width: var(--atmos-max);
+  margin: 0 auto;
+  padding: clamp(48px, 7vw, 96px) var(--atmos-gutter);
+  border-top: 1px solid var(--atmos-hairline);
+  box-sizing: border-box;
+}
+
+/* ── META COLUMN ────────────────────────────────────────── */
+.about-section-meta {
   display: flex;
   flex-direction: column;
   gap: 20px;
-}
-.atmos-about-section-body .body-text {
-  font-family: var(--atmos-sans);
-  font-size: 16px;
-  line-height: 1.7;
-  color: var(--atmos-ink-soft);
-  letter-spacing: 0;
-  margin: 0;
-  max-width: 64ch;
-}
-.atmos-about-section-body .body-text + .body-text {
-  margin-top: 0;
-}
-.atmos-about-section-body .body-text a,
-.atmos-about-section-body .body-text a.link-text {
-  color: var(--atmos-ink) !important;
-  text-decoration: none;
-  border-bottom: 1px solid var(--atmos-badger);
-  padding-bottom: 1px;
-  transition: color 200ms ease;
-}
-.atmos-about-section-body .body-text a:hover {
-  color: var(--atmos-badger) !important;
+  padding-top: 4px;
 }
 
-/* Hide the legacy subheader rendered by the Subheader subcomponent —
-   we render our own typographic title alongside it. The component is
-   still used to preserve content; we just neutralize its visual. */
-.atmos-about-section-body .subheader-text {
-  display: none;
-}
-
-/* Marginalia — small italic pull-quote */
-.atmos-about-aside {
-  margin-top: 24px;
-  padding-top: 18px;
-  border-top: 1px solid var(--atmos-hairline-soft);
-  font-family: var(--atmos-mono);
-  font-size: 10px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--atmos-ink-mute);
-}
-.atmos-about-aside em {
-  display: block;
-  margin-top: 6px;
-  font-family: var(--atmos-serif);
-  font-style: italic;
-  font-weight: 400;
-  font-size: 13.5px;
-  letter-spacing: 0;
-  text-transform: none;
-  color: var(--atmos-ink-soft);
-}
-
-/* FOOT */
-.atmos-about-foot {
-  margin-top: clamp(56px, 8vw, 96px);
-  padding-top: 24px;
-  border-top: 1px solid var(--atmos-hairline);
+.about-section-index {
   display: flex;
-  justify-content: space-between;
-  gap: 24px;
-  font-size: 10px;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.about-section-num {
+  font-family: var(--atmos-serif);
+  font-size: clamp(32px, 3.5vw, 48px);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--atmos-badger);
+  letter-spacing: -0.03em;
+}
+
+.about-section-tag {
+  font-family: var(--atmos-serif);
+  font-size: clamp(14px, 1.3vw, 18px);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--atmos-ink);
+}
+
+.about-section-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 14px;
+  border-top: 1px solid var(--atmos-hairline-soft);
+}
+
+.about-aside-label {
   font-family: var(--atmos-mono);
+  font-size: 10px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--atmos-ink-mute);
+  line-height: 1.5;
 }
-.atmos-about-foot em {
+
+.about-section-aside em {
   font-family: var(--atmos-serif);
   font-style: italic;
   font-weight: 400;
-  font-size: 13px;
+  font-size: clamp(13px, 1.1vw, 15px);
+  color: var(--atmos-ink-soft);
   letter-spacing: 0;
   text-transform: none;
-  color: var(--atmos-ink-soft);
+  line-height: 1.4;
 }
 
-/* RESPONSIVE */
-@media (max-width: 980px) {
-  .atmos-about-section {
-    grid-template-columns: 1fr;
-    gap: 28px;
+/* ── BODY COLUMN ────────────────────────────────────────── */
+.about-section-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 6px;
+}
+
+/* Override global .body-text to match the design system */
+.about-section-body .body-text {
+  font-family: var(--atmos-sans);
+  font-size: clamp(15px, 1.3vw, 17px);
+  font-weight: 400;
+  line-height: 1.75;
+  color: var(--atmos-ink-soft);
+  letter-spacing: 0;
+  margin: 0;
+  padding: 0;
+  max-width: 60ch;
+}
+
+/* "contact us" link */
+.about-section-body .body-text a.link-text,
+.about-section-body .body-text a {
+  color: var(--atmos-ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--atmos-badger);
+  padding-bottom: 1px;
+  font-family: var(--atmos-sans);
+  font-weight: 600;
+  transition: color 200ms ease;
+}
+.about-section-body .body-text a:hover {
+  color: var(--atmos-badger);
+}
+
+/* ── VISUAL COLUMN — ORBITAL (Origin) ───────────────────── */
+.about-section-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-orbital {
+  position: relative;
+  width: 100%;
+  height: 100px;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Squash the whole system vertically to make a flat ellipse */
+.orbit-squash {
+  transform: scaleY(0.28);
+  position: relative;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.orbit-path {
+  position: absolute;
+  width: 90%;
+  height: 100px;
+  border-radius: 50%;
+  border: 1px solid rgba(197, 5, 12, 0.22);
+}
+
+/* Rotates around center; dot is translated to the edge */
+.orbit-spin {
+  position: absolute;
+  width: 0;
+  height: 0;
+  animation: orbitSpin 5s linear infinite;
+}
+
+@keyframes orbitSpin { to { transform: rotate(360deg); } }
+
+/* Counter-scale the dot to restore its round shape */
+.orbit-dot {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  margin: -5px;
+  border-radius: 50%;
+  background: var(--atmos-badger);
+  box-shadow: 0 0 10px rgba(197,5,12,0.9), 0 0 22px rgba(197,5,12,0.4);
+  transform: translateX(calc(45% * 2)) scaleY(3.57);
+}
+
+/* Scattered particles */
+.orbit-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(197, 5, 12, 0.5);
+}
+.op1 { width: 4px; height: 4px; top: 22%; left: 12%; }
+.op2 { width: 3px; height: 3px; top: 68%; right: 15%; }
+.op3 { width: 4px; height: 4px; bottom: 18%; left: 38%; }
+
+/* ── VISUAL COLUMN — TRACKS (Practice) ──────────────────── */
+.about-tracks {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-self: center;
+  width: 100%;
+}
+
+.track-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 10px 12px;
+  flex: 1 1 60px;
+  min-width: 60px;
+  max-width: 90px;
+  border: 1px solid var(--atmos-hairline);
+  border-radius: 12px;
+  text-align: center;
+  transition: border-color 200ms ease, transform 200ms ease;
+  cursor: default;
+}
+.track-chip:hover {
+  border-color: rgba(197, 5, 12, 0.4);
+  transform: translateY(-2px);
+}
+
+.track-chip-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--atmos-badger);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.track-chip-icon svg {
+  width: 100%;
+  height: 100%;
+}
+.track-chip-label {
+  font-family: var(--atmos-sans);
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--atmos-ink-soft);
+  text-transform: uppercase;
+  line-height: 1.3;
+  text-align: center;
+}
+
+/* ── RESPONSIVE ─────────────────────────────────────────── */
+
+/* Tablet — collapse section rows to 2 columns (meta + body),
+   visual drops below on a new row */
+@media (max-width: 1024px) {
+  .about-section-row {
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: auto auto;
   }
-  .atmos-about-section-head {
-    position: static;
+  .about-section-visual {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+    padding-left: 0;
+  }
+  .about-tracks {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 420px;
+  }
+  .about-orbital {
+    width: 140px;
+    height: 140px;
   }
 }
-@media (max-width: 768px) {
-  .atmos-about-meta {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
+
+/* Large phone — stack hero vertically */
+@media (max-width: 860px) {
+  .about-hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding-bottom: clamp(40px, 6vw, 72px);
   }
-  .atmos-about-foot {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
+  .about-hero-right {
+    max-width: 340px;
+    width: 80%;
+    margin: 0 auto;
+    order: -1; /* visual first on mobile, content below */
   }
-  .atmos-about-lede {
-    font-size: 18px;
+
+  /* Tuck float cards closer on small screens */
+  .about-fc-tl { top: 4%;  left:  0%; }
+  .about-fc-tr { top: 8%;  right: 0%; }
+  .about-fc-bl { bottom: 12%; left: 0%; }
+  .about-fc-br { bottom: 6%;  right: 0%; }
+}
+
+/* Phone — collapse section rows to single column */
+@media (max-width: 680px) {
+  .about-section-row {
+    grid-template-columns: 1fr;
+  }
+  .about-section-visual {
+    grid-column: unset;
+    justify-content: center;
+  }
+  .about-tracks {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: none;
+    width: 100%;
+  }
+  .about-orbital {
+    width: 120px;
+    height: 120px;
+  }
+  .about-float-card {
+    padding: 7px 12px 7px 9px;
+  }
+  .about-fc-title {
+    font-size: 11px;
+  }
+}
+
+/* Reduced motion — strip all animations */
+@media (prefers-reduced-motion: reduce) {
+  .about-spiral-logo,
+  .about-spiral-ring,
+  .orbital-ring,
+  .orbital-dot,
+  .about-float-card {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
 }

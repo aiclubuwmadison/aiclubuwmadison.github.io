@@ -50,65 +50,62 @@ const Home = () => {
     <div className="atmos-root">
       <section className="atmos-hero">
         <div className="atmos-shell">
-          <div className="atmos-hero-meta">
-            <span className="atmos-dot" aria-hidden="true" />
-            <span>An interdisciplinary collective</span>
-            <span className="atmos-hero-meta-index">No. 01 — Volume MMXXVI</span>
-          </div>
-
-          <h1
-            className="atmos-wordmark"
-            data-shadow="AI@UW"
-            aria-label="AI@UW"
-          >
-            <span className="atmos-glyph atmos-g1">A</span>
-            <span className="atmos-glyph atmos-g2">I</span>
-            <span className="atmos-glyph atmos-g3 atmos-at">@</span>
-            <span className="atmos-glyph atmos-g4">U</span>
-            <span className="atmos-glyph atmos-g5">W</span>
-          </h1>
-
-          <div className="atmos-hero-row">
-            <p className="atmos-hero-tagline atmos-reveal atmos-d2">
-              A studio for{' '}
-              <em>
-                machine learning, deep learning, generative&nbsp;AI, NLP,
-                computer&nbsp;vision &amp; robotics
-              </em>{' '}
-              — at UW–Madison.
-            </p>
-            <div>
-              <p className="atmos-hero-statement atmos-reveal atmos-d3">
-                <strong>AI@UW</strong> is a student-led collective for serious work
-                in applied and theoretical artificial intelligence. We build
-                end-to-end systems, run reading groups, and host seminars with
-                industry and academic leaders — with the patience of a lab and
-                the rigor of a journal.
+          <div className="atmos-hero-grid">
+            {/* LEFT */}
+            <div className="atmos-hero-left">
+              <div className="atmos-hero-meta">
+                <span className="atmos-dot" aria-hidden="true" />
+                <span>AI@UW &middot; Madison, WI &middot; Est. 2017</span>
+              </div>
+              <h1 className="atmos-wordmark-new" aria-label="AI@UW — The AI Club at UW-Madison">
+                The AI club<br />at UW&ndash;Madison.
+              </h1>
+              <p className="atmos-hero-tagline">
+                A studio for <em>machine learning, deep learning, generative AI, NLP, computer vision &amp; robotics</em> — built by students.
               </p>
-              <div className="atmos-cta-row atmos-reveal atmos-d4">
-                <Link className="atmos-btn atmos-btn-primary" to="/involvement">
-                  Join the Collective <span className="atmos-arr">→</span>
+              <div className="atmos-cta-row">
+                <Link className="atmos-btn atmos-btn-primary" to="/contact">
+                  Become a Member <span className="atmos-arr">→</span>
                 </Link>
-                <Link className="atmos-btn atmos-btn-ghost" to="/about">
-                  Read the Manifesto
+                <Link className="atmos-btn atmos-btn-ghost" to="/seminars">
+                  Explore Events
                 </Link>
+              </div>
+            </div>
+            {/* RIGHT — visual */}
+            <div className="atmos-hero-right">
+              <div className="atmos-hero-visual">
+                <div className="atmos-spiral-ring atmos-sr-1" />
+                <div className="atmos-spiral-ring atmos-sr-2" />
+                <div className="atmos-spiral-ring atmos-sr-3" />
+                <img src="/images/logo.png" alt="" className="atmos-spiral-logo" aria-hidden="true" />
+              </div>
+              <div className="atmos-hero-float-cards">
+                <div className="atmos-float-card atmos-fc-tl">
+                  <span className="atmos-fc-icon">📖</span>
+                  <div><div className="atmos-fc-title">Learn</div><div className="atmos-fc-sub">Together</div></div>
+                </div>
+                <div className="atmos-float-card atmos-fc-tr">
+                  <span className="atmos-fc-icon">⚙️</span>
+                  <div><div className="atmos-fc-title">Build</div><div className="atmos-fc-sub">Projects</div></div>
+                </div>
+                <div className="atmos-float-card atmos-fc-bl">
+                  <span className="atmos-fc-icon">💡</span>
+                  <div><div className="atmos-fc-title">Explore</div><div className="atmos-fc-sub">Ideas</div></div>
+                </div>
+                <div className="atmos-float-card atmos-fc-br">
+                  <span className="atmos-fc-icon">🌟</span>
+                  <div><div className="atmos-fc-title">Create</div><div className="atmos-fc-sub">Impact</div></div>
+                </div>
               </div>
             </div>
           </div>
 
           <div className="atmos-hero-notes atmos-reveal atmos-d4">
-            <div className="atmos-note-col">
-              Members <em>150+ active</em>
-            </div>
-            <div className="atmos-note-col">
-              Projects <em>Five concurrent teams</em>
-            </div>
-            <div className="atmos-note-col">
-              Seminars <em>Ten convened annually</em>
-            </div>
-            <div className="atmos-note-col">
-              Partners <em>Google · Amazon · Meta · ACM · Stanford</em>
-            </div>
+            <div className="atmos-note-col">Members <em>150+ active</em></div>
+            <div className="atmos-note-col">Projects <em>Five concurrent teams</em></div>
+            <div className="atmos-note-col">Seminars <em>Ten convened annually</em></div>
+            <div className="atmos-note-col">Partners <em>Google · Amazon · Meta · ACM · Stanford</em></div>
           </div>
         </div>
       </section>
@@ -144,15 +141,6 @@ const Home = () => {
         </div>
       </section>
 
-      <footer>
-        <div className="atmos-shell atmos-foot">
-          <span>© AI@UW · The Artificial Intelligence Collective at UW–Madison</span>
-          <span className="atmos-pag">
-            Folio <span className="atmos-pag-cur">01</span> / 24
-          </span>
-          <span>Madison, Wisconsin · 43.0747° N</span>
-        </div>
-      </footer>
     </div>
   );
 };
