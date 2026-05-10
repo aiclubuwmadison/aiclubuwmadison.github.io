@@ -84,72 +84,38 @@ const FAQS = [
   },
 ];
 
-const pad = (n) => String(n).padStart(2, '0');
-
 const Involvement = () => {
   return (
     <div className="atmos-root atmos-involvement">
       <div className="atmos-shell">
-        {/* Hero meta */}
-        <div className="atmos-hero-meta">
-          <span className="atmos-dot" />
-          <span>FAQ</span>
-          <span className="atmos-hero-meta-index">vol. iv — questions answered</span>
-          <span>AI@UW</span>
-        </div>
-
-        {/* Editorial title */}
-        <h1 className="atmos-involvement-title atmos-reveal">
-          Everything you need to know about <em>joining</em> &amp; thriving here.
-        </h1>
-
-        <p className="atmos-involvement-stand atmos-reveal atmos-d2">
-          A standing field guide for new members, returning alumni, and the merely curious — kept short, kept honest.
-        </p>
-
-        {/* Rail with section number + count */}
-        <div className="atmos-involvement-rail">
-          <div>
-            <span className="atmos-section-num">§ IV</span>
-            <em>Frequently asked</em>
+        <div className="atmos-faq-layout">
+          {/* Left Column: Title */}
+          <div className="atmos-faq-left atmos-reveal">
+            <h1 className="atmos-faq-main-title">
+              Frequently<br />
+              Asked<br />
+              Questions
+            </h1>
           </div>
-          <div className="atmos-involvement-rail-mark">?</div>
-          <div style={{ textAlign: 'right' }}>
-            {pad(FAQS.length)} entries
-            <em>updated each semester</em>
+
+          {/* Right Column: Accordion List */}
+          <div className="atmos-faq-right">
+            <ul className="atmos-faq-list">
+              {FAQS.map((item, i) => (
+                <li key={i} className="atmos-faq-row atmos-reveal" style={{ transitionDelay: `${i * 50}ms` }}>
+                  <details className="atmos-faq-item">
+                    <summary>
+                      <h2 className="atmos-faq-q">{item.q}</h2>
+                      <span className="atmos-faq-toggle" aria-hidden="true" />
+                    </summary>
+                    <div className="atmos-faq-a">
+                      <p className="atmos-faq-a-body">{item.a}</p>
+                    </div>
+                  </details>
+                </li>
+              ))}
+            </ul>
           </div>
-        </div>
-
-        {/* FAQ list */}
-        <ul className="atmos-faq-list">
-          {FAQS.map((item, i) => (
-            <li key={i} className="atmos-faq-row">
-              <details className="atmos-faq-item">
-                <summary>
-                  <span className="atmos-faq-num">{pad(i + 1)}</span>
-                  <h2 className="atmos-faq-q">{item.q}</h2>
-                  <span className="atmos-faq-toggle" aria-hidden="true" />
-                </summary>
-                <div className="atmos-faq-a">
-                  <div className="atmos-faq-a-side">
-                    Note
-                    <em>{item.tag}</em>
-                  </div>
-                  <p className="atmos-faq-a-body">{item.a}</p>
-                  <div aria-hidden="true" />
-                </div>
-              </details>
-            </li>
-          ))}
-        </ul>
-
-        {/* Sign-off */}
-        <div className="atmos-involvement-foot">
-          <span>Still curious?</span>
-          <em>Open the floor — </em>
-          <a href="https://discord.gg/TTSykcZAg4" target="_blank" rel="noreferrer">
-            ask on Discord →
-          </a>
         </div>
       </div>
     </div>
