@@ -5,13 +5,14 @@ import './About.css';
 // Wave + particle decoration for Areas section
 const AREA_DOTS = (() => {
   const dots = [];
-  for (let col = 0; col < 22; col++) {
-    for (let row = 0; row < 14; row++) {
-      const x = 310 + col * 19;
-      const y = 8 + row * 19;
-      const colFade  = 1 - (col / 22) * 0.75;
-      const rowFade  = row < 4 ? (row + 1) / 4 : 1 - Math.max(0, (row - 10) / 4);
-      const opacity  = +(0.38 * colFade * rowFade).toFixed(3);
+  for (let col = 0; col < 26; col++) {
+    for (let row = 0; row < 15; row++) {
+      const x = 150 + col * 20;
+      const y = 10 + row * 20;
+      // fade out toward right edge and bottom
+      const colFade = 1 - (col / 26) * 0.8;
+      const rowFade = row < 3 ? (row + 1) / 3 : 1 - Math.max(0, (row - 11) / 4);
+      const opacity = +(0.32 * colFade * rowFade).toFixed(3);
       if (opacity > 0.02) dots.push({ x, y, opacity });
     }
   }
@@ -19,13 +20,13 @@ const AREA_DOTS = (() => {
 })();
 
 const AreasDecoration = () => (
-  <svg className="about-areas-deco" viewBox="0 0 760 260" fill="none" aria-hidden="true">
-    <path d="M0,210 C180,155 300,55 460,40 S680,80 760,58"  stroke="rgba(197,5,12,0.30)" strokeWidth="1.6" fill="none"/>
-    <path d="M0,228 C185,168 308,68 468,53 S688,93 768,71"  stroke="rgba(197,5,12,0.20)" strokeWidth="1.1" fill="none"/>
-    <path d="M0,246 C190,182 316,82 476,66 S696,106 776,84" stroke="rgba(197,5,12,0.13)" strokeWidth="0.8" fill="none"/>
-    <path d="M0,192 C174,142 294,42 452,27 S672,67 752,45"  stroke="rgba(197,5,12,0.15)" strokeWidth="0.7" fill="none"/>
+  <svg className="about-areas-deco" viewBox="0 0 800 300" fill="none" aria-hidden="true">
+    <path d="M-20,240 C160,175 290,65 470,45 S700,85 820,60"  stroke="rgba(197,5,12,0.28)" strokeWidth="1.6" fill="none"/>
+    <path d="M-20,260 C165,190 298,78 478,58 S708,98 828,73"  stroke="rgba(197,5,12,0.18)" strokeWidth="1.1" fill="none"/>
+    <path d="M-20,278 C170,205 306,92 486,72 S716,112 836,87" stroke="rgba(197,5,12,0.11)" strokeWidth="0.8" fill="none"/>
+    <path d="M-20,222 C155,160 282,50 462,30 S692,70 812,47"  stroke="rgba(197,5,12,0.14)" strokeWidth="0.7" fill="none"/>
     {AREA_DOTS.map(({ x, y, opacity }, i) => (
-      <circle key={i} cx={x} cy={y} r={1.7} fill={`rgba(197,5,12,${opacity})`}/>
+      <circle key={i} cx={x} cy={y} r={1.8} fill={`rgba(197,5,12,${opacity})`}/>
     ))}
   </svg>
 );

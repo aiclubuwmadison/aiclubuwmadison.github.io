@@ -498,10 +498,11 @@
   position: absolute;
   top: 0;
   right: 0;
-  width: 65%;
+  width: 75%;
   height: 100%;
   pointer-events: none;
   z-index: 0;
+  overflow: visible;
 }
 
 .about-areas .about-shell { position: relative; z-index: 1; }
