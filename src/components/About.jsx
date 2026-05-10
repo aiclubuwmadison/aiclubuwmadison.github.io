@@ -2,6 +2,34 @@ import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './About.css';
 
+// Wave + particle decoration for Areas section
+const AREA_DOTS = (() => {
+  const dots = [];
+  for (let col = 0; col < 22; col++) {
+    for (let row = 0; row < 14; row++) {
+      const x = 310 + col * 19;
+      const y = 8 + row * 19;
+      const colFade  = 1 - (col / 22) * 0.75;
+      const rowFade  = row < 4 ? (row + 1) / 4 : 1 - Math.max(0, (row - 10) / 4);
+      const opacity  = +(0.38 * colFade * rowFade).toFixed(3);
+      if (opacity > 0.02) dots.push({ x, y, opacity });
+    }
+  }
+  return dots;
+})();
+
+const AreasDecoration = () => (
+  <svg className="about-areas-deco" viewBox="0 0 760 260" fill="none" aria-hidden="true">
+    <path d="M0,210 C180,155 300,55 460,40 S680,80 760,58"  stroke="rgba(197,5,12,0.30)" strokeWidth="1.6" fill="none"/>
+    <path d="M0,228 C185,168 308,68 468,53 S688,93 768,71"  stroke="rgba(197,5,12,0.20)" strokeWidth="1.1" fill="none"/>
+    <path d="M0,246 C190,182 316,82 476,66 S696,106 776,84" stroke="rgba(197,5,12,0.13)" strokeWidth="0.8" fill="none"/>
+    <path d="M0,192 C174,142 294,42 452,27 S672,67 752,45"  stroke="rgba(197,5,12,0.15)" strokeWidth="0.7" fill="none"/>
+    {AREA_DOTS.map(({ x, y, opacity }, i) => (
+      <circle key={i} cx={x} cy={y} r={1.7} fill={`rgba(197,5,12,${opacity})`}/>
+    ))}
+  </svg>
+);
+
 // Isometric cube: (x,y) = center of top diamond, s = size
 const IsoCube = ({ x, y, s = 20, color = 'white' }) => {
   const w = Math.round(s * 0.866);
@@ -94,25 +122,34 @@ const WorkshopsIllus = () => {
   );
 };
 
-const CommunityIllus = () => (
-  <svg viewBox="0 0 200 160" fill="none" style={{width:'100%',height:'100%'}}>
-    {/* Person: circle head + rounded-rect body */}
-    {[
-      { x:65,  y:55,  r:14, bw:22, bh:32, hy:75,  c:'#FFFFFF', sc:'#E8E8E8' },
-      { x:95,  y:48,  r:16, bw:26, bh:36, hy:70,  c:'#FFFFFF', sc:'#E8E8E8' },
-      { x:127, y:48,  r:16, bw:26, bh:36, hy:70,  c:'#C5050C', sc:'#9B0409' },
-      { x:158, y:55,  r:14, bw:22, bh:32, hy:75,  c:'#FCEAEA', sc:'#F3CCCD' },
-      { x:80,  y:100, r:13, bw:20, bh:28, hy:118, c:'#FCEAEA', sc:'#F3CCCD' },
-      { x:110, y:96,  r:15, bw:24, bh:34, hy:116, c:'#FFFFFF', sc:'#E8E8E8' },
-      { x:140, y:100, r:13, bw:20, bh:28, hy:118, c:'#C5050C', sc:'#9B0409' },
-    ].map(({ x, y, r, bw, bh, hy, c, sc }, i) => (
-      <g key={i}>
-        <rect x={x-bw/2} y={hy} width={bw} height={bh} rx={bw/2} fill={c} stroke={sc} strokeWidth="1"/>
-        <circle cx={x} cy={y} r={r} fill={c} stroke={sc} strokeWidth="1"/>
-      </g>
-    ))}
-  </svg>
-);
+const CommunityIllus = () => {
+  const people = [
+    // Back row — smaller, drawn first (behind)
+    { hx: 58,  hy: 45, r: 8,  bh: 28, c: '#FFFFFF', s: '#E4E4E4' },
+    { hx: 95,  hy: 43, r: 8,  bh: 28, c: '#FCEAEA', s: '#F0CCCC' },
+    { hx: 133, hy: 45, r: 8,  bh: 28, c: '#C5050C', s: '#9B0409' },
+    // Front row — larger, drawn second (in front)
+    { hx: 52,  hy: 82, r: 10, bh: 35, c: '#FFFFFF', s: '#E4E4E4' },
+    { hx: 86,  hy: 80, r: 10, bh: 35, c: '#FCEAEA', s: '#F0CCCC' },
+    { hx: 118, hy: 81, r: 11, bh: 38, c: '#C5050C', s: '#9B0409' },
+    { hx: 152, hy: 83, r: 10, bh: 35, c: '#FFFFFF', s: '#E4E4E4' },
+  ];
+  return (
+    <svg viewBox="0 0 200 155" fill="none" style={{width:'100%',height:'100%'}}>
+      {people.map(({ hx, hy, r, bh, c, s }, i) => {
+        const bw = r * 1.6;
+        return (
+          <g key={i}>
+            {/* Body top starts at hy — overlaps lower half of head for seamless join */}
+            <rect x={hx - bw / 2} y={hy} width={bw} height={bh} rx={bw * 0.45} fill={c} stroke={s} strokeWidth="1"/>
+            {/* Head rendered after body so it sits cleanly on top */}
+            <circle cx={hx} cy={hy} r={r} fill={c} stroke={s} strokeWidth="1"/>
+          </g>
+        );
+      })}
+    </svg>
+  );
+};
 
 const About = () => {
   const canvasRef = useRef(null);
@@ -328,9 +365,16 @@ const About = () => {
 
       {/* ── AREAS WE EXPLORE ─────────────────────────────────── */}
       <section className="about-areas">
+        <AreasDecoration />
         <div className="about-shell">
           <p className="about-eyebrow">Areas We Explore</p>
-          <h2 className="about-areas-title">AI is everywhere. So are we.</h2>
+          <h2 className="about-areas-title">
+            AI is everywhere<span className="about-what-dot">.</span> So are we<span className="about-what-dot">.</span>
+          </h2>
+          <p className="about-areas-sub">
+            From core machine learning to real-world impact, we explore<br />
+            the full spectrum of AI and beyond.
+          </p>
 
           <div className="about-areas-tags">
             {[

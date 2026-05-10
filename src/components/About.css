@@ -487,21 +487,19 @@
 
 /* ── AREAS WE EXPLORE ───────────────────────────────────── */
 .about-areas {
-  background: var(--atmos-paper-deep);
+  background: #fef5f5;
   padding: clamp(56px, 7vw, 96px) 0;
   position: relative;
   overflow: hidden;
 }
 
-/* Subtle dot texture right side */
-.about-areas::after {
-  content: '';
+/* Wave + dots SVG — absolutely behind content */
+.about-areas-deco {
   position: absolute;
-  inset: 0 -20px 0 50%;
-  background-image: radial-gradient(circle, rgba(197,5,12,0.14) 1.5px, transparent 1.5px);
-  background-size: 18px 18px;
-  mask-image: linear-gradient(to left, rgba(0,0,0,0.5), transparent 70%);
-  -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0.5), transparent 70%);
+  top: 0;
+  right: 0;
+  width: 65%;
+  height: 100%;
   pointer-events: none;
   z-index: 0;
 }
@@ -511,37 +509,48 @@
 .about-areas-title {
   font-family: var(--atmos-serif);
   font-weight: 800;
-  font-size: clamp(26px, 3vw, 38px);
-  letter-spacing: -0.02em;
+  font-size: clamp(28px, 3.2vw, 44px);
+  letter-spacing: -0.025em;
   color: var(--atmos-ink);
+  margin: 0 0 14px;
+  line-height: 1.1;
+}
+
+.about-areas-sub {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--atmos-ink-soft);
   margin: 0 0 clamp(28px, 3.5vw, 44px);
 }
 
+/* 5-column tag grid */
 .about-areas-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
 }
 
 .about-area-tag {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 9px 16px;
-  border: 1px solid var(--atmos-hairline);
-  border-radius: 999px;
+  gap: 12px;
+  padding: 14px 18px;
+  border: 1px solid rgba(0,0,0,0.07);
+  border-radius: 12px;
   background: #fff;
   cursor: default;
-  transition: border-color 180ms ease, box-shadow 180ms ease;
+  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
 }
+
 .about-area-tag:hover {
-  border-color: rgba(197,5,12,0.3);
-  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  border-color: rgba(197,5,12,0.25);
+  box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+  transform: translateY(-1px);
 }
 
 .about-area-icon {
-  width: 16px;
-  height: 16px;
+  width: 22px;
+  height: 22px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -550,20 +559,20 @@
 }
 .about-area-icon svg,
 .about-area-icon-svg {
-  width: 15px;
-  height: 15px;
+  width: 20px;
+  height: 20px;
 }
 
 .about-area-label {
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 500;
-  color: var(--atmos-ink-soft);
+  color: var(--atmos-ink);
   white-space: nowrap;
 }
 
 .about-area-more {
   border-style: dashed;
-  color: var(--atmos-ink-mute);
+  border-color: rgba(0,0,0,0.10);
 }
 .about-area-more .about-area-label {
   color: var(--atmos-ink-mute);
@@ -571,9 +580,8 @@
 
 /* ── CTA BANNER ─────────────────────────────────────────── */
 .about-cta-banner {
-  background: #fff;
+  background: #f5f5f5;
   padding: clamp(36px, 4vw, 52px) 0;
-  border-top: 1px solid var(--atmos-hairline);
 }
 
 .about-cta-inner {
@@ -587,14 +595,14 @@
 .about-cta-left {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 22px;
 }
 
 .about-cta-icon-wrap {
-  width: 52px;
-  height: 52px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
-  background: rgba(197,5,12,0.08);
+  background: rgba(197,5,12,0.09);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -602,16 +610,16 @@
   flex-shrink: 0;
 }
 .about-cta-icon-wrap svg {
-  width: 22px;
-  height: 22px;
+  width: 26px;
+  height: 26px;
 }
 
 .about-cta-title {
   font-family: var(--atmos-serif);
-  font-size: clamp(16px, 1.6vw, 20px);
+  font-size: clamp(17px, 1.7vw, 22px);
   font-weight: 700;
   color: var(--atmos-ink);
-  margin: 0 0 4px;
+  margin: 0 0 5px;
   letter-spacing: -0.01em;
 }
 
@@ -624,13 +632,13 @@
 .about-cta-btn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 9px;
   font-size: 14px;
   font-weight: 600;
   color: #fff;
   background: var(--atmos-badger);
-  padding: 13px 26px;
-  border-radius: 999px;
+  padding: 14px 28px;
+  border-radius: 10px;
   text-decoration: none;
   white-space: nowrap;
   box-shadow: 0 4px 14px rgba(197,5,12,0.22);
@@ -639,7 +647,7 @@
 .about-cta-btn:hover {
   background: #a8040a;
   box-shadow: 0 6px 20px rgba(197,5,12,0.28);
-  gap: 12px;
+  gap: 13px;
 }
 
 /* ── META COLUMN ────────────────────────────────────────── */
@@ -896,6 +904,10 @@
   }
 }
 
+@media (max-width: 1024px) {
+  .about-areas-tags { grid-template-columns: repeat(3, 1fr); }
+}
+
 @media (max-width: 680px) {
   .about-what-cards {
     grid-template-columns: 1fr;
@@ -903,6 +915,7 @@
   .about-what-card-visual {
     height: 180px;
   }
+  .about-areas-tags { grid-template-columns: repeat(2, 1fr); }
   .about-story-stats {
     grid-template-columns: repeat(2, 1fr);
   }
