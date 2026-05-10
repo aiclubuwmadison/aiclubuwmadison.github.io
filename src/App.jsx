@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Nav from './components/Nav';
 import Footer from './components/Footer';
-import Home from './components/Home';
 import About from './components/About';
 import Involvement from './components/Involvement';
 import Leadership from './components/Leadership';
@@ -70,6 +69,10 @@ function App() {
         <div id="body-wrapper">
           <Routes>
             <Route
+              path="/"
+              element={<><About /><Footer /></>}
+            />
+            <Route
               path="/about"
               element={<><About /><Footer /></>}
             />
@@ -89,7 +92,6 @@ function App() {
               path="/seminars"
               element={<><Seminars /><Footer /></>}
             />
-            <Route path="/" element={<Home />} />
           </Routes>
         </div>
       </Router>
