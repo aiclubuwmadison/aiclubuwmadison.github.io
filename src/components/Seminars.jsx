@@ -266,7 +266,7 @@ const Seminars = () => {
         <header className="atmos-sem-hero atmos-reveal">
           <h1 className="atmos-sem-title">
             An archive of<br />
-            talks &amp; workshops<span className="atmos-sem-title-dot">.</span>
+            <span style={{color:'var(--atmos-badger)'}}>talks</span> &amp; workshops<span className="atmos-sem-title-dot">.</span>
           </h1>
         </header>
 
