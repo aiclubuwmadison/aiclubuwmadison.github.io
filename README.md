@@ -59,45 +59,19 @@ The output will be generated in the `dist/` directory.
 
 The site is published at **ai.cs.wisc.edu** via GitHub Pages (custom domain configured in `CNAME`). Because GitHub Pages is a static host, `src/main.jsx` contains a small SPA shim that reads `?redirect=/path` from the URL on load and rewrites `window.history` before React mounts. This pairs with a `404.html` redirect helper so deep links into client-side routes resolve correctly.
 
-## Deployment Workflow
+## Deployment
 
-The website's live code lives on the `master` branch, while all development takes place on the `dev` branch. Once your changes on `dev` are tested and ready, follow these steps to deploy:
+Deployment is fully automated via GitHub Actions (`.github/workflows/pages.yml`). Pushing to the `dev` branch triggers a workflow that:
 
-1. Ensure your `dev` branch is pushed and up-to-date.
-2. Generate the production build:
-   ```bash
-   npm run build
-   ```
-3. Copy the compiled assets to a temporary directory outside the repo:
-   ```bash
-   cp -r dist/ ../temp_build/
-   ```
-4. Switch to the `master` branch:
-   ```bash
-   git checkout master
-   ```
-5. Clear out the old files:
-   ```bash
-   rm -rf *
-   ```
-6. Copy the new files from your temporary build directory into the branch:
-   ```bash
-   cp -r ../temp_build/* .
-   ```
-7. Commit and push the new build to production:
-   ```bash
-   git add . 
-   git commit -m "Deploy updated built files" 
-   git push origin master
-   ```
-8. Remove the temporary directory (optional):
-   ```bash
-   rm -rf ../temp_build/
-   ```
-9. Switch back to the `dev` branch to resume development:
-   ```bash
-   git checkout dev
-   ```
+1. Installs dependencies with `npm ci`
+2. Runs `npm run build` to produce `dist/`
+3. Uploads `dist/` as a Pages artifact and deploys it to GitHub Pages
+
+The site is published at **ai.cs.wisc.edu** (custom domain configured via `public/CNAME`).
+
+No manual `master` branch copy is needed — that legacy flow has been retired. To verify a build before pushing, run `npm run preview` locally.
+
+**Repo settings required (one-time):** Settings → Pages → Source must be set to "GitHub Actions".
 
 ## Project Structure
 
@@ -107,7 +81,7 @@ The website's live code lives on the `master` branch, while all development take
 │   ├── components/     # React components
 │   │   ├── display/    # Reusable display components
 │   │   ├── typographic/# Typography wrappers
-│   │   └── ...         # Page components (Home, About, etc.)
+│   │   └── ...         # Page components (About, Involvement, etc.)
 │   ├── App.jsx         # Main application component & routing
 │   ├── main.jsx        # Entry point
 │   └── ...
