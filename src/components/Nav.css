@@ -14,7 +14,7 @@
   left: 0;
   right: 0;
   z-index: 100;
-  height: 72px;
+  height: 100px;
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -64,8 +64,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 52px;
-  height: 52px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   background: transparent;
   flex-shrink: 0;
@@ -79,8 +79,8 @@
 }
 
 .atmos-nav-brand-mark img {
-  width: 48px;
-  height: 48px;
+  width: 60px;
+  height: 60px;
   object-fit: contain;
   display: block;
   filter: brightness(0);
@@ -98,7 +98,7 @@
 
 .atmos-nav-link {
   font-family: var(--atmos-sans);
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 500;
   color: var(--atmos-ink-soft);
   letter-spacing: 0.055em;
@@ -150,7 +150,7 @@
 /* ── CTA button ─────────────────────────────────────────── */
 .atmos-nav-cta {
   font-family: var(--atmos-sans);
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
   color: #fff;
   background: var(--atmos-badger);
