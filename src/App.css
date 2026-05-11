@@ -96,6 +96,14 @@
 
 body, #root { background: var(--bg); color: var(--text); }
 
+#body-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+#body-wrapper .atmos-footer { margin-top: auto; }
+
+
 .home-section {
   padding: 64px 0;
 }
