@@ -255,6 +255,10 @@ const Seminars = () => {
   const filteredTalks = filtered.filter((i) => i.type === 'talk');
   const filteredWorkshops = filtered.filter((i) => i.type === 'workshop');
 
+  // On the All tab, show only the 3 latest talks as a teaser.
+  const displayedTalks = activeTab === 'all' ? filteredTalks.slice(0, 3) : filteredTalks;
+  const hasMoreTalks = activeTab === 'all' && filteredTalks.length > 3;
+
   const showTalks = activeTab === 'all' || activeTab === 'talks';
   const showWorkshops = activeTab === 'all' || activeTab === 'workshops';
 
@@ -338,13 +342,19 @@ const Seminars = () => {
                 <div className="atmos-sem-sub-eyebrow">Past Seminars</div>
                 <h2 className="atmos-sem-sub-title">Talks given by our speakers.</h2>
               </div>
-              <a className="atmos-sem-view-all" href="#">
-                View all talks <IconArrow />
-              </a>
+              {hasMoreTalks && (
+                <a
+                  className="atmos-sem-view-all"
+                  href="#"
+                  onClick={(e) => { e.preventDefault(); setActiveTab('talks'); }}
+                >
+                  View all talks <IconArrow />
+                </a>
+              )}
             </div>
-            {filteredTalks.length > 0 ? (
+            {displayedTalks.length > 0 ? (
               <div className="atmos-sem-cards">
-                {filteredTalks.map((s) => (
+                {displayedTalks.map((s) => (
                   <SeminarCard item={s} key={`${s.title}-${s.date}`} />
                 ))}
               </div>
@@ -362,9 +372,15 @@ const Seminars = () => {
                 <div className="atmos-sem-sub-eyebrow">Workshops &amp; Tutorials</div>
                 <h2 className="atmos-sem-sub-title">Hands-on, applied sessions.</h2>
               </div>
-              <a className="atmos-sem-view-all" href="#">
-                View all workshops <IconArrow />
-              </a>
+              {activeTab === 'all' && (
+                <a
+                  className="atmos-sem-view-all"
+                  href="#"
+                  onClick={(e) => { e.preventDefault(); setActiveTab('workshops'); }}
+                >
+                  View all workshops <IconArrow />
+                </a>
+              )}
             </div>
             {filteredWorkshops.length > 0 ? (
               <div className="atmos-sem-cards atmos-sem-cards--workshop">
