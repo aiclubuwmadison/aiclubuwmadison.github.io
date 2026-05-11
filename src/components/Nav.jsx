@@ -19,14 +19,21 @@ const Nav = () => {
   const isActive = (to) => location.pathname === to;
 
   useEffect(() => {
-    const update = () => {
-      const y = window.scrollY;
-      const total = document.documentElement.scrollHeight - window.innerHeight;
-      setScrollPct(total > 0 ? (y / total) * 100 : 0);
-      setScrolled(y > 24);
+    let rafId;
+    const onScroll = () => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        const y = window.scrollY;
+        const total = document.documentElement.scrollHeight - window.innerHeight;
+        setScrollPct(total > 0 ? (y / total) * 100 : 0);
+        setScrolled(y > 24);
+      });
     };
-    window.addEventListener('scroll', update, { passive: true });
-    return () => window.removeEventListener('scroll', update);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      cancelAnimationFrame(rafId);
+    };
   }, []);
 
   useEffect(() => { setScrollPct(0); }, [location.pathname]);
