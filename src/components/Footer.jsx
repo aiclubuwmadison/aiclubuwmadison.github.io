@@ -33,6 +33,7 @@ const Footer = () => {
               src="/images/logo.png"
               alt=""
               aria-hidden="true"
+              loading="lazy"
             />
             <div className="atmos-footer-brand-text">
               <p className="atmos-footer-wordmark">

@@ -275,7 +275,7 @@ const Seminars = () => {
             </h1>
           </div>
           <div className="atmos-sem-hero-image" aria-hidden="true">
-            <img src="/images/seminars/hero.png" alt="" />
+            <img src="/images/seminars/hero.png" alt="" loading="lazy" />
           </div>
         </header>
 
