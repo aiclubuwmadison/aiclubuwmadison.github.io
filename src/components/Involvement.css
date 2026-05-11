@@ -47,7 +47,7 @@
 
 .faq-subtitle {
   font-family: var(--atmos-sans);
-  font-size: 15px;
+  font-size: 18px;
   color: var(--atmos-ink-soft);
   line-height: 1.6;
   margin: 0 0 32px;
@@ -83,14 +83,14 @@
 .faq-contact-card-title {
   font-family: var(--atmos-sans);
   font-weight: 700;
-  font-size: 15px;
+  font-size: 17px;
   color: var(--atmos-ink);
   margin: 0 0 6px;
 }
 
 .faq-contact-card-body {
   font-family: var(--atmos-sans);
-  font-size: 13px;
+  font-size: 15px;
   color: var(--atmos-ink-soft);
   line-height: 1.6;
   margin: 0 0 12px;
@@ -99,7 +99,7 @@
 .faq-contact-card-link {
   color: var(--atmos-badger);
   font-family: var(--atmos-sans);
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
   text-decoration: none;
   display: inline-flex;
@@ -172,7 +172,7 @@
 
 .atmos-faq-q {
   font-family: var(--atmos-sans);
-  font-size: 15px;
+  font-size: 18px;
   font-weight: 500;
   color: var(--atmos-ink);
   line-height: 1.3;
@@ -211,7 +211,7 @@
 }
 .atmos-faq-a-body {
   font-family: var(--atmos-sans);
-  font-size: 16px;
+  font-size: 18px;
   line-height: 1.6;
   color: var(--atmos-ink-soft);
   margin: 0;

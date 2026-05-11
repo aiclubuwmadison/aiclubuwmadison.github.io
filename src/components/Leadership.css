@@ -275,6 +275,8 @@
   transition: background 180ms, color 180ms;
 }
 .lead-social-btn:hover { background: var(--atmos-badger); color: #fff; }
+.lead-social-btn--inert { cursor: default; }
+.lead-social-btn--inert:hover { background: rgba(0,0,0,0.05); color: var(--atmos-ink-soft); }
 .lead-featured-card .lead-social-btn {
   background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.85);
   border: none;

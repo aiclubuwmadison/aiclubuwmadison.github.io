@@ -99,9 +99,11 @@ body, #root { background: var(--bg); color: var(--text); }
 #body-wrapper {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
 }
-#body-wrapper .atmos-footer { margin-top: auto; }
+#body-wrapper > .atmos-root {
+  flex-grow: 1;
+}
+
 
 
 .home-section {

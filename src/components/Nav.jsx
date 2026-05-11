@@ -36,7 +36,12 @@ const Nav = () => {
     };
   }, []);
 
-  useEffect(() => { setScrollPct(0); }, [location.pathname]);
+  const [prevPath, setPrevPath] = useState(location.pathname);
+
+  if (location.pathname !== prevPath) {
+    setPrevPath(location.pathname);
+    setScrollPct(0);
+  }
 
   return (
     <>

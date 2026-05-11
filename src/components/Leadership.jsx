@@ -25,8 +25,14 @@ function handlePortraitError(event) {
 function useResolvedPortrait(file) {
   const target = `/images/portraits/${file}`;
   const [src, setSrc] = useState(target);
-  useEffect(() => {
+  const [prevTarget, setPrevTarget] = useState(target);
+
+  if (target !== prevTarget) {
+    setPrevTarget(target);
     setSrc(target);
+  }
+
+  useEffect(() => {
     const probe = new Image();
     probe.onload = () => setSrc(target);
     probe.onerror = () => setSrc(PORTRAIT_PLACEHOLDER);
@@ -135,9 +141,9 @@ const Socials = ({ link }) => (
         <IconLinkedIn />
       </a>
     )}
-    <a href="mailto:aiclubuwmadison@gmail.com" className="lead-social-btn" aria-label="Email">
+    <span className="lead-social-btn lead-social-btn--inert" aria-label="Email">
       <Mail size={14} strokeWidth={2} aria-hidden="true" />
-    </a>
+    </span>
   </div>
 );
 
