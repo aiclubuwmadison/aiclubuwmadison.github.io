@@ -264,10 +264,15 @@ const Seminars = () => {
 
         {/* HERO */}
         <header className="atmos-sem-hero atmos-reveal">
-          <h1 className="atmos-sem-title">
-            An archive of<br />
-            <span style={{color:'var(--atmos-badger)'}}>talks</span> &amp; workshops<span className="atmos-sem-title-dot">.</span>
-          </h1>
+          <div className="atmos-sem-hero-text">
+            <h1 className="atmos-sem-title">
+              An archive of<br />
+              <span style={{color:'var(--atmos-badger)'}}>talks</span> &amp; workshops<span className="atmos-sem-title-dot">.</span>
+            </h1>
+          </div>
+          <div className="atmos-sem-hero-image" aria-hidden="true">
+            <img src="/images/seminars/hero.png" alt="" />
+          </div>
         </header>
 
         {/* FILTER BAR */}
