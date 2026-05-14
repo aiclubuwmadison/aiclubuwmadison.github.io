@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" width="100%" height="100%">
+  <defs>
+    <!-- Outer three rings (32 dots each) -->
+    <g id="c">
+      <circle cx="500" cy="240" r="16" />
+      <circle cx="500" cy="160" r="11" />
+      <circle cx="500" cy="80" r="7" />
+    </g>
+    <!-- Second ring (16 dots) + Outer three rings -->
+    <g id="b">
+      <circle cx="500" cy="320" r="23" />
+      <use href="#c" />
+    </g>
+    <!-- Innermost ring (8 dots) + all outer rings -->
+    <g id="a">
+      <circle cx="500" cy="400" r="30" />
+      <use href="#b" />
+    </g>
+  </defs>
+  
+  <!-- Transparent background by default. Add a rect here if white is needed -->
+  
+  <g fill="#950000">
+    <!-- Main 8 Axes (Includes dots in all 5 rings) -->
+    <use href="#a" transform="rotate(0 500 500)" />
+    <use href="#a" transform="rotate(45 500 500)" />
+    <use href="#a" transform="rotate(90 500 500)" />
+    <use href="#a" transform="rotate(135 500 500)" />
+    <use href="#a" transform="rotate(180 500 500)" />
+    <use href="#a" transform="rotate(225 500 500)" />
+    <use href="#a" transform="rotate(270 500 500)" />
+    <use href="#a" transform="rotate(315 500 500)" />
+
+    <!-- Secondary 8 Axes (Includes dots in outer 4 rings) -->
+    <use href="#b" transform="rotate(22.5 500 500)" />
+    <use href="#b" transform="rotate(67.5 500 500)" />
+    <use href="#b" transform="rotate(112.5 500 500)" />
+    <use href="#b" transform="rotate(157.5 500 500)" />
+    <use href="#b" transform="rotate(202.5 500 500)" />
+    <use href="#b" transform="rotate(247.5 500 500)" />
+    <use href="#b" transform="rotate(292.5 500 500)" />
+    <use href="#b" transform="rotate(337.5 500 500)" />
+
+    <!-- Tertiary 16 Axes (Includes dots in outer 3 rings) -->
+    <use href="#c" transform="rotate(11.25 500 500)" />
+    <use href="#c" transform="rotate(33.75 500 500)" />
+    <use href="#c" transform="rotate(56.25 500 500)" />
+    <use href="#c" transform="rotate(78.75 500 500)" />
+    <use href="#c" transform="rotate(101.25 500 500)" />
+    <use href="#c" transform="rotate(123.75 500 500)" />
+    <use href="#c" transform="rotate(146.25 500 500)" />
+    <use href="#c" transform="rotate(168.75 500 500)" />
+    <use href="#c" transform="rotate(191.25 500 500)" />
+    <use href="#c" transform="rotate(213.75 500 500)" />
+    <use href="#c" transform="rotate(236.25 500 500)" />
+    <use href="#c" transform="rotate(258.75 500 500)" />
+    <use href="#c" transform="rotate(281.25 500 500)" />
+    <use href="#c" transform="rotate(303.75 500 500)" />
+    <use href="#c" transform="rotate(326.25 500 500)" />
+    <use href="#c" transform="rotate(348.75 500 500)" />
+  </g>
+</svg>

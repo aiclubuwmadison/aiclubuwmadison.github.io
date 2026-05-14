@@ -1,6 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { Sun, Moon } from 'lucide-react';
 import './Nav.css';
+
+const getInitialTheme = () => {
+  if (typeof window === 'undefined') return 'light';
+  const stored = window.localStorage.getItem('theme');
+  if (stored === 'light' || stored === 'dark') return stored;
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+};
 
 const NAV_ITEMS = [
   { to: '/about', label: 'About Us' },
@@ -15,8 +23,17 @@ const Nav = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrollPct, setScrollPct] = useState(0);
   const [scrolled, setScrolled] = useState(false);
+  const [theme, setTheme] = useState(getInitialTheme);
 
   const isActive = (to) => location.pathname === to;
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    window.localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => setTheme((t) => (t === 'dark' ? 'light' : 'dark'));
+  const themeLabel = theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode';
 
   useEffect(() => {
     let rafId;
@@ -83,6 +100,17 @@ const Nav = () => {
             </ul>
           </nav>
 
+          {/* Theme toggle */}
+          <button
+            type="button"
+            className="atmos-nav-theme-toggle"
+            onClick={toggleTheme}
+            aria-label={themeLabel}
+            title={themeLabel}
+          >
+            {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
+
           {/* CTA */}
           <Link to="/contact" className="atmos-nav-cta">
             Become a Member
@@ -133,6 +161,15 @@ const Nav = () => {
             </Link>
           ))}
         </nav>
+        <button
+          type="button"
+          className="atmos-nav-mobile-theme-toggle"
+          onClick={toggleTheme}
+          aria-label={themeLabel}
+        >
+          {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+          <span>{theme === 'dark' ? 'Light mode' : 'Dark mode'}</span>
+        </button>
         <Link
           to="/contact"
           className="atmos-nav-mobile-cta"
