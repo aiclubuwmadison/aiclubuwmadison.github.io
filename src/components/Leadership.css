@@ -434,3 +434,56 @@
   .lead-hero-cta, .lead-focus-link, .atmos-archive-toggle,
   .atmos-archive-panel, .atmos-archive-glyph { transition: none !important; }
 }
+
+/* ── Dark mode (entire Leadership page) ──────────────────── */
+[data-theme="dark"] .atmos-leadership {
+  background: #0a0a0a;
+  --atmos-paper: #141414;
+  --atmos-paper-deep: #0a0a0a;
+  --atmos-ink: #f1f5f9;
+  --atmos-ink-soft: #cbd5e1;
+  --atmos-ink-mute: #64748b;
+  --atmos-hairline: rgba(255, 255, 255, 0.10);
+}
+
+/* Hero photo collage: fade bottom edge to dark instead of white */
+[data-theme="dark"] .lead-cc::after {
+  background: linear-gradient(
+    to bottom,
+    transparent 60%,
+    rgba(10, 10, 10, 0.5) 85%,
+    rgba(10, 10, 10, 0.75) 100%
+  );
+}
+
+/* Stat row hover */
+[data-theme="dark"] .lead-stat:hover {
+  background: rgba(197, 5, 12, 0.10);
+}
+
+/* Team cards: dark surface + deeper shadows */
+[data-theme="dark"] .lead-team-card {
+  background: #141414;
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.4);
+}
+[data-theme="dark"] .lead-team-card:hover {
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.6);
+}
+
+/* Social buttons (non-featured cards) */
+[data-theme="dark"] .lead-social-btn {
+  background: rgba(255, 255, 255, 0.08);
+}
+[data-theme="dark"] .lead-social-btn--inert:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Focus topic icon halo: bump red opacity so it reads on dark */
+[data-theme="dark"] .lead-focus-topic-icon {
+  background: rgba(197, 5, 12, 0.18);
+}
+
+/* Archive toggle hover */
+[data-theme="dark"] .atmos-archive-toggle:hover {
+  background: rgba(197, 5, 12, 0.08);
+}

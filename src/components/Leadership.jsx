@@ -287,7 +287,7 @@ const Leadership = () => {
     ],
     [
       { file: 'sam.jpg',        title: 'Project Manager',        name: 'Sam Avramov',                   link: 'https://www.linkedin.com/in/samavramov/' },
-      { file: 'yug.jpg',        title: 'Project Manager',        name: 'Yug Marwaha',                   link: 'https://www.linkedin.com/in/yug-marwaha-881b53321' },
+      { file: 'yug.png',        title: 'Project Manager',        name: 'Yug Marwaha',                   link: 'https://www.linkedin.com/in/yug-marwaha-881b53321' },
       { file: 'kartik.jpg',     title: 'Project Manager',        name: 'Kartik Gangwar',                link: 'https://www.linkedin.com/in/kartik-gangwar' },
     ],
     [
@@ -404,7 +404,6 @@ const Leadership = () => {
                     alt={m.name}
                     loading="lazy"
                     onError={handlePortraitError}
-                    style={m.name === 'Yug Marwaha' ? { objectFit: 'contain', objectPosition: 'center center', background: '#f0eeec' } : undefined}
                   />
                 </div>
                 <span className="lead-card-role">{m.title}</span>
