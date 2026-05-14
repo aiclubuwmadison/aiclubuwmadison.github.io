@@ -749,3 +749,80 @@
 [data-theme="dark"] .about-spiral-logo {
   filter: brightness(0) invert(1);
 }
+
+/* ── Dark mode (Our Story + What We Do) ──────────────────── */
+[data-theme="dark"] .about-story,
+[data-theme="dark"] .about-what {
+  --atmos-paper-deep: #0a0a0a;
+  --atmos-ink: #f1f5f9;
+  --atmos-ink-soft: #cbd5e1;
+  --atmos-ink-mute: #64748b;
+  --atmos-hairline: rgba(255, 255, 255, 0.10);
+}
+
+[data-theme="dark"] .about-what {
+  background: #0a0a0a;
+}
+
+[data-theme="dark"] .about-stat {
+  background: #141414;
+}
+
+[data-theme="dark"] .about-stat:hover {
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .about-stat-icon {
+  background: rgba(197, 5, 12, 0.18);
+}
+
+[data-theme="dark"] .about-what-card {
+  background: #141414;
+}
+
+[data-theme="dark"] .about-what-card:hover {
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .about-what-card-visual {
+  background: #1a1a1a;
+}
+
+[data-theme="dark"] .about-what-icon {
+  background: rgba(197, 5, 12, 0.18);
+}
+
+/* ── Dark mode (Areas We Explore + CTA Banner) ───────────── */
+[data-theme="dark"] .about-areas,
+[data-theme="dark"] .about-cta-banner {
+  --atmos-ink: #f1f5f9;
+  --atmos-ink-soft: #cbd5e1;
+  --atmos-ink-mute: #64748b;
+  --atmos-hairline: rgba(255, 255, 255, 0.10);
+}
+
+[data-theme="dark"] .about-areas {
+  background: #0a0a0a;
+}
+
+[data-theme="dark"] .about-area-tag {
+  background: #141414;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .about-area-tag:hover {
+  border-color: rgba(197, 5, 12, 0.40);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .about-area-more {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+[data-theme="dark"] .about-cta-banner {
+  background: #0a0a0a;
+}
+
+[data-theme="dark"] .about-cta-icon-wrap {
+  background: rgba(197, 5, 12, 0.20);
+}
