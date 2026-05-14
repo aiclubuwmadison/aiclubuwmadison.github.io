@@ -160,6 +160,7 @@ const About = () => {
 
       const goldenAngle = 2.39996323;
       const N = 750;
+      const isDark = document.documentElement.dataset.theme === 'dark';
 
       for (let i = 1; i <= N; i++) {
         const norm = i / N;
@@ -173,10 +174,18 @@ const About = () => {
 
         let rc, gc, bc, alpha;
         if (norm < 0.05) {
-          rc=8;   gc=0;  bc=2;  alpha=0.96;
+          if (isDark) { rc=245; gc=245; bc=245; alpha=0.96; }
+          else        { rc=8;   gc=0;   bc=2;   alpha=0.96; }
         } else if (norm < 0.18) {
           const p=(norm-0.05)/0.13;
-          rc=Math.round(8+p*189); gc=0; bc=2+Math.round(p*10); alpha=0.93;
+          if (isDark) {
+            rc = Math.round(245 - p * (245 - 197));
+            gc = Math.round(245 - p * (245 - 5));
+            bc = Math.round(245 - p * (245 - 12));
+            alpha = 0.93;
+          } else {
+            rc=Math.round(8+p*189); gc=0; bc=2+Math.round(p*10); alpha=0.93;
+          }
         } else if (norm < 0.55) {
           rc=197; gc=5;  bc=12; alpha=0.88*(1-norm*0.35);
         } else {

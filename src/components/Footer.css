@@ -208,3 +208,12 @@
     justify-content: center;
   }
 }
+
+/* ── Dark mode (footer only) ───────────────────────────── */
+[data-theme="dark"] .atmos-footer {
+  --atmos-paper-deep: #0a0a0a;
+  --atmos-ink: #f1f5f9;
+  --atmos-ink-soft: #cbd5e1;
+  --atmos-ink-mute: #64748b;
+  --atmos-hairline: rgba(255, 255, 255, 0.10);
+}

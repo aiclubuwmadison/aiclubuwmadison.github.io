@@ -359,3 +359,39 @@
     display: flex;
   }
 }
+
+/* ── Dark mode (navbar only — page chrome flips with [data-theme="dark"]) ── */
+[data-theme="dark"] .atmos-nav,
+[data-theme="dark"] .atmos-nav-mobile-panel {
+  --atmos-ink: #f1f5f9;
+  --atmos-ink-soft: #cbd5e1;
+  --atmos-ink-mute: #64748b;
+  --atmos-hairline: rgba(255, 255, 255, 0.10);
+  --atmos-hairline-soft: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .atmos-nav {
+  background: rgba(10, 10, 10, 0.96);
+}
+
+[data-theme="dark"] .atmos-nav--scrolled {
+  background: #0a0a0a;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.6), 0 4px 24px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .atmos-nav-brand-mark img {
+  filter: brightness(0) invert(1);
+}
+
+[data-theme="dark"] .atmos-nav-link:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .atmos-nav-link-active:hover {
+  background: rgba(197, 5, 12, 0.15);
+}
+
+[data-theme="dark"] .atmos-nav-mobile-panel {
+  background: #0a0a0a;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+}

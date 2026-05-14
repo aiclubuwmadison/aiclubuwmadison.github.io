@@ -722,3 +722,30 @@
     transform: none !important;
   }
 }
+
+/* ── Dark mode (hero block only) ─────────────────────────── */
+[data-theme="dark"] .about-hero {
+  background: #0a0a0a;
+  /* Full-bleed: extend dark bg to viewport edges while keeping content max-width */
+  box-shadow: 0 0 0 100vmax #0a0a0a;
+  clip-path: inset(0 -100vmax);
+  --atmos-ink: #f1f5f9;
+  --atmos-ink-soft: #cbd5e1;
+  --atmos-ink-mute: #64748b;
+  --atmos-hairline: rgba(255, 255, 255, 0.10);
+}
+
+[data-theme="dark"] .about-hero .about-float-card {
+  background: #141414;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .about-spiral-center {
+  background: transparent;
+  box-shadow: none;
+}
+
+[data-theme="dark"] .about-spiral-logo {
+  filter: brightness(0) invert(1);
+}
