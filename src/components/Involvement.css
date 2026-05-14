@@ -246,3 +246,38 @@
     display: none;
   }
 }
+
+/* ── Dark mode (Involvement / FAQ) ─────────────────────── */
+[data-theme="dark"] .atmos-involvement {
+  background: #0a0a0a;
+  --atmos-paper: #141414;
+  --atmos-paper-deep: #0a0a0a;
+  --atmos-ink: #f1f5f9;
+  --atmos-ink-soft: #cbd5e1;
+  --atmos-ink-mute: #64748b;
+  --atmos-hairline: rgba(255, 255, 255, 0.10);
+}
+
+/* Left column contact card */
+[data-theme="dark"] .faq-contact-card {
+  background: #141414;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .faq-contact-card-icon {
+  background: rgba(197, 5, 12, 0.18);
+}
+
+/* Right column FAQ card */
+[data-theme="dark"] .faq-right-card {
+  background: #141414;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .faq-row-icon {
+  background: rgba(197, 5, 12, 0.18);
+}
+
+[data-theme="dark"] .atmos-faq-row {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
