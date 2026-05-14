@@ -431,3 +431,36 @@
     flex-wrap: wrap;
   }
 }
+
+/* ── Dark mode (Seminars) ─────────────────────────────── */
+[data-theme="dark"] .atmos-seminars {
+  background: #0a0a0a;
+  --atmos-paper: #141414;
+  --atmos-paper-deep: #0a0a0a;
+  --atmos-ink: #f1f5f9;
+  --atmos-ink-soft: #cbd5e1;
+  --atmos-ink-mute: #64748b;
+  --atmos-hairline: rgba(255, 255, 255, 0.10);
+}
+
+/* Filter selects: hardcoded white background + light chevron */
+[data-theme="dark"] .atmos-seminars .atmos-sem-select {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23cbd5e1' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 10px center;
+  background-color: #141414;
+}
+
+/* Search input: hardcoded white background */
+[data-theme="dark"] .atmos-seminars .atmos-sem-search {
+  background: #141414;
+}
+
+/* Card hover: bump shadow for visibility on dark */
+[data-theme="dark"] .atmos-seminars .atmos-sem-card:hover {
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5);
+}
+
+/* Tags: bump faint red tint so it stays visible on dark */
+[data-theme="dark"] .atmos-seminars .atmos-sem-tag {
+  border-color: rgba(197, 5, 12, 0.35);
+  background: rgba(197, 5, 12, 0.18);
+}
