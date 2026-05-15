@@ -1,0 +1,219 @@
+/* =========================================================
+   ATMOSPHERIC MODERN — Footer
+   Paper colophon with stronger ink contrast for readability.
+   Tokens (--atmos-*) are declared globally in App.css.
+   ========================================================= */
+
+.atmos-footer {
+  background: var(--atmos-paper-deep);
+  color: var(--atmos-ink);
+  font-family: var(--atmos-sans);
+  margin-top: 0;
+  position: relative;
+  z-index: 2;
+  border-top: 1px solid var(--atmos-hairline);
+}
+
+.atmos-footer-shell {
+  max-width: var(--atmos-max);
+  margin: 0 auto;
+  padding: 0 var(--atmos-gutter);
+}
+
+.atmos-footer-rule {
+  height: 1px;
+  width: 100%;
+  background: var(--atmos-hairline);
+  border: 0;
+  margin: 0;
+}
+
+.atmos-footer-rule-soft {
+  height: 1px;
+  width: 100%;
+  background: var(--atmos-hairline);
+  border: 0;
+  margin: 0;
+}
+
+/* TOP — centered stack */
+.atmos-footer-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 32px 0;
+  text-align: center;
+}
+
+.atmos-footer-brand {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 2vw, 22px);
+}
+
+.atmos-footer-logo {
+  width: clamp(48px, 5vw, 60px);
+  height: auto;
+  display: block;
+  flex: 0 0 auto;
+}
+
+.atmos-footer-brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.atmos-footer-wordmark {
+  font-family: var(--atmos-serif);
+  font-weight: 800;
+  font-size: clamp(28px, 3vw, 36px);
+  line-height: 1;
+  letter-spacing: -0.015em;
+  color: var(--atmos-ink);
+  margin: 0;
+}
+
+.atmos-footer-wordmark .atmos-footer-at {
+  font-style: italic;
+  color: var(--atmos-badger);
+  font-weight: 700;
+}
+
+.atmos-footer-eyebrow {
+  font-family: var(--atmos-sans);
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--atmos-ink-soft);
+  margin: 0;
+}
+
+.atmos-footer-links {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0;
+  font-family: var(--atmos-serif);
+  font-weight: 500;
+  font-size: clamp(15px, 1.4vw, 18px);
+  line-height: 1.2;
+  letter-spacing: -0.005em;
+}
+
+.atmos-footer-link {
+  color: var(--atmos-ink);
+  text-decoration: none;
+  position: relative;
+  padding: 4px 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  transition: color 200ms cubic-bezier(.2,.7,.2,1);
+}
+
+.atmos-footer-link:first-child { padding-left: 0; }
+.atmos-footer-link:last-child  { padding-right: 0; }
+
+.atmos-footer-link + .atmos-footer-link {
+  border-left: 1px solid var(--atmos-hairline);
+}
+
+.atmos-footer-link::after {
+  content: "";
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: -2px;
+  height: 1px;
+  background: var(--atmos-badger);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 260ms cubic-bezier(.2,.7,.2,1);
+}
+.atmos-footer-link:first-child::after { left: 0; }
+.atmos-footer-link:last-child::after  { right: 0; }
+
+.atmos-footer-link:hover::after { transform: scaleX(1); }
+
+.atmos-footer-link .atmos-arr {
+  font-family: var(--atmos-sans);
+  font-size: 0.72em;
+  color: var(--atmos-ink-soft);
+  opacity: 0;
+  transform: translateX(-2px);
+  transition: opacity 200ms ease, transform 220ms cubic-bezier(.2,.7,.2,1), color 200ms ease;
+}
+
+.atmos-footer-link:hover {
+  color: var(--atmos-badger);
+}
+
+.atmos-footer-link:hover .atmos-arr {
+  opacity: 1;
+  transform: translateX(0);
+  color: var(--atmos-badger);
+}
+
+/* BOTTOM ROW — colophon */
+.atmos-footer-bottom {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 24px;
+  align-items: center;
+  padding: 26px 0 30px;
+  font-family: var(--atmos-sans);
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--atmos-ink-soft);
+}
+
+.atmos-footer-copy {
+  text-align: left;
+}
+
+.atmos-footer-pag {
+  font-family: var(--atmos-serif);
+  font-style: italic;
+  font-weight: 420;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 14.5px;
+  color: var(--atmos-ink);
+  text-align: center;
+}
+
+.atmos-footer-pag-cur {
+  color: var(--atmos-badger);
+  font-weight: 500;
+}
+
+.atmos-footer-place {
+  text-align: right;
+}
+
+/* RESPONSIVE */
+@media (max-width: 760px) {
+  .atmos-footer-top {
+    gap: 20px;
+    padding: 36px 0;
+  }
+  .atmos-footer-links {
+    justify-content: center;
+  }
+}
+
+/* ── Dark mode (footer only) ───────────────────────────── */
+[data-theme="dark"] .atmos-footer {
+  --atmos-paper-deep: #0a0a0a;
+  --atmos-ink: #f1f5f9;
+  --atmos-ink-soft: #cbd5e1;
+  --atmos-ink-mute: #64748b;
+  --atmos-hairline: rgba(255, 255, 255, 0.10);
+}

@@ -1,0 +1,497 @@
+/* =========================================================
+   Leadership page — matches Image 23 reference design
+   ========================================================= */
+
+.atmos-leadership { padding-bottom: clamp(64px,9vw,120px); }
+
+/* ── HERO ────────────────────────────────────────────────── */
+.lead-hero {
+  padding: clamp(48px,6vw,80px) 0 0;
+  border-bottom: 1px solid var(--atmos-hairline);
+  overflow: hidden;
+}
+.lead-hero-shell {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px,6vw,96px);
+  align-items: center;
+  padding-bottom: clamp(48px,6vw,80px);
+}
+.lead-hero-left { display: flex; flex-direction: column; gap: clamp(16px,2vw,24px); }
+
+.lead-eyebrow {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--atmos-badger); margin: 0;
+}
+.lead-hero-title {
+  font-family: var(--atmos-serif); font-weight: 800;
+  font-size: clamp(38px, 5.5vw, 72px); line-height: 1.02;
+  letter-spacing: -0.035em; color: var(--atmos-ink); margin: 0;
+}
+.lead-hero-title em {
+  font-style: italic; color: var(--atmos-badger);
+  font-size: 1.05em;
+}
+
+.lead-hero-lede {
+  font-size: clamp(14px,1.3vw,16px); line-height: 1.7;
+  color: var(--atmos-ink-soft); max-width: 38ch; margin: 0;
+}
+.lead-hero-cta {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 14px; font-weight: 600; color: var(--atmos-badger);
+  text-decoration: none; width: fit-content;
+  transition: gap 220ms ease;
+}
+.lead-hero-cta:hover { gap: 10px; }
+
+/* Photo collage */
+.lead-hero-right {
+  position: relative;
+  display: flex; flex-direction: column;
+  align-items: flex-end; gap: 20px;
+  overflow: hidden;
+}
+.lead-collage {
+  position: relative;
+  width: 100%;
+  height: clamp(380px, 48vw, 540px);
+  margin-top: clamp(20px, 3vw, 40px);
+}
+.lead-cc {
+  position: absolute;
+  border-radius: 16px; overflow: hidden;
+  border: none;
+  box-shadow: none;
+}
+/* Fade photo into background at the bottom */
+.lead-cc::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 60%, rgba(255,255,255,0.5) 85%, rgba(255,255,255,0.75) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+.lead-cc img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center 20%;
+  display: block;
+  filter: grayscale(100%) contrast(1.05);
+  transition: filter 400ms ease;
+}
+.lead-cc:hover img { filter: grayscale(0%) contrast(1); }
+
+/* Wave canvas — covers the full hero-right column */
+.lead-wave-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Keep the in-collage bg div inert (no longer draws anything) */
+.lead-collage-bg { display: none; }
+
+/* Club logo spiral — right of photos, inside white circle */
+.lead-collage-spiral {
+  position: absolute;
+  bottom: 26%; right: -4%;
+  width: clamp(120px, 15vw, 175px);
+  height: clamp(120px, 15vw, 175px);
+  z-index: 5;
+  background: rgba(255,255,255,0.9);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+.lead-collage-spiral img {
+  width: 72%; height: 72%; object-fit: contain;
+  filter: brightness(0) saturate(100%) invert(9%) sepia(96%) saturate(5500%) hue-rotate(355deg) brightness(88%);
+}
+
+/* Straight staggered 2×2 — no rotation */
+.lead-cc-1 { width: 36%; aspect-ratio: 2/3;   top: 0;    left: 14%;  transform: none; z-index: 2; }
+.lead-cc-2 { width: 30%; aspect-ratio: 2/2.8; top: 0;    right: 20%; transform: none; z-index: 2; }
+.lead-cc-3 { width: 28%; aspect-ratio: 2/2.5; bottom: 0; left: 4%;   transform: none; z-index: 4; }
+.lead-cc-4 { width: 36%; aspect-ratio: 2/3;   bottom: 0; left: 34%;  transform: none; z-index: 4; }
+
+.lead-cc-1 img { object-position: center 15%; }
+.lead-cc-2 img { object-position: center 10%; }
+.lead-cc-3 img { object-position: center 25%; }
+.lead-cc-4 img { object-position: center 20%; }
+
+.lead-hero-tagline {
+  font-size: 13px; line-height: 1.8; color: var(--atmos-ink-soft);
+  text-align: right; margin: 0;
+}
+.lead-hero-tagline em { font-style: normal; color: var(--atmos-badger); font-weight: 600; }
+
+/* ── STATS ───────────────────────────────────────────────── */
+.lead-stats {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  border: 1px solid var(--atmos-hairline); border-radius: 14px;
+  overflow: hidden; margin: clamp(32px,4vw,56px) 0;
+}
+.lead-stat {
+  display: flex; align-items: center; gap: 14px;
+  padding: 24px 20px;
+  border-right: 1px solid var(--atmos-hairline);
+  transition: background 200ms;
+}
+.lead-stat:last-child { border-right: none; }
+.lead-stat:hover { background: rgba(197,5,12,0.03); }
+.lead-stat-icon { width: 28px; height: 28px; flex-shrink: 0; color: var(--atmos-badger); }
+.lead-stat-num  {
+  display: block; font-family: var(--atmos-serif); font-size: clamp(20px,2vw,28px);
+  font-weight: 800; letter-spacing: -0.02em; color: var(--atmos-ink); line-height: 1.1;
+}
+.lead-stat-label {
+  display: block; font-size: 11px; font-weight: 500;
+  color: var(--atmos-ink-mute); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px;
+}
+
+/* ── SECTION HEAD ────────────────────────────────────────── */
+.lead-officers { padding: clamp(48px,6vw,72px) 0; }
+.lead-archive-section { padding: clamp(48px,6vw,72px) 0; border-top: 1px solid var(--atmos-hairline); }
+
+.lead-section-head {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-bottom: clamp(28px,3.5vw,48px); gap: 20px;
+}
+.lead-section-eyebrow {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--atmos-badger); margin: 0 0 8px;
+}
+.lead-section-title {
+  font-family: var(--atmos-serif); font-weight: 800;
+  font-size: clamp(24px,3vw,40px); letter-spacing: -0.025em;
+  color: var(--atmos-ink); margin: 0;
+}
+.lead-section-aside {
+  font-size: 13px; color: var(--atmos-ink-mute); white-space: nowrap;
+}
+
+/* ── FEATURED CARDS (President + VP) ────────────────────── */
+.lead-featured-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  margin-bottom: 16px;
+}
+.lead-featured-card {
+  position: relative;
+  min-height: 300px;
+  border-radius: 16px; overflow: hidden;
+  padding: clamp(24px,3vw,36px);
+  background-size: cover; background-position: right center;
+  display: flex; flex-direction: column; gap: 10px;
+  justify-content: flex-end;
+  transition: transform 220ms cubic-bezier(0.2,0.8,0.2,1), box-shadow 220ms;
+}
+.lead-featured-arrow {
+  position: absolute; top: 16px; right: 16px;
+  width: 34px; height: 34px;
+  background: var(--atmos-badger); color: #fff;
+  border-radius: 50%; display: flex;
+  align-items: center; justify-content: center;
+  font-size: 15px; font-weight: 700;
+  z-index: 2;
+}
+.lead-featured-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.24);
+}
+.lead-card-role {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--atmos-badger);
+  background: none; padding: 4px 0;
+  align-self: flex-start; width: fit-content;
+}
+.lead-card-role--light {
+  color: rgba(255,255,255,0.85);
+  background: rgba(0,0,0,0.35);
+  padding: 4px 12px; border-radius: 999px;
+}
+.lead-featured-name {
+  font-family: var(--atmos-serif); font-weight: 800;
+  font-size: clamp(24px,2.8vw,36px); letter-spacing: -0.025em;
+  color: #fff; margin: 0; line-height: 1.05;
+}
+.lead-featured-desc {
+  font-size: 14px; line-height: 1.55; color: rgba(255,255,255,0.72); margin: 0;
+}
+
+/* ── TEAM GRID ───────────────────────────────────────────── */
+.lead-team-grid {
+  display: grid; grid-template-columns: repeat(4,1fr); gap: 16px;
+}
+.lead-team-card {
+  border: none;
+  border-radius: 14px; overflow: hidden;
+  display: flex; flex-direction: column;
+  box-shadow: 0 2px 14px rgba(0,0,0,0.07);
+  transition: transform 200ms cubic-bezier(0.2,0.8,0.2,1), box-shadow 200ms;
+}
+.lead-team-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 32px rgba(0,0,0,0.12);
+}
+.lead-team-photo {
+  aspect-ratio: 4/3; overflow: hidden; background: var(--atmos-paper-deep);
+}
+.lead-team-photo img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform 400ms ease;
+}
+.lead-team-card:hover .lead-team-photo img { transform: scale(1.04); }
+
+.lead-team-card > .lead-card-role {
+  margin: 16px 16px 0;
+  color: var(--atmos-badger); background: none; padding: 0;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+}
+
+.lead-team-name {
+  font-family: var(--atmos-serif); font-weight: 700;
+  font-size: clamp(16px,1.5vw,20px); letter-spacing: -0.02em;
+  color: var(--atmos-ink); margin: 6px 16px 0; line-height: 1.2;
+}
+.lead-team-desc {
+  font-size: 12.5px; line-height: 1.6; color: var(--atmos-ink-soft);
+  margin: 8px 16px 0; flex: 1;
+}
+
+/* ── SOCIAL BUTTONS ─────────────────────────────────────── */
+.lead-socials {
+  display: flex; gap: 8px; padding: 14px 16px;
+}
+.lead-featured-card .lead-socials { padding: 0; margin-top: 6px; }
+
+.lead-social-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px; border-radius: 50%;
+  background: rgba(0,0,0,0.05); color: var(--atmos-ink-soft);
+  text-decoration: none; border: none;
+  transition: background 180ms, color 180ms;
+}
+.lead-social-btn:hover { background: var(--atmos-badger); color: #fff; }
+.lead-social-btn--inert { cursor: default; }
+.lead-social-btn--inert:hover { background: rgba(0,0,0,0.05); color: var(--atmos-ink-soft); }
+.lead-featured-card .lead-social-btn {
+  background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.85);
+  border: none;
+}
+.lead-featured-card .lead-social-btn:hover {
+  background: rgba(255,255,255,0.9); color: var(--atmos-badger);
+}
+
+/* ── FOCUS SECTION ───────────────────────────────────────── */
+.lead-focus {
+  padding: clamp(32px,4vw,56px) 0;
+}
+.lead-focus-card {
+  display: grid; grid-template-columns: 1fr 1.4fr 1fr;
+  gap: clamp(24px,3.5vw,56px); align-items: center;
+  border: 1px solid var(--atmos-hairline);
+  border-radius: 16px;
+  background: var(--atmos-paper);
+  padding: clamp(24px,3vw,40px);
+}
+.lead-focus-title {
+  font-family: var(--atmos-serif); font-weight: 800;
+  font-size: clamp(20px,2.2vw,28px); letter-spacing: -0.025em;
+  color: var(--atmos-ink); margin: 8px 0 0; line-height: 1.15;
+}
+.lead-focus-topics {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+}
+.lead-focus-topic {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 13px; font-weight: 500; color: var(--atmos-ink-soft);
+  padding: 8px 12px; border-radius: 8px;
+  background: var(--atmos-paper); border: 1px solid var(--atmos-hairline);
+}
+.lead-focus-topic-icon {
+  width: 28px; height: 28px;
+  flex-shrink: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 8px;
+  background: rgba(197, 5, 12, 0.08);
+  color: var(--atmos-badger);
+}
+.lead-focus-topic-icon svg { width: 16px; height: 16px; }
+
+.lead-focus-cta {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 14px;
+  border-left: 1px solid var(--atmos-hairline); padding-left: clamp(20px,3vw,36px);
+}
+.lead-focus-cta > p {
+  font-size: 14px; font-weight: 600; color: var(--atmos-ink); line-height: 1.4; margin: 0;
+}
+.lead-focus-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 14px; font-weight: 700; color: var(--atmos-badger);
+  text-decoration: none; transition: gap 220ms ease;
+}
+.lead-focus-link:hover { gap: 10px; }
+
+/* ── ARCHIVE ─────────────────────────────────────────────── */
+.lead-archive-select {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; color: var(--atmos-ink-mute); cursor: pointer;
+}
+
+.lead-archive-wrap {
+  border: 1px solid var(--atmos-hairline);
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--atmos-paper);
+}
+
+.atmos-archive { border-top: 1px solid var(--atmos-hairline); }
+.atmos-archive:first-child { border-top: none; }
+
+.atmos-archive-toggle {
+  width: 100%; display: flex; justify-content: space-between; align-items: center;
+  gap: 18px; padding: 22px 28px; background: none; border: none; cursor: pointer;
+  text-align: left; font-family: var(--atmos-sans); font-size: 14px;
+  font-weight: 500; color: var(--atmos-ink);
+  transition: background 180ms ease;
+}
+.atmos-archive-toggle:hover { background: rgba(197,5,12,0.025); }
+
+.atmos-archive-label { display: flex; align-items: center; gap: 20px; flex: 1; }
+.atmos-archive-num {
+  font-family: var(--atmos-serif); font-size: clamp(16px,1.8vw,22px);
+  font-weight: 700; font-style: italic;
+  color: var(--atmos-badger); white-space: nowrap; width: 32px;
+}
+.atmos-archive-title {
+  font-family: var(--atmos-sans); font-size: clamp(15px,1.5vw,18px);
+  font-weight: 600; letter-spacing: -0.01em; color: var(--atmos-ink);
+}
+.atmos-archive-meta {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; color: var(--atmos-ink-mute);
+  white-space: nowrap;
+}
+.atmos-archive-glyph {
+  font-size: 18px; transition: transform 240ms ease; display: inline-block;
+  color: var(--atmos-badger);
+}
+.atmos-archive-glyph.is-open { transform: rotate(90deg); }
+.atmos-archive-panel {
+  overflow: hidden; max-height: 0; opacity: 0;
+  transition: max-height 460ms cubic-bezier(.2,.7,.2,1), opacity 300ms ease;
+}
+.atmos-archive-panel.is-open { max-height: 6000px; opacity: 1; padding-bottom: 32px; }
+
+.lead-archive-roster {
+  display: flex; flex-direction: column;
+  gap: clamp(20px, 3vw, 32px);
+  padding: 8px 28px 0;
+}
+
+.lead-archive-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(140px,1fr));
+  gap: 16px; padding: 8px 28px 0;
+}
+.lead-archive-card {
+  display: flex; flex-direction: column; gap: 6px;
+}
+.lead-archive-photo {
+  aspect-ratio: 1; border-radius: 10px; overflow: hidden;
+  background: var(--atmos-paper-deep); border: 1px solid var(--atmos-hairline);
+}
+.lead-archive-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.lead-archive-name {
+  font-size: 13px; font-weight: 700; color: var(--atmos-ink); margin: 0; line-height: 1.2;
+}
+.lead-archive-card .lead-socials { padding: 2px 0; }
+
+/* ── RESPONSIVE ──────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .lead-team-grid { grid-template-columns: repeat(3,1fr); }
+}
+@media (max-width: 860px) {
+  .lead-hero-shell { grid-template-columns: 1fr; }
+  .lead-hero-right { display: none; }
+  .lead-stats { grid-template-columns: repeat(2,1fr); }
+  .lead-stat:nth-child(2) { border-right: none; }
+  .lead-stat:nth-child(3) { border-top: 1px solid var(--atmos-hairline); }
+  .lead-stat:nth-child(4) { border-top: 1px solid var(--atmos-hairline); border-right: none; }
+  .lead-featured-grid { grid-template-columns: 1fr; }
+  .lead-team-grid { grid-template-columns: repeat(2,1fr); }
+  .lead-focus-card { grid-template-columns: 1fr; }
+  .lead-focus-cta { border-left: none; border-top: 1px solid var(--atmos-hairline); padding-left: 0; padding-top: 20px; }
+}
+@media (max-width: 540px) {
+  .lead-team-grid { grid-template-columns: repeat(2,1fr); }
+  .lead-focus-topics { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lead-featured-card, .lead-team-card, .lead-social-btn,
+  .lead-hero-cta, .lead-focus-link, .atmos-archive-toggle,
+  .atmos-archive-panel, .atmos-archive-glyph { transition: none !important; }
+}
+
+/* ── Dark mode (entire Leadership page) ──────────────────── */
+[data-theme="dark"] .atmos-leadership {
+  background: #0a0a0a;
+  --atmos-paper: #141414;
+  --atmos-paper-deep: #0a0a0a;
+  --atmos-ink: #f1f5f9;
+  --atmos-ink-soft: #cbd5e1;
+  --atmos-ink-mute: #64748b;
+  --atmos-hairline: rgba(255, 255, 255, 0.10);
+}
+
+/* Hero photo collage: fade bottom edge to dark instead of white */
+[data-theme="dark"] .lead-cc::after {
+  background: linear-gradient(
+    to bottom,
+    transparent 60%,
+    rgba(10, 10, 10, 0.5) 85%,
+    rgba(10, 10, 10, 0.75) 100%
+  );
+}
+
+/* Spiral badge: drop the white disc and render the logo in white */
+[data-theme="dark"] .lead-collage-spiral {
+  background: transparent;
+}
+[data-theme="dark"] .lead-collage-spiral img {
+  filter: brightness(0) invert(1);
+}
+
+/* Stat row hover */
+[data-theme="dark"] .lead-stat:hover {
+  background: rgba(197, 5, 12, 0.10);
+}
+
+/* Team cards: dark surface + deeper shadows */
+[data-theme="dark"] .lead-team-card {
+  background: #141414;
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.4);
+}
+[data-theme="dark"] .lead-team-card:hover {
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.6);
+}
+
+/* Social buttons (non-featured cards) */
+[data-theme="dark"] .lead-social-btn {
+  background: rgba(255, 255, 255, 0.08);
+}
+[data-theme="dark"] .lead-social-btn--inert:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Focus topic icon halo: bump red opacity so it reads on dark */
+[data-theme="dark"] .lead-focus-topic-icon {
+  background: rgba(197, 5, 12, 0.18);
+}
+
+/* Archive toggle hover */
+[data-theme="dark"] .atmos-archive-toggle:hover {
+  background: rgba(197, 5, 12, 0.08);
+}

@@ -1,0 +1,314 @@
+/* =========================================================
+   ATMOSPHERIC MODERN — Contact page
+   Scoped to .atmos-contact
+   Matches About page design system: white bg, Inter font,
+   UW red (#C5050C) accent via --atmos-badger.
+   ========================================================= */
+
+/* PAGE WRAPPER --------------------------------------------- */
+.atmos-contact {
+  padding-bottom: clamp(64px, 9vw, 120px);
+}
+
+/* HERO ----------------------------------------------------- */
+.atmos-contact .atmos-contact-hero {
+  padding: clamp(48px, 6vw, 80px) 0 0;
+}
+
+/* HERO TITLE ----------------------------------------------- */
+.atmos-contact .atmos-contact-title {
+  font-family: var(--atmos-serif);
+  font-weight: 800;
+  font-size: clamp(40px, 5.5vw, 72px);
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  color: var(--atmos-ink);
+  margin: 0;
+}
+
+.atmos-contact .atmos-contact-title .atmos-contact-amp {
+  color: var(--atmos-badger);
+  font-style: italic;
+}
+
+/* HERO LEDE ------------------------------------------------ */
+.atmos-contact .atmos-contact-lede {
+  font-family: var(--atmos-sans);
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--atmos-ink-soft);
+  max-width: 52ch;
+  margin: 0;
+}
+
+.atmos-contact .atmos-contact-lede a {
+  color: var(--atmos-badger);
+  text-underline-offset: 3px;
+}
+
+/* TWO-COLUMN ROW ------------------------------------------- */
+.atmos-contact .atmos-contact-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 6vw, 96px);
+  padding: clamp(40px, 5vw, 64px) 0;
+}
+
+/* LEFT COLUMN ---------------------------------------------- */
+.atmos-contact .atmos-contact-left {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* CHANNEL LIST --------------------------------------------- */
+.atmos-contact .atmos-channel-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.atmos-contact .atmos-channel-card {
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  align-items: center;
+  gap: 18px;
+  padding: 16px 22px 16px 16px;
+  border: 1px solid var(--atmos-hairline);
+  border-radius: 16px;
+  background: #fff;
+  font-family: var(--atmos-sans);
+  text-decoration: none;
+  color: var(--atmos-ink);
+  box-shadow: 0 1px 2px rgba(15, 17, 21, 0.03);
+  transition: border-color 200ms ease, transform 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.atmos-contact .atmos-channel-card:hover {
+  border-color: rgba(197, 5, 12, 0.35);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(197, 5, 12, 0.08);
+}
+
+.atmos-contact .atmos-channel-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: rgba(197, 5, 12, 0.08);
+  color: var(--atmos-badger);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.atmos-contact .atmos-channel-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.atmos-contact .atmos-channel-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.atmos-contact .atmos-channel-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--atmos-ink);
+  letter-spacing: -0.005em;
+}
+
+.atmos-contact .atmos-channel-sub {
+  font-size: 13.5px;
+  color: var(--atmos-ink-mute);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.atmos-contact .atmos-channel-arr {
+  width: 22px;
+  height: 22px;
+  color: var(--atmos-ink-mute);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 200ms ease, color 200ms ease;
+}
+
+.atmos-contact .atmos-channel-arr svg {
+  width: 20px;
+  height: 20px;
+}
+
+.atmos-contact .atmos-channel-card:hover .atmos-channel-arr {
+  color: var(--atmos-badger);
+  transform: translateX(3px);
+}
+
+/* RIGHT COLUMN --------------------------------------------- */
+.atmos-contact .atmos-contact-right {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* FORM HEAD ------------------------------------------------ */
+.atmos-contact .atmos-form-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--atmos-hairline);
+}
+
+.atmos-contact .atmos-form-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--atmos-badger);
+}
+
+.atmos-contact .atmos-form-roman {
+  font-size: 11px;
+  color: var(--atmos-ink-mute);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* FORM IFRAME WRAPPER -------------------------------------- */
+.atmos-contact .atmos-form-frame {
+  border: 1px solid var(--atmos-hairline);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.atmos-contact .atmos-form-iframe {
+  display: block;
+  width: 100%;
+  border: none;
+}
+
+/* FORM FOOT ------------------------------------------------ */
+.atmos-contact .atmos-form-foot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--atmos-ink-mute);
+  padding-top: 8px;
+}
+
+.atmos-contact .atmos-form-foot em {
+  font-style: italic;
+  color: var(--atmos-ink-soft);
+}
+
+/* PAGE FOOT ------------------------------------------------ */
+.atmos-contact .atmos-contact-foot {
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid var(--atmos-hairline);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--atmos-ink-mute);
+}
+
+.atmos-contact .atmos-contact-foot em {
+  font-style: italic;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--atmos-ink-soft);
+}
+
+/* RESPONSIVE ----------------------------------------------- */
+@media (max-width: 760px) {
+  .atmos-contact .atmos-contact-row {
+    grid-template-columns: 1fr;
+  }
+
+  .atmos-contact .atmos-contact-foot {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .atmos-contact .atmos-form-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .atmos-contact .atmos-channel-card {
+    grid-template-columns: 48px 1fr auto;
+    gap: 14px;
+    padding: 14px 16px 14px 14px;
+  }
+
+  .atmos-contact .atmos-channel-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+  }
+
+  .atmos-contact .atmos-channel-icon svg {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+/* Reduced motion ------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .atmos-contact .atmos-channel-card,
+  .atmos-contact .atmos-channel-arr {
+    transition: none;
+  }
+
+  .atmos-contact .atmos-channel-card:hover {
+    transform: none;
+  }
+
+  .atmos-contact .atmos-channel-card:hover .atmos-channel-arr {
+    transform: none;
+  }
+}
+
+/* ── Dark mode (Contact) ─────────────────────────────────── */
+[data-theme="dark"] .atmos-contact {
+  background: #0a0a0a;
+  --atmos-paper: #141414;
+  --atmos-paper-deep: #0a0a0a;
+  --atmos-ink: #f1f5f9;
+  --atmos-ink-soft: #cbd5e1;
+  --atmos-ink-mute: #64748b;
+  --atmos-hairline: rgba(255, 255, 255, 0.10);
+}
+
+/* Channel cards: dark surface + deeper shadows */
+[data-theme="dark"] .atmos-contact .atmos-channel-card {
+  background: #141414;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .atmos-contact .atmos-channel-card:hover {
+  box-shadow: 0 6px 18px rgba(197, 5, 12, 0.18);
+}
+
+/* Channel icon halo: bump red opacity so it reads on dark */
+[data-theme="dark"] .atmos-contact .atmos-channel-icon {
+  background: rgba(197, 5, 12, 0.18);
+}

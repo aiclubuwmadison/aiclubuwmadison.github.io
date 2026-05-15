@@ -1,0 +1,466 @@
+/* =========================================================
+   ATMOSPHERIC MODERN — Seminars page
+   ========================================================= */
+
+.atmos-seminars {
+  padding: clamp(48px, 6vw, 80px) 0 clamp(64px, 9vw, 120px);
+}
+
+/* ── HERO ───────────────────────────────────────────────── */
+.atmos-seminars .atmos-sem-hero {
+  padding-bottom: clamp(40px, 5vw, 64px);
+  margin-bottom: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(24px, 4vw, 64px);
+}
+
+.atmos-seminars .atmos-sem-hero-text {
+  text-align: left;
+}
+
+.atmos-seminars .atmos-sem-hero-image {
+  display: flex;
+  justify-content: center;
+}
+
+.atmos-seminars .atmos-sem-hero-image img {
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .atmos-seminars .atmos-sem-hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .atmos-seminars .atmos-sem-hero-text {
+    text-align: center;
+  }
+}
+
+
+.atmos-seminars .atmos-sem-title {
+  font-family: var(--atmos-serif);
+  font-weight: 800;
+  font-size: clamp(40px, 5.5vw, 72px);
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  color: var(--atmos-ink);
+  margin: 0 0 20px;
+}
+
+.atmos-seminars .atmos-sem-title-dot {
+  color: var(--atmos-badger);
+}
+
+
+
+/* ── FILTER BAR ─────────────────────────────────────────── */
+.atmos-seminars .atmos-sem-filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 20px 0;
+  border-top: 1px solid var(--atmos-hairline);
+  border-bottom: 1px solid var(--atmos-hairline);
+  margin: 40px 0 48px;
+  flex-wrap: wrap;
+}
+
+.atmos-seminars .atmos-sem-tabs {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.atmos-seminars .atmos-sem-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 16px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--atmos-ink-soft);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: color 180ms ease, border-color 180ms ease;
+  border-radius: 6px 6px 0 0;
+  margin-bottom: -1px;
+}
+
+.atmos-seminars .atmos-sem-tab:hover {
+  color: var(--atmos-ink);
+}
+
+.atmos-seminars .atmos-sem-tab.active {
+  color: var(--atmos-badger);
+  border-bottom-color: var(--atmos-badger);
+  font-weight: 600;
+}
+
+.atmos-seminars .atmos-sem-filters {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.atmos-seminars .atmos-sem-select {
+  appearance: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 10px center;
+  background-color: #fff;
+  border: 1px solid var(--atmos-hairline);
+  border-radius: 7px;
+  padding: 8px 32px 8px 13px;
+  font-size: 13px;
+  color: var(--atmos-ink);
+  cursor: pointer;
+  transition: border-color 180ms ease;
+  min-width: 120px;
+}
+
+.atmos-seminars .atmos-sem-select:focus {
+  outline: none;
+  border-color: rgba(197,5,12,0.4);
+}
+
+.atmos-seminars .atmos-sem-search-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.atmos-seminars .atmos-sem-search {
+  border: 1px solid var(--atmos-hairline);
+  border-radius: 7px;
+  padding: 8px 36px 8px 13px;
+  font-size: 13px;
+  color: var(--atmos-ink);
+  background: #fff;
+  width: 180px;
+  transition: border-color 180ms ease, width 220ms ease;
+}
+
+.atmos-seminars .atmos-sem-search::placeholder {
+  color: var(--atmos-ink-mute);
+}
+
+.atmos-seminars .atmos-sem-search:focus {
+  outline: none;
+  border-color: rgba(197,5,12,0.4);
+  width: 220px;
+}
+
+.atmos-seminars .atmos-sem-search-icon {
+  position: absolute;
+  right: 10px;
+  color: var(--atmos-ink-mute);
+  display: flex;
+  pointer-events: none;
+}
+
+/* ── SECTION ────────────────────────────────────────────── */
+.atmos-seminars .atmos-sem-section {
+  margin-bottom: clamp(48px, 6vw, 80px);
+}
+
+/* ── SUB-SECTION HEADER ─────────────────────────────────── */
+.atmos-seminars .atmos-sem-sub {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  padding-bottom: clamp(20px, 2.5vw, 28px);
+  margin-bottom: clamp(20px, 2.5vw, 28px);
+  border-bottom: 1px solid var(--atmos-hairline);
+}
+
+.atmos-seminars .atmos-sem-sub-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--atmos-badger);
+  margin-bottom: 8px;
+}
+
+.atmos-seminars .atmos-sem-sub-title {
+  font-family: var(--atmos-serif);
+  font-weight: 700;
+  font-size: clamp(22px, 2.5vw, 30px);
+  letter-spacing: -0.02em;
+  color: var(--atmos-ink);
+  margin: 0;
+}
+
+.atmos-seminars .atmos-sem-view-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--atmos-badger);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: gap 180ms ease;
+}
+
+.atmos-seminars .atmos-sem-view-all:hover {
+  gap: 9px;
+}
+
+/* ── CARD GRID ───────────────────────────────────────────── */
+.atmos-seminars .atmos-sem-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+/* ── CARD ────────────────────────────────────────────────── */
+.atmos-seminars .atmos-sem-card {
+  border: 1px solid var(--atmos-hairline);
+  border-radius: 14px;
+  padding: clamp(18px, 2.2vw, 26px);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: var(--atmos-paper);
+  transition: border-color 220ms ease, transform 220ms cubic-bezier(0.2,0.8,0.2,1), box-shadow 220ms ease;
+}
+
+.atmos-seminars .atmos-sem-card:hover {
+  border-color: rgba(197,5,12,0.25);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.07);
+}
+
+.atmos-seminars .atmos-sem-card--workshop {
+  background: var(--atmos-paper-deep);
+}
+
+/* Top row: date badge + content + bookmark */
+.atmos-seminars .atmos-sem-card-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+/* Date badge — vertical pill */
+.atmos-seminars .atmos-sem-date-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--atmos-badger);
+  color: #fff;
+  border-radius: 8px;
+  padding: 8px 10px;
+  min-width: 46px;
+  flex-shrink: 0;
+  line-height: 1;
+  gap: 3px;
+}
+
+.atmos-seminars .atmos-sem-date-badge--workshop {
+  background: var(--atmos-ink-mute);
+}
+
+.atmos-seminars .atmos-sem-date-month {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.atmos-seminars .atmos-sem-date-year {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+/* Card content: title + speaker + tags */
+.atmos-seminars .atmos-sem-card-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Bookmark icon */
+.atmos-seminars .atmos-sem-bookmark {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--atmos-ink-mute);
+  padding: 2px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  transition: color 180ms ease;
+  margin-left: auto;
+}
+
+.atmos-seminars .atmos-sem-bookmark:hover {
+  color: var(--atmos-badger);
+}
+
+/* Title */
+.atmos-seminars .atmos-sem-talk {
+  font-family: var(--atmos-serif);
+  font-size: clamp(15px, 1.5vw, 17.5px);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--atmos-ink);
+  margin: 0;
+  line-height: 1.3;
+}
+
+/* Speaker */
+.atmos-seminars .atmos-sem-speaker {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--atmos-ink-mute);
+  margin: 0;
+}
+
+/* Tags */
+.atmos-seminars .atmos-sem-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  list-style: none;
+  padding: 0;
+  margin: 2px 0 0;
+}
+
+.atmos-seminars .atmos-sem-tag {
+  font-size: 10.5px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(197,5,12,0.2);
+  color: var(--atmos-badger);
+  background: rgba(197,5,12,0.04);
+}
+
+/* Abstract */
+.atmos-seminars .atmos-sem-abstract {
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--atmos-ink-soft);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex: 1;
+}
+
+.atmos-seminars .atmos-sem-abstract--expanded {
+  -webkit-line-clamp: unset;
+}
+
+/* View details button */
+.atmos-seminars .atmos-sem-view-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--atmos-badger);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: gap 180ms ease;
+  font-family: inherit;
+}
+
+.atmos-seminars .atmos-sem-view-link:hover {
+  gap: 8px;
+}
+
+/* Empty state */
+.atmos-seminars .atmos-sem-empty {
+  font-size: 14px;
+  color: var(--atmos-ink-mute);
+  padding: 32px 0;
+}
+
+/* ── RESPONSIVE ─────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .atmos-seminars .atmos-sem-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .atmos-seminars .atmos-sem-filter-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .atmos-seminars .atmos-sem-filters {
+    width: 100%;
+  }
+
+  .atmos-seminars .atmos-sem-search {
+    width: 100%;
+  }
+
+  .atmos-seminars .atmos-sem-sub {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .atmos-seminars .atmos-sem-card-row {
+    flex-wrap: wrap;
+  }
+}
+
+/* ── Dark mode (Seminars) ─────────────────────────────── */
+[data-theme="dark"] .atmos-seminars {
+  background: #0a0a0a;
+  --atmos-paper: #141414;
+  --atmos-paper-deep: #0a0a0a;
+  --atmos-ink: #f1f5f9;
+  --atmos-ink-soft: #cbd5e1;
+  --atmos-ink-mute: #64748b;
+  --atmos-hairline: rgba(255, 255, 255, 0.10);
+}
+
+/* Filter selects: hardcoded white background + light chevron */
+[data-theme="dark"] .atmos-seminars .atmos-sem-select {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23cbd5e1' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 10px center;
+  background-color: #141414;
+}
+
+/* Search input: hardcoded white background */
+[data-theme="dark"] .atmos-seminars .atmos-sem-search {
+  background: #141414;
+}
+
+/* Card hover: bump shadow for visibility on dark */
+[data-theme="dark"] .atmos-seminars .atmos-sem-card:hover {
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5);
+}
+
+/* Tags: bump faint red tint so it stays visible on dark */
+[data-theme="dark"] .atmos-seminars .atmos-sem-tag {
+  border-color: rgba(197, 5, 12, 0.35);
+  background: rgba(197, 5, 12, 0.18);
+}

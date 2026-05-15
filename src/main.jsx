@@ -1,0 +1,26 @@
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import './index.css';
+import './App.css';
+import App from './App.jsx';
+
+// If the app was redirected here by the GitHub Pages 404 redirect helper
+// (which appends `?redirect=/original/path`), restore the original path
+// so BrowserRouter renders the correct route.
+(function restorePathFromRedirect() {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const redirect = params.get('redirect');
+    if (redirect) {
+      window.history.replaceState({}, '', decodeURIComponent(redirect));
+    }
+  } catch {
+    // ignore
+  }
+})();
+
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <App />
+  </StrictMode>
+);
