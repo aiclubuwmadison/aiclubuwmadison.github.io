@@ -219,19 +219,19 @@
    relative to the .about-hero-right square */
 .about-fc-tl {
   top: 8%;
-  left: -4%;
+  left: 0;
 }
 .about-fc-tr {
   top: 12%;
-  right: -6%;
+  right: 0;
 }
 .about-fc-bl {
   bottom: 16%;
-  left: -6%;
+  left: 0;
 }
 .about-fc-br {
   bottom: 10%;
-  right: -4%;
+  right: 0;
 }
 
 /* ── SHARED SHELL ───────────────────────────────────────── */
@@ -567,7 +567,7 @@
   font-size: 13.5px;
   font-weight: 500;
   color: var(--atmos-ink);
-  white-space: nowrap;
+  min-width: 0;
 }
 
 .about-area-more {
@@ -669,7 +669,15 @@
   .about-hero {
     grid-template-columns: 1fr;
     min-height: auto;
+    gap: clamp(20px, 4vw, 36px);
+    padding-top: clamp(28px, 7vw, 48px);
     padding-bottom: clamp(40px, 6vw, 72px);
+  }
+  .about-hero-left {
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
+    align-items: center;
   }
   .about-hero-right {
     max-width: 340px;
@@ -692,6 +700,38 @@
 }
 
 @media (max-width: 680px) {
+  .about-shell {
+    padding: 0 clamp(18px, 5vw, 28px);
+  }
+  .about-hero {
+    padding-left: clamp(18px, 5vw, 28px);
+    padding-right: clamp(18px, 5vw, 28px);
+  }
+  .about-hero-title {
+    font-size: clamp(36px, 11vw, 52px);
+    letter-spacing: -0.025em;
+  }
+  .about-hero-lede {
+    max-width: 34ch;
+  }
+  .about-hero-ctas {
+    width: 100%;
+    align-items: stretch;
+  }
+  .about-btn-primary,
+  .about-btn-ghost {
+    flex: 1 1 180px;
+    justify-content: center;
+    min-height: 46px;
+    padding-left: 18px;
+    padding-right: 18px;
+    white-space: normal;
+    text-align: center;
+  }
+  .about-hero-right {
+    width: min(84vw, 300px);
+    max-width: none;
+  }
   .about-what-cards {
     grid-template-columns: 1fr;
   }
@@ -704,13 +744,111 @@
   }
   .about-float-card {
     padding: 7px 12px 7px 9px;
+    gap: 8px;
+    border-radius: 10px;
+  }
+  .about-fc-svg {
+    width: 20px;
+    height: 20px;
   }
   .about-fc-title {
     font-size: 11px;
   }
+  .about-fc-sub {
+    font-size: 10px;
+  }
   .about-cta-inner {
     flex-direction: column;
     align-items: flex-start;
+  }
+  .about-cta-left {
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .about-cta-btn {
+    width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-hero {
+    padding-top: 24px;
+  }
+  .about-hero-left {
+    text-align: left;
+    align-items: flex-start;
+  }
+  .about-hero-title {
+    font-size: clamp(34px, 10.5vw, 44px);
+    line-height: 1.08;
+  }
+  .about-hero-lede {
+    max-width: none;
+  }
+  .about-hero-ctas {
+    flex-direction: column;
+  }
+  .about-btn-primary,
+  .about-btn-ghost {
+    width: 100%;
+    flex-basis: auto;
+    box-sizing: border-box;
+  }
+  .about-hero-right {
+    width: min(86vw, 270px);
+  }
+  .about-fc-tl {
+    top: 2%;
+    left: -2%;
+  }
+  .about-fc-tr {
+    top: 10%;
+    right: -2%;
+  }
+  .about-fc-bl {
+    bottom: 14%;
+    left: -2%;
+  }
+  .about-fc-br {
+    bottom: 4%;
+    right: -2%;
+  }
+  .about-story {
+    padding-top: 48px;
+  }
+  .about-story-inner {
+    gap: 32px;
+  }
+  .about-story-stats {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .about-stat {
+    align-items: flex-start;
+    text-align: left;
+    padding: 18px;
+  }
+  .about-what-title,
+  .about-areas-title {
+    font-size: clamp(28px, 9vw, 36px);
+  }
+  .about-areas-sub br {
+    display: none;
+  }
+  .about-areas-tags {
+    grid-template-columns: 1fr;
+  }
+  .about-area-tag {
+    padding: 13px 14px;
+  }
+  .about-cta-left {
+    flex-direction: column;
+  }
+  .about-cta-icon-wrap {
+    width: 48px;
+    height: 48px;
   }
 }
 

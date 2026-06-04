@@ -42,6 +42,12 @@ body {
   padding-top: 88px;
 }
 
+@media (max-width: 760px) {
+  #body-wrapper {
+    padding-top: 64px;
+  }
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
