@@ -100,27 +100,29 @@ const Nav = () => {
             </ul>
           </nav>
 
-          {/* Theme toggle */}
-          <button
-            type="button"
-            className="atmos-nav-theme-toggle"
-            onClick={toggleTheme}
-            aria-label={themeLabel}
-            title={themeLabel}
-          >
-            {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
-          </button>
+          <div className="atmos-nav-actions">
+            {/* CTA */}
+            <Link to="/contact" className="atmos-nav-cta">
+              Become a Member
+              <span className="atmos-nav-cta-arrow" aria-hidden="true">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </span>
+            </Link>
 
-          {/* CTA */}
-          <Link to="/contact" className="atmos-nav-cta">
-            Become a Member
-            <span className="atmos-nav-cta-arrow" aria-hidden="true">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12" />
-                <polyline points="12 5 19 12 12 19" />
-              </svg>
-            </span>
-          </Link>
+            {/* Theme toggle */}
+            <button
+              type="button"
+              className="atmos-nav-theme-toggle"
+              onClick={toggleTheme}
+              aria-label={themeLabel}
+              title={themeLabel}
+            >
+              {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
+          </div>
 
           {/* Burger */}
           <button

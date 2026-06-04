@@ -96,6 +96,14 @@
   padding: 0;
 }
 
+.atmos-nav-actions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 18px;
+  flex-shrink: 0;
+}
+
 .atmos-nav-link {
   font-family: var(--atmos-sans);
   font-size: 15px;
@@ -345,13 +353,26 @@
     height: 64px;
   }
 
+  .atmos-nav-inner {
+    gap: 16px;
+  }
+
+  .atmos-nav-brand-mark {
+    width: 56px;
+    height: 56px;
+  }
+
+  .atmos-nav-brand-mark img {
+    width: 48px;
+    height: 48px;
+  }
+
   .atmos-nav-mobile-panel {
     top: 64px;
   }
 
   .atmos-nav-links,
-  .atmos-nav-cta,
-  .atmos-nav-theme-toggle {
+  .atmos-nav-actions {
     display: none;
   }
 
