@@ -217,3 +217,25 @@
   --atmos-ink-mute: #64748b;
   --atmos-hairline: rgba(255, 255, 255, 0.10);
 }
+
+/* Social Icon Hover States */
+.atmos-footer-instagram:hover {
+  color: #e1306c !important;
+}
+.atmos-footer-instagram::after {
+  background: #e1306c !important;
+}
+
+.atmos-footer-linkedin:hover {
+  color: #0077b5 !important;
+}
+.atmos-footer-linkedin::after {
+  background: #0077b5 !important;
+}
+
+.atmos-footer-suggestions:hover {
+  color: #059669 !important;
+}
+.atmos-footer-suggestions::after {
+  background: #059669 !important;
+}
