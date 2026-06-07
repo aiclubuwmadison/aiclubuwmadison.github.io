@@ -37,6 +37,9 @@ Prefer composing these over re-styling MUI from scratch.
 
 **Commit incrementally during UI work.** When making UI changes, commit each logically distinct change as its own commit rather than batching everything into one large commit. This keeps the history bisectable and makes it easier to identify which change introduced a bug during later review. Wait for explicit user approval before each commit unless the user has said otherwise for the current session.
 
+**Terminate subagents upon task completion.** Once a task is fully completed, verified, and merged/committed, terminate/delete all subagents and their workspaces to keep the repository clean, provided we are not going to work with them again. Always ask the user for explicit approval before performing this termination.
+
+
 ## Branches and deploy
 
 Default branch for PRs is `dev`. The published build is hosted from the `master` branch. `guide.txt` documents the legacy CRA `build/` → `master` copy-and-commit deploy flow; since the Vite rewrite the output directory is now `dist/`, so those steps need updating before reuse. The legacy CRA source under `_saved/` was removed in commit `d9e868b`; do not re-introduce it.
