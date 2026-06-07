@@ -240,13 +240,7 @@ const Resources = () => {
         const data = await response.json();
         if (active) {
           if (data.hits && data.hits.length > 0) {
-            const twoWeeksAgo = Date.now() - 14 * 24 * 60 * 60 * 1000;
-            const cleanHits = data.hits.filter(hit => {
-              if (!hit.title || !hit.url) return false;
-              const createdMs = hit.created_at_i ? hit.created_at_i * 1000 : new Date(hit.created_at).getTime();
-              return createdMs > twoWeeksAgo;
-            });
-            
+            const cleanHits = data.hits.filter(hit => hit.title && hit.url);
             if (cleanHits.length >= 3) {
               setNews(cleanHits.slice(0, 5));
             } else {
@@ -289,13 +283,7 @@ const Resources = () => {
       }
       const data = await response.json();
       if (data.hits && data.hits.length > 0) {
-        const twoWeeksAgo = Date.now() - 14 * 24 * 60 * 60 * 1000;
-        const cleanHits = data.hits.filter(hit => {
-          if (!hit.title || !hit.url) return false;
-          const createdMs = hit.created_at_i ? hit.created_at_i * 1000 : new Date(hit.created_at).getTime();
-          return createdMs > twoWeeksAgo;
-        });
-        
+        const cleanHits = data.hits.filter(hit => hit.title && hit.url);
         if (cleanHits.length >= 3) {
           setNews(cleanHits.slice(0, 5));
         } else {
