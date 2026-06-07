@@ -339,102 +339,7 @@ const Resources = () => {
         </div>
       </section>
 
-      {/* 2. GUIDES & SKILLS DIRECTORY */}
-      <section className="res-section">
-        <div className="atmos-shell">
-          <div className="atmos-section-head">
-            <div>
-              <span className="atmos-section-eyebrow">Curriculum Directory</span>
-              <h2 className="atmos-section-title">Core AI Guides</h2>
-            </div>
-            <span className="atmos-section-aside">01 / Skillsets</span>
-          </div>
-
-          <div className="res-skills-grid">
-            {SKILLS_DATA.map((skill) => (
-              <div className="res-skill-card" key={skill.id}>
-                <div className={`res-card-visual visual-${skill.colorPreset}`}>
-                  <SkillVisual preset={skill.colorPreset} />
-                  <span className="res-card-category-badge">
-                    {getSkillIcon(skill.id)}
-                    {skill.title}
-                  </span>
-                </div>
-                
-                <div className="res-card-body">
-                  <h3 className="res-card-title">{skill.title}</h3>
-                  <p className="res-card-desc">{skill.description}</p>
-                  
-                  <div className="res-card-footer">
-                    <div className="res-tag-group">
-                      {skill.tags.map((tag) => (
-                        <span className="res-tag-chip" key={tag}>{tag}</span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 3. RECOMMENDED READINGS */}
-      <section className="res-section res-section-tinted">
-        <div className="atmos-shell">
-          <div className="atmos-section-head">
-            <div>
-              <span className="atmos-section-eyebrow">Literature List</span>
-              <h2 className="atmos-section-title">Recommended Readings</h2>
-            </div>
-            <span className="atmos-section-aside">02 / Research</span>
-          </div>
-
-          <div className="res-readings-list">
-            {READINGS_DATA.map((reading, index) => (
-              <div className="res-reading-row" key={index}>
-                <div className="res-reading-left">
-                  <div className="res-reading-number">
-                    {(index + 1).toString().padStart(2, '0')}
-                  </div>
-                  <div className="res-reading-meta">
-                    <h3 className="res-reading-title">{reading.title}</h3>
-                    <span className="res-reading-author">
-                      <User size={13} style={{ marginRight: '6px' }} />
-                      {reading.authors}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="res-reading-center">
-                  <p className="res-reading-desc">{reading.description}</p>
-                  <div className="res-reading-tags">
-                    {reading.tags.map((tag) => (
-                      <span className="res-reading-chip" key={tag}>{tag}</span>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="res-reading-right">
-                  <a 
-                    href={reading.link} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="res-reading-link"
-                    aria-label={`Read paper ${reading.title}`}
-                  >
-                    <FileText size={16} />
-                    <span>View PDF</span>
-                    <ExternalLink size={12} className="res-link-icon" />
-                  </a>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 4. LIVE AI NEWS FEED */}
+      {/* 2. LIVE AI NEWS FEED */}
       <section className="res-section">
         <div className="atmos-shell">
           <div className="atmos-section-head">
@@ -442,7 +347,7 @@ const Resources = () => {
               <span className="atmos-section-eyebrow">Algolia Hacker News Stream</span>
               <h2 className="atmos-section-title">Live AI News Feed</h2>
             </div>
-            <span className="atmos-section-aside">03 / Signal</span>
+            <span className="atmos-section-aside">01 / Signal</span>
           </div>
 
           {/* Search and Feedback Banner */}
@@ -543,6 +448,101 @@ const Resources = () => {
                 </button>
               </div>
             )}
+          </div>
+        </div>
+      </section>
+
+      {/* 3. GUIDES & SKILLS DIRECTORY */}
+      <section className="res-section res-section-tinted">
+        <div className="atmos-shell">
+          <div className="atmos-section-head">
+            <div>
+              <span className="atmos-section-eyebrow">Curriculum Directory</span>
+              <h2 className="atmos-section-title">Core AI Guides</h2>
+            </div>
+            <span className="atmos-section-aside">02 / Skillsets</span>
+          </div>
+
+          <div className="res-skills-grid">
+            {SKILLS_DATA.map((skill) => (
+              <div className="res-skill-card" key={skill.id}>
+                <div className={`res-card-visual visual-${skill.colorPreset}`}>
+                  <SkillVisual preset={skill.colorPreset} />
+                  <span className="res-card-category-badge">
+                    {getSkillIcon(skill.id)}
+                    {skill.title}
+                  </span>
+                </div>
+                
+                <div className="res-card-body">
+                  <h3 className="res-card-title">{skill.title}</h3>
+                  <p className="res-card-desc">{skill.description}</p>
+                  
+                  <div className="res-card-footer">
+                    <div className="res-tag-group">
+                      {skill.tags.map((tag) => (
+                        <span className="res-tag-chip" key={tag}>{tag}</span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 4. RECOMMENDED READINGS */}
+      <section className="res-section">
+        <div className="atmos-shell">
+          <div className="atmos-section-head">
+            <div>
+              <span className="atmos-section-eyebrow">Literature List</span>
+              <h2 className="atmos-section-title">Recommended Readings</h2>
+            </div>
+            <span className="atmos-section-aside">03 / Research</span>
+          </div>
+
+          <div className="res-readings-list">
+            {READINGS_DATA.map((reading, index) => (
+              <div className="res-reading-row" key={index}>
+                <div className="res-reading-left">
+                  <div className="res-reading-number">
+                    {(index + 1).toString().padStart(2, '0')}
+                  </div>
+                  <div className="res-reading-meta">
+                    <h3 className="res-reading-title">{reading.title}</h3>
+                    <span className="res-reading-author">
+                      <User size={13} style={{ marginRight: '6px' }} />
+                      {reading.authors}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="res-reading-center">
+                  <p className="res-reading-desc">{reading.description}</p>
+                  <div className="res-reading-tags">
+                    {reading.tags.map((tag) => (
+                      <span className="res-reading-chip" key={tag}>{tag}</span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="res-reading-right">
+                  <a 
+                    href={reading.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="res-reading-link"
+                    aria-label={`Read paper ${reading.title}`}
+                  >
+                    <FileText size={16} />
+                    <span>View PDF</span>
+                    <ExternalLink size={12} className="res-link-icon" />
+                  </a>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
