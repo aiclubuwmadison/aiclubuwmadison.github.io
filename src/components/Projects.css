@@ -360,3 +360,43 @@
 [data-theme="dark"] .visual-orange { background: linear-gradient(135deg, rgba(234, 88, 12, 0.12) 0%, rgba(0, 0, 0, 0) 100%); }
 [data-theme="dark"] .visual-purple { background: linear-gradient(135deg, rgba(124, 58, 237, 0.12) 0%, rgba(0, 0, 0, 0) 100%); }
 [data-theme="dark"] .visual-emerald { background: linear-gradient(135deg, rgba(5, 150, 105, 0.12) 0%, rgba(0, 0, 0, 0) 100%); }
+
+/* PLACEHOLDER NOTICE BANNER -------------------------------- */
+.projects-notice-banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 24px;
+  background: rgba(197, 5, 12, 0.03);
+  border: 1px dashed rgba(197, 5, 12, 0.25);
+  border-radius: 12px;
+  max-width: 680px;
+  margin: 20px auto 0;
+  text-align: center;
+}
+
+[data-theme="dark"] .projects-notice-banner {
+  background: rgba(197, 5, 12, 0.05);
+  border: 1px dashed rgba(197, 5, 12, 0.35);
+}
+
+.projects-notice-badge {
+  font-family: var(--atmos-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--atmos-badger);
+  background: rgba(197, 5, 12, 0.08);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.projects-notice-text {
+  font-family: var(--atmos-sans);
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--atmos-ink-soft);
+  margin: 0;
+}

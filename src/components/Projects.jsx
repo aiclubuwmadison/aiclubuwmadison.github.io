@@ -29,7 +29,7 @@ const PROJECTS_DATA = [
     category: 'Robotics',
     description: 'Developed an autonomous navigation system using computer vision, RTK-GPS sensor fusion, and ROS2 to pilot a custom-built physical rover across unstructured terrain.',
     tech: ['ROS2', 'Python', 'C++', 'OpenCV', 'PyTorch'],
-    team: ['Sam Avramov', 'Jack Koteles', 'Liam O\'Connor'],
+    team: ['Project Lead', 'Team Member 1', 'Team Member 2'],
     repo: 'https://github.com/aiclubuwmadison/autonomous-rover',
     colorPreset: 'red'
   },
@@ -40,7 +40,7 @@ const PROJECTS_DATA = [
     category: 'NLP',
     description: 'Fine-tuned a Llama-3 model on open-source clinical notes datasets to summarize patient records and extract diagnostic event timelines with high medical accuracy.',
     tech: ['PyTorch', 'HuggingFace', 'Llama-3', 'FastAPI', 'React'],
-    team: ['Yug Marwaha', 'Hriday Sethi', 'Dr. Sarah Chen'],
+    team: ['Project Lead', 'Team Member 1', 'Team Member 2'],
     repo: 'https://github.com/aiclubuwmadison/clinician-assistant',
     colorPreset: 'azure'
   },
@@ -51,7 +51,7 @@ const PROJECTS_DATA = [
     category: 'CV',
     description: 'Built a semantic segmentation pipeline using a customized UNet architecture to identify and outline wildfire hotspots from satellite and real-time drone imagery.',
     tech: ['PyTorch', 'UNet', 'TensorRT', 'Python', 'GDAL'],
-    team: ['Kartik Gangwar', 'Diana Prince', 'Alexey Gorbunov'],
+    team: ['Project Lead', 'Team Member 1', 'Team Member 2'],
     repo: 'https://github.com/aiclubuwmadison/wildfire-eye',
     colorPreset: 'orange'
   },
@@ -62,7 +62,7 @@ const PROJECTS_DATA = [
     category: 'Agents',
     description: 'An autonomous agent that assists students by checking compile errors in real-time, explaining algorithms, and suggesting codebase fixes in a sandboxed Docker environment.',
     tech: ['LangChain', 'Claude API', 'Node.js', 'Docker', 'React'],
-    team: ['Adhyot Singh', 'Samarth Bhargava', 'Elena Rostova'],
+    team: ['Project Lead', 'Team Member 1', 'Team Member 2'],
     repo: 'https://github.com/aiclubuwmadison/study-agent',
     colorPreset: 'purple'
   },
@@ -73,7 +73,7 @@ const PROJECTS_DATA = [
     category: 'Robotics',
     description: 'Implemented multi-agent reinforcement learning (MARL) algorithms to coordinate drone swarms in target tracking and collision avoidance within simulated environments.',
     tech: ['ROS', 'Python', 'Ray/RLlib', 'C++', 'Gazebo'],
-    team: ['Rishabh Aggarwal', 'Arnav Batra', 'David Kim'],
+    team: ['Project Lead', 'Team Member 1', 'Team Member 2'],
     repo: 'https://github.com/aiclubuwmadison/swarm-coordinator',
     colorPreset: 'emerald'
   },
@@ -84,7 +84,7 @@ const PROJECTS_DATA = [
     category: 'NLP',
     description: 'Fine-tuned transformer-based models specifically on a corpus of legal briefs and terms of service documents to produce highly accurate, plain-English legal summaries.',
     tech: ['PyTorch', 'HuggingFace', 'Transformers', 'Flask'],
-    team: ['Charith Reddy Pareddy', 'Kashish Agarwal', 'Jessica Taylor'],
+    team: ['Project Lead', 'Team Member 1', 'Team Member 2'],
     repo: 'https://github.com/aiclubuwmadison/legal-summarizer',
     colorPreset: 'purple'
   },
@@ -95,7 +95,7 @@ const PROJECTS_DATA = [
     category: 'Agents',
     description: 'An AI agent that interacts with real-time Madison transit APIs to create optimized travel plans for students, adapting dynamically to weather, delays, and class schedules.',
     tech: ['LangGraph', 'Python', 'FastAPI', 'Google Maps API'],
-    team: ['Vardaan Kapoor', 'Ira Hande', 'Akash Goda'],
+    team: ['Project Lead', 'Team Member 1', 'Team Member 2'],
     repo: 'https://github.com/aiclubuwmadison/campus-navigator',
     colorPreset: 'orange'
   }
@@ -194,6 +194,12 @@ const Projects = () => {
               Explore cutting-edge systems, models, and platforms built by our members. 
               From physical robots to fine-tuned transformer networks, we learn by building.
             </p>
+            <div className="projects-notice-banner">
+              <span className="projects-notice-badge">Template Showcase</span>
+              <p className="projects-notice-text">
+                Note: The projects listed below represent template showcases and hypothetical portfolio examples of the types of engineering projects AI@UW members collaborate on. Active project recruitment for this semester will open soon.
+              </p>
+            </div>
           </div>
         </div>
       </section>
