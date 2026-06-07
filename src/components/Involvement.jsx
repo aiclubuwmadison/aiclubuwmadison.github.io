@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import './Involvement.css';
 import { Link } from 'react-router-dom';
 import { User, Calendar, Mail, GraduationCap, Lightbulb, Clock, Users, LogIn, UserPlus, MessageCircle } from 'lucide-react';
@@ -96,6 +97,10 @@ const FAQS = [
 ];
 
 const Involvement = () => {
+  useEffect(() => {
+    document.title = 'FAQ | AI@UW';
+  }, []);
+
   return (
     <div className="atmos-root atmos-involvement">
       <div className="atmos-shell">

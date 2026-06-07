@@ -15,18 +15,7 @@ function ScrollReveal() {
 
   useEffect(() => {
     const SELECTORS = [
-      '.atmos-section-head',
-      '.atmos-index-row',
-      '.atmos-roster-tile',
-      '.atmos-archive-section-head',
       '.atmos-faq-row',
-      '.atmos-sem-row',
-      '.atmos-channel',
-      '.about-section-row',
-      '.atmos-hero-notes',
-      '.atmos-leadership-foot',
-      '.atmos-sem-foot',
-      '.atmos-contact-foot',
     ].join(',');
 
     const io = new IntersectionObserver((entries) => {
