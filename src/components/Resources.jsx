@@ -232,7 +232,7 @@ const Resources = () => {
     const loadNewsAsync = async () => {
       try {
         const response = await fetch(
-          'https://hn.algolia.com/api/v1/search?query=artificial%20intelligence&tags=story'
+          'https://hn.algolia.com/api/v1/search_by_date?query=artificial%20intelligence&tags=story'
         );
         if (!response.ok) {
           throw new Error('API request failed');
@@ -240,10 +240,21 @@ const Resources = () => {
         const data = await response.json();
         if (active) {
           if (data.hits && data.hits.length > 0) {
-            const cleanHits = data.hits.filter(hit => hit.title && hit.url);
-            setNews(cleanHits);
+            const twoWeeksAgo = Date.now() - 14 * 24 * 60 * 60 * 1000;
+            const cleanHits = data.hits.filter(hit => {
+              if (!hit.title || !hit.url) return false;
+              const createdMs = hit.created_at_i ? hit.created_at_i * 1000 : new Date(hit.created_at).getTime();
+              return createdMs > twoWeeksAgo;
+            });
+            
+            if (cleanHits.length >= 3) {
+              setNews(cleanHits.slice(0, 5));
+            } else {
+              setNews(MOCK_NEWS_DATA.slice(0, 5));
+              setUsingFallback(true);
+            }
           } else {
-            setNews(MOCK_NEWS_DATA);
+            setNews(MOCK_NEWS_DATA.slice(0, 5));
             setUsingFallback(true);
           }
           setLoading(false);
@@ -251,7 +262,7 @@ const Resources = () => {
       } catch (err) {
         console.warn('HN API Fetch failed, loading high-quality curated fallback news instead:', err);
         if (active) {
-          setNews(MOCK_NEWS_DATA);
+          setNews(MOCK_NEWS_DATA.slice(0, 5));
           setUsingFallback(true);
           setLoading(false);
         }
@@ -271,22 +282,33 @@ const Resources = () => {
     setUsingFallback(false);
     try {
       const response = await fetch(
-        'https://hn.algolia.com/api/v1/search?query=artificial%20intelligence&tags=story'
+        'https://hn.algolia.com/api/v1/search_by_date?query=artificial%20intelligence&tags=story'
       );
       if (!response.ok) {
         throw new Error('API request failed');
       }
       const data = await response.json();
       if (data.hits && data.hits.length > 0) {
-        const cleanHits = data.hits.filter(hit => hit.title && hit.url);
-        setNews(cleanHits);
+        const twoWeeksAgo = Date.now() - 14 * 24 * 60 * 60 * 1000;
+        const cleanHits = data.hits.filter(hit => {
+          if (!hit.title || !hit.url) return false;
+          const createdMs = hit.created_at_i ? hit.created_at_i * 1000 : new Date(hit.created_at).getTime();
+          return createdMs > twoWeeksAgo;
+        });
+        
+        if (cleanHits.length >= 3) {
+          setNews(cleanHits.slice(0, 5));
+        } else {
+          setNews(MOCK_NEWS_DATA.slice(0, 5));
+          setUsingFallback(true);
+        }
       } else {
-        setNews(MOCK_NEWS_DATA);
+        setNews(MOCK_NEWS_DATA.slice(0, 5));
         setUsingFallback(true);
       }
     } catch (err) {
       console.warn('HN API Fetch failed, loading high-quality curated fallback news instead:', err);
-      setNews(MOCK_NEWS_DATA);
+      setNews(MOCK_NEWS_DATA.slice(0, 5));
       setUsingFallback(true);
     } finally {
       setLoading(false);
