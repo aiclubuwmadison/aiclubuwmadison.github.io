@@ -15,6 +15,7 @@ const NAV_ITEMS = [
   { to: "/leadership", label: "Leadership" },
   { to: "/seminars", label: "Seminars" },
   { to: "/projects", label: "Projects" },
+  { to: "/resources", label: "Resources" },
   { to: "/involvement", label: "FAQ" },
   { to: "/contact", label: "Contact" }
 ];

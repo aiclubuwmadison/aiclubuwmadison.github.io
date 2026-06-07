@@ -9,6 +9,7 @@ const Leadership = lazy(() => import("./components/Leadership"));
 const Contact = lazy(() => import("./components/Contact"));
 const Seminars = lazy(() => import("./components/Seminars"));
 const Projects = lazy(() => import("./components/Projects"));
+const Resources = lazy(() => import("./components/Resources"));
 const PitchBuilder = lazy(() => import("./components/PitchBuilder"));
 const Sandbox = lazy(() => import("./components/Sandbox"));
 
@@ -89,6 +90,10 @@ function App() {
               <Route
                 path="/projects"
                 element={<><Projects /><Footer /></>}
+              />
+              <Route
+                path="/resources"
+                element={<><Resources /><Footer /></>}
               />
               <Route
                 path="/pitch"
