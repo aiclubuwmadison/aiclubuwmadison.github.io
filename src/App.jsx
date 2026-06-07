@@ -1,12 +1,17 @@
-import { useEffect, lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import Nav from './components/Nav';
-import Footer from './components/Footer';
-const About = lazy(() => import('./components/About'));
-const Involvement = lazy(() => import('./components/Involvement'));
-const Leadership = lazy(() => import('./components/Leadership'));
-const Contact = lazy(() => import('./components/Contact'));
-const Seminars = lazy(() => import('./components/Seminars'));
+import { useEffect, lazy, Suspense } from "react";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import Nav from "./components/Nav";
+import Footer from "./components/Footer";
+
+const About = lazy(() => import("./components/About"));
+const Involvement = lazy(() => import("./components/Involvement"));
+const Leadership = lazy(() => import("./components/Leadership"));
+const Contact = lazy(() => import("./components/Contact"));
+const Seminars = lazy(() => import("./components/Seminars"));
+const Projects = lazy(() => import("./components/Projects"));
+const Resources = lazy(() => import("./components/Resources"));
+const PitchBuilder = lazy(() => import("./components/PitchBuilder"));
+const Sandbox = lazy(() => import("./components/Sandbox"));
 
 // Global scroll-reveal — watches specific elements on every page and fades
 // them in as they enter the viewport. Re-runs on route change via MutationObserver.
@@ -15,13 +20,13 @@ function ScrollReveal() {
 
   useEffect(() => {
     const SELECTORS = [
-      '.atmos-faq-row',
-    ].join(',');
+      ".atmos-faq-row"
+    ].join(",");
 
     const io = new IntersectionObserver((entries) => {
       entries.forEach((e) => {
         if (e.isIntersecting) {
-          e.target.classList.add('sr-visible');
+          e.target.classList.add("sr-visible");
           io.unobserve(e.target);
         }
       });
@@ -30,8 +35,8 @@ function ScrollReveal() {
     const observe = () => {
       document.querySelectorAll(SELECTORS).forEach((el, i) => {
         if (el.dataset.srReady) return;
-        el.dataset.srReady = '1';
-        el.classList.add('sr-hidden');
+        el.dataset.srReady = "1";
+        el.classList.add("sr-hidden");
         el.style.transitionDelay = `${Math.min((i % 5) * 70, 280)}ms`;
         io.observe(el);
       });
@@ -39,7 +44,7 @@ function ScrollReveal() {
 
     observe();
     const mo = new MutationObserver(() => setTimeout(observe, 30));
-    mo.observe(document.getElementById('body-wrapper') || document.body, {
+    mo.observe(document.getElementById("body-wrapper") || document.body, {
       childList: true, subtree: true,
     });
 
@@ -82,6 +87,22 @@ function App() {
                 path="/seminars"
                 element={<><Seminars /><Footer /></>}
               />
+              <Route
+                path="/projects"
+                element={<><Projects /><Footer /></>}
+              />
+              <Route
+                path="/resources"
+                element={<><Resources /><Footer /></>}
+              />
+              <Route
+                path="/pitch"
+                element={<><PitchBuilder /><Footer /></>}
+              />
+              <Route
+                path="/sandbox"
+                element={<><Sandbox /><Footer /></>}
+              />
             </Routes>
           </Suspense>
         </div>
@@ -91,3 +112,4 @@ function App() {
 }
 
 export default App;
+

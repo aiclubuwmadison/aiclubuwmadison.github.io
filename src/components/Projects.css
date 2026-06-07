@@ -1,0 +1,402 @@
+/* =========================================================
+   ATMOSPHERIC MODERN — Projects Showcase Page
+   Scoped to .atmos-projects
+   ========================================================= */
+
+.atmos-projects {
+  padding-bottom: clamp(64px, 9vw, 120px);
+  background: var(--atmos-paper);
+}
+
+/* HERO SECTION -------------------------------------------- */
+.projects-hero {
+  padding: clamp(48px, 6vw, 80px) 0 clamp(24px, 3vw, 40px);
+}
+
+.projects-hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(14px, 2vw, 24px);
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.projects-hero-eyebrow {
+  font-family: var(--atmos-mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--atmos-badger);
+  margin: 0;
+}
+
+.projects-hero-title {
+  font-family: var(--atmos-serif);
+  font-weight: 800;
+  font-size: clamp(38px, 5.5vw, 64px);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--atmos-ink);
+  margin: 0;
+}
+
+.projects-hero-lede {
+  font-family: var(--atmos-sans);
+  font-size: clamp(15px, 1.4vw, 18px);
+  line-height: 1.6;
+  color: var(--atmos-ink-soft);
+  margin: 0;
+}
+
+/* TAB FILTERS --------------------------------------------- */
+.projects-tabs-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: clamp(32px, 4vw, 56px);
+  padding: 0 var(--atmos-gutter);
+}
+
+.projects-tabs {
+  display: flex;
+  gap: 8px;
+  padding: 6px;
+  background: rgba(15, 23, 42, 0.04);
+  border: 1px solid var(--atmos-hairline);
+  border-radius: 999px;
+  backdrop-filter: blur(10px);
+  overflow-x: auto;
+  max-width: 100%;
+  scrollbar-width: none; /* Firefox */
+}
+
+.projects-tabs::-webkit-scrollbar {
+  display: none; /* Safari/Chrome */
+}
+
+.projects-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--atmos-sans);
+  font-size: 13.5px;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  color: var(--atmos-ink-soft);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.projects-tab:hover {
+  color: var(--atmos-ink);
+  background: rgba(15, 23, 42, 0.03);
+}
+
+.projects-tab.active {
+  background: #ffffff;
+  color: var(--atmos-badger);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.project-category-icon {
+  flex-shrink: 0;
+}
+
+/* PROJECTS GRID ------------------------------------------- */
+.projects-grid-section {
+  padding-bottom: 24px;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: clamp(20px, 3vw, 36px);
+}
+
+/* PROJECT CARD -------------------------------------------- */
+.project-card {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border: 1px solid var(--atmos-hairline);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(15, 17, 21, 0.02), 0 8px 24px rgba(15, 17, 21, 0.03);
+  transition: transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1),
+              box-shadow 300ms cubic-bezier(0.2, 0.8, 0.2, 1),
+              border-color 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(197, 5, 12, 0.25);
+  box-shadow: 0 12px 32px rgba(197, 5, 12, 0.08), 0 2px 8px rgba(197, 5, 12, 0.04);
+}
+
+/* CARD VISUAL HEADER --------------------------------------- */
+.project-card-visual {
+  position: relative;
+  height: 180px;
+  background: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-bottom: 1px solid var(--atmos-hairline);
+}
+
+.project-card-visual-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  transition: transform 500ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.project-card:hover .project-card-visual-svg {
+  transform: scale(1.05);
+}
+
+/* Background Gradients for Visual Header */
+.visual-red { background: linear-gradient(135deg, rgba(197, 5, 12, 0.04) 0%, rgba(197, 5, 12, 0.01) 100%); }
+.visual-azure { background: linear-gradient(135deg, rgba(2, 132, 199, 0.05) 0%, rgba(2, 132, 199, 0.01) 100%); }
+.visual-orange { background: linear-gradient(135deg, rgba(234, 88, 12, 0.05) 0%, rgba(234, 88, 12, 0.01) 100%); }
+.visual-purple { background: linear-gradient(135deg, rgba(124, 58, 237, 0.05) 0%, rgba(124, 58, 237, 0.01) 100%); }
+.visual-emerald { background: linear-gradient(135deg, rgba(5, 150, 105, 0.05) 0%, rgba(5, 150, 105, 0.01) 100%); }
+
+/* Category Badge */
+.project-card-category-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  font-family: var(--atmos-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  color: var(--atmos-ink);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  backdrop-filter: blur(8px);
+  z-index: 2;
+}
+
+/* CARD BODY ----------------------------------------------- */
+.project-card-body {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  flex-grow: 1;
+}
+
+.project-card-title {
+  font-family: var(--atmos-serif);
+  font-size: clamp(20px, 2.2vw, 24px);
+  font-weight: 700;
+  color: var(--atmos-ink);
+  margin: 0 0 6px 0;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+}
+
+.project-card-tagline {
+  font-family: var(--atmos-sans);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--atmos-badger);
+  margin: 0 0 14px 0;
+  line-height: 1.3;
+}
+
+.project-card-desc {
+  font-family: var(--atmos-sans);
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--atmos-ink-soft);
+  margin: 0 0 20px 0;
+}
+
+/* Tech Chips */
+.project-card-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+
+.project-tech-chip {
+  font-family: var(--atmos-mono);
+  font-size: 10px;
+  font-weight: 550;
+  padding: 4px 10px;
+  background: var(--atmos-paper-tint);
+  border: 1px solid var(--atmos-hairline);
+  color: var(--atmos-ink-soft);
+  border-radius: 6px;
+  letter-spacing: -0.01em;
+}
+
+/* Team Credits */
+.project-card-team {
+  display: flex;
+  gap: 6px;
+  font-family: var(--atmos-sans);
+  font-size: 13px;
+  line-height: 1.4;
+  margin-bottom: 20px;
+  padding-top: 14px;
+  border-top: 1px solid var(--atmos-hairline-soft);
+  margin-top: auto; /* Push to bottom of content area */
+}
+
+.project-team-label {
+  font-weight: 700;
+  color: var(--atmos-ink-soft);
+}
+
+.project-team-members {
+  color: var(--atmos-ink-mute);
+  font-style: italic;
+}
+
+/* Repo Link */
+.project-repo-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--atmos-sans);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--atmos-ink);
+  text-decoration: none;
+  align-self: flex-start;
+  transition: color 200ms ease;
+}
+
+.project-repo-arrow {
+  display: inline-block;
+  transition: transform 200ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.project-repo-link:hover {
+  color: var(--atmos-badger);
+}
+
+.project-repo-link:hover .project-repo-arrow {
+  transform: translateX(4px);
+}
+
+/* RESPONSIVE LAYOUT --------------------------------------- */
+@media (max-width: 760px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .projects-tabs {
+    border-radius: 16px;
+  }
+}
+
+/* =========================================================
+   DARK MODE ADJUSTMENTS
+   ========================================================= */
+[data-theme="dark"] .atmos-projects {
+  background: #0a0a0a;
+  --atmos-paper: #141414;
+  --atmos-paper-deep: #0a0a0a;
+  --atmos-paper-tint: #1e1e1e;
+  --atmos-ink: #f1f5f9;
+  --atmos-ink-soft: #cbd5e1;
+  --atmos-ink-mute: #64748b;
+  --atmos-hairline: rgba(255, 255, 255, 0.10);
+  --atmos-hairline-soft: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .projects-tabs {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+[data-theme="dark"] .projects-tab:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+[data-theme="dark"] .projects-tab.active {
+  background: #1e1e1e;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .project-card {
+  background: #141414;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5), 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .project-card:hover {
+  box-shadow: 0 12px 32px rgba(197, 5, 12, 0.16), 0 2px 8px rgba(197, 5, 12, 0.08);
+}
+
+[data-theme="dark"] .project-card-visual {
+  background: #1a1a1a;
+}
+
+[data-theme="dark"] .project-card-category-badge {
+  background: rgba(20, 20, 20, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #f1f5f9;
+}
+
+/* Accent overlays in Dark Mode */
+[data-theme="dark"] .visual-red { background: linear-gradient(135deg, rgba(197, 5, 12, 0.10) 0%, rgba(0, 0, 0, 0) 100%); }
+[data-theme="dark"] .visual-azure { background: linear-gradient(135deg, rgba(2, 132, 199, 0.12) 0%, rgba(0, 0, 0, 0) 100%); }
+[data-theme="dark"] .visual-orange { background: linear-gradient(135deg, rgba(234, 88, 12, 0.12) 0%, rgba(0, 0, 0, 0) 100%); }
+[data-theme="dark"] .visual-purple { background: linear-gradient(135deg, rgba(124, 58, 237, 0.12) 0%, rgba(0, 0, 0, 0) 100%); }
+[data-theme="dark"] .visual-emerald { background: linear-gradient(135deg, rgba(5, 150, 105, 0.12) 0%, rgba(0, 0, 0, 0) 100%); }
+
+/* PLACEHOLDER NOTICE BANNER -------------------------------- */
+.projects-notice-banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 24px;
+  background: rgba(197, 5, 12, 0.03);
+  border: 1px dashed rgba(197, 5, 12, 0.25);
+  border-radius: 12px;
+  max-width: 680px;
+  margin: 20px auto 0;
+  text-align: center;
+}
+
+[data-theme="dark"] .projects-notice-banner {
+  background: rgba(197, 5, 12, 0.05);
+  border: 1px dashed rgba(197, 5, 12, 0.35);
+}
+
+.projects-notice-badge {
+  font-family: var(--atmos-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--atmos-badger);
+  background: rgba(197, 5, 12, 0.08);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.projects-notice-text {
+  font-family: var(--atmos-sans);
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--atmos-ink-soft);
+  margin: 0;
+}

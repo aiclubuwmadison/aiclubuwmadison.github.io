@@ -1,21 +1,23 @@
-import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Sun, Moon } from 'lucide-react';
-import './Nav.css';
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Sun, Moon } from "lucide-react";
+import "./Nav.css";
 
 const getInitialTheme = () => {
-  if (typeof window === 'undefined') return 'light';
-  const stored = window.localStorage.getItem('theme');
-  if (stored === 'light' || stored === 'dark') return stored;
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  if (typeof window === "undefined") return "light";
+  const stored = window.localStorage.getItem("theme");
+  if (stored === "light" || stored === "dark") return stored;
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 };
 
 const NAV_ITEMS = [
-  { to: '/about', label: 'About Us' },
-  { to: '/leadership', label: 'Leadership' },
-  { to: '/seminars', label: 'Seminars' },
-  { to: '/involvement', label: 'FAQ' },
-  { to: '/contact', label: 'Contact' },
+  { to: "/about", label: "About Us" },
+  { to: "/leadership", label: "Leadership" },
+  { to: "/seminars", label: "Seminars" },
+  { to: "/projects", label: "Projects" },
+  { to: "/resources", label: "Resources" },
+  { to: "/involvement", label: "FAQ" },
+  { to: "/contact", label: "Contact" }
 ];
 
 const Nav = () => {
@@ -28,12 +30,12 @@ const Nav = () => {
   const isActive = (to) => location.pathname === to;
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-    window.localStorage.setItem('theme', theme);
+    document.documentElement.setAttribute("data-theme", theme);
+    window.localStorage.setItem("theme", theme);
   }, [theme]);
 
-  const toggleTheme = () => setTheme((t) => (t === 'dark' ? 'light' : 'dark'));
-  const themeLabel = theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode';
+  const toggleTheme = () => setTheme((t) => (t === "dark" ? "light" : "dark"));
+  const themeLabel = theme === "dark" ? "Switch to light mode" : "Switch to dark mode";
 
   useEffect(() => {
     let rafId;
@@ -46,9 +48,9 @@ const Nav = () => {
         setScrolled(y > 24);
       });
     };
-    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => {
-      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener("scroll", onScroll);
       cancelAnimationFrame(rafId);
     };
   }, []);
@@ -68,7 +70,7 @@ const Nav = () => {
         aria-hidden="true"
       />
 
-      <header className={`atmos-nav${scrolled ? ' atmos-nav--scrolled' : ''}`}>
+      <header className={`atmos-nav${scrolled ? " atmos-nav--scrolled" : ""}`}>
         <div className="atmos-shell atmos-nav-inner">
 
           {/* Brand */}
@@ -86,8 +88,8 @@ const Nav = () => {
                   <Link
                     to={item.to}
                     className={
-                      'atmos-nav-link' +
-                      (isActive(item.to) ? ' atmos-nav-link-active' : '')
+                      "atmos-nav-link" +
+                      (isActive(item.to) ? " atmos-nav-link-active" : "")
                     }
                   >
                     {item.label}
@@ -120,14 +122,14 @@ const Nav = () => {
               aria-label={themeLabel}
               title={themeLabel}
             >
-              {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+              {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
             </button>
           </div>
 
           {/* Burger */}
           <button
             type="button"
-            className={`atmos-nav-burger${mobileOpen ? ' atmos-nav-burger--open' : ''}`}
+            className={`atmos-nav-burger${mobileOpen ? " atmos-nav-burger--open" : ""}`}
             aria-expanded={mobileOpen}
             aria-controls="atmos-nav-mobile-panel"
             onClick={() => setMobileOpen((v) => !v)}
@@ -144,8 +146,8 @@ const Nav = () => {
       <div
         id="atmos-nav-mobile-panel"
         className={
-          'atmos-nav-mobile-panel' +
-          (mobileOpen ? ' atmos-nav-mobile-open' : '')
+          "atmos-nav-mobile-panel" +
+          (mobileOpen ? " atmos-nav-mobile-open" : "")
         }
       >
         <nav>
@@ -155,8 +157,8 @@ const Nav = () => {
               to={item.to}
               onClick={() => setMobileOpen(false)}
               className={
-                'atmos-nav-mobile-link' +
-                (isActive(item.to) ? ' atmos-nav-link-active' : '')
+                "atmos-nav-mobile-link" +
+                (isActive(item.to) ? " atmos-nav-link-active" : "")
               }
             >
               {item.label}
@@ -169,8 +171,8 @@ const Nav = () => {
           onClick={toggleTheme}
           aria-label={themeLabel}
         >
-          {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
-          <span>{theme === 'dark' ? 'Light mode' : 'Dark mode'}</span>
+          {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+          <span>{theme === "dark" ? "Light mode" : "Dark mode"}</span>
         </button>
         <Link
           to="/contact"
@@ -185,3 +187,4 @@ const Nav = () => {
 };
 
 export default Nav;
+
