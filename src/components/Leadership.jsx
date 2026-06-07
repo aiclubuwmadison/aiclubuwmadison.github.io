@@ -227,8 +227,8 @@ const Leadership = () => {
   const PastLeadershipData = [
     [
       { file: 'anniruddh.jpg',  title: 'President',                          name: 'Anniruddh Kumar' },
-      { file: 'tanish.jpg',     title: 'Vice President',                     name: 'Tanish Nahata',       link: 'https://www.linkedin.com/in/tanish-nahata' },
-      { file: 'taha.jpg',       title: 'Head of PR',                         name: 'Taha Sawar',          link: 'https://www.linkedin.com/in/sawar/' },
+      { file: '_placeholder.svg', title: 'Vice President',                     name: 'Tanish Nahata',       link: 'https://www.linkedin.com/in/tanish-nahata' },
+      { file: '_placeholder.svg', title: 'Head of PR',                         name: 'Taha Sawar',          link: 'https://www.linkedin.com/in/sawar/' },
     ],
     [
       { file: 'arun.jpg',       title: 'Event Head',                         name: 'Arun Sivarajah' },
@@ -283,7 +283,7 @@ const Leadership = () => {
     [
       { file: 'shikha.jpeg',    title: 'Marketing Head',         name: 'Shikha Ashara',                 link: 'https://www.linkedin.com/in/shikha-ashara/' },
       { file: 'arnav.jpg',      title: 'Communications Manager', name: 'Arnav Batra',                   link: 'https://www.linkedin.com/in/batraarnav/' },
-      { file: 'swati.jpg',      title: 'Event Organizer',        name: 'Swati Banwani',                 link: 'https://matias.ma/nsfw/' },
+      { file: 'swati.jpg',      title: 'Event Organizer',        name: 'Swati Banwani',                 link: 'https://www.linkedin.com/in/swati-banwani-8497ab1b8/' },
     ],
     [
       { file: 'sam.jpg',        title: 'Project Manager',        name: 'Sam Avramov',                   link: 'https://www.linkedin.com/in/samavramov/' },
