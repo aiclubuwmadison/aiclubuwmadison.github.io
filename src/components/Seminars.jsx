@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import './Seminars.css';
 
 const seminars = [
@@ -141,6 +141,91 @@ const splitDate = (display) => {
   return { month: display.toUpperCase(), year: '' };
 };
 
+const getUtcString = (dateStr, timeStr = '18:00', durationMinutes = 60) => {
+  const month = parseInt(dateStr.split('-')[1], 10);
+  const offset = (month >= 3 && month < 11) ? 5 : 6;
+  const start = new Date(Date.UTC(
+    parseInt(dateStr.split('-')[0], 10),
+    parseInt(dateStr.split('-')[1], 10) - 1,
+    parseInt(dateStr.split('-')[2], 10),
+    parseInt(timeStr.split(':')[0], 10) + offset,
+    parseInt(timeStr.split(':')[1], 10)
+  ));
+  const end = new Date(start.getTime() + durationMinutes * 60000);
+  
+  const format = (d) => d.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+  return { start: format(start), end: format(end) };
+};
+
+const makeGoogleCalendarUrl = (item) => {
+  const { start, end } = getUtcString(item.date, item.time || '18:00', item.duration || 60);
+  const title = encodeURIComponent(item.title);
+  const details = encodeURIComponent(`${item.description || ''}\n\nSpeaker: ${item.speaker || ''}`);
+  const location = encodeURIComponent(item.location || 'Computer Sciences Building, UW-Madison');
+  return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${start}/${end}&details=${details}&location=${location}`;
+};
+
+const getIcsString = (item) => {
+  const { start, end } = getUtcString(item.date, item.time || '18:00', item.duration || 60);
+  const title = item.title.replace(/[,;]/g, '\\$&');
+  const details = (item.description || '').replace(/\n/g, '\\n').replace(/[,;]/g, '\\$&');
+  const location = (item.location || 'Computer Sciences Building, UW-Madison').replace(/[,;]/g, '\\$&');
+  const speaker = (item.speaker || '').replace(/[,;]/g, '\\$&');
+
+  return [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//AI Club UW Madison//Website//EN',
+    'CALSCALE:GREGORIAN',
+    'BEGIN:VEVENT',
+    `DTSTART:${start}`,
+    `DTEND:${end}`,
+    `SUMMARY:${title}`,
+    `DESCRIPTION:${details}\\n\\nSpeaker: ${speaker}`,
+    `LOCATION:${location}`,
+    'END:VEVENT',
+    'END:VCALENDAR'
+  ].join('\r\n');
+};
+
+const handleIcsDownload = (item) => {
+  const icsString = getIcsString(item);
+  const blob = new Blob([icsString], { type: 'text/calendar;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = `${item.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}.ics`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+};
+
+const IconCalendar = () => (
+  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '4px' }}>
+    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+    <line x1="16" y1="2" x2="16" y2="6" />
+    <line x1="8" y1="2" x2="8" y2="6" />
+    <line x1="3" y1="10" x2="21" y2="10" />
+  </svg>
+);
+
+const IconExternalLink = () => (
+  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '6px' }}>
+    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+    <polyline points="15 3 21 3 21 9" />
+    <line x1="10" y1="14" x2="21" y2="3" />
+  </svg>
+);
+
+const IconDownload = () => (
+  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '6px' }}>
+    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+    <polyline points="7 10 12 15 17 10" />
+    <line x1="12" y1="15" x2="12" y2="3" />
+  </svg>
+);
+
 const IconGrid = () => (
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
     <rect x="1" y="1" width="6" height="6" rx="1" fill="currentColor" />
@@ -188,8 +273,22 @@ const IconArrow = () => (
 
 const SeminarCard = ({ item }) => {
   const [expanded, setExpanded] = useState(false);
+  const [calOpen, setCalOpen] = useState(false);
+  const calRef = useRef(null);
   const { month, year } = splitDate(item.displayDate);
   const isWorkshop = item.type === 'workshop';
+
+  useEffect(() => {
+    if (!calOpen) return;
+    const handler = (e) => {
+      if (calRef.current && !calRef.current.contains(e.target)) {
+        setCalOpen(false);
+      }
+    };
+    document.addEventListener('click', handler);
+    return () => document.removeEventListener('click', handler);
+  }, [calOpen]);
+
   return (
     <div className={`atmos-sem-card${isWorkshop ? ' atmos-sem-card--workshop' : ''}`}>
       <div className="atmos-sem-card-row">
@@ -213,9 +312,47 @@ const SeminarCard = ({ item }) => {
       <p className={`atmos-sem-abstract${expanded ? ' atmos-sem-abstract--expanded' : ''}`}>
         {item.description}
       </p>
-      <button className="atmos-sem-view-link" onClick={() => setExpanded((v) => !v)}>
-        {expanded ? 'Show less' : 'View details'} <IconArrow />
-      </button>
+      <div className="atmos-sem-actions-row">
+        <button className="atmos-sem-view-link" onClick={() => setExpanded((v) => !v)}>
+          {expanded ? 'Show less' : 'View details'} <IconArrow />
+        </button>
+
+        <div className="atmos-sem-cal-wrapper" ref={calRef}>
+          <button 
+            type="button"
+            className="atmos-sem-cal-btn" 
+            onClick={() => setCalOpen((v) => !v)}
+            aria-expanded={calOpen}
+            aria-haspopup="menu"
+          >
+            <IconCalendar /> Add to Calendar
+          </button>
+          
+          {calOpen && (
+            <div className="atmos-sem-cal-dropdown" role="menu">
+              <a 
+                href={makeGoogleCalendarUrl(item)} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                role="menuitem"
+                onClick={() => setCalOpen(false)}
+              >
+                <IconExternalLink /> Google Calendar
+              </a>
+              <button 
+                type="button"
+                role="menuitem"
+                onClick={() => {
+                  handleIcsDownload(item);
+                  setCalOpen(false);
+                }}
+              >
+                <IconDownload /> Apple / Outlook (.ics)
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
