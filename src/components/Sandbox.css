@@ -1,0 +1,701 @@
+/* =========================================================
+   ATMOSPHERIC MODERN — AI Sandbox Page Styling
+   Sleek dashboard layout supporting light & dark modes,
+   glassmorphism cards, premium controls, and custom layouts.
+   ========================================================= */
+
+.atmos-sandbox {
+  padding: clamp(64px, 8vw, 120px) 0 clamp(48px, 6vw, 80px);
+  background: #f8fafc;
+  --atmos-paper: #ffffff;
+  --atmos-paper-deep: #f1f5f9;
+  --atmos-paper-tint: #f8fafc;
+  --atmos-ink: #0f172a;
+  --atmos-ink-soft: #475569;
+  --atmos-ink-mute: #94a3b8;
+  --atmos-hairline: rgba(0, 0, 0, 0.08);
+  --atmos-accent: #C5050C;
+  --atmos-accent-glow: rgba(197, 5, 12, 0.1);
+  --atmos-secondary: #00E5FF; /* Electric Cyan */
+  --atmos-secondary-glow: rgba(0, 229, 255, 0.15);
+  min-height: 100vh;
+}
+
+[data-theme="dark"] .atmos-sandbox {
+  background: #0a0a0a;
+  --atmos-paper: #141414;
+  --atmos-paper-deep: #0e0e0e;
+  --atmos-paper-tint: #1c1c1c;
+  --atmos-ink: #f1f5f9;
+  --atmos-ink-soft: #cbd5e1;
+  --atmos-ink-mute: #64748b;
+  --atmos-hairline: rgba(255, 255, 255, 0.08);
+  --atmos-accent: #E53935; /* Brighter red for dark theme contrast */
+  --atmos-accent-glow: rgba(229, 57, 53, 0.2);
+  --atmos-secondary: #00E5FF;
+  --atmos-secondary-glow: rgba(0, 229, 255, 0.2);
+}
+
+.atmos-sandbox-header {
+  margin-bottom: clamp(32px, 5vw, 64px);
+  text-align: center;
+}
+
+.sandbox-label {
+  display: block;
+  font-family: var(--atmos-sans);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--atmos-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 12px;
+}
+
+.sandbox-title {
+  font-family: var(--atmos-sans);
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--atmos-ink);
+  margin: 0 0 16px;
+}
+
+.sandbox-subtitle {
+  font-family: var(--atmos-sans);
+  font-size: 18px;
+  color: var(--atmos-ink-soft);
+  line-height: 1.6;
+  margin: 0 auto;
+  max-width: 50ch;
+}
+
+/* Dashboard Grid Layout */
+.sandbox-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 32px;
+  align-items: start;
+}
+
+@media (max-width: 1100px) {
+  .sandbox-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+/* Card Styling */
+.sandbox-card {
+  background: var(--atmos-paper);
+  border: 1px solid var(--atmos-hairline);
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+  position: relative;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .sandbox-card {
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+}
+
+.card-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--atmos-hairline);
+  padding-bottom: 16px;
+}
+
+.card-icon {
+  color: var(--atmos-accent);
+}
+
+.card-heading {
+  font-family: var(--atmos-sans);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--atmos-ink);
+  margin: 0;
+}
+
+.card-desc {
+  font-family: var(--atmos-sans);
+  font-size: 14px;
+  color: var(--atmos-ink-soft);
+  margin-top: 4px;
+  margin-bottom: 0;
+}
+
+/* SECTION 1: Neural Network Playground Controls */
+.nn-controls-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+  background: var(--atmos-paper-deep);
+  padding: 20px;
+  border-radius: 14px;
+  border: 1px solid var(--atmos-hairline);
+}
+
+.nn-control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.nn-control-group label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--atmos-ink-mute);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.nn-select, .nn-input {
+  background: var(--atmos-paper);
+  border: 1px solid var(--atmos-hairline);
+  color: var(--atmos-ink);
+  font-size: 13.5px;
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: 8px;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 200ms ease;
+}
+
+.nn-select:focus, .nn-input:focus {
+  border-color: var(--atmos-accent);
+}
+
+/* Hidden Layers Designer */
+.nn-layers-designer {
+  background: var(--atmos-paper-deep);
+  border: 1px solid var(--atmos-hairline);
+  border-radius: 14px;
+  padding: 16px 20px;
+  margin-bottom: 24px;
+}
+
+.nn-layers-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.nn-layers-header h4 {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--atmos-ink-soft);
+  text-transform: uppercase;
+  margin: 0;
+  letter-spacing: 0.05em;
+}
+
+.layer-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.layer-btn {
+  background: var(--atmos-paper);
+  border: 1px solid var(--atmos-hairline);
+  color: var(--atmos-ink);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 150ms ease;
+}
+
+.layer-btn:hover:not(:disabled) {
+  border-color: var(--atmos-accent);
+  color: var(--atmos-accent);
+}
+
+.layer-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.nn-layers-list {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.nn-layer-pill {
+  background: var(--atmos-paper);
+  border: 1px solid var(--atmos-hairline);
+  padding: 10px 14px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+}
+
+.nn-layer-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--atmos-ink-soft);
+}
+
+.nn-neuron-counter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.counter-btn {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid var(--atmos-hairline);
+  background: var(--atmos-paper-deep);
+  color: var(--atmos-ink);
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.counter-btn:hover:not(:disabled) {
+  background: var(--atmos-accent);
+  color: white;
+  border-color: var(--atmos-accent);
+}
+
+.counter-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.neuron-count {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--atmos-ink);
+  min-width: 14px;
+  text-align: center;
+}
+
+.nn-layer-arrow {
+  color: var(--atmos-ink-mute);
+  font-size: 14px;
+}
+
+/* Neural Network Interactive Visuals Split */
+.nn-visuals-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 16px;
+}
+
+@media (max-width: 768px) {
+  .nn-visuals-split {
+    grid-template-columns: 1fr;
+  }
+}
+
+.nn-panel-left, .nn-panel-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.boundary-canvas-container {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1.5px solid var(--atmos-hairline);
+  background: var(--atmos-paper-deep);
+  box-shadow: inset 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.boundary-canvas {
+  display: block;
+}
+
+.nn-train-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+  width: 100%;
+}
+
+.nn-btn {
+  flex: 1;
+  font-family: var(--atmos-sans);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 200ms cubic-bezier(.2,.7,.2,1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px solid transparent;
+  outline: none;
+}
+
+.nn-btn-train {
+  background: var(--atmos-accent);
+  color: white;
+  box-shadow: 0 4px 12px var(--atmos-accent-glow);
+}
+
+.nn-btn-train:hover {
+  transform: translateY(-1.5px);
+  box-shadow: 0 6px 16px var(--atmos-accent-glow);
+}
+
+.nn-btn-pause {
+  background: #f59e0b;
+  color: white;
+}
+
+.nn-btn-reset {
+  background: transparent;
+  border-color: var(--atmos-hairline);
+  color: var(--atmos-ink-soft);
+}
+
+.nn-btn-reset:hover {
+  border-color: var(--atmos-ink);
+  color: var(--atmos-ink);
+}
+
+.nn-btn-step {
+  background: var(--atmos-paper-deep);
+  border-color: var(--atmos-hairline);
+  color: var(--atmos-ink);
+}
+
+.nn-btn-step:hover {
+  border-color: var(--atmos-ink);
+}
+
+.nn-status-banner {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 14px;
+  padding: 10px;
+  background: var(--atmos-paper-deep);
+  border-radius: 8px;
+  border: 1.5px solid var(--atmos-hairline);
+}
+
+.status-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.status-stat span:first-child {
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--atmos-ink-mute);
+  text-transform: uppercase;
+}
+
+.status-stat span:last-child {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--atmos-ink);
+}
+
+/* Right Panel Visuals: SVG and Chart */
+.nn-architecture-svg-wrap {
+  width: 100%;
+  border: 1.5px solid var(--atmos-hairline);
+  border-radius: 12px;
+  background: var(--atmos-paper-deep);
+  padding: 8px;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loss-chart-card {
+  width: 100%;
+  margin-top: 16px;
+  border: 1.5px solid var(--atmos-hairline);
+  border-radius: 12px;
+  background: var(--atmos-paper-deep);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.chart-title {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--atmos-ink-mute);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+.chart-value {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--atmos-accent);
+}
+
+.loss-svg {
+  display: block;
+  width: 100%;
+  overflow: visible;
+}
+
+
+/* SECTION 2: Digit Recognition Canvas */
+.digit-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.digit-canvas-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.canvas-container {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 2px solid var(--atmos-hairline);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  background: #000000; /* Digit drawings are white on black */
+}
+
+.digit-canvas {
+  display: block;
+  cursor: crosshair;
+  touch-action: none; /* disables scrolling while drawing */
+}
+
+.canvas-controls {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  max-width: 280px;
+}
+
+.canvas-btn {
+  flex: 1;
+  font-family: var(--atmos-sans);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 1.5px solid var(--atmos-hairline);
+  background: var(--atmos-paper);
+  color: var(--atmos-ink-soft);
+  transition: all 150ms ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.canvas-btn:hover {
+  border-color: var(--atmos-ink);
+  color: var(--atmos-ink);
+}
+
+.canvas-btn-clear {
+  border-color: var(--atmos-accent);
+  color: var(--atmos-accent);
+  background: var(--atmos-accent-glow);
+}
+
+.canvas-btn-clear:hover {
+  background: var(--atmos-accent);
+  color: white;
+}
+
+/* Predictions Column */
+.digit-predictions-row {
+  background: var(--atmos-paper-deep);
+  border: 1.5px solid var(--atmos-hairline);
+  border-radius: 14px;
+  padding: 20px;
+}
+
+.predictions-header {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--atmos-ink-mute);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 16px;
+  border-bottom: 1.5px solid var(--atmos-hairline);
+  padding-bottom: 8px;
+}
+
+.prob-bars-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.prob-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.prob-digit {
+  font-family: var(--atmos-sans);
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--atmos-ink);
+  min-width: 20px;
+  text-align: center;
+}
+
+.prob-track-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.prob-track {
+  height: 8px;
+  background: var(--atmos-paper-tint);
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--atmos-hairline);
+}
+
+.prob-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 120ms ease;
+}
+
+.prob-fill-primary {
+  background: var(--atmos-accent);
+  box-shadow: 0 0 8px var(--atmos-accent-glow);
+}
+
+.prob-fill-secondary {
+  background: var(--atmos-ink-soft);
+}
+
+.prob-value {
+  font-family: var(--atmos-mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--atmos-ink-soft);
+  min-width: 42px;
+  text-align: right;
+}
+
+/* Feature Grid View */
+.feature-grid-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--atmos-ink-mute);
+  text-transform: uppercase;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  letter-spacing: 0.05em;
+  text-align: center;
+}
+
+.feature-grid-visualizer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  background: var(--atmos-paper);
+  border: 1.5px solid var(--atmos-hairline);
+  padding: 12px;
+  border-radius: 10px;
+}
+
+.feature-grid-8x8 {
+  display: grid;
+  grid-template-columns: repeat(8, 14px);
+  grid-template-rows: repeat(8, 14px);
+  gap: 1.5px;
+  background: var(--atmos-paper-deep);
+  border: 1.5px solid var(--atmos-hairline);
+  padding: 4px;
+  border-radius: 6px;
+}
+
+.grid-cell {
+  background: var(--atmos-paper);
+  border-radius: 1.5px;
+}
+
+.feature-grid-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-family: var(--atmos-mono);
+  font-size: 10px;
+  color: var(--atmos-ink-soft);
+}
+
+.metric-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.metric-val {
+  font-weight: 700;
+  color: var(--atmos-ink);
+}
+
+/* Explanation details */
+.digit-explanation {
+  margin-top: 14px;
+  font-size: 12px;
+  color: var(--atmos-ink-mute);
+  line-height: 1.5;
+  text-align: justify;
+}
+
+.digit-explanation code {
+  background: var(--atmos-paper-deep);
+  padding: 2px 4px;
+  border-radius: 4px;
+  color: var(--atmos-accent);
+}

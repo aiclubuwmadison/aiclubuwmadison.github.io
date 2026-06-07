@@ -42,7 +42,7 @@ body {
   padding-top: 88px;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 1024px) {
   #body-wrapper {
     padding-top: 64px;
   }

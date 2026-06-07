@@ -566,3 +566,169 @@
   background-color: rgba(255, 255, 255, 0.05);
   color: var(--atmos-badger);
 }
+
+/* ── Topic Tag Cloud ─────────────────────────────────── */
+.atmos-seminars .atmos-sem-tag-cloud-container {
+  margin: -24px 0 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.atmos-seminars .atmos-sem-tag-cloud-label {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--atmos-ink-mute);
+}
+
+.atmos-seminars .atmos-sem-tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.atmos-seminars .atmos-sem-cloud-tag {
+  font-family: var(--atmos-sans);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--atmos-hairline);
+  background: var(--atmos-paper);
+  color: var(--atmos-ink-soft);
+  cursor: pointer;
+  transition: all 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.atmos-seminars .atmos-sem-cloud-tag:hover {
+  color: var(--atmos-ink);
+  border-color: var(--atmos-ink-soft);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+}
+
+.atmos-seminars .atmos-sem-cloud-tag.active {
+  background: rgba(197, 5, 12, 0.08);
+  color: var(--atmos-badger);
+  border-color: var(--atmos-badger);
+  font-weight: 600;
+  box-shadow: inset 0 1px 2px rgba(197, 5, 12, 0.05);
+}
+
+[data-theme="dark"] .atmos-seminars .atmos-sem-cloud-tag {
+  background: #141414;
+}
+
+[data-theme="dark"] .atmos-seminars .atmos-sem-cloud-tag.active {
+  background: rgba(197, 5, 12, 0.22);
+}
+
+/* ── Smart Autocomplete Search ─────────────────────── */
+.atmos-seminars .atmos-sem-autocomplete-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  width: 320px;
+  max-height: 260px;
+  overflow-y: auto;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--atmos-hairline);
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  padding: 6px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  box-sizing: border-box;
+  animation: dropdownFadeIn 180ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@media (max-width: 760px) {
+  .atmos-seminars .atmos-sem-autocomplete-dropdown {
+    width: 100%;
+  }
+}
+
+.atmos-seminars .atmos-sem-autocomplete-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 10px;
+  background: none;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  transition: background-color 150ms ease, color 150ms ease;
+  box-sizing: border-box;
+}
+
+.atmos-seminars .atmos-sem-autocomplete-item:hover {
+  background-color: var(--atmos-paper-tint);
+}
+
+.atmos-seminars .atmos-sem-autocomplete-title {
+  font-size: 13px;
+  color: var(--atmos-ink);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+
+.atmos-seminars .atmos-sem-autocomplete-item:hover .atmos-sem-autocomplete-title {
+  color: var(--atmos-badger);
+}
+
+.atmos-seminars .atmos-sem-autocomplete-badge {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+}
+
+.atmos-seminars .atmos-sem-autocomplete-badge--talk {
+  background: rgba(197, 5, 12, 0.08);
+  color: var(--atmos-badger);
+  border: 1px solid rgba(197, 5, 12, 0.15);
+}
+
+.atmos-seminars .atmos-sem-autocomplete-badge--workshop {
+  background: rgba(71, 85, 105, 0.08);
+  color: var(--atmos-ink-soft);
+  border: 1px solid rgba(71, 85, 105, 0.15);
+}
+
+/* Dark mode overrides for autocomplete dropdown */
+[data-theme="dark"] .atmos-seminars .atmos-sem-autocomplete-dropdown {
+  background: rgba(20, 20, 20, 0.9);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .atmos-seminars .atmos-sem-autocomplete-item:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .atmos-seminars .atmos-sem-autocomplete-badge--talk {
+  background: rgba(197, 5, 12, 0.2);
+  color: #ff8084;
+  border-color: rgba(197, 5, 12, 0.3);
+}
+
+[data-theme="dark"] .atmos-seminars .atmos-sem-autocomplete-badge--workshop {
+  background: rgba(255, 255, 255, 0.08);
+  color: #cbd5e1;
+  border-color: rgba(255, 255, 255, 0.15);
+}

@@ -1,0 +1,559 @@
+/* =========================================================
+   ATMOSPHERIC MODERN — Pitch Builder Page
+   Scoped to .atmos-pitch
+   ========================================================= */
+
+.atmos-pitch {
+  padding-bottom: clamp(64px, 9vw, 120px);
+  background: var(--atmos-paper);
+}
+
+/* HERO SECTION -------------------------------------------- */
+.pitch-hero {
+  padding: clamp(48px, 6vw, 80px) 0 clamp(24px, 3vw, 40px);
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.pitch-hero-eyebrow {
+  font-family: var(--atmos-mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--atmos-badger);
+  margin: 0 0 14px 0;
+}
+
+.pitch-hero-title {
+  font-family: var(--atmos-serif);
+  font-weight: 800;
+  font-size: clamp(38px, 5.5vw, 64px);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--atmos-ink);
+  margin: 0 0 20px 0;
+}
+
+.pitch-hero-lede {
+  font-family: var(--atmos-sans);
+  font-size: clamp(15px, 1.4vw, 18px);
+  line-height: 1.6;
+  color: var(--atmos-ink-soft);
+  margin: 0;
+}
+
+/* LAYOUT -------------------------------------------------- */
+.pitch-builder-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: clamp(32px, 4vw, 64px);
+  align-items: start;
+}
+
+/* LEFT COLUMN: FORM CARD ----------------------------------- */
+.pitch-form-card {
+  padding: 32px;
+  border-radius: 20px;
+  background: #ffffff;
+  border: 1px solid var(--atmos-hairline);
+  box-shadow: 0 1px 3px rgba(15, 17, 21, 0.02), 0 8px 24px rgba(15, 17, 21, 0.03);
+}
+
+.pitch-form-heading {
+  font-family: var(--atmos-serif);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--atmos-ink);
+  margin: 0 0 6px 0;
+  letter-spacing: -0.01em;
+}
+
+.pitch-form-subheading {
+  font-family: var(--atmos-sans);
+  font-size: 13.5px;
+  color: var(--atmos-ink-mute);
+  margin: 0 0 28px 0;
+}
+
+.pitch-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-family: var(--atmos-sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--atmos-ink-soft);
+}
+
+.form-group input[type="text"],
+.form-group textarea {
+  font-family: var(--atmos-sans);
+  font-size: 14.5px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1.5px solid var(--atmos-hairline);
+  background: var(--atmos-paper-deep);
+  color: var(--atmos-ink);
+  outline: none;
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group textarea:focus {
+  border-color: var(--atmos-badger);
+  box-shadow: 0 0 0 3px var(--atmos-accent-glow);
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.char-counter {
+  font-family: var(--atmos-mono);
+  font-size: 10px;
+  color: var(--atmos-ink-mute);
+  align-self: flex-end;
+}
+
+/* Role Chip Selectors */
+.roles-checkbox-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.role-select-chip {
+  font-family: var(--atmos-sans);
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: 1.5px solid var(--atmos-hairline);
+  background: transparent;
+  color: var(--atmos-ink-soft);
+  cursor: pointer;
+  transition: all 180ms ease;
+}
+
+.role-select-chip:hover {
+  border-color: var(--atmos-ink-mute);
+  color: var(--atmos-ink);
+}
+
+.role-select-chip.selected {
+  background: var(--atmos-badger);
+  border-color: var(--atmos-badger);
+  color: #ffffff;
+  box-shadow: 0 4px 10px rgba(197, 5, 12, 0.22);
+}
+
+/* Theme Selector Preset Buttons */
+.theme-selector-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.theme-preset-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  font-family: var(--atmos-sans);
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 10px;
+  border: 1.5px solid var(--atmos-hairline);
+  background: var(--atmos-paper-deep);
+  color: #f1f5f9;
+  cursor: pointer;
+  transition: all 180ms ease;
+}
+
+/* Preset Specific Background colors */
+.theme-preset-btn.theme-obsidian { background: #0b0f19; border-color: rgba(255,255,255,0.06); }
+.theme-preset-btn.theme-midnight { background: #020617; border-color: rgba(255,255,255,0.06); }
+.theme-preset-btn.theme-emerald { background: #022c22; border-color: rgba(255,255,255,0.06); }
+.theme-preset-btn.theme-crimson { background: #3f0709; border-color: rgba(255,255,255,0.06); }
+
+.theme-preset-btn .theme-color-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.theme-obsidian .theme-color-dot { background: var(--atmos-badger); }
+.theme-midnight .theme-color-dot { background: #0284c7; }
+.theme-emerald .theme-color-dot { background: #059669; }
+.theme-crimson .theme-color-dot { background: #f59e0b; }
+
+.theme-preset-btn.active {
+  border-color: var(--atmos-badger);
+  box-shadow: 0 0 0 2px var(--atmos-accent-glow);
+}
+
+.theme-preset-btn:hover {
+  transform: translateY(-1px);
+}
+
+/* RIGHT COLUMN: SLIDE PREVIEW ------------------------------ */
+.pitch-preview-col {
+  position: sticky;
+  top: 110px;
+}
+
+.pitch-preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 12px;
+  padding: 0 4px;
+}
+
+.preview-label {
+  font-family: var(--atmos-sans);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--atmos-ink);
+}
+
+.aspect-ratio-label {
+  font-family: var(--atmos-mono);
+  font-size: 11px;
+  color: var(--atmos-ink-mute);
+}
+
+/* THE SLIDE CONTAINER (16:9 Aspect Ratio) ----------------- */
+.pitch-slide-container {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.25), 0 4px 12px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  padding: 4.8%; /* Proportional internal margins */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  color: #ffffff;
+  transition: all 400ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Preset Themes Gradients */
+.pitch-slide-container.theme-obsidian {
+  background: radial-gradient(circle at 10% 20%, rgba(197, 5, 12, 0.15) 0%, transparent 45%),
+              radial-gradient(circle at 90% 80%, rgba(124, 58, 237, 0.12) 0%, transparent 50%),
+              #0b0f19;
+}
+
+.pitch-slide-container.theme-midnight {
+  background: radial-gradient(circle at 10% 20%, rgba(2, 132, 199, 0.18) 0%, transparent 45%),
+              radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+              #020617;
+}
+
+.pitch-slide-container.theme-emerald {
+  background: radial-gradient(circle at 10% 20%, rgba(20, 184, 166, 0.15) 0%, transparent 45%),
+              radial-gradient(circle at 90% 80%, rgba(5, 150, 105, 0.12) 0%, transparent 50%),
+              #022c22;
+}
+
+.pitch-slide-container.theme-crimson {
+  background: radial-gradient(circle at 10% 20%, rgba(245, 158, 11, 0.18) 0%, transparent 45%),
+              radial-gradient(circle at 90% 80%, rgba(197, 5, 12, 0.22) 0%, transparent 50%),
+              #3f0709;
+}
+
+/* Dot Grid Overlay */
+.slide-dot-grid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Hairline border framing */
+.slide-inner-border {
+  position: absolute;
+  inset: 2.8%;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Slide components */
+.slide-header {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: clamp(14px, 3.5%, 32px);
+}
+
+.slide-logo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--atmos-mono);
+  font-size: clamp(8px, 1.6vw, 11px);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.slide-logo-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--atmos-badger);
+}
+
+.slide-tag {
+  font-family: var(--atmos-mono);
+  font-size: clamp(7px, 1.4vw, 10px);
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.slide-main {
+  position: relative;
+  z-index: 3;
+  margin-bottom: clamp(16px, 4%, 36px);
+}
+
+.slide-title {
+  font-family: var(--atmos-serif);
+  font-size: clamp(22px, 4.2vw, 44px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  margin: 0 0 4px 0;
+  color: #ffffff;
+}
+
+.slide-tagline {
+  font-family: var(--atmos-sans);
+  font-size: clamp(11px, 2vw, 20px);
+  font-weight: 600;
+  font-style: italic;
+  color: var(--atmos-badger);
+  margin: 0;
+}
+
+.theme-midnight .slide-tagline { color: #38bdf8; }
+.theme-emerald .slide-tagline { color: #34d399; }
+.theme-crimson .slide-tagline { color: #f59e0b; }
+
+.slide-details {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 5%;
+  flex-grow: 1;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 4%;
+  align-content: start;
+}
+
+.slide-left-col,
+.slide-right-col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.slide-section-label {
+  font-family: var(--atmos-mono);
+  font-size: clamp(7px, 1.4vw, 9.5px);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.35);
+  margin-bottom: 2px;
+}
+
+.slide-problem-text {
+  font-family: var(--atmos-sans);
+  font-size: clamp(10px, 1.6vw, 15px);
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+}
+
+.slide-roles-container {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(4px, 1.2vw, 8px);
+}
+
+.slide-role-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: clamp(4px, 1vw, 8px) clamp(8px, 1.5vw, 14px);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  min-width: 0;
+}
+
+.role-badge-accent {
+  width: 3px;
+  height: clamp(12px, 2vw, 20px);
+  background: var(--atmos-badger);
+  flex-shrink: 0;
+}
+
+.theme-midnight .role-badge-accent { background: #0284c7; }
+.theme-emerald .role-badge-accent { background: #059669; }
+.theme-crimson .role-badge-accent { background: #f59e0b; }
+
+.role-badge-text {
+  font-family: var(--atmos-sans);
+  font-size: clamp(9px, 1.5vw, 13px);
+  font-weight: 600;
+  color: #ffffff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.slide-role-more-badge {
+  font-family: var(--atmos-sans);
+  font-size: clamp(8px, 1.3vw, 11px);
+  color: rgba(255, 255, 255, 0.45);
+  font-style: italic;
+  padding-left: 10px;
+}
+
+.slide-empty-roles {
+  font-family: var(--atmos-sans);
+  font-size: clamp(9px, 1.5vw, 13px);
+  color: rgba(255, 255, 255, 0.4);
+  font-style: italic;
+  margin: 0;
+}
+
+/* ACTIONS BAR --------------------------------------------- */
+.pitch-actions-bar {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.download-slide-btn {
+  background: var(--atmos-badger);
+  border-color: var(--atmos-badger);
+  color: #ffffff;
+  padding: 14px 28px;
+  box-shadow: 0 4px 16px rgba(197, 5, 12, 0.28);
+  font-size: 14px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 220ms ease;
+}
+
+.download-slide-btn:hover:not(:disabled) {
+  background: transparent;
+  color: var(--atmos-badger);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(197, 5, 12, 0.18);
+}
+
+.download-slide-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* RESPONSIVE LAYOUTS -------------------------------------- */
+@media (max-width: 980px) {
+  .pitch-builder-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
+  .pitch-preview-col {
+    position: static;
+  }
+}
+
+@media (max-width: 580px) {
+  .pitch-form-card {
+    padding: 20px;
+  }
+  
+  .theme-selector-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .pitch-actions-bar {
+    justify-content: stretch;
+  }
+  
+  .download-slide-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* =========================================================
+   DARK MODE ADJUSTMENTS
+   ========================================================= */
+[data-theme="dark"] .atmos-pitch {
+  background: #0a0a0a;
+  --atmos-paper: #141414;
+  --atmos-paper-deep: #0a0a0a;
+  --atmos-paper-tint: #1e1e1e;
+  --atmos-ink: #f1f5f9;
+  --atmos-ink-soft: #cbd5e1;
+  --atmos-ink-mute: #64748b;
+  --atmos-hairline: rgba(255, 255, 255, 0.10);
+  --atmos-hairline-soft: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .pitch-form-card {
+  background: #141414;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5), 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .form-group input[type="text"],
+[data-theme="dark"] .form-group textarea {
+  background: #1a1a1a;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .role-select-chip {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .role-select-chip:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+[data-theme="dark"] .role-select-chip.selected {
+  background: var(--atmos-badger);
+  border-color: var(--atmos-badger);
+  color: #fff;
+}

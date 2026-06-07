@@ -281,3 +281,310 @@
 [data-theme="dark"] .atmos-faq-row {
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
+
+/* ── Dynamic FAQ Search ───────────────────────────────── */
+.faq-search-container {
+  margin-bottom: 24px;
+}
+
+.faq-search-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.faq-search-input {
+  width: 100%;
+  font-family: var(--atmos-sans);
+  font-size: 15px;
+  color: var(--atmos-ink);
+  background: white;
+  border: 1px solid var(--atmos-hairline);
+  border-radius: 12px;
+  padding: 12px 42px 12px 46px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  transition: all 180ms ease;
+  box-sizing: border-box;
+}
+
+.faq-search-input:focus {
+  outline: none;
+  border-color: rgba(197,5,12,0.4);
+  box-shadow: 0 4px 12px rgba(197,5,12,0.08);
+}
+
+.faq-search-icon {
+  position: absolute;
+  left: 16px;
+  color: var(--atmos-ink-mute);
+  display: flex;
+  pointer-events: none;
+}
+
+.faq-search-clear {
+  position: absolute;
+  right: 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--atmos-ink-mute);
+  display: flex;
+  padding: 4px;
+  border-radius: 50%;
+  transition: all 150ms ease;
+}
+
+.faq-search-clear:hover {
+  background-color: var(--atmos-hairline);
+  color: var(--atmos-ink);
+}
+
+[data-theme="dark"] .faq-search-input {
+  background: #141414;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+[data-theme="dark"] .faq-search-clear:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* ── FAQ Text Wrap and Badges ────────────────────────── */
+.faq-row-text-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+}
+
+.faq-pending-tag {
+  font-family: var(--atmos-sans);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: rgba(197, 5, 12, 0.08);
+  color: var(--atmos-badger);
+  border: 1px solid rgba(197, 5, 12, 0.15);
+  display: inline-block;
+  animation: fadeIn 200ms ease;
+}
+
+[data-theme="dark"] .faq-pending-tag {
+  background: rgba(197, 5, 12, 0.2);
+  color: #ff8084;
+  border-color: rgba(197, 5, 12, 0.3);
+}
+
+/* ── FAQ Empty State ──────────────────────────────────── */
+.faq-empty-state {
+  padding: 48px 24px;
+  text-align: center;
+}
+
+.faq-empty-title {
+  font-family: var(--atmos-sans);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--atmos-ink);
+  margin: 0 0 8px;
+}
+
+.faq-empty-subtitle {
+  font-family: var(--atmos-sans);
+  font-size: 14px;
+  color: var(--atmos-ink-soft);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ── Q&A Submission Form ───────────────────────────────── */
+.faq-submit-card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  margin-top: 32px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04);
+}
+
+.faq-submit-title {
+  font-family: var(--atmos-sans);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--atmos-ink);
+  margin: 0 0 8px;
+}
+
+.faq-submit-text {
+  font-family: var(--atmos-sans);
+  font-size: 14.5px;
+  color: var(--atmos-ink-soft);
+  line-height: 1.5;
+  margin: 0 0 20px;
+}
+
+.faq-submit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.faq-submit-textarea-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.faq-submit-textarea {
+  width: 100%;
+  font-family: var(--atmos-sans);
+  font-size: 14.5px;
+  color: var(--atmos-ink);
+  background: white;
+  border: 1px solid var(--atmos-hairline);
+  border-radius: 10px;
+  padding: 12px 16px 32px 16px;
+  resize: vertical;
+  min-height: 80px;
+  transition: all 180ms ease;
+  box-sizing: border-box;
+}
+
+.faq-submit-textarea:focus {
+  outline: none;
+  border-color: rgba(197,5,12,0.4);
+  box-shadow: 0 4px 12px rgba(197,5,12,0.06);
+}
+
+.faq-submit-char-count {
+  position: absolute;
+  bottom: 8px;
+  right: 12px;
+  font-family: var(--atmos-mono);
+  font-size: 11px;
+  color: var(--atmos-ink-mute);
+}
+
+.faq-submit-btn {
+  align-self: flex-start;
+  font-family: var(--atmos-sans);
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  background: var(--atmos-badger);
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 180ms ease;
+}
+
+.faq-submit-btn:hover {
+  background: #9d0309;
+  transform: translateY(-1px);
+}
+
+.faq-submit-btn:active {
+  transform: translateY(0);
+}
+
+[data-theme="dark"] .faq-submit-card {
+  background: #141414;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .faq-submit-textarea {
+  background: #0a0a0a;
+}
+
+/* ── Custom Success Notification Toast ───────────────── */
+.faq-toast {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--atmos-hairline);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  padding: 16px 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  z-index: 9999;
+  max-width: 380px;
+  box-sizing: border-box;
+  animation: toastSlideIn 300ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes toastSlideIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.faq-toast-icon {
+  color: #10b981; /* emerald success green */
+  display: flex;
+  margin-top: 2px;
+}
+
+.faq-toast-content {
+  flex: 1;
+}
+
+.faq-toast-title {
+  font-family: var(--atmos-sans);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--atmos-ink);
+  margin: 0 0 4px;
+}
+
+.faq-toast-message {
+  font-family: var(--atmos-sans);
+  font-size: 13.5px;
+  color: var(--atmos-ink-soft);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.faq-toast-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--atmos-ink-mute);
+  display: flex;
+  padding: 2px;
+  border-radius: 4px;
+  transition: all 150ms ease;
+  margin-top: 1px;
+}
+
+.faq-toast-close:hover {
+  background-color: var(--atmos-hairline);
+  color: var(--atmos-ink);
+}
+
+[data-theme="dark"] .faq-toast {
+  background: rgba(20, 20, 20, 0.95);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .faq-toast-close:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+@media (max-width: 480px) {
+  .faq-toast {
+    bottom: 16px;
+    right: 16px;
+    left: 16px;
+    max-width: calc(100% - 32px);
+  }
+}
