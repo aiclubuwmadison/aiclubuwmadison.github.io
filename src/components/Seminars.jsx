@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import './Seminars.css';
 
 const seminars = [
@@ -221,6 +221,10 @@ const SeminarCard = ({ item }) => {
 };
 
 const Seminars = () => {
+  useEffect(() => {
+    document.title = 'Seminars | AI@UW';
+  }, []);
+
   const [activeTab, setActiveTab] = useState('all');
   const [topicFilter, setTopicFilter] = useState('');
   const [yearFilter, setYearFilter] = useState('');

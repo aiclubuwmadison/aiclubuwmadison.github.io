@@ -220,6 +220,10 @@ const ArchiveSection = ({ id, num, title, meta, data, isOpen, onToggle }) => (
 );
 
 const Leadership = () => {
+  useEffect(() => {
+    document.title = 'Leadership | AI@UW';
+  }, []);
+
   const [expanded, setExpanded] = useState({ dec24Dec25Leaders: false, currentLeaders: false, pastLeaders: false });
   const toggle = (id) => setExpanded((p) => ({ ...p, [id]: !p[id] }));
   const waveRef = useWaveCanvas();

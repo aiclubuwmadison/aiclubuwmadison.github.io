@@ -137,6 +137,10 @@ const About = () => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
+    document.title = 'About Us | AI@UW';
+  }, []);
+
+  useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');

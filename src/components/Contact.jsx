@@ -1,7 +1,12 @@
+import { useEffect } from 'react';
 import { Mail, Newspaper, MapPin, ArrowRight } from 'lucide-react';
 import './Contact.css';
 
 const Contact = () => {
+  useEffect(() => {
+    document.title = 'Contact | AI@UW';
+  }, []);
+
   return (
     <div className="atmos-root atmos-contact">
       <section className="atmos-contact-hero">
