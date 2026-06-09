@@ -16,12 +16,6 @@ import './Leadership.css';
 
 const PORTRAIT_PLACEHOLDER = '/images/portraits/_placeholder.svg';
 
-function handlePortraitError(event) {
-  const img = event.currentTarget;
-  if (img.src.endsWith('_placeholder.svg')) return;
-  img.src = PORTRAIT_PLACEHOLDER;
-}
-
 function useResolvedPortrait(file) {
   const target = `/images/portraits/${file}`;
   const [src, setSrc] = useState(target);
@@ -113,14 +107,19 @@ function useWaveCanvas() {
     }
 
     draw();
+    let rafId;
     const ro = new ResizeObserver(() => {
-      window.requestAnimationFrame(() => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
         if (!ref.current) return;
         draw();
       });
     });
     ro.observe(canvas);
-    return () => ro.disconnect();
+    return () => {
+      ro.disconnect();
+      cancelAnimationFrame(rafId);
+    };
   }, []);
   return ref;
 }
@@ -180,6 +179,24 @@ const FeaturedCard = ({ m }) => {
     </div>
   );
 };
+const RosterCard = ({ m }) => {
+  const src = useResolvedPortrait(m.file);
+  return (
+    <div className="lead-team-card">
+      <div className="lead-team-photo">
+        <img
+          src={src}
+          alt={m.name}
+          loading="lazy"
+        />
+      </div>
+      <span className="lead-card-role">{m.title}</span>
+      <h4 className="lead-team-name">{m.name}</h4>
+      <p className="lead-team-desc">{ROLE_DESC[m.title] || 'Contributing to AI@UW.'}</p>
+      <Socials link={m.link} />
+    </div>
+  );
+};
 
 const ArchiveRoster = ({ data }) => {
   const all = data.flat();
@@ -197,20 +214,7 @@ const ArchiveRoster = ({ data }) => {
       {team.length > 0 && (
         <div className="lead-team-grid">
           {team.map((m) => (
-            <div className="lead-team-card" key={m.name}>
-              <div className="lead-team-photo">
-                <img
-                  src={`/images/portraits/${m.file}`}
-                  alt={m.name}
-                  loading="lazy"
-                  onError={handlePortraitError}
-                />
-              </div>
-              <span className="lead-card-role">{m.title}</span>
-              <h4 className="lead-team-name">{m.name}</h4>
-              <p className="lead-team-desc">{ROLE_DESC[m.title] || 'Contributing to AI@UW.'}</p>
-              <Socials link={m.link} />
-            </div>
+            <RosterCard key={m.name} m={m} />
           ))}
         </div>
       )}
@@ -419,20 +423,7 @@ const Leadership = () => {
           {/* Team cards grid */}
           <div className="lead-team-grid">
             {team.map((m) => (
-              <div className="lead-team-card" key={m.name}>
-                <div className="lead-team-photo">
-                  <img
-                    src={`/images/portraits/${m.file}`}
-                    alt={m.name}
-                    loading="lazy"
-                    onError={handlePortraitError}
-                  />
-                </div>
-                <span className="lead-card-role">{m.title}</span>
-                <h4 className="lead-team-name">{m.name}</h4>
-                <p className="lead-team-desc">{ROLE_DESC[m.title] || 'Contributing to AI@UW.'}</p>
-                <Socials link={m.link} />
-              </div>
+              <RosterCard key={m.name} m={m} />
             ))}
           </div>
         </div>
