@@ -189,7 +189,7 @@ body, #root { background: var(--bg); color: var(--text); }
   --atmos-hairline-soft: #f1f5f9;
   --atmos-badger: #C5050C;
   --atmos-accent-glow: rgba(197, 5, 12, 0.12);
-  --atmos-serif: "Inter", "Helvetica Neue", sans-serif;
+  --atmos-serif: "NeueMontreal-Bold", "Neue Montreal", "Inter", sans-serif;
   --atmos-sans: "Inter", "Helvetica Neue", sans-serif;
   --atmos-mono: "JetBrains Mono", "Fira Code", monospace;
   --atmos-max: 1320px;
