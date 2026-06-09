@@ -588,3 +588,8 @@
     max-width: calc(100% - 32px);
   }
 }
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
