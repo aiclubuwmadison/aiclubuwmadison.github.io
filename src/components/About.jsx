@@ -147,16 +147,21 @@ const About = () => {
     let animId;
     let rot = 0;
 
+    let canvasW = 0;
+    let canvasH = 0;
+
     function setup() {
       const dpr = window.devicePixelRatio || 1;
       const rect = canvas.getBoundingClientRect();
       canvas.width = rect.width * dpr;
       canvas.height = rect.height * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      canvasW = rect.width;
+      canvasH = rect.height;
     }
 
     function draw() {
-      const w = canvas.offsetWidth, h = canvas.offsetHeight;
+      const w = canvasW, h = canvasH;
       ctx.clearRect(0, 0, w, h);
       const cx = w * 0.5, cy = h * 0.5;
       const maxR = Math.min(w, h) * 0.48;

@@ -1,5 +1,8 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+import '@fontsource/google-sans';
+import '@fontsource/google-sans/500.css';
+import '@fontsource/google-sans/700.css';
 import './index.css';
 import './App.css';
 import App from './App.jsx';
