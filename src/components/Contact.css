@@ -85,7 +85,7 @@
   color: var(--atmos-ink);
   box-shadow: 0 1px 2px rgba(15, 17, 21, 0.03);
   transition: border-color 200ms ease, transform 200ms ease,
-    box-shadow 200ms ease;
+    box-shadow 200ms ease, background 280ms ease;
 }
 
 .atmos-contact .atmos-channel-card:hover {
@@ -311,4 +311,10 @@
 /* Channel icon halo: bump red opacity so it reads on dark */
 [data-theme="dark"] .atmos-contact .atmos-channel-icon {
   background: rgba(197, 5, 12, 0.18);
+}
+
+/* Form iframe: invert colors in dark mode to fit the dark theme */
+[data-theme="dark"] .atmos-contact .atmos-form-iframe {
+  filter: invert(0.9) hue-rotate(180deg);
+  background: #fff;
 }
