@@ -52,15 +52,10 @@ function useWaveCanvas() {
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     const dpr = window.devicePixelRatio || 1;
+    let lastW = 0;
+    let lastH = 0;
 
-    function draw() {
-      const w = canvas.offsetWidth;
-      const h = canvas.offsetHeight;
-      canvas.width  = w * dpr;
-      canvas.height = h * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.clearRect(0, 0, w, h);
-
+    function render(w, h) {
       const NUM_CURVES  = 28;
       const DOTS_EACH   = 65;
 
@@ -99,8 +94,31 @@ function useWaveCanvas() {
       }
     }
 
+    function draw() {
+      const w = canvas.offsetWidth;
+      const h = canvas.offsetHeight;
+      if (w === 0 || h === 0) return;
+      if (w === lastW && h === lastH) {
+        ctx.clearRect(0, 0, w, h);
+        render(w, h);
+        return;
+      }
+      lastW = w;
+      lastH = h;
+      canvas.width  = w * dpr;
+      canvas.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, w, h);
+      render(w, h);
+    }
+
     draw();
-    const ro = new ResizeObserver(draw);
+    const ro = new ResizeObserver(() => {
+      window.requestAnimationFrame(() => {
+        if (!ref.current) return;
+        draw();
+      });
+    });
     ro.observe(canvas);
     return () => ro.disconnect();
   }, []);
