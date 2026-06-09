@@ -121,22 +121,14 @@ const getElementText = (node) => {
 };
 
 const Involvement = () => {
-  useEffect(() => {
-    document.title = 'FAQ | AI@UW';
-  }, []);
-
   const [faqList, setFaqList] = useState(FAQS);
   const [searchQuery, setSearchQuery] = useState('');
   const [newQuestion, setNewQuestion] = useState('');
   const [notification, setNotification] = useState(null);
 
   useEffect(() => {
-    if (!notification) return;
-    const timer = setTimeout(() => {
-      setNotification(null);
-    }, 4500);
-    return () => clearTimeout(timer);
-  }, [notification]);
+    document.title = 'FAQ | AI@UW';
+  }, []);
 
   const filteredFaqs = useMemo(() => {
     if (!searchQuery.trim()) return faqList;
@@ -147,6 +139,38 @@ const Involvement = () => {
       return questionText.includes(q) || answerText.includes(q);
     });
   }, [faqList, searchQuery]);
+
+  useEffect(() => {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add("sr-visible");
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    const elements = document.querySelectorAll(".atmos-reveal, .atmos-faq-row");
+    elements.forEach((el, i) => {
+      if (el.dataset.srReady) return;
+      el.dataset.srReady = "1";
+      el.classList.add("sr-hidden");
+      if (el.classList.contains("atmos-faq-row")) {
+        el.style.transitionDelay = `${Math.min((i % 5) * 70, 280)}ms`;
+      }
+      io.observe(el);
+    });
+
+    return () => io.disconnect();
+  }, [filteredFaqs]);
+
+  useEffect(() => {
+    if (!notification) return;
+    const timer = setTimeout(() => {
+      setNotification(null);
+    }, 4500);
+    return () => clearTimeout(timer);
+  }, [notification]);
 
   const handleSubmitQuestion = (e) => {
     e.preventDefault();
@@ -228,7 +252,7 @@ const Involvement = () => {
               {filteredFaqs.length > 0 ? (
                 <ul className="atmos-faq-list">
                   {filteredFaqs.map((item, i) => (
-                    <li key={i} className="atmos-faq-row atmos-reveal" style={{ transitionDelay: `${i * 50}ms` }}>
+                    <li key={item.q} className="atmos-faq-row atmos-reveal">
                       <details className="atmos-faq-item">
                         <summary>
                           <div className="faq-row-inner">
