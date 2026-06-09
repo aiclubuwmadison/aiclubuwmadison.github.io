@@ -133,12 +133,13 @@
   display: grid; grid-template-columns: repeat(4,1fr);
   border: 1px solid var(--atmos-hairline); border-radius: 14px;
   overflow: hidden; margin: clamp(32px,4vw,56px) 0;
+  transition: border-color 280ms ease;
 }
 .lead-stat {
   display: flex; align-items: center; gap: 14px;
   padding: 24px 20px;
   border-right: 1px solid var(--atmos-hairline);
-  transition: background 200ms;
+  transition: background 200ms, border-color 280ms ease;
 }
 .lead-stat:last-child { border-right: none; }
 .lead-stat:hover { background: rgba(197,5,12,0.03); }
@@ -226,11 +227,12 @@
   display: grid; grid-template-columns: repeat(4,1fr); gap: 16px;
 }
 .lead-team-card {
+  background: white;
   border: none;
   border-radius: 14px; overflow: hidden;
   display: flex; flex-direction: column;
   box-shadow: 0 2px 14px rgba(0,0,0,0.07);
-  transition: transform 200ms cubic-bezier(0.2,0.8,0.2,1), box-shadow 200ms;
+  transition: transform 200ms cubic-bezier(0.2,0.8,0.2,1), box-shadow 200ms, background 280ms ease, border-color 280ms ease;
 }
 .lead-team-card:hover {
   transform: translateY(-3px);
@@ -381,10 +383,20 @@
 }
 .atmos-archive-glyph.is-open { transform: rotate(90deg); }
 .atmos-archive-panel {
-  overflow: hidden; max-height: 0; opacity: 0;
-  transition: max-height 460ms cubic-bezier(.2,.7,.2,1), opacity 300ms ease;
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  opacity: 0;
+  transition: grid-template-rows 460ms cubic-bezier(.2,.7,.2,1), opacity 300ms ease;
 }
-.atmos-archive-panel.is-open { max-height: 6000px; opacity: 1; padding-bottom: 32px; }
+.atmos-archive-panel.is-open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+.atmos-archive-panel > div {
+  min-height: 0;
+  padding-bottom: 32px;
+}
 
 .lead-archive-roster {
   display: flex; flex-direction: column;
