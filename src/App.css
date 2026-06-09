@@ -189,8 +189,8 @@ body, #root { background: var(--bg); color: var(--text); }
   --atmos-hairline-soft: #f1f5f9;
   --atmos-badger: #C5050C;
   --atmos-accent-glow: rgba(197, 5, 12, 0.12);
-  --atmos-serif: "NeueMontreal-Bold", "Neue Montreal", "Inter", sans-serif;
-  --atmos-sans: "Inter", "Helvetica Neue", sans-serif;
+  --atmos-serif: "Google Sans", "Inter", sans-serif;
+  --atmos-sans: "Google Sans", "Inter", sans-serif;
   --atmos-mono: "JetBrains Mono", "Fira Code", monospace;
   --atmos-max: 1320px;
   --atmos-gutter: clamp(20px, 4vw, 56px);
@@ -260,11 +260,11 @@ body, #root { background: var(--bg); color: var(--text); }
 .atmos-wordmark {
   position: relative;
   font-family: var(--atmos-serif);
-  font-weight: 800;
+  font-weight: 500;
   font-style: normal;
   font-size: clamp(64px, 10vw, 140px);
   line-height: 0.86;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.015em;
   color: var(--atmos-ink);
   margin: 0;
   padding: 0;
@@ -691,10 +691,10 @@ body, #root { background: var(--bg); color: var(--text); }
 
 .atmos-wordmark-new {
   font-family: var(--atmos-serif);
-  font-weight: 800;
+  font-weight: 500;
   font-size: clamp(36px, 5vw, 64px);
   line-height: 1.05;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.015em;
   color: var(--atmos-ink);
   margin: 0;
 }

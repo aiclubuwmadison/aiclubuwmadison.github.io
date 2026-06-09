@@ -39,10 +39,10 @@
 
 .about-hero-title {
   font-family: var(--atmos-serif);
-  font-weight: 800;
+  font-weight: 500;
   font-size: clamp(40px, 5.5vw, 72px);
   line-height: 1.12;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
   color: var(--atmos-ink);
   margin: 0;
 }
@@ -273,10 +273,10 @@
 
 .about-story-title {
   font-family: var(--atmos-serif);
-  font-weight: 800;
+  font-weight: 500;
   font-size: clamp(24px, 2.8vw, 36px);
   line-height: 1.15;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
   color: var(--atmos-ink);
   margin: 0;
 }
@@ -377,9 +377,9 @@
 
 .about-what-title {
   font-family: var(--atmos-serif);
-  font-weight: 800;
+  font-weight: 500;
   font-size: clamp(26px, 3vw, 40px);
-  letter-spacing: -0.025em;
+  letter-spacing: -0.015em;
   color: var(--atmos-ink);
   margin: 0 0 clamp(32px, 4vw, 52px);
   line-height: 1.1;
@@ -526,9 +526,9 @@
 
 .about-areas-title {
   font-family: var(--atmos-serif);
-  font-weight: 800;
+  font-weight: 500;
   font-size: clamp(28px, 3.2vw, 44px);
-  letter-spacing: -0.025em;
+  letter-spacing: -0.015em;
   color: var(--atmos-ink);
   margin: 0 0 14px;
   line-height: 1.1;
@@ -645,10 +645,10 @@
 .about-cta-title {
   font-family: var(--atmos-serif);
   font-size: clamp(20px, 2.2vw, 26px);
-  font-weight: 800;
+  font-weight: 500;
   color: #ffffff;
   margin: 0 0 6px;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 
 .about-cta-sub {
