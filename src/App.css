@@ -94,7 +94,7 @@
 .contact-form .MuiOutlinedInput-notchedOutline { border-color: var(--cardBorder); }
 .contact-form .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline { border-color: #cbd5e1; }
 
-body, #root { background: var(--bg); color: var(--text); }
+body, #root { background: var(--atmos-paper, var(--bg)); color: var(--atmos-ink, var(--text)); transition: background 250ms ease, color 250ms ease; }
 
 #body-wrapper {
   display: flex;
@@ -197,9 +197,17 @@ body, #root { background: var(--bg); color: var(--text); }
 }
 
 [data-theme="dark"] {
-  --atmos-ink-mute: #94a3b8; /* WCAG AA accessible contrast in Dark Mode */
-  --atmos-badger: #ff6e75; /* WCAG AA accessible red accent contrast in Dark Mode */
-  --atmos-accent-glow: rgba(255, 110, 117, 0.15);
+  --bg:                 #0d1117;
+  --atmos-paper:        #0d1117;
+  --atmos-paper-deep:   #080c11;
+  --atmos-paper-tint:   #161b22;
+  --atmos-ink:          #e6edf3;
+  --atmos-ink-soft:     #8b949e;
+  --atmos-ink-mute:     #6e7681;
+  --atmos-hairline:     rgba(255, 255, 255, 0.08);
+  --atmos-hairline-soft: rgba(255, 255, 255, 0.04);
+  --atmos-badger:       #ff6e75;
+  --atmos-accent-glow:  rgba(255, 110, 117, 0.15);
 }
 
 /* ── Theme Transitions (prevents theme snapping) ────────────────── */
