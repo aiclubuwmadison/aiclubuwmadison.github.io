@@ -23,7 +23,6 @@ const NAV_ITEMS = [
 const Nav = () => {
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [scrollPct, setScrollPct] = useState(0);
   const [scrolled, setScrolled] = useState(false);
   const [theme, setTheme] = useState(getInitialTheme);
 
@@ -44,7 +43,8 @@ const Nav = () => {
       rafId = requestAnimationFrame(() => {
         const y = window.scrollY;
         const total = document.documentElement.scrollHeight - window.innerHeight;
-        setScrollPct(total > 0 ? (y / total) * 100 : 0);
+        const pct = total > 0 ? (y / total) * 100 : 0;
+        document.documentElement.style.setProperty('--scroll-pct', `${pct}%`);
         setScrolled(y > 24);
       });
     };
@@ -55,18 +55,16 @@ const Nav = () => {
     };
   }, []);
 
-  const [prevPath, setPrevPath] = useState(location.pathname);
-
-  if (location.pathname !== prevPath) {
-    setPrevPath(location.pathname);
-    setScrollPct(0);
-  }
+  // Listen to path changes and reset scroll percentage cleanly
+  useEffect(() => {
+    document.documentElement.style.setProperty('--scroll-pct', '0%');
+  }, [location.pathname]);
 
   return (
     <>
       <div
         className="atmos-scroll-progress"
-        style={{ width: `${scrollPct}%` }}
+        style={{ width: "var(--scroll-pct, 0%)" }}
         aria-hidden="true"
       />
 
