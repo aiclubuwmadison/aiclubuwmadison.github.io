@@ -41,8 +41,8 @@
   font-family: var(--atmos-serif);
   font-weight: 800;
   font-size: clamp(40px, 5.5vw, 72px);
-  line-height: 1.04;
-  letter-spacing: -0.03em;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
   color: var(--atmos-ink);
   margin: 0;
 }
