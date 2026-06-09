@@ -397,25 +397,26 @@
 
 .about-what-card {
   border: 1px solid var(--atmos-hairline);
-  border-radius: 16px;
+  border-radius: 18px;
   display: flex;
   flex-direction: column;
-  background: #fafafa;
+  background: #ffffff;
   overflow: hidden;
-  transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+  transition: border-color 280ms ease, box-shadow 280ms ease, transform 380ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .about-what-card:hover {
-  border-color: rgba(197,5,12,0.18);
-  box-shadow: 0 8px 28px rgba(0,0,0,0.08);
-  transform: translateY(-4px);
+  border-color: rgba(197, 5, 12, 0.15);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(197, 5, 12, 0.03);
+  transform: translateY(-6px) scale(1.015);
 }
 
-/* Visual area: contains icon + SVG illustration */
+/* Visual area: contains icon + SVG illustration with subtle grid pattern or clean gradient */
 .about-what-card-visual {
   position: relative;
   height: 190px;
-  background: #f3f3f3;
+  background: radial-gradient(130% 130% at 50% 100%, #ffffff 0%, #f1f5f9 100%);
+  border-bottom: 1px solid var(--atmos-hairline-soft);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -427,20 +428,27 @@
   position: absolute;
   top: 16px;
   left: 16px;
-  width: 46px;
-  height: 46px;
-  border-radius: 12px;
-  background: rgba(197,5,12,0.08);
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(197, 5, 12, 0.12);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--atmos-badger);
   z-index: 2;
   flex-shrink: 0;
+  transition: transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1), background-color 220ms ease;
+}
+.about-what-card:hover .about-what-icon {
+  transform: scale(1.08);
+  background-color: #ffffff;
 }
 .about-what-icon svg {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
 }
 
 .about-what-illus-wrap {
@@ -449,24 +457,28 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform 380ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.about-what-card:hover .about-what-illus-wrap {
+  transform: scale(1.05);
 }
 
 /* Text body */
 .about-what-card-body {
-  padding: 20px 20px 18px;
+  padding: 22px 22px 20px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
   flex: 1;
 }
 
 .about-what-card-title {
   font-family: var(--atmos-serif);
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 700;
   color: var(--atmos-ink);
   margin: 0;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
   line-height: 1.25;
 }
 
@@ -923,19 +935,24 @@
 }
 
 [data-theme="dark"] .about-what-card {
-  background: #141414;
+  background: #111111;
+  border-color: rgba(255, 255, 255, 0.05);
 }
 
 [data-theme="dark"] .about-what-card:hover {
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5);
+  border-color: rgba(197, 5, 12, 0.3);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(197, 5, 12, 0.1);
 }
 
 [data-theme="dark"] .about-what-card-visual {
-  background: #1a1a1a;
+  background: radial-gradient(130% 130% at 50% 100%, #161616 0%, #0d0d0d 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 [data-theme="dark"] .about-what-icon {
-  background: rgba(197, 5, 12, 0.18);
+  background: #1c1c1c;
+  border-color: rgba(255, 255, 255, 0.08);
+  color: #fca5a5;
 }
 
 /* ── Dark mode (Areas We Explore + CTA Banner) ───────────── */
