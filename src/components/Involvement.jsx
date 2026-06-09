@@ -251,7 +251,7 @@ const Involvement = () => {
             <div className="faq-right-card">
               {filteredFaqs.length > 0 ? (
                 <ul className="atmos-faq-list">
-                  {filteredFaqs.map((item, i) => (
+                  {filteredFaqs.map((item) => (
                     <li key={item.q} className="atmos-faq-row atmos-reveal">
                       <details className="atmos-faq-item">
                         <summary>
