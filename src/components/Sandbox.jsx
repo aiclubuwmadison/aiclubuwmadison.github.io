@@ -349,6 +349,7 @@ export default function Sandbox() {
   
   const networkRef = useRef(null);
   const canvasRef = useRef(null);
+  const analysisPendingRef = useRef(false);
 
   // Boundary Draw Function
   const drawBoundary = useCallback((canvas, net) => {
@@ -547,8 +548,8 @@ export default function Sandbox() {
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
     const clientY = e.touches ? e.touches[0].clientY : e.clientY;
     
-    const x = clientX - rect.left;
-    const y = clientY - rect.top;
+    const x = (clientX - rect.left) * (canvas.width / rect.width);
+    const y = (clientY - rect.top) * (canvas.height / rect.height);
     
     ctx.lineWidth = 20;
     ctx.lineCap = 'round';
@@ -571,14 +572,20 @@ export default function Sandbox() {
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
     const clientY = e.touches ? e.touches[0].clientY : e.clientY;
     
-    const x = clientX - rect.left;
-    const y = clientY - rect.top;
+    const x = (clientX - rect.left) * (canvas.width / rect.width);
+    const y = (clientY - rect.top) * (canvas.height / rect.height);
     
     ctx.lineTo(x, y);
     ctx.stroke();
     
-    // Analyze digit in real-time
-    analyzeDrawing();
+    // Analyze digit in real-time, throttled to animation frames
+    if (!analysisPendingRef.current) {
+      analysisPendingRef.current = true;
+      requestAnimationFrame(() => {
+        analyzeDrawing();
+        analysisPendingRef.current = false;
+      });
+    }
     e.preventDefault();
   };
   
