@@ -29,9 +29,11 @@ const PitchBuilder = () => {
   const [selectedTheme, setSelectedTheme] = useState(THEMES[0]);
   const [isDownloading, setIsDownloading] = useState(false);
   const canvasRef = useRef(null);
+  const downloadTimeoutRef = useRef(null);
 
   useEffect(() => {
     document.title = 'Project Pitch Builder | AI@UW';
+    return () => clearTimeout(downloadTimeoutRef.current);
   }, []);
 
   const handleRoleToggle = (role) => {
@@ -89,7 +91,7 @@ const PitchBuilder = () => {
   const handleDownload = () => {
     setIsDownloading(true);
     // Give state a small window to reflect downloading if needed
-    setTimeout(() => {
+    downloadTimeoutRef.current = setTimeout(() => {
       const canvas = canvasRef.current;
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
