@@ -52,7 +52,7 @@ const Footer = () => {
               className="atmos-footer-link atmos-footer-instagram"
               href="https://www.instagram.com/aiclubuw/"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               aria-label="Instagram"
             >
               <IconInstagram />
@@ -62,7 +62,7 @@ const Footer = () => {
               className="atmos-footer-link atmos-footer-linkedin"
               href="https://www.linkedin.com/company/aiclub-uwmadison"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               aria-label="LinkedIn"
             >
               <IconLinkedIn />
@@ -72,7 +72,7 @@ const Footer = () => {
               className="atmos-footer-link atmos-footer-suggestions"
               href="https://docs.google.com/forms/d/e/1FAIpQLSdpbz1I_cmMtlJIx5LDufsIFybab7qvBPqHW42fXVBLcDGZNQ/viewform?usp=publish-editor"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               aria-label="Suggestions Box"
             >
               <IconSuggestions />

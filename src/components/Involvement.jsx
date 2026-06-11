@@ -23,7 +23,7 @@ const FAQS = [
     q: 'I am a Freshman in CS. Is this club for me?',
     a: (
       <>
-        Absolutely! Our meetings are targeted towards students at all levels in their AI journeys. This school year will be new for all of us, so we encourage freshmen to join our Discord at <a href="https://discord.gg/TTSykcZAg4" target="_blank" rel="noreferrer">discord.gg/TTSykcZAg4</a> to stay in the loop on upcoming workshops and other virtual events.
+        Absolutely! Our meetings are targeted towards students at all levels in their AI journeys. This school year will be new for all of us, so we encourage freshmen to join our Discord at <a href="https://discord.gg/TTSykcZAg4" target="_blank" rel="noopener noreferrer">discord.gg/TTSykcZAg4</a> to stay in the loop on upcoming workshops and other virtual events.
       </>
     ),
     tag: 'Beginners',
@@ -33,7 +33,7 @@ const FAQS = [
     q: 'When are the meetings?',
     a: (
       <>
-        Our intent is for individual groups (i.e. study groups &amp; project groups) to set up their own regular meeting times. Contact group leaders over <a href="https://discord.gg/TTSykcZAg4" target="_blank" rel="noreferrer">discord.gg/TTSykcZAg4</a> for their regular meeting schedule.
+        Our intent is for individual groups (i.e. study groups &amp; project groups) to set up their own regular meeting times. Contact group leaders over <a href="https://discord.gg/TTSykcZAg4" target="_blank" rel="noopener noreferrer">discord.gg/TTSykcZAg4</a> for their regular meeting schedule.
       </>
     ),
     tag: 'Schedule',
@@ -43,7 +43,7 @@ const FAQS = [
     q: 'How do I join AI@UW’s official mailing list?',
     a: (
       <>
-        Our email list is moderated through Google Forms — If you'd like to receive emails regarding club events and projects, please join our discord and sign up through the linktr.ee on our instagram page <a href="https://www.instagram.com/aiclubuw/" target="_blank" rel="noreferrer">instagram.com/aiclubuw</a> or the following <a href="https://linktr.ee/aiclubuw" target="_blank" rel="noreferrer">linktr.ee/aiclubuw.</a>
+        Our email list is moderated through Google Forms — If you'd like to receive emails regarding club events and projects, please join our discord and sign up through the linktr.ee on our instagram page <a href="https://www.instagram.com/aiclubuw/" target="_blank" rel="noopener noreferrer">instagram.com/aiclubuw</a> or the following <a href="https://linktr.ee/aiclubuw" target="_blank" rel="noopener noreferrer">linktr.ee/aiclubuw.</a>
       </>
     ),
     tag: 'Mailing list',
@@ -53,7 +53,7 @@ const FAQS = [
     q: 'I am an AI@UW Alumni. How do I stay in touch?',
     a: (
       <>
-        Join our <a href="https://discord.gg/TTSykcZAg4" target="_blank" rel="noreferrer">Discord</a>, <a href="https://www.instagram.com/aiclubuw/" target="_blank" rel="noreferrer">Instagram</a> or, <a href="https://www.linkedin.com/company/aiclub-uwmadison" target="_blank" rel="noreferrer">LinkedIn</a> network.
+        Join our <a href="https://discord.gg/TTSykcZAg4" target="_blank" rel="noopener noreferrer">Discord</a>, <a href="https://www.instagram.com/aiclubuw/" target="_blank" rel="noopener noreferrer">Instagram</a> or, <a href="https://www.linkedin.com/company/aiclub-uwmadison" target="_blank" rel="noopener noreferrer">LinkedIn</a> network.
       </>
     ),
     tag: 'Alumni',
@@ -93,7 +93,7 @@ const FAQS = [
     q: 'If I missed the first several meetings, can I still join in the groups? (Can I join in the groups halfway through the semester?)',
     a: (
       <>
-        You should message the group leader over discord <a href="https://discord.gg/TTSykcZAg4" target="_blank" rel="noreferrer">discord.gg/TTSykcZAg4</a> to find out. Some groups progress in content, while some have meetings which act as standalone events (and don't depend on past meetings).
+        You should message the group leader over discord <a href="https://discord.gg/TTSykcZAg4" target="_blank" rel="noopener noreferrer">discord.gg/TTSykcZAg4</a> to find out. Some groups progress in content, while some have meetings which act as standalone events (and don't depend on past meetings).
       </>
     ),
     tag: 'Joining late',
@@ -190,7 +190,7 @@ const Involvement = () => {
     setFaqList((prev) => [...prev, newItem]);
     setNewQuestion('');
     setNotification({
-      message: "Your question has been submitted successfully and is pending officer review.",
+      message: "Demo Submission: Submitted for local preview (officer review is simulated).",
       id: Date.now()
     });
   };
