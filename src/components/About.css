@@ -7,7 +7,54 @@
 /* ── Page shell ─────────────────────────────────────────── */
 .atmos-about {
   padding-bottom: 0;
+
+  /* Illustration light mode variables */
+  --cube-white-top: #FFFFFF;
+  --cube-white-right: #F0F0F0;
+  --cube-white-left: #E4E4E4;
+  --cube-gray-top: #F3F3F3;
+  --cube-gray-right: #E7E7E7;
+  --cube-gray-left: #DADADA;
+  --cube-red-top: #E8464E;
+  --cube-red-right: #C5050C;
+  --cube-red-left: #9B0409;
+  --cube-pink-top: #FCEAEA;
+  --cube-pink-right: #F3CCCD;
+  --cube-pink-left: #E8B3B5;
+  --proj-back-bg: #F5F5F5;
+  --proj-back-stroke: #E8E8E8;
+  --proj-back-line: #E0E0E0;
+  --proj-back-line-soft: #E8E8E8;
+  --proj-mid-bg: #F8F8F8;
+  --proj-mid-stroke: #E5E5E5;
+  --proj-mid-line: #E0E0E0;
+  --proj-mid-line-soft: #E8E8E8;
+  --proj-front-bg: #FFFFFF;
+  --proj-front-stroke: #EBEBEB;
+  --proj-front-line: #EBEBEB;
+  --proj-front-line-soft: #F0F0F0;
+  --node-white: #FFFFFF;
+  --node-white-stroke: #E4E4E4;
+  --node-pink: #FCEAEA;
+  --node-pink-stroke: #F0CCCC;
+  --node-red: #C5050C;
+  --node-red-stroke: #9B0409;
+  --node-edge: #DADADA;
 }
+
+/* Scroll Reveal */
+.sr-hidden {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 800ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sr-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 
 /* ── HERO ───────────────────────────────────────────────── */
 .about-hero {
@@ -827,23 +874,22 @@
     box-sizing: border-box;
   }
   .about-hero-right {
-    width: min(86vw, 270px);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: auto;
+    width: 100%;
+    max-width: none;
   }
-  .about-fc-tl {
-    top: 2%;
-    left: -2%;
+  .about-spiral-canvas,
+  .about-spiral-center {
+    display: none; /* Disable CPU heavy drawing on tiny viewports */
   }
-  .about-fc-tr {
-    top: 10%;
-    right: -2%;
-  }
-  .about-fc-bl {
-    bottom: 14%;
-    left: -2%;
-  }
-  .about-fc-br {
-    bottom: 4%;
-    right: -2%;
+  .about-float-card {
+    position: static;
+    width: 100%;
+    box-sizing: border-box;
+    animation: none;
   }
   .about-story {
     padding-top: 48px;
@@ -1002,3 +1048,47 @@
   background: linear-gradient(135deg, #050505 0%, #121212 100%);
   border-color: rgba(197, 5, 12, 0.28);
 }
+
+[data-theme="dark"] .atmos-about {
+  --cube-white-top: #22252a;
+  --cube-white-right: #1c1e22;
+  --cube-white-left: #16181b;
+
+  --cube-gray-top: #1b1e22;
+  --cube-gray-right: #16181b;
+  --cube-gray-left: #121316;
+
+  --cube-red-top: #ff858b;
+  --cube-red-right: #ff6e75;
+  --cube-red-left: #c5050c;
+
+  --cube-pink-top: #3c2325;
+  --cube-pink-right: #2f1b1d;
+  --cube-pink-left: #251516;
+
+  --proj-back-bg: #1c1e22;
+  --proj-back-stroke: #30363d;
+  --proj-back-line: #30363d;
+  --proj-back-line-soft: #21262d;
+  --proj-mid-bg: #161b22;
+  --proj-mid-stroke: #21262d;
+  --proj-mid-line: #30363d;
+  --proj-mid-line-soft: #21262d;
+  --proj-front-bg: #0d1117;
+  --proj-front-stroke: #30363d;
+  --proj-front-line: #21262d;
+  --proj-front-line-soft: #161b22;
+
+  --node-white: #161b22;
+  --node-white-stroke: #30363d;
+  --node-pink: #251516;
+  --node-pink-stroke: #3c2325;
+  --node-red: #ff6e75;
+  --node-red-stroke: #c5050c;
+  --node-edge: #30363d;
+}
+
+[data-theme="dark"] .about-areas-deco path {
+  stroke: rgba(255, 110, 117, 0.18);
+}
+

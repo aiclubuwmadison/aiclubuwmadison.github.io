@@ -121,22 +121,17 @@ const getElementText = (node) => {
 };
 
 const Involvement = () => {
-  useEffect(() => {
-    document.title = 'FAQ | AI@UW';
-  }, []);
-
   const [faqList, setFaqList] = useState(FAQS);
   const [searchQuery, setSearchQuery] = useState('');
   const [newQuestion, setNewQuestion] = useState('');
   const [notification, setNotification] = useState(null);
+  const [openFaq, setOpenFaq] = useState(null);
+
+  const toggleFaq = (q) => setOpenFaq((prev) => (prev === q ? null : q));
 
   useEffect(() => {
-    if (!notification) return;
-    const timer = setTimeout(() => {
-      setNotification(null);
-    }, 4500);
-    return () => clearTimeout(timer);
-  }, [notification]);
+    document.title = 'FAQ | AI@UW';
+  }, []);
 
   const filteredFaqs = useMemo(() => {
     if (!searchQuery.trim()) return faqList;
@@ -147,6 +142,38 @@ const Involvement = () => {
       return questionText.includes(q) || answerText.includes(q);
     });
   }, [faqList, searchQuery]);
+
+  useEffect(() => {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add("sr-visible");
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    const elements = document.querySelectorAll(".atmos-reveal, .atmos-faq-row");
+    elements.forEach((el, i) => {
+      if (el.dataset.srReady) return;
+      el.dataset.srReady = "1";
+      el.classList.add("sr-hidden");
+      if (el.classList.contains("atmos-faq-row")) {
+        el.style.transitionDelay = `${Math.min((i % 5) * 70, 280)}ms`;
+      }
+      io.observe(el);
+    });
+
+    return () => io.disconnect();
+  }, [filteredFaqs]);
+
+  useEffect(() => {
+    if (!notification) return;
+    const timer = setTimeout(() => {
+      setNotification(null);
+    }, 4500);
+    return () => clearTimeout(timer);
+  }, [notification]);
 
   const handleSubmitQuestion = (e) => {
     e.preventDefault();
@@ -227,10 +254,15 @@ const Involvement = () => {
             <div className="faq-right-card">
               {filteredFaqs.length > 0 ? (
                 <ul className="atmos-faq-list">
-                  {filteredFaqs.map((item, i) => (
-                    <li key={i} className="atmos-faq-row atmos-reveal" style={{ transitionDelay: `${i * 50}ms` }}>
-                      <details className="atmos-faq-item">
-                        <summary>
+                  {filteredFaqs.map((item) => (
+                    <li key={item.q} className="atmos-faq-row atmos-reveal">
+                      <div className="atmos-faq-item">
+                        <button
+                          type="button"
+                          className="atmos-faq-toggle-btn"
+                          onClick={() => toggleFaq(item.q)}
+                          aria-expanded={openFaq === item.q}
+                        >
                           <div className="faq-row-inner">
                             <div className="faq-row-icon"><item.Icon size={17} /></div>
                             <div className="faq-row-text-wrap">
@@ -240,12 +272,16 @@ const Involvement = () => {
                               )}
                             </div>
                           </div>
-                          <span className="atmos-faq-toggle" aria-hidden="true" />
-                        </summary>
-                        <div className="atmos-faq-a">
-                          <p className="atmos-faq-a-body">{item.a}</p>
+                          <span className={`atmos-faq-toggle-icon${openFaq === item.q ? ' is-open' : ''}`} aria-hidden="true">›</span>
+                        </button>
+                        <div className={`atmos-faq-answer-panel${openFaq === item.q ? ' is-open' : ''}`} role="region">
+                          <div className="atmos-faq-answer-inner">
+                            <div className="atmos-faq-a">
+                              <p className="atmos-faq-a-body">{item.a}</p>
+                            </div>
+                          </div>
                         </div>
-                      </details>
+                      </div>
                     </li>
                   ))}
                 </ul>

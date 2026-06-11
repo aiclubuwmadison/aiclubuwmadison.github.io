@@ -88,11 +88,24 @@
   color: var(--atmos-ink-soft);
   background: none;
   border: none;
-  border-bottom: 2px solid transparent;
+  position: relative;
   cursor: pointer;
-  transition: color 180ms ease, border-color 180ms ease;
+  transition: color 180ms ease;
   border-radius: 6px 6px 0 0;
   margin-bottom: -1px;
+}
+
+.atmos-seminars .atmos-sem-tab::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--atmos-badger);
+  transform: scaleX(0);
+  transform-origin: bottom center;
+  transition: transform 240ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .atmos-seminars .atmos-sem-tab:hover {
@@ -101,8 +114,11 @@
 
 .atmos-seminars .atmos-sem-tab.active {
   color: var(--atmos-badger);
-  border-bottom-color: var(--atmos-badger);
   font-weight: 600;
+}
+
+.atmos-seminars .atmos-sem-tab.active::after {
+  transform: scaleX(1);
 }
 
 .atmos-seminars .atmos-sem-filters {
@@ -144,8 +160,8 @@
   font-size: 13px;
   color: var(--atmos-ink);
   background: #fff;
-  width: 180px;
-  transition: border-color 180ms ease, width 220ms ease;
+  width: 220px;
+  transition: border-color 180ms ease;
 }
 
 .atmos-seminars .atmos-sem-search::placeholder {
@@ -155,7 +171,6 @@
 .atmos-seminars .atmos-sem-search:focus {
   outline: none;
   border-color: rgba(197,5,12,0.4);
-  width: 220px;
 }
 
 .atmos-seminars .atmos-sem-search-icon {
@@ -308,7 +323,8 @@
   margin-left: auto;
 }
 
-.atmos-seminars .atmos-sem-bookmark:hover {
+.atmos-seminars .atmos-sem-bookmark:hover,
+.atmos-seminars .atmos-sem-bookmark.active {
   color: var(--atmos-badger);
 }
 

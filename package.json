@@ -13,7 +13,6 @@
     "@fontsource/google-sans": "^5.2.1",
     "lucide-react": "^1.14.0",
     "react": "^19.2.5",
-    "react-burger-menu": "^3.1.0",
     "react-dom": "^19.2.5",
     "react-router-dom": "^7.15.0"
   },

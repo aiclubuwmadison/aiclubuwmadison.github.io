@@ -103,6 +103,12 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  transition: transform 220ms ease, background-color 220ms ease;
+}
+
+.atmos-contact .atmos-channel-card:hover .atmos-channel-icon {
+  transform: scale(1.05);
+  background-color: rgba(197, 5, 12, 0.14);
 }
 
 .atmos-contact .atmos-channel-icon svg {
@@ -183,32 +189,149 @@
   text-transform: uppercase;
 }
 
-/* FORM IFRAME WRAPPER -------------------------------------- */
-.atmos-contact .atmos-form-frame {
-  border: 1px solid var(--atmos-hairline);
-  border-radius: 14px;
-  overflow: hidden;
+/* CONTACT FORM STYLES -------------------------------------- */
+.atmos-contact .contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 12px;
 }
 
-.atmos-contact .atmos-form-iframe {
-  display: block;
+.atmos-contact .contact-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.atmos-contact .contact-form-label {
+  font-family: var(--atmos-sans);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--atmos-ink-soft);
+}
+
+.atmos-contact .contact-form-input,
+.atmos-contact .contact-form-textarea {
   width: 100%;
-  border: none;
+  font-family: var(--atmos-sans);
+  font-size: 14.5px;
+  color: var(--atmos-ink);
+  background: var(--atmos-paper, #ffffff);
+  border: 1px solid var(--atmos-hairline);
+  border-radius: 12px;
+  padding: 12px 16px;
+  box-sizing: border-box;
+  transition: border-color 180ms ease, box-shadow 180ms ease, background 280ms ease;
 }
 
-/* FORM FOOT ------------------------------------------------ */
-.atmos-contact .atmos-form-foot {
+.atmos-contact .contact-form-input:focus,
+.atmos-contact .contact-form-textarea:focus {
+  outline: none;
+  border-color: rgba(197, 5, 12, 0.4);
+  box-shadow: 0 0 0 3px rgba(197, 5, 12, 0.08);
+}
+
+[data-theme="dark"] .atmos-contact .contact-form-input:focus,
+[data-theme="dark"] .atmos-contact .contact-form-textarea:focus {
+  border-color: rgba(255, 110, 117, 0.4);
+  box-shadow: 0 0 0 3px rgba(255, 110, 117, 0.12);
+}
+
+.atmos-contact .contact-form-submit-btn {
+  font-family: var(--atmos-sans);
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  background: var(--atmos-badger);
+  border: none;
+  border-radius: 12px;
+  padding: 14px 24px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  align-self: flex-start;
+  transition: background 200ms ease, transform 200ms ease, box-shadow 200ms ease;
+  box-shadow: 0 4px 14px var(--atmos-accent-glow);
+}
+
+.atmos-contact .contact-form-submit-btn:hover {
+  background: #a8040a;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(197, 5, 12, 0.25);
+}
+
+.atmos-contact .contact-form-submit-btn:active {
+  transform: translateY(0);
+}
+
+[data-theme="dark"] .atmos-contact .contact-form-submit-btn:hover {
+  background: #ff858b;
+  box-shadow: 0 6px 20px rgba(255, 110, 117, 0.4);
+  color: #0d1117;
+}
+
+/* SUCCESS STATE STYLES ------------------------------------- */
+.atmos-contact .contact-success-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 40px 24px;
+  gap: 16px;
+  border: 1px solid var(--atmos-hairline);
+  border-radius: 16px;
+  background: var(--atmos-paper-deep);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.02);
+}
+
+.atmos-contact .contact-success-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.1);
+  color: #10b981;
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 12px;
-  color: var(--atmos-ink-mute);
-  padding-top: 8px;
+  justify-content: center;
 }
 
-.atmos-contact .atmos-form-foot em {
-  font-style: italic;
+.atmos-contact .contact-success-title {
+  font-family: var(--atmos-serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--atmos-ink);
+  margin: 0;
+}
+
+.atmos-contact .contact-success-message {
+  font-family: var(--atmos-sans);
+  font-size: 15px;
+  line-height: 1.6;
   color: var(--atmos-ink-soft);
+  max-width: 36ch;
+  margin: 0;
+}
+
+.atmos-contact .contact-success-back-btn {
+  font-family: var(--atmos-sans);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--atmos-badger);
+  background: transparent;
+  border: 1px solid var(--atmos-hairline);
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 180ms ease;
+}
+
+.atmos-contact .contact-success-back-btn:hover {
+  background: var(--atmos-paper-tint);
+  border-color: var(--atmos-ink-soft);
 }
 
 /* PAGE FOOT ------------------------------------------------ */
@@ -313,8 +436,7 @@
   background: rgba(197, 5, 12, 0.18);
 }
 
-/* Form iframe: invert colors in dark mode to fit the dark theme */
-[data-theme="dark"] .atmos-contact .atmos-form-iframe {
-  filter: invert(0.9) hue-rotate(180deg);
-  background: #fff;
+[data-theme="dark"] .atmos-contact .atmos-channel-card:hover .atmos-channel-icon {
+  background-color: rgba(255, 110, 117, 0.24);
 }
+

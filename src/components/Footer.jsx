@@ -80,7 +80,19 @@ const Footer = () => {
             </a>
           </div>
         </div>
+        <hr className="atmos-footer-rule-soft" aria-hidden="true" />
 
+        <div className="atmos-footer-bottom">
+          <div className="atmos-footer-copy">
+            &copy; {new Date().getFullYear()} AI@UW
+          </div>
+          <div className="atmos-footer-pag">
+            Nurturing AI <span className="atmos-footer-pag-cur">for all</span>
+          </div>
+          <div className="atmos-footer-place">
+            Madison, WI
+          </div>
+        </div>
       </div>
     </footer>
   );

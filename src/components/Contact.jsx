@@ -1,11 +1,49 @@
-import { useEffect } from 'react';
-import { Mail, Newspaper, MapPin, ArrowRight } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Mail, Newspaper, MapPin, ArrowRight, Check } from 'lucide-react';
 import './Contact.css';
 
 const Contact = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     document.title = 'Contact | AI@UW';
   }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!message.trim()) return;
+    setLoading(true);
+
+    const fullMessage = `Name: ${name.trim() || 'Anonymous'}\nEmail: ${email.trim() || 'Not provided'}\n\nMessage:\n${message.trim()}`;
+
+    const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdpbz1I_cmMtlJIx5LDufsIFybab7qvBPqHW42fXVBLcDGZNQ/formResponse';
+    const formData = new URLSearchParams();
+    formData.append('entry.216942505', fullMessage);
+
+    try {
+      await fetch(formUrl, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: formData.toString(),
+      });
+      setSubmitted(true);
+      setName('');
+      setEmail('');
+      setMessage('');
+    } catch (err) {
+      console.error('Submission error:', err);
+      alert('Failed to send message. Please try again or email us directly at aiclubuwmadison@gmail.com');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="atmos-root atmos-contact">
@@ -110,32 +148,85 @@ const Contact = () => {
               </div>
 
               <p className="atmos-contact-lede" style={{ margin: 0 }}>
-                If there's anything else you want to say, share it via the form below or our{' '}
+                If there's anything else you want to say, share it via the form below (which lets you optionally include your name and email) or the raw{' '}
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
                   href="https://docs.google.com/forms/d/e/1FAIpQLSdpbz1I_cmMtlJIx5LDufsIFybab7qvBPqHW42fXVBLcDGZNQ/viewform?usp=publish-editor"
                 >
-                  full-page version
+                  Student Suggestion Box
                 </a>
                 .
               </p>
 
-              <div className="atmos-form-frame">
-                <iframe
-                  className="atmos-form-iframe"
-                  title="contact-embed"
-                  src="https://docs.google.com/forms/d/e/1FAIpQLSdpbz1I_cmMtlJIx5LDufsIFybab7qvBPqHW42fXVBLcDGZNQ/viewform?embedded=true"
-                  width="640"
-                  height="640"
-                  frameBorder="0"
-                  marginHeight="0"
-                  marginWidth="0"
-                  scrolling="auto"
-                >
-                  Loading…
-                </iframe>
-              </div>
+              {submitted ? (
+                <div className="contact-success-panel">
+                  <div className="contact-success-icon" aria-hidden="true">
+                    <Check size={28} strokeWidth={2.5} />
+                  </div>
+                  <h3 className="contact-success-title">Message Sent!</h3>
+                  <p className="contact-success-message">
+                    Thank you for reaching out. We have received your suggestion and will review it shortly.
+                  </p>
+                  <button
+                    type="button"
+                    className="contact-success-back-btn"
+                    onClick={() => setSubmitted(false)}
+                  >
+                    Send another message
+                  </button>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="contact-form">
+                  <div className="contact-form-group">
+                    <label htmlFor="contact-name" className="contact-form-label">
+                      Name (Optional)
+                    </label>
+                    <input
+                      type="text"
+                      id="contact-name"
+                      className="contact-form-input"
+                      placeholder="Alex Badger"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                    />
+                  </div>
+                  <div className="contact-form-group">
+                    <label htmlFor="contact-email" className="contact-form-label">
+                      Email Address (Optional)
+                    </label>
+                    <input
+                      type="email"
+                      id="contact-email"
+                      className="contact-form-input"
+                      placeholder="abadger@wisc.edu"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </div>
+                  <div className="contact-form-group">
+                    <label htmlFor="contact-message" className="contact-form-label">
+                      Comments / Suggestions
+                    </label>
+                    <textarea
+                      id="contact-message"
+                      className="contact-form-textarea"
+                      placeholder="Share your thoughts, suggestions, or questions with us..."
+                      rows={5}
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className="contact-form-submit-btn"
+                    disabled={loading}
+                  >
+                    {loading ? 'Sending...' : 'Submit Message'}
+                  </button>
+                </form>
+              )}
             </div>
           </div>
 

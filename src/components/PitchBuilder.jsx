@@ -29,9 +29,11 @@ const PitchBuilder = () => {
   const [selectedTheme, setSelectedTheme] = useState(THEMES[0]);
   const [isDownloading, setIsDownloading] = useState(false);
   const canvasRef = useRef(null);
+  const downloadTimeoutRef = useRef(null);
 
   useEffect(() => {
     document.title = 'Project Pitch Builder | AI@UW';
+    return () => clearTimeout(downloadTimeoutRef.current);
   }, []);
 
   const handleRoleToggle = (role) => {
@@ -43,23 +45,35 @@ const PitchBuilder = () => {
   };
 
   const drawTextWithWrap = (ctx, text, x, y, maxWidth, lineHeight) => {
-    const words = text.split(' ');
-    let line = '';
+    const paragraphs = text.split('\n');
     let currentY = y;
 
-    for (let n = 0; n < words.length; n++) {
-      const testLine = line + words[n] + ' ';
-      const metrics = ctx.measureText(testLine);
-      const testWidth = metrics.width;
-      if (testWidth > maxWidth && n > 0) {
-        ctx.fillText(line, x, currentY);
-        line = words[n] + ' ';
-        currentY += lineHeight;
-      } else {
-        line = testLine;
+    for (let i = 0; i < paragraphs.length; i++) {
+      const paragraph = paragraphs[i];
+      if (paragraph.trim() === '') {
+        currentY += lineHeight * 0.6; // Small spacing for empty paragraph
+        continue;
+      }
+      const words = paragraph.split(' ');
+      let line = '';
+
+      for (let n = 0; n < words.length; n++) {
+        const testLine = line + words[n] + ' ';
+        const metrics = ctx.measureText(testLine);
+        const testWidth = metrics.width;
+        if (testWidth > maxWidth && n > 0) {
+          ctx.fillText(line, x, currentY);
+          line = words[n] + ' ';
+          currentY += lineHeight;
+        } else {
+          line = testLine;
+        }
+      }
+      ctx.fillText(line, x, currentY);
+      if (i < paragraphs.length - 1) {
+        currentY += lineHeight * 1.25; // Add paragraph spacing
       }
     }
-    ctx.fillText(line, x, currentY);
     return currentY;
   };
 
@@ -86,10 +100,17 @@ const PitchBuilder = () => {
     }
   };
 
-  const handleDownload = () => {
+  const handleDownload = async () => {
     setIsDownloading(true);
+    try {
+      if (document.fonts) {
+        await document.fonts.ready;
+      }
+    } catch (e) {
+      console.warn('Failed to wait for fonts ready:', e);
+    }
     // Give state a small window to reflect downloading if needed
-    setTimeout(() => {
+    downloadTimeoutRef.current = setTimeout(() => {
       const canvas = canvasRef.current;
       if (!canvas) return;
       const ctx = canvas.getContext('2d');

@@ -95,6 +95,11 @@
 /* Keep the in-collage bg div inert (no longer draws anything) */
 .lead-collage-bg { display: none; }
 
+@keyframes slow-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 /* Club logo spiral — right of photos, inside white circle */
 .lead-collage-spiral {
   position: absolute;
@@ -102,13 +107,18 @@
   width: clamp(120px, 15vw, 175px);
   height: clamp(120px, 15vw, 175px);
   z-index: 5;
-  background: rgba(255,255,255,0.9);
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--atmos-hairline);
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
 }
 .lead-collage-spiral img {
   width: 72%; height: 72%; object-fit: contain;
   filter: brightness(0) saturate(100%) invert(9%) sepia(96%) saturate(5500%) hue-rotate(355deg) brightness(88%);
+  animation: slow-rotate 24s linear infinite;
 }
 
 /* Straight staggered 2×2 — no rotation */
@@ -197,10 +207,14 @@
   align-items: center; justify-content: center;
   font-size: 15px; font-weight: 700;
   z-index: 2;
+  transition: transform 220ms ease;
 }
 .lead-featured-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 12px 36px rgba(0,0,0,0.24);
+}
+.lead-featured-card:hover .lead-featured-arrow {
+  transform: translate(2px, -2px);
 }
 .lead-card-role {
   font-size: 10px; font-weight: 700; letter-spacing: 0.18em;
@@ -311,7 +325,7 @@
   display: flex; align-items: center; gap: 10px;
   font-size: 13px; font-weight: 500; color: var(--atmos-ink-soft);
   padding: 8px 12px; border-radius: 8px;
-  background: var(--atmos-paper); border: 1px solid var(--atmos-hairline);
+  background: var(--atmos-paper-deep); border: 1px solid var(--atmos-hairline);
 }
 .lead-focus-topic-icon {
   width: 28px; height: 28px;
@@ -404,23 +418,6 @@
   padding: 8px 28px 0;
 }
 
-.lead-archive-grid {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(140px,1fr));
-  gap: 16px; padding: 8px 28px 0;
-}
-.lead-archive-card {
-  display: flex; flex-direction: column; gap: 6px;
-}
-.lead-archive-photo {
-  aspect-ratio: 1; border-radius: 10px; overflow: hidden;
-  background: var(--atmos-paper-deep); border: 1px solid var(--atmos-hairline);
-}
-.lead-archive-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.lead-archive-name {
-  font-size: 13px; font-weight: 700; color: var(--atmos-ink); margin: 0; line-height: 1.2;
-}
-.lead-archive-card .lead-socials { padding: 2px 0; }
-
 /* ── RESPONSIVE ──────────────────────────────────────────── */
 @media (max-width: 1024px) {
   .lead-team-grid { grid-template-columns: repeat(3,1fr); }
@@ -436,6 +433,12 @@
   .lead-team-grid { grid-template-columns: repeat(2,1fr); }
   .lead-focus-card { grid-template-columns: 1fr; }
   .lead-focus-cta { border-left: none; border-top: 1px solid var(--atmos-hairline); padding-left: 0; padding-top: 20px; }
+}
+@media (max-width: 480px) {
+  .lead-stats { grid-template-columns: 1fr; }
+  .lead-stat { border-right: none; border-bottom: 1px solid var(--atmos-hairline); }
+  .lead-stat:last-child { border-bottom: none; }
+  .lead-team-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 540px) {
   .lead-team-grid { grid-template-columns: repeat(2,1fr); }
@@ -468,9 +471,10 @@
   );
 }
 
-/* Spiral badge: drop the white disc and render the logo in white */
+/* Spiral badge: keep glassmorphism with dark background and render the logo in white */
 [data-theme="dark"] .lead-collage-spiral {
-  background: transparent;
+  background: rgba(13, 17, 23, 0.65);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 [data-theme="dark"] .lead-collage-spiral img {
   filter: brightness(0) invert(1);

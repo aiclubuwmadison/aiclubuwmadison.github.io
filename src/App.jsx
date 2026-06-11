@@ -1,5 +1,5 @@
-import { useEffect, lazy, Suspense } from "react";
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { lazy, Suspense } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 
@@ -13,52 +13,10 @@ const Resources = lazy(() => import("./components/Resources"));
 const PitchBuilder = lazy(() => import("./components/PitchBuilder"));
 const Sandbox = lazy(() => import("./components/Sandbox"));
 
-// Global scroll-reveal — watches specific elements on every page and fades
-// them in as they enter the viewport. Re-runs on route change via MutationObserver.
-function ScrollReveal() {
-  const location = useLocation();
-
-  useEffect(() => {
-    const SELECTORS = [
-      ".atmos-faq-row"
-    ].join(",");
-
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          e.target.classList.add("sr-visible");
-          io.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.08 });
-
-    const observe = () => {
-      document.querySelectorAll(SELECTORS).forEach((el, i) => {
-        if (el.dataset.srReady) return;
-        el.dataset.srReady = "1";
-        el.classList.add("sr-hidden");
-        el.style.transitionDelay = `${Math.min((i % 5) * 70, 280)}ms`;
-        io.observe(el);
-      });
-    };
-
-    observe();
-    const mo = new MutationObserver(() => setTimeout(observe, 30));
-    mo.observe(document.getElementById("body-wrapper") || document.body, {
-      childList: true, subtree: true,
-    });
-
-    return () => { io.disconnect(); mo.disconnect(); };
-  }, [location.pathname]);
-
-  return null;
-}
-
 function App() {
   return (
     <div>
       <Router>
-        <ScrollReveal />
         <Nav />
         <div id="body-wrapper">
           <Suspense fallback={null}>

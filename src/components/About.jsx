@@ -22,10 +22,10 @@ const IsoCube = ({ x, y, s = 20, color = 'white' }) => {
   const w = Math.round(s * 0.866);
   const h = Math.round(s * 0.5);
   const p = {
-    white: ['#FFFFFF','#F0F0F0','#E4E4E4'],
-    gray:  ['#F3F3F3','#E7E7E7','#DADADA'],
-    red:   ['#E8464E','#C5050C','#9B0409'],
-    pink:  ['#FCEAEA','#F3CCCD','#E8B3B5'],
+    white: ['var(--cube-white-top, #FFFFFF)','var(--cube-white-right, #F0F0F0)','var(--cube-white-left, #E4E4E4)'],
+    gray:  ['var(--cube-gray-top, #F3F3F3)','var(--cube-gray-right, #E7E7E7)','var(--cube-gray-left, #DADADA)'],
+    red:   ['var(--cube-red-top, #E8464E)','var(--cube-red-right, #C5050C)','var(--cube-red-left, #9B0409)'],
+    pink:  ['var(--cube-pink-top, #FCEAEA)','var(--cube-pink-right, #F3CCCD)','var(--cube-pink-left, #E8B3B5)'],
   }[color] || ['#FFF','#F0F0F0','#E4E4E4'];
   const top   = `${x},${y-h} ${x+w},${y} ${x},${y+h} ${x-w},${y}`;
   const right = `${x+w},${y} ${x},${y+h} ${x},${y+h+s} ${x+w},${y+s}`;
@@ -69,24 +69,24 @@ const ProjectsIllus = () => (
   <svg viewBox="0 0 200 160" fill="none" style={{width:'100%',height:'100%'}}>
     {/* Back card */}
     <g transform="translate(110,55) rotate(-10)">
-      <rect x="-55" y="0" width="110" height="72" rx="4" fill="#F5F5F5" stroke="#E8E8E8" strokeWidth="1"/>
-      <line x1="-38" y1="22" x2="30" y2="22" stroke="#E0E0E0" strokeWidth="2.5" strokeLinecap="round"/>
-      <line x1="-38" y1="34" x2="16" y2="34" stroke="#E8E8E8" strokeWidth="2" strokeLinecap="round"/>
-      <line x1="-38" y1="46" x2="24" y2="46" stroke="#E8E8E8" strokeWidth="2" strokeLinecap="round"/>
+      <rect x="-55" y="0" width="110" height="72" rx="4" fill="var(--proj-back-bg, #F5F5F5)" stroke="var(--proj-back-stroke, #E8E8E8)" strokeWidth="1"/>
+      <line x1="-38" y1="22" x2="30" y2="22" stroke="var(--proj-back-line, #E0E0E0)" strokeWidth="2.5" strokeLinecap="round"/>
+      <line x1="-38" y1="34" x2="16" y2="34" stroke="var(--proj-back-line-soft, #E8E8E8)" strokeWidth="2" strokeLinecap="round"/>
+      <line x1="-38" y1="46" x2="24" y2="46" stroke="var(--proj-back-line-soft, #E8E8E8)" strokeWidth="2" strokeLinecap="round"/>
     </g>
     {/* Mid card */}
     <g transform="translate(103,68) rotate(-5)">
-      <rect x="-55" y="0" width="110" height="72" rx="4" fill="#F8F8F8" stroke="#E5E5E5" strokeWidth="1"/>
-      <line x1="-38" y1="22" x2="30" y2="22" stroke="#E0E0E0" strokeWidth="2.5" strokeLinecap="round"/>
-      <line x1="-38" y1="34" x2="20" y2="34" stroke="#E8E8E8" strokeWidth="2" strokeLinecap="round"/>
+      <rect x="-55" y="0" width="110" height="72" rx="4" fill="var(--proj-mid-bg, #F8F8F8)" stroke="var(--proj-mid-stroke, #E5E5E5)" strokeWidth="1"/>
+      <line x1="-38" y1="22" x2="30" y2="22" stroke="var(--proj-mid-line, #E0E0E0)" strokeWidth="2.5" strokeLinecap="round"/>
+      <line x1="-38" y1="34" x2="20" y2="34" stroke="var(--proj-mid-line-soft, #E8E8E8)" strokeWidth="2" strokeLinecap="round"/>
     </g>
     {/* Front card with red stripe */}
     <g transform="translate(96,80)">
-      <rect x="-55" y="0" width="110" height="72" rx="4" fill="white" stroke="#EBEBEB" strokeWidth="1"/>
-      <rect x="-55" y="0" width="10" height="72" rx="3" fill="#C5050C"/>
-      <line x1="-30" y1="20" x2="35" y2="20" stroke="#EBEBEB" strokeWidth="2.5" strokeLinecap="round"/>
-      <line x1="-30" y1="32" x2="20" y2="32" stroke="#F0F0F0" strokeWidth="2" strokeLinecap="round"/>
-      <line x1="-30" y1="44" x2="28" y2="44" stroke="#F0F0F0" strokeWidth="2" strokeLinecap="round"/>
+      <rect x="-55" y="0" width="110" height="72" rx="4" fill="var(--proj-front-bg, #FFFFFF)" stroke="var(--proj-front-stroke, #EBEBEB)" strokeWidth="1"/>
+      <rect x="-55" y="0" width="10" height="72" rx="3" fill="var(--atmos-badger, #C5050C)"/>
+      <line x1="-30" y1="20" x2="35" y2="20" stroke="var(--proj-front-line, #EBEBEB)" strokeWidth="2.5" strokeLinecap="round"/>
+      <line x1="-30" y1="32" x2="20" y2="32" stroke="var(--proj-front-line-soft, #F0F0F0)" strokeWidth="2" strokeLinecap="round"/>
+      <line x1="-30" y1="44" x2="28" y2="44" stroke="var(--proj-front-line-soft, #F0F0F0)" strokeWidth="2" strokeLinecap="round"/>
     </g>
   </svg>
 );
@@ -111,17 +111,17 @@ const WorkshopsIllus = () => {
 
 const CommunityIllus = () => {
   const nodes = [
-    { x: 55,  y: 50,  r: 11, c: '#FFFFFF', s: '#E4E4E4' },
-    { x: 100, y: 35,  r: 13, c: '#FCEAEA', s: '#F0CCCC' },
-    { x: 145, y: 55,  r: 11, c: '#FFFFFF', s: '#E4E4E4' },
-    { x: 50,  y: 110, r: 12, c: '#FCEAEA', s: '#F0CCCC' },
-    { x: 100, y: 95,  r: 15, c: '#C5050C', s: '#9B0409' },
-    { x: 150, y: 115, r: 11, c: '#FFFFFF', s: '#E4E4E4' },
+    { x: 55,  y: 50,  r: 11, c: 'var(--node-white, #FFFFFF)', s: 'var(--node-white-stroke, #E4E4E4)' },
+    { x: 100, y: 35,  r: 13, c: 'var(--node-pink, #FCEAEA)', s: 'var(--node-pink-stroke, #F0CCCC)' },
+    { x: 145, y: 55,  r: 11, c: 'var(--node-white, #FFFFFF)', s: 'var(--node-white-stroke, #E4E4E4)' },
+    { x: 50,  y: 110, r: 12, c: 'var(--node-pink, #FCEAEA)', s: 'var(--node-pink-stroke, #F0CCCC)' },
+    { x: 100, y: 95,  r: 15, c: 'var(--node-red, #C5050C)', s: 'var(--node-red-stroke, #9B0409)' },
+    { x: 150, y: 115, r: 11, c: 'var(--node-white, #FFFFFF)', s: 'var(--node-white-stroke, #E4E4E4)' },
   ];
   const edges = [[0,1],[1,2],[0,4],[2,4],[1,4],[0,3],[3,4],[4,5],[2,5]];
   return (
     <svg viewBox="0 0 200 155" fill="none" style={{width:'100%',height:'100%'}}>
-      <g stroke="#DADADA" strokeWidth="1.2">
+      <g stroke="var(--node-edge, #DADADA)" strokeWidth="1.2">
         {edges.map(([a, b], i) => (
           <line key={i} x1={nodes[a].x} y1={nodes[a].y} x2={nodes[b].x} y2={nodes[b].y}/>
         ))}
@@ -140,6 +140,32 @@ const About = () => {
     document.title = 'About Us | AI@UW';
   }, []);
 
+  // IntersectionObserver for scroll reveals
+  useEffect(() => {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add("sr-visible");
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    const elements = document.querySelectorAll(
+      ".about-story, .about-what, .about-areas, .about-cta-banner, .about-stat, .about-what-card, .about-area-tag"
+    );
+
+    elements.forEach((el, i) => {
+      el.classList.add("sr-hidden");
+      if (el.classList.contains("about-stat") || el.classList.contains("about-what-card") || el.classList.contains("about-area-tag")) {
+        el.style.transitionDelay = `${(i % 4) * 80}ms`;
+      }
+      io.observe(el);
+    });
+
+    return () => io.disconnect();
+  }, []);
+
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -151,6 +177,11 @@ const About = () => {
     let canvasH = 0;
 
     function setup() {
+      // Disable drawing loop entirely if screen width < 480px (CSS hides the canvas)
+      if (window.innerWidth < 480) {
+        cancelAnimationFrame(animId);
+        return;
+      }
       const dpr = window.devicePixelRatio || 1;
       const rect = canvas.getBoundingClientRect();
       canvas.width = rect.width * dpr;
@@ -161,6 +192,7 @@ const About = () => {
     }
 
     function draw() {
+      if (window.innerWidth < 480) return;
       const w = canvasW, h = canvasH;
       ctx.clearRect(0, 0, w, h);
       const cx = w * 0.5, cy = h * 0.5;

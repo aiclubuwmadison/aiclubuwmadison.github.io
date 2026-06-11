@@ -94,7 +94,7 @@
 .contact-form .MuiOutlinedInput-notchedOutline { border-color: var(--cardBorder); }
 .contact-form .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline { border-color: #cbd5e1; }
 
-body, #root { background: var(--bg); color: var(--text); }
+body, #root { background: var(--atmos-paper, var(--bg)); color: var(--atmos-ink, var(--text)); transition: background 250ms ease, color 250ms ease; }
 
 #body-wrapper {
   display: flex;
@@ -184,7 +184,7 @@ body, #root { background: var(--bg); color: var(--text); }
   --atmos-paper-tint: #f1f5f9;
   --atmos-ink: #0f172a;
   --atmos-ink-soft: #475569;
-  --atmos-ink-mute: #94a3b8;
+  --atmos-ink-mute: #64748b; /* WCAG AA accessible contrast in Light Mode */
   --atmos-hairline: #e2e8f0;
   --atmos-hairline-soft: #f1f5f9;
   --atmos-badger: #C5050C;
@@ -195,6 +195,63 @@ body, #root { background: var(--bg); color: var(--text); }
   --atmos-max: 1320px;
   --atmos-gutter: clamp(20px, 4vw, 56px);
 }
+
+[data-theme="dark"] {
+  --bg:                 #0d1117;
+  --atmos-paper:        #0d1117;
+  --atmos-paper-deep:   #080c11;
+  --atmos-paper-tint:   #161b22;
+  --atmos-ink:          #e6edf3;
+  --atmos-ink-soft:     #8b949e;
+  --atmos-ink-mute:     #6e7681;
+  --atmos-hairline:     rgba(255, 255, 255, 0.08);
+  --atmos-hairline-soft: rgba(255, 255, 255, 0.04);
+  --atmos-badger:       #ff6e75;
+  --atmos-accent-glow:  rgba(255, 110, 117, 0.15);
+}
+
+/* ── Theme Transitions (prevents theme snapping) ────────────────── */
+body,
+#root,
+.atmos-root,
+.atmos-nav,
+.atmos-nav-mobile-panel,
+.atmos-footer,
+.atmos-about,
+.atmos-contact,
+.atmos-involvement,
+.atmos-leadership,
+.atmos-pitch,
+.atmos-projects,
+.atmos-resources,
+.atmos-sandbox,
+.atmos-seminars,
+.about-hero,
+.about-story,
+.about-what,
+.about-areas,
+.about-cta-banner,
+.about-float-card,
+.about-stat,
+.about-what-card,
+.about-area-tag,
+.project-card,
+.projects-tab,
+.res-skill-card,
+.res-reading-row,
+.res-reading-link,
+.res-search-input,
+.res-refresh-btn,
+.res-news-card,
+.lead-featured-card,
+.lead-team-card,
+.lead-social-btn,
+.atmos-sem-card,
+.pitch-form-card,
+.pitch-slide-container {
+  transition: background 250ms ease, background-color 250ms ease, color 250ms ease, border-color 250ms ease, box-shadow 250ms ease;
+}
+
 
 .atmos-root {
   background: var(--atmos-paper);
