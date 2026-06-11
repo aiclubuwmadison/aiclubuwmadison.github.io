@@ -35,6 +35,7 @@ temp_build/
 *.sw?
 
 # Misc
+.teach/
 .claude/
 CLAUDE.md
 GEMINI.md

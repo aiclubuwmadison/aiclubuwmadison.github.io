@@ -369,7 +369,7 @@ const Seminars = () => {
     try {
       const saved = localStorage.getItem('atmos_bookmarked_seminars');
       return saved ? JSON.parse(saved) : [];
-    } catch (e) {
+    } catch {
       return [];
     }
   });
@@ -377,7 +377,7 @@ const Seminars = () => {
   useEffect(() => {
     try {
       localStorage.setItem('atmos_bookmarked_seminars', JSON.stringify(bookmarkedIds));
-    } catch (e) {
+    } catch {
       // Ignore
     }
   }, [bookmarkedIds]);
