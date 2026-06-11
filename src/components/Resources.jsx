@@ -214,6 +214,15 @@ const getSkillIcon = (id) => {
   }
 };
 
+const isSafeUrl = (urlStr) => {
+  try {
+    const parsed = new URL(urlStr);
+    return parsed.protocol === 'http:' || parsed.protocol === 'https:';
+  } catch {
+    return false;
+  }
+};
+
 const Resources = () => {
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -240,7 +249,7 @@ const Resources = () => {
         const data = await response.json();
         if (active) {
           if (data.hits && data.hits.length > 0) {
-            const cleanHits = data.hits.filter(hit => hit.title && hit.url);
+            const cleanHits = data.hits.filter(hit => hit.title && hit.url && isSafeUrl(hit.url));
             if (cleanHits.length >= 3) {
               setNews(cleanHits.slice(0, 5));
             } else {
@@ -283,7 +292,7 @@ const Resources = () => {
       }
       const data = await response.json();
       if (data.hits && data.hits.length > 0) {
-        const cleanHits = data.hits.filter(hit => hit.title && hit.url);
+        const cleanHits = data.hits.filter(hit => hit.title && hit.url && isSafeUrl(hit.url));
         if (cleanHits.length >= 3) {
           setNews(cleanHits.slice(0, 5));
         } else {
