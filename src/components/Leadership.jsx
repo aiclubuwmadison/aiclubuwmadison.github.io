@@ -154,7 +154,7 @@ const IconLinkedIn = () => (
 const Socials = ({ link }) => (
   <div className="lead-socials">
     {link && (
-      <a href={link} target="_blank" rel="noreferrer" className="lead-social-btn" aria-label="LinkedIn">
+      <a href={link} target="_blank" rel="noopener noreferrer" className="lead-social-btn" aria-label="LinkedIn">
         <IconLinkedIn />
       </a>
     )}

@@ -368,7 +368,8 @@ const Seminars = () => {
   const [bookmarkedIds, setBookmarkedIds] = useState(() => {
     try {
       const saved = localStorage.getItem('atmos_bookmarked_seminars');
-      return saved ? JSON.parse(saved) : [];
+      const parsed = saved ? JSON.parse(saved) : [];
+      return Array.isArray(parsed) ? parsed : [];
     } catch {
       return [];
     }
