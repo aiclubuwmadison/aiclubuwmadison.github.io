@@ -236,7 +236,9 @@ const ArchiveSection = ({ id, num, title, meta, data, isOpen, onToggle }) => (
       </span>
     </button>
     <div id={`${id}-panel`} className={`atmos-archive-panel${isOpen ? ' is-open' : ''}`} role="region">
-      {isOpen && <ArchiveRoster data={data} />}
+      <div className="atmos-archive-panel-inner">
+        <ArchiveRoster data={data} />
+      </div>
     </div>
   </div>
 );
