@@ -113,7 +113,7 @@
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 350px), 1fr));
   gap: clamp(20px, 3vw, 36px);
 }
 
@@ -121,7 +121,7 @@
 .project-card {
   display: flex;
   flex-direction: column;
-  background: #ffffff;
+  background: var(--atmos-paper);
   border: 1px solid var(--atmos-hairline);
   border-radius: 20px;
   overflow: hidden;
@@ -245,6 +245,12 @@
   border-radius: 6px;
   letter-spacing: -0.01em;
   transition: background 280ms ease, border-color 280ms ease, color 280ms ease;
+}
+
+.project-tech-chip:hover {
+  background: var(--atmos-accent-glow);
+  border-color: var(--atmos-badger);
+  color: var(--atmos-badger);
 }
 
 /* Team Credits */
