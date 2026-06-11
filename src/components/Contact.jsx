@@ -148,13 +148,13 @@ const Contact = () => {
               </div>
 
               <p className="atmos-contact-lede" style={{ margin: 0 }}>
-                If there's anything else you want to say, share it via the form below or our{' '}
+                If there's anything else you want to say, share it via the form below (which lets you optionally include your name and email) or the raw{' '}
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
                   href="https://docs.google.com/forms/d/e/1FAIpQLSdpbz1I_cmMtlJIx5LDufsIFybab7qvBPqHW42fXVBLcDGZNQ/viewform?usp=publish-editor"
                 >
-                  full-page version
+                  Student Suggestion Box
                 </a>
                 .
               </p>
