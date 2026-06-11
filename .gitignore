@@ -17,6 +17,8 @@ dist
 dist-ssr
 build/
 temp_build/
+.vite/
+
 
 # Local env files
 .env
