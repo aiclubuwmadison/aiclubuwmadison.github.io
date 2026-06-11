@@ -79,6 +79,7 @@ const Footer = () => {
               Suggestions
             </a>
           </div>
+        </div>
         <hr className="atmos-footer-rule-soft" aria-hidden="true" />
 
         <div className="atmos-footer-bottom">

@@ -125,6 +125,9 @@ const Involvement = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [newQuestion, setNewQuestion] = useState('');
   const [notification, setNotification] = useState(null);
+  const [openFaq, setOpenFaq] = useState(null);
+
+  const toggleFaq = (q) => setOpenFaq((prev) => (prev === q ? null : q));
 
   useEffect(() => {
     document.title = 'FAQ | AI@UW';
@@ -253,8 +256,13 @@ const Involvement = () => {
                 <ul className="atmos-faq-list">
                   {filteredFaqs.map((item) => (
                     <li key={item.q} className="atmos-faq-row atmos-reveal">
-                      <details className="atmos-faq-item">
-                        <summary>
+                      <div className="atmos-faq-item">
+                        <button
+                          type="button"
+                          className="atmos-faq-toggle-btn"
+                          onClick={() => toggleFaq(item.q)}
+                          aria-expanded={openFaq === item.q}
+                        >
                           <div className="faq-row-inner">
                             <div className="faq-row-icon"><item.Icon size={17} /></div>
                             <div className="faq-row-text-wrap">
@@ -264,12 +272,16 @@ const Involvement = () => {
                               )}
                             </div>
                           </div>
-                          <span className="atmos-faq-toggle" aria-hidden="true" />
-                        </summary>
-                        <div className="atmos-faq-a">
-                          <p className="atmos-faq-a-body">{item.a}</p>
+                          <span className={`atmos-faq-toggle-icon${openFaq === item.q ? ' is-open' : ''}`} aria-hidden="true">›</span>
+                        </button>
+                        <div className={`atmos-faq-answer-panel${openFaq === item.q ? ' is-open' : ''}`} role="region">
+                          <div className="atmos-faq-answer-inner">
+                            <div className="atmos-faq-a">
+                              <p className="atmos-faq-a-body">{item.a}</p>
+                            </div>
+                          </div>
                         </div>
-                      </details>
+                      </div>
                     </li>
                   ))}
                 </ul>

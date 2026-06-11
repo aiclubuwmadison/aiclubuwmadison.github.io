@@ -4,8 +4,8 @@
    ========================================================= */
 
 .atmos-involvement {
-  padding: clamp(72px, 10vw, 140px) 0 clamp(48px, 6vw, 80px);
-  background: #f5f5f7;
+  padding: clamp(48px, 6vw, 80px) 0 clamp(48px, 6vw, 80px);
+  background: var(--atmos-paper);
 }
 
 .atmos-faq-layout {
@@ -123,7 +123,7 @@
   height: 40px;
   min-width: 40px;
   border-radius: 50%;
-  background: #fef0f0;
+  background: rgba(197, 5, 12, 0.06);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -145,7 +145,8 @@
 }
 
 .atmos-faq-row {
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid var(--atmos-hairline);
+  transition: background-color 200ms ease;
 }
 .atmos-faq-row:first-child {
   border-top: none;
@@ -153,33 +154,34 @@
 .atmos-faq-row:last-child {
   border-bottom: none;
 }
+.atmos-faq-row:hover {
+  background-color: rgba(197, 5, 12, 0.015);
+}
 
-.atmos-faq-item summary {
+.atmos-faq-toggle-btn {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
   padding: 20px 24px;
+  background: none;
+  border: none;
   cursor: pointer;
-  list-style: none;
-}
-.atmos-faq-item summary::-webkit-details-marker {
-  display: none;
-}
-.atmos-faq-item summary::marker {
-  content: "";
+  text-align: left;
+  transition: background-color 200ms ease;
 }
 
 .atmos-faq-q {
   font-family: var(--atmos-sans);
-  font-size: 23px;
+  font-size: clamp(16px, 2.2vw, 20px);
   font-weight: 500;
   color: var(--atmos-ink);
   line-height: 1.3;
   margin: 0;
 }
 
-.atmos-faq-toggle {
+.atmos-faq-toggle-icon {
   width: 32px;
   height: 32px;
   display: flex;
@@ -188,26 +190,37 @@
   flex-shrink: 0;
   color: var(--atmos-ink-mute);
   font-family: var(--atmos-sans);
-  font-size: 40px;
-  font-weight: 200;
+  font-size: 28px;
+  font-weight: 300;
   line-height: 1;
   transition: transform 300ms cubic-bezier(.2,.7,.2,1), color 300ms ease;
 }
-.atmos-faq-toggle::before {
-  content: '+';
-  position: relative;
-  top: -2px; /* optical alignment */
+
+.atmos-faq-toggle-icon.is-open {
+  transform: rotate(90deg);
+  color: var(--atmos-badger);
 }
 
-.atmos-faq-item[open] .atmos-faq-toggle {
-  transform: rotate(45deg);
-  color: var(--atmos-badger);
+.atmos-faq-answer-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  opacity: 0;
+  transition: grid-template-rows 300ms cubic-bezier(.2,.7,.2,1), opacity 200ms ease;
+}
+
+.atmos-faq-answer-panel.is-open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.atmos-faq-answer-inner {
+  min-height: 0;
 }
 
 .atmos-faq-a {
   padding: 0 24px 20px 80px;
   max-width: 60ch;
-  animation: atmosFaqOpen 240ms cubic-bezier(.2,.7,.2,1);
 }
 .atmos-faq-a-body {
   font-family: var(--atmos-sans);
