@@ -1,7 +1,7 @@
 /* General */
 body {
   margin: 0;
-  font-family: 'Google Sans', 'Inter', 'Helvetica Neue', sans-serif;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--atmos-paper);
@@ -19,7 +19,7 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  font-family: 'Space Mono', ui-monospace, monospace;
 }
 
 iframe {

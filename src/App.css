@@ -71,9 +71,9 @@ button:focus-visible,
   --atmos-hairline-soft: #f1f5f9;
   --atmos-badger: #C5050C;
   --atmos-accent-glow: rgba(197, 5, 12, 0.12);
-  --atmos-serif: "Google Sans", "Inter", sans-serif;
-  --atmos-sans: "Google Sans", "Inter", sans-serif;
-  --atmos-mono: "JetBrains Mono", "Fira Code", monospace;
+  --atmos-serif: "Instrument Serif", Georgia, serif;
+  --atmos-sans: "Space Grotesk", system-ui, sans-serif;
+  --atmos-mono: "Space Mono", ui-monospace, monospace;
   --atmos-max: 1320px;
   --atmos-gutter: clamp(20px, 4vw, 56px);
   --atmos-glass-blur: blur(20px) saturate(1.4);
