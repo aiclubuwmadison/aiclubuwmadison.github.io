@@ -394,6 +394,7 @@ const Seminars = () => {
   const [yearFilter, setYearFilter] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [autocompleteOpen, setAutocompleteOpen] = useState(false);
+  const [topicsExpanded, setTopicsExpanded] = useState(false);
   const searchWrapRef = useRef(null);
 
   const allTopics = useMemo(() => {
@@ -467,108 +468,115 @@ const Seminars = () => {
         </header>
 
         {/* FILTER BAR */}
-        <div className="atmos-sem-filter-bar">
-          <div className="atmos-sem-tabs">
-            <button
-              className={`atmos-sem-tab${activeTab === 'all' ? ' active' : ''}`}
-              onClick={() => setActiveTab('all')}
-            >
-              <IconGrid /> All
-            </button>
-            <button
-              className={`atmos-sem-tab${activeTab === 'talks' ? ' active' : ''}`}
-              onClick={() => setActiveTab('talks')}
-            >
-              <IconMic /> Talks
-            </button>
-            <button
-              className={`atmos-sem-tab${activeTab === 'workshops' ? ' active' : ''}`}
-              onClick={() => setActiveTab('workshops')}
-            >
-              <IconWrench /> Workshops
-            </button>
-          </div>
-          <div className="atmos-sem-filters">
-            <select
-              className="atmos-sem-select"
-              value={topicFilter}
-              onChange={(e) => setTopicFilter(e.target.value)}
-            >
-              <option value="">All Topics</option>
-              {allTopics.map((t) => (
-                <option key={t} value={t}>{t}</option>
-              ))}
-            </select>
-            <select
-              className="atmos-sem-select"
-              value={yearFilter}
-              onChange={(e) => setYearFilter(e.target.value)}
-            >
-              <option value="">All Years</option>
-              {allYears.map((y) => (
-                <option key={y} value={y}>{y}</option>
-              ))}
-            </select>
-            <div className="atmos-sem-search-wrap" ref={searchWrapRef}>
-              <input
-                className="atmos-sem-search"
-                placeholder="Search talks..."
-                value={searchQuery}
-                onChange={(e) => {
-                  setSearchQuery(e.target.value);
-                  setAutocompleteOpen(true);
-                }}
-                onFocus={() => setAutocompleteOpen(true)}
-              />
-              <span className="atmos-sem-search-icon"><IconSearch /></span>
-              {autocompleteOpen && autocompleteMatches.length > 0 && (
-                <div className="atmos-sem-autocomplete-dropdown" role="listbox">
-                  {autocompleteMatches.map((item) => (
-                    <button
-                      key={`${item.title}-${item.date}`}
-                      type="button"
-                      className="atmos-sem-autocomplete-item"
-                      role="option"
-                      onClick={() => {
-                        setSearchQuery(item.title);
-                        setAutocompleteOpen(false);
-                      }}
-                    >
-                      <span className={`atmos-sem-autocomplete-badge atmos-sem-autocomplete-badge--${item.type}`}>
-                        {item.type === 'workshop' ? 'Workshop' : 'Talk'}
-                      </span>
-                      <span className="atmos-sem-autocomplete-title" title={item.title}>
-                        {item.title}
-                      </span>
-                    </button>
-                  ))}
-                </div>
-              )}
+        <div className="atmos-sem-filter-stack">
+          <div className="atmos-sem-filter-bar">
+            <div className="atmos-sem-tabs-pill">
+              <button
+                className={`atmos-sem-tab${activeTab === 'all' ? ' active' : ''}`}
+                onClick={() => setActiveTab('all')}
+              >
+                <IconGrid /> All
+              </button>
+              <button
+                className={`atmos-sem-tab${activeTab === 'talks' ? ' active' : ''}`}
+                onClick={() => setActiveTab('talks')}
+              >
+                <IconMic /> Talks
+              </button>
+              <button
+                className={`atmos-sem-tab${activeTab === 'workshops' ? ' active' : ''}`}
+                onClick={() => setActiveTab('workshops')}
+              >
+                <IconWrench /> Workshops
+              </button>
+            </div>
+            <div className="atmos-sem-filters">
+              <select
+                className="atmos-sem-select"
+                value={yearFilter}
+                onChange={(e) => setYearFilter(e.target.value)}
+                aria-label="Filter by year"
+              >
+                <option value="">All Years</option>
+                {allYears.map((y) => (
+                  <option key={y} value={y}>{y}</option>
+                ))}
+              </select>
+              <div className="atmos-sem-search-wrap" ref={searchWrapRef}>
+                <input
+                  className="atmos-sem-search"
+                  placeholder="Search talks..."
+                  value={searchQuery}
+                  onChange={(e) => {
+                    setSearchQuery(e.target.value);
+                    setAutocompleteOpen(true);
+                  }}
+                  onFocus={() => setAutocompleteOpen(true)}
+                />
+                <span className="atmos-sem-search-icon"><IconSearch /></span>
+                {autocompleteOpen && autocompleteMatches.length > 0 && (
+                  <div className="atmos-sem-autocomplete-dropdown" role="listbox">
+                    {autocompleteMatches.map((item) => (
+                      <button
+                        key={`${item.title}-${item.date}`}
+                        type="button"
+                        className="atmos-sem-autocomplete-item"
+                        role="option"
+                        onClick={() => {
+                          setSearchQuery(item.title);
+                          setAutocompleteOpen(false);
+                        }}
+                      >
+                        <span className={`atmos-sem-autocomplete-badge atmos-sem-autocomplete-badge--${item.type}`}>
+                          {item.type === 'workshop' ? 'Workshop' : 'Talk'}
+                        </span>
+                        <span className="atmos-sem-autocomplete-title" title={item.title}>
+                          {item.title}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* TOPIC TAG CLOUD */}
-        <div className="atmos-sem-tag-cloud-container">
-          <span className="atmos-sem-tag-cloud-label">Filter by Topic:</span>
-          <div className="atmos-sem-tag-cloud">
+          <div className={`atmos-sem-topics${topicsExpanded ? ' atmos-sem-topics--open' : ''}`}>
             <button
               type="button"
-              className={`atmos-sem-cloud-tag${!topicFilter ? ' active' : ''}`}
-              onClick={() => setTopicFilter('')}
+              className="atmos-sem-topics-toggle"
+              onClick={() => setTopicsExpanded((v) => !v)}
+              aria-expanded={topicsExpanded}
             >
-              All Topics
+              <span className="atmos-sem-topics-toggle-label">Topics</span>
+              {topicFilter ? (
+                <span className="atmos-sem-topics-active">{topicFilter}</span>
+              ) : (
+                <span className="atmos-sem-topics-count">{allTopics.length} tags</span>
+              )}
+              <span className="atmos-sem-topics-chevron" aria-hidden="true" />
             </button>
-            {allTopics.map((tag) => (
-              <button
-                key={tag}
-                type="button"
-                className={`atmos-sem-cloud-tag${topicFilter === tag ? ' active' : ''}`}
-                onClick={() => setTopicFilter(tag === topicFilter ? '' : tag)}
-              >
-                {tag}
-              </button>
-            ))}
+            {topicsExpanded && (
+              <div className="atmos-sem-tag-cloud">
+                <button
+                  type="button"
+                  className={`atmos-sem-cloud-tag${!topicFilter ? ' active' : ''}`}
+                  onClick={() => setTopicFilter('')}
+                >
+                  All
+                </button>
+                {allTopics.map((tag) => (
+                  <button
+                    key={tag}
+                    type="button"
+                    className={`atmos-sem-cloud-tag${topicFilter === tag ? ' active' : ''}`}
+                    onClick={() => setTopicFilter(tag === topicFilter ? '' : tag)}
+                  >
+                    {tag}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         </div>
 
