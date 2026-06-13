@@ -241,7 +241,9 @@
   display: grid; grid-template-columns: repeat(4,1fr); gap: 16px;
 }
 .lead-team-card {
-  background: white;
+  background: var(--atmos-glass-panel);
+  backdrop-filter: var(--atmos-glass-blur);
+  -webkit-backdrop-filter: var(--atmos-glass-blur);
   border: none;
   border-radius: 14px; overflow: hidden;
   display: flex; flex-direction: column;
@@ -310,7 +312,9 @@
   gap: clamp(24px,3.5vw,56px); align-items: center;
   border: 1px solid var(--atmos-hairline);
   border-radius: 16px;
-  background: var(--atmos-paper);
+  background: var(--atmos-glass-panel);
+  backdrop-filter: var(--atmos-glass-blur);
+  -webkit-backdrop-filter: var(--atmos-glass-blur);
   padding: clamp(24px,3vw,40px);
 }
 .lead-focus-title {
@@ -487,7 +491,9 @@
 
 /* Team cards: dark surface + deeper shadows */
 [data-theme="dark"] .lead-team-card {
-  background: #141414;
+  background: var(--atmos-glass-panel);
+  backdrop-filter: var(--atmos-glass-blur);
+  -webkit-backdrop-filter: var(--atmos-glass-blur);
   box-shadow: 0 2px 14px rgba(0, 0, 0, 0.4);
 }
 [data-theme="dark"] .lead-team-card:hover {

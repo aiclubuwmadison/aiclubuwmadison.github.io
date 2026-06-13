@@ -88,7 +88,9 @@
 
 /* Card Styling */
 .sandbox-card {
-  background: var(--atmos-paper);
+  background: var(--atmos-glass-panel);
+  backdrop-filter: var(--atmos-glass-blur);
+  -webkit-backdrop-filter: var(--atmos-glass-blur);
   border: 1px solid var(--atmos-hairline);
   border-radius: 20px;
   padding: 32px;
@@ -157,7 +159,9 @@
 }
 
 .nn-select, .nn-input {
-  background: var(--atmos-paper);
+  background: var(--atmos-glass-control);
+  backdrop-filter: var(--atmos-glass-blur);
+  -webkit-backdrop-filter: var(--atmos-glass-blur);
   border: 1px solid var(--atmos-hairline);
   color: var(--atmos-ink);
   font-size: 13.5px;
@@ -204,7 +208,9 @@
 }
 
 .layer-btn {
-  background: var(--atmos-paper);
+  background: var(--atmos-glass-control);
+  backdrop-filter: var(--atmos-glass-blur);
+  -webkit-backdrop-filter: var(--atmos-glass-blur);
   border: 1px solid var(--atmos-hairline);
   color: var(--atmos-ink);
   font-size: 12px;
@@ -236,7 +242,9 @@
 }
 
 .nn-layer-pill {
-  background: var(--atmos-paper);
+  background: var(--atmos-glass-control);
+  backdrop-filter: var(--atmos-glass-blur);
+  -webkit-backdrop-filter: var(--atmos-glass-blur);
   border: 1px solid var(--atmos-hairline);
   padding: 10px 14px;
   border-radius: 10px;
@@ -521,7 +529,9 @@
   border-radius: 8px;
   cursor: pointer;
   border: 1.5px solid var(--atmos-hairline);
-  background: var(--atmos-paper);
+  background: var(--atmos-glass-control);
+  backdrop-filter: var(--atmos-glass-blur);
+  -webkit-backdrop-filter: var(--atmos-glass-blur);
   color: var(--atmos-ink-soft);
   transition: all 150ms ease;
   display: inline-flex;
@@ -642,7 +652,9 @@
   justify-content: center;
   align-items: center;
   gap: 16px;
-  background: var(--atmos-paper);
+  background: var(--atmos-glass-control);
+  backdrop-filter: var(--atmos-glass-blur);
+  -webkit-backdrop-filter: var(--atmos-glass-blur);
   border: 1.5px solid var(--atmos-hairline);
   padding: 12px;
   border-radius: 10px;

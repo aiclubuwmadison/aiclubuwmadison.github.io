@@ -5,7 +5,9 @@
    ========================================================= */
 
 .atmos-footer {
-  background: var(--atmos-paper-deep);
+  background: linear-gradient(to top, var(--atmos-glass-bg-strong), transparent);
+  backdrop-filter: var(--atmos-glass-blur);
+  -webkit-backdrop-filter: var(--atmos-glass-blur);
   color: var(--atmos-ink);
   font-family: var(--atmos-sans);
   margin-top: 0;

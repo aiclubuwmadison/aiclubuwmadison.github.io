@@ -125,8 +125,9 @@ body, #root { background: var(--atmos-paper, var(--bg)); color: var(--atmos-ink,
 }
 
 .glass {
-  backdrop-filter: blur(10px);
-  background: rgba(255,255,255,0.6);
+  backdrop-filter: var(--atmos-glass-blur);
+  -webkit-backdrop-filter: var(--atmos-glass-blur);
+  background: var(--atmos-glass-panel);
 }
 
 .home-card {
@@ -194,6 +195,12 @@ body, #root { background: var(--atmos-paper, var(--bg)); color: var(--atmos-ink,
   --atmos-mono: "JetBrains Mono", "Fira Code", monospace;
   --atmos-max: 1320px;
   --atmos-gutter: clamp(20px, 4vw, 56px);
+  --atmos-glass-blur: blur(20px) saturate(1.4);
+  --atmos-glass-bg: rgba(255, 255, 255, 0.88);
+  --atmos-glass-bg-strong: rgba(255, 255, 255, 0.96);
+  --atmos-glass-panel: rgba(255, 255, 255, 0.72);
+  --atmos-glass-panel-hover: rgba(255, 255, 255, 0.86);
+  --atmos-glass-control: rgba(255, 255, 255, 0.82);
 }
 
 [data-theme="dark"] {
@@ -208,6 +215,30 @@ body, #root { background: var(--atmos-paper, var(--bg)); color: var(--atmos-ink,
   --atmos-hairline-soft: rgba(255, 255, 255, 0.04);
   --atmos-badger:       #ff6e75;
   --atmos-accent-glow:  rgba(255, 110, 117, 0.15);
+  --atmos-glass-bg: rgba(10, 10, 10, 0.82);
+  --atmos-glass-bg-strong: rgba(10, 10, 10, 0.95);
+  --atmos-glass-panel: rgba(10, 10, 10, 0.78);
+  --atmos-glass-panel-hover: rgba(10, 10, 10, 0.88);
+  --atmos-glass-control: rgba(10, 10, 10, 0.82);
+}
+
+/* ── Glass surface utilities (matches navbar command bar) ──────── */
+.atmos-glass-panel,
+.glass-panel {
+  background: var(--atmos-glass-panel);
+  backdrop-filter: var(--atmos-glass-blur);
+  -webkit-backdrop-filter: var(--atmos-glass-blur);
+}
+
+.atmos-glass-control {
+  background: var(--atmos-glass-control);
+  backdrop-filter: var(--atmos-glass-blur);
+  -webkit-backdrop-filter: var(--atmos-glass-blur);
+}
+
+.atmos-glass-chrome {
+  backdrop-filter: var(--atmos-glass-blur);
+  -webkit-backdrop-filter: var(--atmos-glass-blur);
 }
 
 /* ── Theme Transitions (prevents theme snapping) ────────────────── */
