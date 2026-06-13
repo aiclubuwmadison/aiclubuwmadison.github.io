@@ -147,7 +147,7 @@ const Contact = () => {
               </div>
 
               <p className="atmos-contact-lede" style={{ margin: 0 }}>
-                Name and email are optional.
+                Send a quick message below, or use the Google Form if you prefer.
               </p>
 
               {submitted ? (
@@ -218,6 +218,36 @@ const Contact = () => {
                   </button>
                 </form>
               )}
+
+              <div className="atmos-form-alt">
+                <p className="atmos-contact-lede" style={{ margin: 0 }}>
+                  Prefer the full form? Fill it out below or open the{' '}
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSdpbz1I_cmMtlJIx5LDufsIFybab7qvBPqHW42fXVBLcDGZNQ/viewform?usp=publish-editor"
+                  >
+                    full-page version
+                  </a>
+                  .
+                </p>
+
+                <div className="atmos-form-frame">
+                  <iframe
+                    className="atmos-form-iframe"
+                    title="AI@UW suggestions form"
+                    src="https://docs.google.com/forms/d/e/1FAIpQLSdpbz1I_cmMtlJIx5LDufsIFybab7qvBPqHW42fXVBLcDGZNQ/viewform?embedded=true"
+                    width="640"
+                    height="640"
+                    frameBorder="0"
+                    marginHeight="0"
+                    marginWidth="0"
+                    scrolling="auto"
+                  >
+                    Loading…
+                  </iframe>
+                </div>
+              </div>
             </div>
           </div>
 
