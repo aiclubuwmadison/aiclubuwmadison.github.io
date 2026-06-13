@@ -23,7 +23,6 @@ const Nav = () => {
   const [iconTheme, setIconTheme] = useState(null);
   const panelRef = useRef(null);
   const burgerRef = useRef(null);
-  const prevFocusRef = useRef(null);
 
   const isActive = (to) => {
     const path = location.pathname;
@@ -99,7 +98,6 @@ const Nav = () => {
 
   useEffect(() => {
     if (!mobileOpen) return;
-    prevFocusRef.current = document.activeElement;
     const panel = panelRef.current;
     if (!panel) return;
 
@@ -136,33 +134,29 @@ const Nav = () => {
       <header className={`atmos-nav${scrolled ? " atmos-nav--scrolled" : ""}`}>
         <div className="atmos-shell atmos-nav-inner">
 
-          <div className="atmos-nav-group">
-            <Link to="/" className="atmos-nav-brand" aria-label="AI@UW home">
-              <span className="atmos-nav-brand-mark" aria-hidden="true">
-                <img src="/images/logo.png" alt="AI@UW" />
-              </span>
-            </Link>
+          <Link to="/" className="atmos-nav-brand" aria-label="AI@UW home">
+            <span className="atmos-nav-brand-mark" aria-hidden="true">
+              <img src="/images/logo.png" alt="AI@UW" />
+            </span>
+          </Link>
 
-            <span className="atmos-nav-divider" aria-hidden="true" />
-
-            <nav aria-label="Primary">
-              <ul className="atmos-nav-links">
-                {NAV_ITEMS.map((item) => (
-                  <li key={item.to}>
-                    <Link
-                      to={item.to}
-                      className={
-                        "atmos-nav-link" +
-                        (isActive(item.to) ? " atmos-nav-link-active" : "")
-                      }
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </div>
+          <nav className="atmos-nav-center" aria-label="Primary">
+            <ul className="atmos-nav-links">
+              {NAV_ITEMS.map((item) => (
+                <li key={item.to}>
+                  <Link
+                    to={item.to}
+                    className={
+                      "atmos-nav-link" +
+                      (isActive(item.to) ? " atmos-nav-link-active" : "")
+                    }
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
           <div className="atmos-nav-actions">
             {/* CTA */}

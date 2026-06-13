@@ -37,6 +37,7 @@
 }
 
 .atmos-nav-inner {
+  position: static;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -44,21 +45,13 @@
   width: 100%;
 }
 
-/* ── Command cluster (logo + divider + links) ───────────── */
-.atmos-nav-group {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  flex: 1;
-  min-width: 0;
-}
-
-.atmos-nav-divider {
-  display: block;
-  width: 1px;
-  height: 22px;
-  background: var(--atmos-hairline);
-  flex-shrink: 0;
+/* ── Centered nav links ─────────────────────────────────── */
+.atmos-nav-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
 }
 
 /* ── Brand ──────────────────────────────────────────────── */
@@ -69,6 +62,8 @@
   text-decoration: none;
   color: var(--atmos-ink);
   flex-shrink: 0;
+  position: relative;
+  z-index: 2;
   transition: opacity 200ms ease;
 }
 
@@ -119,6 +114,8 @@
   justify-content: flex-end;
   gap: 14px;
   flex-shrink: 0;
+  position: relative;
+  z-index: 2;
 }
 
 .atmos-nav-link {
@@ -395,11 +392,7 @@
     gap: 16px;
   }
 
-  .atmos-nav-group {
-    flex: 0;
-  }
-
-  .atmos-nav-divider {
+  .atmos-nav-center {
     display: none;
   }
 
@@ -421,7 +414,6 @@
     top: 64px;
   }
 
-  .atmos-nav-group nav,
   .atmos-nav-actions {
     display: none;
   }
