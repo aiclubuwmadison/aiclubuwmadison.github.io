@@ -252,6 +252,75 @@ body,
   transition: background 250ms ease, background-color 250ms ease, color 250ms ease, border-color 250ms ease, box-shadow 250ms ease;
 }
 
+/* ── Circular theme reveal (View Transitions API) ──────────────── */
+::view-transition-group(root) {
+  animation-duration: 520ms;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 520ms;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  animation-fill-mode: both;
+  mix-blend-mode: normal;
+  height: 100%;
+}
+
+::view-transition-old(root) {
+  z-index: 2;
+  animation-name: atmos-theme-circle-in;
+}
+
+::view-transition-new(root) {
+  z-index: 1;
+  animation-name: atmos-theme-circle-out;
+}
+
+@keyframes atmos-theme-circle-out {
+  from {
+    clip-path: circle(0px at var(--reveal-x) var(--reveal-y));
+  }
+  to {
+    clip-path: circle(var(--reveal-radius) at var(--reveal-x) var(--reveal-y));
+  }
+}
+
+@keyframes atmos-theme-circle-in {
+  from {
+    clip-path: circle(var(--reveal-radius) at var(--reveal-x) var(--reveal-y));
+  }
+  to {
+    clip-path: circle(0px at var(--reveal-x) var(--reveal-y));
+  }
+}
+
+/* Suppress color fades while the circular reveal runs */
+.atmos-theme-transitioning body,
+.atmos-theme-transitioning #root,
+.atmos-theme-transitioning .atmos-root,
+.atmos-theme-transitioning .atmos-nav,
+.atmos-theme-transitioning .atmos-nav-mobile-panel,
+.atmos-theme-transitioning .atmos-footer,
+.atmos-theme-transitioning .atmos-about,
+.atmos-theme-transitioning .atmos-contact,
+.atmos-theme-transitioning .atmos-involvement,
+.atmos-theme-transitioning .atmos-leadership,
+.atmos-theme-transitioning .atmos-pitch,
+.atmos-theme-transitioning .atmos-projects,
+.atmos-theme-transitioning .atmos-resources,
+.atmos-theme-transitioning .atmos-sandbox,
+.atmos-theme-transitioning .atmos-seminars {
+  transition: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
+}
+
 
 .atmos-root {
   background: var(--atmos-paper);
@@ -909,4 +978,5 @@ body,
   .atmos-root        { animation: none !important; }
   .sr-hidden         { opacity: 1 !important; transform: none !important; transition: none !important; }
   .atmos-scroll-progress { transition: none !important; }
+  .atmos-nav-theme-toggle-icon { animation: none !important; }
 }
