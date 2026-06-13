@@ -22,14 +22,6 @@
   padding: 0 var(--atmos-gutter);
 }
 
-.atmos-footer-rule {
-  height: 1px;
-  width: 100%;
-  background: var(--atmos-hairline);
-  border: 0;
-  margin: 0;
-}
-
 /* TOP — centered stack */
 .atmos-footer-top {
   display: flex;
@@ -158,22 +150,7 @@
 
 .atmos-footer-link:hover::after { transform: scaleX(1); }
 
-.atmos-footer-link .atmos-arr {
-  font-family: var(--atmos-sans);
-  font-size: 0.72em;
-  color: var(--atmos-ink-soft);
-  opacity: 0;
-  transform: translateX(-2px);
-  transition: opacity 200ms ease, transform 220ms cubic-bezier(.2,.7,.2,1), color 200ms ease;
-}
-
 .atmos-footer-link:hover {
-  color: var(--atmos-badger);
-}
-
-.atmos-footer-link:hover .atmos-arr {
-  opacity: 1;
-  transform: translateX(0);
   color: var(--atmos-badger);
 }
 

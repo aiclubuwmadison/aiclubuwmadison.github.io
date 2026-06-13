@@ -13,59 +13,6 @@
   padding: clamp(48px, 6vw, 80px) 0 clamp(24px, 3vw, 40px);
 }
 
-.projects-hero-content {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(14px, 2vw, 24px);
-  text-align: center;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.projects-hero-eyebrow {
-  font-family: var(--atmos-sans);
-  font-size: 11px;
-  letter-spacing: var(--ls-eyebrow);
-  text-transform: uppercase;
-  color: var(--atmos-badger);
-  margin: 0;
-}
-
-.projects-hero-title {
-  font-family: var(--atmos-serif);
-  font-weight: 800;
-  font-size: var(--type-display);
-  line-height: 1.05;
-  letter-spacing: -0.03em;
-  color: var(--atmos-ink);
-  margin: 0;
-}
-
-.projects-hero-lede {
-  font-family: var(--atmos-sans);
-  font-size: clamp(15px, 1.4vw, 18px);
-  line-height: 1.6;
-  color: var(--atmos-ink-soft);
-  margin: 0;
-}
-
-.projects-hero-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--atmos-badger);
-  text-decoration: none;
-  width: fit-content;
-  margin: 0 auto;
-  transition: gap 220ms ease;
-}
-
-.projects-hero-cta:hover {
-  gap: 10px;
-}
-
 .project-tech-chip--more {
   color: var(--atmos-ink-mute);
   background: transparent;
@@ -273,29 +220,6 @@
   background: var(--atmos-accent-glow);
   border-color: var(--atmos-badger);
   color: var(--atmos-badger);
-}
-
-/* Team Credits */
-.project-card-team {
-  display: flex;
-  gap: 6px;
-  font-family: var(--atmos-sans);
-  font-size: 13px;
-  line-height: 1.4;
-  margin-bottom: 20px;
-  padding-top: 14px;
-  border-top: 1px solid var(--atmos-hairline-soft);
-  margin-top: auto; /* Push to bottom of content area */
-}
-
-.project-team-label {
-  font-weight: 700;
-  color: var(--atmos-ink-soft);
-}
-
-.project-team-members {
-  color: var(--atmos-ink-mute);
-  font-style: italic;
 }
 
 /* Repo Link */

@@ -1,5 +1,3 @@
-const REVEAL_DURATION_MS = 520;
-
 function getRevealRadius(x, y) {
   const { innerWidth: w, innerHeight: h } = window;
   return Math.hypot(Math.max(x, w - x), Math.max(y, h - y)) + 8;
@@ -54,5 +52,3 @@ export function animateThemeChange(_currentTheme, nextTheme, originX, originY, o
 
   transition.finished.then(finish).catch(finish);
 }
-
-export { REVEAL_DURATION_MS };

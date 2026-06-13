@@ -80,7 +80,6 @@ button:focus-visible,
   --atmos-glass-bg: rgba(255, 255, 255, 0.88);
   --atmos-glass-bg-strong: rgba(255, 255, 255, 0.96);
   --atmos-glass-panel: var(--atmos-paper-tint);
-  --atmos-glass-panel-hover: #e8edf2;
   --atmos-glass-control: rgba(255, 255, 255, 0.82);
 
   /* Apple-inspired design tokens */
@@ -125,7 +124,6 @@ button:focus-visible,
   --atmos-glass-bg: rgba(10, 10, 10, 0.82);
   --atmos-glass-bg-strong: rgba(10, 10, 10, 0.95);
   --atmos-glass-panel: var(--atmos-paper-tint);
-  --atmos-glass-panel-hover: #1a1a1a;
   --atmos-glass-control: rgba(10, 10, 10, 0.82);
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.24), 0 1px 2px rgba(0, 0, 0, 0.16);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.32), 0 2px 4px rgba(0, 0, 0, 0.16);
@@ -212,20 +210,8 @@ button:focus-visible,
 }
 
 /* ── Glass surface utilities (solid panels; glass only on chrome) ─ */
-.atmos-glass-panel,
 .glass-panel {
   background: var(--atmos-paper-tint);
-}
-
-.atmos-glass-control {
-  background: var(--atmos-glass-control);
-  backdrop-filter: var(--atmos-glass-blur);
-  -webkit-backdrop-filter: var(--atmos-glass-blur);
-}
-
-.atmos-glass-chrome {
-  backdrop-filter: var(--atmos-glass-blur);
-  -webkit-backdrop-filter: var(--atmos-glass-blur);
 }
 
 /* ── Theme Transitions (prevents theme snapping) ────────────────── */
@@ -387,18 +373,6 @@ body,
   text-transform: uppercase;
   margin-bottom: 8px;
 }
-.atmos-section-num {
-  font-family: var(--atmos-mono);
-  font-style: normal;
-  font-weight: 600;
-  font-size: 10px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--atmos-ink-mute);
-  margin-right: 14px;
-  border-bottom: 1px solid var(--atmos-ink-mute);
-  padding-bottom: 2px;
-}
 .atmos-section-title {
   font-family: var(--atmos-serif);
   font-weight: 700;
@@ -408,27 +382,15 @@ body,
   margin: 0;
   color: var(--atmos-ink);
 }
-.atmos-section-aside {
-  font-family: var(--atmos-mono);
-  font-size: 10px;
-  color: var(--atmos-ink-mute);
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  text-align: right;
-}
-
-/* REVEAL ANIMATIONS */
-@keyframes atmosLineRise {
-  0%   { opacity: 0; transform: translateY(14px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
 .atmos-reveal {
   opacity: 0;
   animation: atmosLineRise 420ms cubic-bezier(.2,.7,.2,1) forwards;
 }
-.atmos-d2 { animation-delay: 120ms; }
-.atmos-d3 { animation-delay: 180ms; }
-.atmos-d4 { animation-delay: 240ms; }
+
+@keyframes atmosLineRise {
+  0%   { opacity: 0; transform: translateY(14px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .atmos-reveal {
@@ -445,7 +407,6 @@ body,
     align-items: flex-start;
     gap: 12px;
   }
-  .atmos-section-aside { text-align: left; }
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -511,7 +472,6 @@ body,
 /* ── Global link underline animation ─────────────────────
    Any plain anchor inside body content gets a sliding
    underline instead of a static one.                       */
-.atmos-about .atmos-section-body a,
 .atmos-contact .atmos-contact-lede a,
 .atmos-involvement .atmos-faq-a-body a {
   text-decoration: none;
@@ -521,7 +481,6 @@ body,
   background-position: 0 100%;
   transition: background-size 250ms ease, color 200ms ease;
 }
-.atmos-about .atmos-section-body a:hover,
 .atmos-contact .atmos-contact-lede a:hover,
 .atmos-involvement .atmos-faq-a-body a:hover {
   background-size: 100% 1px;

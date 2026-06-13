@@ -182,34 +182,6 @@
   color: var(--atmos-badger);
 }
 
-.atmos-contact .atmos-form-roman {
-  font-size: 11px;
-  color: var(--atmos-ink-mute);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.atmos-contact .atmos-form-alt {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin-top: 8px;
-  padding-top: 28px;
-  border-top: 1px solid var(--atmos-hairline);
-}
-
-.atmos-contact .atmos-form-frame {
-  border: 1px solid var(--atmos-hairline);
-  border-radius: 14px;
-  overflow: hidden;
-}
-
-.atmos-contact .atmos-form-iframe {
-  display: block;
-  width: 100%;
-  border: none;
-}
-
 /* CONTACT FORM STYLES -------------------------------------- */
 .atmos-contact .contact-form {
   display: flex;
@@ -335,38 +307,10 @@
   border-color: var(--atmos-ink-soft);
 }
 
-/* PAGE FOOT ------------------------------------------------ */
-.atmos-contact .atmos-contact-foot {
-  margin-top: 48px;
-  padding-top: 24px;
-  border-top: 1px solid var(--atmos-hairline);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--atmos-ink-mute);
-}
-
-.atmos-contact .atmos-contact-foot em {
-  font-style: italic;
-  letter-spacing: 0;
-  text-transform: none;
-  color: var(--atmos-ink-soft);
-}
-
 /* RESPONSIVE ----------------------------------------------- */
 @media (max-width: 760px) {
   .atmos-contact .atmos-contact-row {
     grid-template-columns: 1fr;
-  }
-
-  .atmos-contact .atmos-contact-foot {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
   }
 
   .atmos-contact .atmos-form-head {
@@ -429,10 +373,5 @@
 
 [data-theme="dark"] .atmos-contact .atmos-channel-card:hover .atmos-channel-icon {
   background-color: rgba(255, 110, 117, 0.24);
-}
-
-[data-theme="dark"] .atmos-contact .atmos-form-iframe {
-  filter: invert(0.9) hue-rotate(180deg);
-  background: #fff;
 }
 
