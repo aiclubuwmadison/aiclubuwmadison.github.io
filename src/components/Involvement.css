@@ -55,7 +55,9 @@
 }
 
 .faq-contact-card {
-  background: white;
+  background: var(--atmos-glass-panel);
+  backdrop-filter: var(--atmos-glass-blur);
+  -webkit-backdrop-filter: var(--atmos-glass-blur);
   border-radius: 16px;
   padding: 20px 24px;
   display: flex;
@@ -112,7 +114,9 @@
 
 
 .faq-right-card {
-  background: white;
+  background: var(--atmos-glass-panel);
+  backdrop-filter: var(--atmos-glass-blur);
+  -webkit-backdrop-filter: var(--atmos-glass-blur);
   border-radius: 16px;
   overflow: hidden;
   border: 1px solid rgba(0, 0, 0, 0.08);
@@ -273,7 +277,9 @@
 
 /* Left column contact card */
 [data-theme="dark"] .faq-contact-card {
-  background: #141414;
+  background: var(--atmos-glass-panel);
+  backdrop-filter: var(--atmos-glass-blur);
+  -webkit-backdrop-filter: var(--atmos-glass-blur);
   box-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
 }
 
@@ -283,7 +289,9 @@
 
 /* Right column FAQ card */
 [data-theme="dark"] .faq-right-card {
-  background: #141414;
+  background: var(--atmos-glass-panel);
+  backdrop-filter: var(--atmos-glass-blur);
+  -webkit-backdrop-filter: var(--atmos-glass-blur);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -312,7 +320,9 @@
   font-family: var(--atmos-sans);
   font-size: 15px;
   color: var(--atmos-ink);
-  background: white;
+  background: var(--atmos-glass-control);
+  backdrop-filter: var(--atmos-glass-blur);
+  -webkit-backdrop-filter: var(--atmos-glass-blur);
   border: 1px solid var(--atmos-hairline);
   border-radius: 12px;
   padding: 12px 42px 12px 46px;
@@ -354,7 +364,9 @@
 }
 
 [data-theme="dark"] .faq-search-input {
-  background: #141414;
+  background: var(--atmos-glass-control);
+  backdrop-filter: var(--atmos-glass-blur);
+  -webkit-backdrop-filter: var(--atmos-glass-blur);
   box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
@@ -417,7 +429,9 @@
 
 /* ── Q&A Submission Form ───────────────────────────────── */
 .faq-submit-card {
-  background: white;
+  background: var(--atmos-glass-panel);
+  backdrop-filter: var(--atmos-glass-blur);
+  -webkit-backdrop-filter: var(--atmos-glass-blur);
   border-radius: 16px;
   padding: 24px;
   margin-top: 32px;
@@ -457,7 +471,9 @@
   font-family: var(--atmos-sans);
   font-size: 14.5px;
   color: var(--atmos-ink);
-  background: white;
+  background: var(--atmos-glass-control);
+  backdrop-filter: var(--atmos-glass-blur);
+  -webkit-backdrop-filter: var(--atmos-glass-blur);
   border: 1px solid var(--atmos-hairline);
   border-radius: 10px;
   padding: 12px 16px 32px 16px;
@@ -506,13 +522,17 @@
 }
 
 [data-theme="dark"] .faq-submit-card {
-  background: #141414;
+  background: var(--atmos-glass-panel);
+  backdrop-filter: var(--atmos-glass-blur);
+  -webkit-backdrop-filter: var(--atmos-glass-blur);
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 [data-theme="dark"] .faq-submit-textarea {
-  background: #0a0a0a;
+  background: var(--atmos-glass-control);
+  backdrop-filter: var(--atmos-glass-blur);
+  -webkit-backdrop-filter: var(--atmos-glass-blur);
 }
 
 /* ── Custom Success Notification Toast ───────────────── */
@@ -520,9 +540,9 @@
   position: fixed;
   bottom: 32px;
   right: 32px;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: var(--atmos-glass-bg-strong);
+  backdrop-filter: var(--atmos-glass-blur);
+  -webkit-backdrop-filter: var(--atmos-glass-blur);
   border: 1px solid var(--atmos-hairline);
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
@@ -585,7 +605,9 @@
 }
 
 [data-theme="dark"] .faq-toast {
-  background: rgba(20, 20, 20, 0.95);
+  background: var(--atmos-glass-bg-strong);
+  backdrop-filter: var(--atmos-glass-blur);
+  -webkit-backdrop-filter: var(--atmos-glass-blur);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 

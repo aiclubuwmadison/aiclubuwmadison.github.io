@@ -61,10 +61,11 @@
   display: flex;
   gap: 8px;
   padding: 6px;
-  background: rgba(15, 23, 42, 0.04);
+  background: var(--atmos-glass-control);
   border: 1px solid var(--atmos-hairline);
   border-radius: 999px;
-  backdrop-filter: blur(10px);
+  backdrop-filter: var(--atmos-glass-blur);
+  -webkit-backdrop-filter: var(--atmos-glass-blur);
   overflow-x: auto;
   max-width: 100%;
   scrollbar-width: none; /* Firefox */
@@ -97,7 +98,7 @@
 }
 
 .projects-tab.active {
-  background: #ffffff;
+  background: var(--atmos-glass-bg-strong);
   color: var(--atmos-badger);
   box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
 }
@@ -121,7 +122,9 @@
 .project-card {
   display: flex;
   flex-direction: column;
-  background: var(--atmos-paper);
+  background: var(--atmos-glass-panel);
+  backdrop-filter: var(--atmos-glass-blur);
+  -webkit-backdrop-filter: var(--atmos-glass-blur);
   border: 1px solid var(--atmos-hairline);
   border-radius: 20px;
   overflow: hidden;
@@ -330,7 +333,7 @@
 }
 
 [data-theme="dark"] .projects-tabs {
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--atmos-glass-control);
 }
 
 [data-theme="dark"] .projects-tab:hover {
@@ -338,17 +341,22 @@
 }
 
 [data-theme="dark"] .projects-tab.active {
-  background: #1e1e1e;
+  background: var(--atmos-glass-bg-strong);
   color: #fff;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 [data-theme="dark"] .project-card {
-  background: #141414;
+  background: var(--atmos-glass-panel);
+  backdrop-filter: var(--atmos-glass-blur);
+  -webkit-backdrop-filter: var(--atmos-glass-blur);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5), 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
 [data-theme="dark"] .project-card:hover {
+  background: var(--atmos-glass-panel-hover);
+  backdrop-filter: var(--atmos-glass-blur);
+  -webkit-backdrop-filter: var(--atmos-glass-blur);
   box-shadow: 0 12px 32px rgba(197, 5, 12, 0.16), 0 2px 8px rgba(197, 5, 12, 0.08);
 }
 
