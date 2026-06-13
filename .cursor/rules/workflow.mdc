@@ -6,6 +6,8 @@ alwaysApply: true
 ## Commits
 
 - Never add `Co-authored-by: Cursor` (or any Cursor/agent co-author trailer) to commit messages.
+- **Disable platform injection:** Cursor Settings → Agents → Attribution → turn off **Commit Attribution** (and PR Attribution). Also set `attributeCommitsToAgent: false` in `~/.cursor/cli-config.json`.
+- Install repo hook after clone: `cp scripts/git-hooks/prepare-commit-msg .git/hooks/prepare-commit-msg && chmod +x .git/hooks/prepare-commit-msg`
 - Write commit messages in the repo's existing style; focus on why, not a file list.
 
 ## Research
