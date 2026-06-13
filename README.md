@@ -35,10 +35,6 @@ The contact page uses a native quick-message form that POSTs to Google Forms (`m
    ```bash
    npm install
    ```
-3. Optional — install the commit hook that blocks Cursor co-author trailers:
-   ```bash
-   cp scripts/git-hooks/prepare-commit-msg .git/hooks/prepare-commit-msg && chmod +x .git/hooks/prepare-commit-msg
-   ```
 
 ### Development
 Start the development server. Ensure you are working off the `dev` branch.
@@ -101,8 +97,6 @@ To verify a build before pushing, run `npm run preview` locally.
 │   ├── main.jsx            # Entry point + SPA redirect shim
 │   ├── index.css           # Global styles
 │   └── App.css             # Design tokens and shared atmospheric styles
-├── scripts/
-│   └── git-hooks/          # Optional prepare-commit-msg hook
 ├── index.html              # Vite HTML entry + Google Fonts links
 ├── vite.config.js          # Vite configuration
 └── eslint.config.js        # ESLint flat config
