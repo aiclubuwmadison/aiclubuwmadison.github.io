@@ -196,6 +196,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  position: relative;
   width: 38px;
   height: 38px;
   padding: 0;
@@ -206,6 +207,29 @@
   cursor: pointer;
   flex-shrink: 0;
   transition: border-color 180ms ease, color 180ms ease, transform 200ms ease;
+  overflow: visible;
+}
+
+.atmos-nav-theme-toggle-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  animation: atmosThemeIconIn 480ms cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
+}
+
+@keyframes atmosThemeIconIn {
+  0% {
+    transform: scale(0) rotate(-90deg);
+    opacity: 0;
+  }
+  55% {
+    transform: scale(1.15) rotate(8deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
 }
 
 .atmos-nav-theme-toggle:hover {

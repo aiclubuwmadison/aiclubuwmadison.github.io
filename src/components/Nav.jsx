@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
+import { flushSync } from "react-dom";
 import { Link, useLocation } from "react-router-dom";
 import { Sun, Moon } from "lucide-react";
+import { animateThemeChange } from "../utils/themeTransition";
 import "./Nav.css";
 
 const getInitialTheme = () => {
@@ -25,6 +27,8 @@ const Nav = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [theme, setTheme] = useState(getInitialTheme);
+  const [iconAnimKey, setIconAnimKey] = useState(0);
+  const [iconTheme, setIconTheme] = useState(null);
 
   const isActive = (to) => location.pathname === to;
 
@@ -33,8 +37,26 @@ const Nav = () => {
     window.localStorage.setItem("theme", theme);
   }, [theme]);
 
-  const toggleTheme = () => setTheme((t) => (t === "dark" ? "light" : "dark"));
+  const handleThemeToggle = (event) => {
+    const nextTheme = theme === "dark" ? "light" : "dark";
+    const rect = event.currentTarget.getBoundingClientRect();
+    const originX = rect.left + rect.width / 2;
+    const originY = rect.top + rect.height / 2;
+
+    setIconTheme(nextTheme);
+    setIconAnimKey((k) => k + 1);
+
+    animateThemeChange(theme, nextTheme, originX, originY, (newTheme) => {
+      flushSync(() => {
+        setTheme(newTheme);
+        setIconTheme(null);
+      });
+    });
+  };
+
   const themeLabel = theme === "dark" ? "Switch to light mode" : "Switch to dark mode";
+  const activeIconTheme = iconTheme ?? theme;
+  const ThemeIcon = activeIconTheme === "dark" ? Sun : Moon;
 
   useEffect(() => {
     let rafId;
@@ -116,11 +138,17 @@ const Nav = () => {
             <button
               type="button"
               className="atmos-nav-theme-toggle"
-              onClick={toggleTheme}
+              onClick={handleThemeToggle}
               aria-label={themeLabel}
               title={themeLabel}
             >
-              {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+              <span
+                key={iconAnimKey}
+                className="atmos-nav-theme-toggle-icon"
+                aria-hidden="true"
+              >
+                <ThemeIcon size={18} />
+              </span>
             </button>
           </div>
 
@@ -166,10 +194,16 @@ const Nav = () => {
         <button
           type="button"
           className="atmos-nav-mobile-theme-toggle"
-          onClick={toggleTheme}
+          onClick={handleThemeToggle}
           aria-label={themeLabel}
         >
-          {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+          <span
+            key={iconAnimKey}
+            className="atmos-nav-theme-toggle-icon"
+            aria-hidden="true"
+          >
+            <ThemeIcon size={18} />
+          </span>
           <span>{theme === "dark" ? "Light mode" : "Dark mode"}</span>
         </button>
         <Link
