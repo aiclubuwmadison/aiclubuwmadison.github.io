@@ -1,5 +1,5 @@
 /* =========================================================
-   ATMOSPHERIC MODERN — Nav
+   ATMOSPHERIC MODERN — Nav (Glass command bar)
    ========================================================= */
 
 /* ── Nav shell ──────────────────────────────────────────── */
@@ -14,16 +14,17 @@
   left: 0;
   right: 0;
   z-index: 100;
-  height: 100px;
+  height: 68px;
   box-sizing: border-box;
   display: flex;
   align-items: center;
   font-family: var(--atmos-sans);
 
-  background: rgba(255, 255, 255, 0.88);
+  --nav-bg-scrolled: rgba(255, 255, 255, 0.88);
+  background: linear-gradient(to bottom, var(--nav-bg-scrolled), transparent);
   backdrop-filter: blur(20px) saturate(1.4);
   -webkit-backdrop-filter: blur(20px) saturate(1.4);
-  border-bottom: 1px solid transparent;
+  border-bottom: 1px solid var(--atmos-hairline);
 
   animation: navEntrance 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
   transition: border-color 280ms ease, box-shadow 280ms ease, background 280ms ease;
@@ -31,17 +32,33 @@
 
 /* Scrolled state — elevate with shadow */
 .atmos-nav--scrolled {
-  border-bottom-color: var(--atmos-hairline);
-  box-shadow: 0 1px 0 rgba(0,0,0,0.04), 0 4px 24px rgba(0,0,0,0.05);
-  background: rgba(255, 255, 255, 0.96);
+  --nav-bg-scrolled: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04), 0 4px 24px rgba(0, 0, 0, 0.05);
 }
 
 .atmos-nav-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 32px;
+  gap: 24px;
   width: 100%;
+}
+
+/* ── Command cluster (logo + divider + links) ───────────── */
+.atmos-nav-group {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex: 1;
+  min-width: 0;
+}
+
+.atmos-nav-divider {
+  display: block;
+  width: 1px;
+  height: 22px;
+  background: var(--atmos-hairline);
+  flex-shrink: 0;
 }
 
 /* ── Brand ──────────────────────────────────────────────── */
@@ -64,8 +81,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 90px;
-  height: 90px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   background: transparent;
   flex-shrink: 0;
@@ -79,8 +96,8 @@
 }
 
 .atmos-nav-brand-mark img {
-  width: 80px;
-  height: 80px;
+  width: 44px;
+  height: 44px;
   object-fit: contain;
   display: block;
   filter: brightness(0);
@@ -90,7 +107,7 @@
 /* ── Nav links ──────────────────────────────────────────── */
 .atmos-nav-links {
   display: flex;
-  gap: 4px;
+  gap: 2px;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -100,25 +117,22 @@
   display: inline-flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 18px;
+  gap: 14px;
   flex-shrink: 0;
 }
 
 .atmos-nav-link {
   font-family: var(--atmos-sans);
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
   color: var(--atmos-ink-soft);
-  letter-spacing: 0.055em;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
   text-decoration: none;
-  position: relative;
   padding: 6px 12px;
-  border-radius: 6px;
-  display: flex;
-  flex-direction: column;
+  border-radius: 999px;
+  display: inline-flex;
   align-items: center;
-  gap: 5px;
+  white-space: nowrap;
   transition: color 180ms ease, background 180ms ease;
 }
 
@@ -127,58 +141,41 @@
   background: rgba(15, 23, 42, 0.04);
 }
 
-/* Active link */
+/* Active link — soft red tint pill */
 .atmos-nav-link-active {
   color: var(--atmos-badger);
+  background: rgba(197, 5, 12, 0.1);
 }
 
 .atmos-nav-link-active:hover {
   color: var(--atmos-badger);
-  background: rgba(197, 5, 12, 0.05);
-}
-
-/* Red dot indicator below active link */
-.atmos-nav-link-dot {
-  display: block;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: var(--atmos-badger);
-  position: absolute;
-  bottom: -1px;
-  left: 50%;
-  transform: translateX(-50%) scale(0);
-  animation: dotPop 300ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-
-@keyframes dotPop {
-  to { transform: translateX(-50%) scale(1); }
+  background: rgba(197, 5, 12, 0.14);
 }
 
 /* ── CTA button ─────────────────────────────────────────── */
 .atmos-nav-cta {
   font-family: var(--atmos-sans);
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   color: #fff;
   background: var(--atmos-badger);
-  padding: 10px 22px;
+  padding: 8px 18px;
   border-radius: 999px;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  gap: 9px;
+  gap: 8px;
   white-space: nowrap;
   flex-shrink: 0;
   transition: background 200ms ease, box-shadow 200ms ease, gap 200ms ease;
-  box-shadow: 0 1px 3px rgba(197,5,12,0.25), 0 4px 14px rgba(197,5,12,0.18);
+  box-shadow: 0 1px 3px rgba(197, 5, 12, 0.25), 0 4px 14px rgba(197, 5, 12, 0.18);
 }
 
 .atmos-nav-cta:hover {
   background: #a8040a;
-  box-shadow: 0 2px 6px rgba(197,5,12,0.3), 0 6px 20px rgba(197,5,12,0.22);
-  gap: 13px;
+  box-shadow: 0 2px 6px rgba(197, 5, 12, 0.3), 0 6px 20px rgba(197, 5, 12, 0.22);
+  gap: 11px;
 }
 
 .atmos-nav-cta-arrow {
@@ -197,8 +194,8 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   padding: 0;
   background: transparent;
   border: 1px solid var(--atmos-hairline);
@@ -265,14 +262,16 @@
   flex-direction: column;
   justify-content: center;
   gap: 5px;
-  background: transparent;
+  background: rgba(255, 255, 255, 0.5);
   border: 1px solid var(--atmos-hairline);
   border-radius: 8px;
   padding: 10px 12px;
   cursor: pointer;
   width: 42px;
   height: 38px;
-  transition: border-color 180ms ease;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: border-color 180ms ease, background 180ms ease;
 }
 
 .atmos-nav-burger:hover {
@@ -304,18 +303,19 @@
 /* ── Mobile panel ───────────────────────────────────────── */
 .atmos-nav-mobile-panel {
   position: fixed;
-  top: 72px;
+  top: 68px;
   left: 0;
   right: 0;
-  background: rgba(255, 255, 255, 0.98);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  --nav-bg-scrolled: rgba(255, 255, 255, 0.96);
+  background: linear-gradient(to bottom, var(--nav-bg-scrolled), rgba(255, 255, 255, 0.92));
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
   border-bottom: 1px solid var(--atmos-hairline);
   padding: 12px var(--atmos-gutter) 28px;
   display: flex;
   flex-direction: column;
   z-index: 99;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
   opacity: 0;
   pointer-events: none;
   transform: translateY(-8px);
@@ -336,23 +336,25 @@
 
 .atmos-nav-mobile-link {
   font-family: var(--atmos-sans);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 500;
   color: var(--atmos-ink-soft);
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
   text-decoration: none;
-  padding: 15px 0;
-  border-bottom: 1px solid var(--atmos-hairline);
-  transition: color 160ms ease;
+  padding: 13px 12px;
+  margin: 0 -12px;
+  border-radius: 10px;
+  transition: color 160ms ease, background 160ms ease;
 }
 
-.atmos-nav-mobile-link:last-child {
-  border-bottom: none;
+.atmos-nav-mobile-link:hover {
+  color: var(--atmos-ink);
+  background: rgba(15, 23, 42, 0.04);
 }
 
 .atmos-nav-mobile-link.atmos-nav-link-active {
   color: var(--atmos-badger);
+  background: rgba(197, 5, 12, 0.1);
 }
 
 .atmos-nav-mobile-cta {
@@ -369,7 +371,7 @@
   align-items: center;
   gap: 8px;
   align-self: flex-start;
-  box-shadow: 0 4px 14px rgba(197,5,12,0.2);
+  box-shadow: 0 4px 14px rgba(197, 5, 12, 0.2);
 }
 
 /* ── Scroll Progress Bar ─────────────────────────────────── */
@@ -394,21 +396,29 @@
     gap: 16px;
   }
 
+  .atmos-nav-group {
+    flex: 0;
+  }
+
+  .atmos-nav-divider {
+    display: none;
+  }
+
   .atmos-nav-brand-mark {
-    width: 56px;
-    height: 56px;
+    width: 48px;
+    height: 48px;
   }
 
   .atmos-nav-brand-mark img {
-    width: 48px;
-    height: 48px;
+    width: 40px;
+    height: 40px;
   }
 
   .atmos-nav-mobile-panel {
     top: 64px;
   }
 
-  .atmos-nav-links,
+  .atmos-nav-group nav,
   .atmos-nav-actions {
     display: none;
   }
@@ -429,11 +439,12 @@
 }
 
 [data-theme="dark"] .atmos-nav {
-  background: rgba(13, 17, 23, 0.82);
+  --nav-bg-scrolled: rgba(10, 10, 10, 0.82);
+  background: linear-gradient(to bottom, var(--nav-bg-scrolled), transparent);
 }
 
 [data-theme="dark"] .atmos-nav--scrolled {
-  background: rgba(13, 17, 23, 0.95);
+  --nav-bg-scrolled: rgba(10, 10, 10, 0.95);
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.6), 0 4px 24px rgba(0, 0, 0, 0.5);
 }
 
@@ -441,21 +452,32 @@
   filter: brightness(0) invert(1);
 }
 
-[data-theme="dark"] .atmos-nav-link:hover {
+[data-theme="dark"] .atmos-nav-link:hover,
+[data-theme="dark"] .atmos-nav-mobile-link:hover {
   background: rgba(255, 255, 255, 0.06);
 }
 
-[data-theme="dark"] .atmos-nav-link-active:hover {
-  background: rgba(197, 5, 12, 0.15);
+[data-theme="dark"] .atmos-nav-link-active,
+[data-theme="dark"] .atmos-nav-mobile-link.atmos-nav-link-active {
+  background: rgba(255, 110, 117, 0.12);
+}
+
+[data-theme="dark"] .atmos-nav-link-active:hover,
+[data-theme="dark"] .atmos-nav-mobile-link.atmos-nav-link-active:hover {
+  background: rgba(255, 110, 117, 0.18);
 }
 
 [data-theme="dark"] .atmos-nav-mobile-panel {
-  background: rgba(13, 17, 23, 0.98);
+  --nav-bg-scrolled: rgba(10, 10, 10, 0.96);
+  background: linear-gradient(to bottom, var(--nav-bg-scrolled), rgba(10, 10, 10, 0.88));
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+}
+
+[data-theme="dark"] .atmos-nav-burger {
+  background: rgba(10, 10, 10, 0.5);
 }
 
 [data-theme="dark"] .atmos-nav-cta:hover {
   background: #ff858b;
   box-shadow: 0 4px 16px rgba(255, 110, 117, 0.4);
 }
-

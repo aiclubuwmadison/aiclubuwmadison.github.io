@@ -93,34 +93,33 @@ const Nav = () => {
       <header className={`atmos-nav${scrolled ? " atmos-nav--scrolled" : ""}`}>
         <div className="atmos-shell atmos-nav-inner">
 
-          {/* Brand */}
-          <Link to="/" className="atmos-nav-brand" aria-label="AI@UW home">
-            <span className="atmos-nav-brand-mark" aria-hidden="true">
-              <img src="/images/logo.png" alt="AI@UW" />
-            </span>
-          </Link>
+          <div className="atmos-nav-group">
+            <Link to="/" className="atmos-nav-brand" aria-label="AI@UW home">
+              <span className="atmos-nav-brand-mark" aria-hidden="true">
+                <img src="/images/logo.png" alt="AI@UW" />
+              </span>
+            </Link>
 
-          {/* Desktop links */}
-          <nav aria-label="Primary">
-            <ul className="atmos-nav-links">
-              {NAV_ITEMS.map((item) => (
-                <li key={item.to}>
-                  <Link
-                    to={item.to}
-                    className={
-                      "atmos-nav-link" +
-                      (isActive(item.to) ? " atmos-nav-link-active" : "")
-                    }
-                  >
-                    {item.label}
-                    {isActive(item.to) && (
-                      <span className="atmos-nav-link-dot" aria-hidden="true" />
-                    )}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
+            <span className="atmos-nav-divider" aria-hidden="true" />
+
+            <nav aria-label="Primary">
+              <ul className="atmos-nav-links">
+                {NAV_ITEMS.map((item) => (
+                  <li key={item.to}>
+                    <Link
+                      to={item.to}
+                      className={
+                        "atmos-nav-link" +
+                        (isActive(item.to) ? " atmos-nav-link-active" : "")
+                      }
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
 
           <div className="atmos-nav-actions">
             {/* CTA */}
