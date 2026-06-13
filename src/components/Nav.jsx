@@ -63,11 +63,7 @@ const Nav = () => {
     const onScroll = () => {
       cancelAnimationFrame(rafId);
       rafId = requestAnimationFrame(() => {
-        const y = window.scrollY;
-        const total = document.documentElement.scrollHeight - window.innerHeight;
-        const pct = total > 0 ? (y / total) * 100 : 0;
-        document.documentElement.style.setProperty('--scroll-pct', `${pct}%`);
-        setScrolled(y > 24);
+        setScrolled(window.scrollY > 24);
       });
     };
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -77,19 +73,8 @@ const Nav = () => {
     };
   }, []);
 
-  // Listen to path changes and reset scroll percentage cleanly
-  useEffect(() => {
-    document.documentElement.style.setProperty('--scroll-pct', '0%');
-  }, [location.pathname]);
-
   return (
     <>
-      <div
-        className="atmos-scroll-progress"
-        style={{ width: "var(--scroll-pct, 0%)" }}
-        aria-hidden="true"
-      />
-
       <header className={`atmos-nav${scrolled ? " atmos-nav--scrolled" : ""}`}>
         <div className="atmos-shell atmos-nav-inner">
 
@@ -124,7 +109,7 @@ const Nav = () => {
           <div className="atmos-nav-actions">
             {/* CTA */}
             <Link to="/contact" className="atmos-nav-cta">
-              Become a Member
+              Join
               <span className="atmos-nav-cta-arrow" aria-hidden="true">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <line x1="5" y1="12" x2="19" y2="12" />
@@ -210,7 +195,7 @@ const Nav = () => {
           className="atmos-nav-mobile-cta"
           onClick={() => setMobileOpen(false)}
         >
-          Become a Member <span aria-hidden="true">→</span>
+          Join <span aria-hidden="true">→</span>
         </Link>
       </div>
     </>

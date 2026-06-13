@@ -42,20 +42,6 @@
   --node-edge: #DADADA;
 }
 
-/* Scroll Reveal */
-.sr-hidden {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 800ms cubic-bezier(0.16, 1, 0.3, 1),
-              transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.sr-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-
 /* ── HERO ───────────────────────────────────────────────── */
 .about-hero {
   display: grid;
@@ -109,6 +95,20 @@
   color: var(--atmos-ink-soft);
   margin: 0;
   max-width: 42ch;
+}
+
+.about-hero-lede-link {
+  color: var(--atmos-ink-mute);
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: var(--atmos-hairline);
+  text-underline-offset: 3px;
+  transition: color 180ms ease, text-decoration-color 180ms ease;
+}
+
+.about-hero-lede-link:hover {
+  color: var(--atmos-badger);
+  text-decoration-color: var(--atmos-badger);
 }
 
 /* CTA ROW */
@@ -172,7 +172,7 @@
   color: var(--atmos-ink);
 }
 
-/* RIGHT COLUMN — spiral canvas + floating cards */
+/* RIGHT COLUMN — spiral canvas */
 .about-hero-right {
   position: relative;
   aspect-ratio: 1 / 1;
@@ -213,76 +213,6 @@
   filter: brightness(0);
 }
 
-/* ── Floating label cards ────────────────────────────────── */
-.about-float-card {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px 18px;
-  background: var(--atmos-glass-panel);
-  backdrop-filter: var(--atmos-glass-blur);
-  -webkit-backdrop-filter: var(--atmos-glass-blur);
-  border-radius: 14px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.06);
-  white-space: nowrap;
-  z-index: 10;
-  animation: fcFloat 500ms cubic-bezier(.2,.7,.2,1) both;
-}
-
-.about-float-card:nth-child(3) { animation-delay: 80ms;  }
-.about-float-card:nth-child(4) { animation-delay: 160ms; }
-.about-float-card:nth-child(5) { animation-delay: 240ms; }
-.about-float-card:nth-child(6) { animation-delay: 320ms; }
-
-@keyframes fcFloat {
-  from { opacity: 0; transform: translateY(8px); }
-  to   { opacity: 1; transform: translateY(0);   }
-}
-
-.about-fc-svg {
-  width: 26px;
-  height: 26px;
-  flex-shrink: 0;
-  color: var(--atmos-badger);
-}
-
-.about-fc-title {
-  font-family: var(--atmos-sans);
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--atmos-ink);
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-}
-.about-fc-sub {
-  font-family: var(--atmos-sans);
-  font-size: 12px;
-  font-weight: 400;
-  color: var(--atmos-ink-soft);
-  line-height: 1.2;
-  margin-top: 1px;
-}
-
-/* Card positions — top-left, top-right, bottom-left, bottom-right
-   relative to the .about-hero-right square */
-.about-fc-tl {
-  top: 8%;
-  left: 0;
-}
-.about-fc-tr {
-  top: 12%;
-  right: 0;
-}
-.about-fc-bl {
-  bottom: 16%;
-  left: 0;
-}
-.about-fc-br {
-  bottom: 10%;
-  right: 0;
-}
-
 /* ── SHARED SHELL ───────────────────────────────────────── */
 .about-shell {
   max-width: var(--atmos-max);
@@ -304,7 +234,7 @@
 /* ── OUR STORY ──────────────────────────────────────────── */
 .about-story {
   background: var(--atmos-paper-deep);
-  padding: clamp(56px, 7vw, 96px) 0;
+  padding: var(--space-section-y, clamp(64px, 8vw, 96px)) 0;
 }
 
 .about-story-inner {
@@ -423,7 +353,7 @@
 /* ── WHAT WE DO ─────────────────────────────────────────── */
 .about-what {
   background: #fff;
-  padding: clamp(56px, 7vw, 96px) 0;
+  padding: var(--space-section-y, clamp(64px, 8vw, 96px)) 0;
 }
 
 .about-what-title {
@@ -559,7 +489,7 @@
 /* ── AREAS WE EXPLORE ───────────────────────────────────── */
 .about-areas {
   background: #fef5f5;
-  padding: clamp(56px, 7vw, 96px) 0;
+  padding: var(--space-section-y, clamp(64px, 8vw, 96px)) 0;
   position: relative;
   overflow: hidden;
 }
@@ -656,7 +586,7 @@
 /* ── CTA BANNER ─────────────────────────────────────────── */
 .about-cta-banner {
   background: transparent;
-  padding: clamp(48px, 6vw, 80px) 0;
+  padding: var(--space-section-y, clamp(64px, 8vw, 96px)) 0;
 }
 
 .about-cta-inner {
@@ -768,10 +698,6 @@
     margin: 0 auto;
     order: -1;
   }
-  .about-fc-tl { top: 4%;  left:  0%; }
-  .about-fc-tr { top: 8%;  right: 0%; }
-  .about-fc-bl { bottom: 12%; left: 0%; }
-  .about-fc-br { bottom: 6%;  right: 0%; }
 
   .about-story-inner {
     grid-template-columns: 1fr;
@@ -825,21 +751,6 @@
   .about-story-stats {
     grid-template-columns: repeat(2, 1fr);
   }
-  .about-float-card {
-    padding: 7px 12px 7px 9px;
-    gap: 8px;
-    border-radius: 10px;
-  }
-  .about-fc-svg {
-    width: 20px;
-    height: 20px;
-  }
-  .about-fc-title {
-    font-size: 11px;
-  }
-  .about-fc-sub {
-    font-size: 10px;
-  }
   .about-cta-inner {
     flex-direction: column;
     align-items: flex-start;
@@ -871,31 +782,20 @@
     max-width: none;
   }
   .about-hero-ctas {
-    flex-direction: column;
-  }
-  .about-btn-primary,
-  .about-btn-ghost {
     width: 100%;
-    flex-basis: auto;
+  }
+  .about-btn-primary {
+    width: 100%;
+    justify-content: center;
     box-sizing: border-box;
   }
   .about-hero-right {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    height: auto;
     width: 100%;
     max-width: none;
   }
   .about-spiral-canvas,
   .about-spiral-center {
     display: none; /* Disable CPU heavy drawing on tiny viewports */
-  }
-  .about-float-card {
-    position: static;
-    width: 100%;
-    box-sizing: border-box;
-    animation: none;
   }
   .about-story {
     padding-top: 48px;
@@ -935,8 +835,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .about-spiral-logo,
-  .about-float-card {
+  .about-spiral-logo {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
@@ -953,14 +852,6 @@
   --atmos-ink-soft: #cbd5e1;
   --atmos-ink-mute: #64748b;
   --atmos-hairline: rgba(255, 255, 255, 0.10);
-}
-
-[data-theme="dark"] .about-hero .about-float-card {
-  background: var(--atmos-glass-panel);
-  backdrop-filter: var(--atmos-glass-blur);
-  -webkit-backdrop-filter: var(--atmos-glass-blur);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.3);
 }
 
 [data-theme="dark"] .about-spiral-center {

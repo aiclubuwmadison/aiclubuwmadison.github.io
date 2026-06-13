@@ -2,18 +2,13 @@ import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './About.css';
 
-// Wave + particle decoration for Areas section
-const AREA_DOTS = [];
-
+// Wave decoration for Areas section
 const AreasDecoration = () => (
   <svg className="about-areas-deco" viewBox="0 0 800 300" fill="none" aria-hidden="true">
     <path d="M-20,240 C160,175 290,65 470,45 S700,85 820,60"  stroke="rgba(197,5,12,0.28)" strokeWidth="1.6" fill="none"/>
     <path d="M-20,260 C165,190 298,78 478,58 S708,98 828,73"  stroke="rgba(197,5,12,0.18)" strokeWidth="1.1" fill="none"/>
     <path d="M-20,278 C170,205 306,92 486,72 S716,112 836,87" stroke="rgba(197,5,12,0.11)" strokeWidth="0.8" fill="none"/>
     <path d="M-20,222 C155,160 282,50 462,30 S692,70 812,47"  stroke="rgba(197,5,12,0.14)" strokeWidth="0.7" fill="none"/>
-    {AREA_DOTS.map(({ x, y, opacity }, i) => (
-      <circle key={i} cx={x} cy={y} r={1.8} fill={`rgba(197,5,12,${opacity})`}/>
-    ))}
   </svg>
 );
 
@@ -263,15 +258,12 @@ const About = () => {
             curious about AI.
           </h1>
           <p className="about-hero-lede">
-            Built by students, open to every discipline —{' '}
-            from CS to the humanities.
+            UW–Madison's student AI club. All majors welcome.{' '}
+            <Link to="/seminars" className="about-hero-lede-link">Explore events</Link>
           </p>
           <div className="about-hero-ctas">
             <Link className="about-btn-primary" to="/contact">
-              Become a Member <span className="about-btn-arr">→</span>
-            </Link>
-            <Link className="about-btn-ghost" to="/seminars">
-              Explore Events
+              Join <span className="about-btn-arr">→</span>
             </Link>
           </div>
         </div>
@@ -280,22 +272,6 @@ const About = () => {
           <canvas ref={canvasRef} className="about-spiral-canvas" />
           <div className="about-spiral-center">
             <img src="/images/logo.png" alt="" className="about-spiral-logo" />
-          </div>
-          <div className="about-float-card about-fc-tl">
-            <svg className="about-fc-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.74"/></svg>
-            <div><div className="about-fc-title">Learn</div><div className="about-fc-sub">Together</div></div>
-          </div>
-          <div className="about-float-card about-fc-tr">
-            <svg className="about-fc-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M16 18l6-6-6-6M8 6L2 12l6 6"/></svg>
-            <div><div className="about-fc-title">Build</div><div className="about-fc-sub">Projects</div></div>
-          </div>
-          <div className="about-float-card about-fc-bl">
-            <svg className="about-fc-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M9 18h6M12 2a7 7 0 00-4 12.9V17a1 1 0 001 1h6a1 1 0 001-1v-2.1A7 7 0 0012 2z"/></svg>
-            <div><div className="about-fc-title">Explore</div><div className="about-fc-sub">Ideas</div></div>
-          </div>
-          <div className="about-float-card about-fc-br">
-            <svg className="about-fc-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <div><div className="about-fc-title">Create</div><div className="about-fc-sub">Impact</div></div>
           </div>
         </div>
       </section>
@@ -315,9 +291,9 @@ const About = () => {
                 into the largest AI club at UW-Madison — a welcoming community
                 for students from all backgrounds and academic interests.
               </p>
-              <a className="about-story-link" href="#">
+              <Link className="about-story-link" to="/involvement">
                 Learn our story <span>→</span>
-              </a>
+              </Link>
             </div>
 
             <div className="about-story-stats">
@@ -363,7 +339,7 @@ const About = () => {
                 title: 'Project Teams',
                 desc: 'Join interdisciplinary teams to build real-world AI projects from idea to impact.',
                 Illus: ProjectsIllus,
-                to: '/leadership',
+                to: '/projects',
               },
               {
                 icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>,
@@ -448,8 +424,8 @@ const About = () => {
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
               </div>
               <div>
-                <h3 className="about-cta-title">Have questions or want to get involved?</h3>
-                <p className="about-cta-sub">We'd love to hear from you.</p>
+                <h3 className="about-cta-title">Questions?</h3>
+                <p className="about-cta-sub">Reach out anytime.</p>
               </div>
             </div>
             <Link className="about-cta-btn" to="/contact">
