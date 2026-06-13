@@ -257,12 +257,6 @@ const IconSearch = () => (
   </svg>
 );
 
-const IconBookmark = ({ filled = false }) => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill={filled ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
-  </svg>
-);
-
 const IconArrow = () => (
   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
     <line x1="5" y1="12" x2="19" y2="12" />
@@ -270,7 +264,12 @@ const IconArrow = () => (
   </svg>
 );
 
-const SeminarCard = ({ item, isBookmarked, onToggleBookmark }) => {
+const getFirstSentence = (text) => {
+  const match = text.match(/^(.+?[.!?])(?:\s|$)/s);
+  return match ? match[1].trim() : text;
+};
+
+const SeminarCard = ({ item }) => {
   const [expanded, setExpanded] = useState(false);
   const [calOpen, setCalOpen] = useState(false);
   const calRef = useRef(null);
@@ -304,16 +303,9 @@ const SeminarCard = ({ item, isBookmarked, onToggleBookmark }) => {
             ))}
           </ul>
         </div>
-        <button 
-          className={`atmos-sem-bookmark${isBookmarked ? ' active' : ''}`} 
-          onClick={onToggleBookmark}
-          aria-label={isBookmarked ? "Remove bookmark" : "Bookmark event"}
-        >
-          <IconBookmark filled={isBookmarked} />
-        </button>
       </div>
       <p className={`atmos-sem-abstract${expanded ? ' atmos-sem-abstract--expanded' : ''}`}>
-        {item.description}
+        {expanded ? item.description : getFirstSentence(item.description)}
       </p>
       <div className="atmos-sem-actions-row">
         <button className="atmos-sem-view-link" onClick={() => setExpanded((v) => !v)}>
@@ -364,30 +356,6 @@ const Seminars = () => {
   useEffect(() => {
     document.title = 'Seminars | AI@UW';
   }, []);
-
-  const [bookmarkedIds, setBookmarkedIds] = useState(() => {
-    try {
-      const saved = localStorage.getItem('atmos_bookmarked_seminars');
-      const parsed = saved ? JSON.parse(saved) : [];
-      return Array.isArray(parsed) ? parsed : [];
-    } catch {
-      return [];
-    }
-  });
-
-  useEffect(() => {
-    try {
-      localStorage.setItem('atmos_bookmarked_seminars', JSON.stringify(bookmarkedIds));
-    } catch {
-      // Ignore
-    }
-  }, [bookmarkedIds]);
-
-  const toggleBookmark = (title) => {
-    setBookmarkedIds((prev) =>
-      prev.includes(title) ? prev.filter((id) => id !== title) : [...prev, title]
-    );
-  };
 
   const [activeTab, setActiveTab] = useState('all');
   const [topicFilter, setTopicFilter] = useState('');
@@ -601,11 +569,9 @@ const Seminars = () => {
             {displayedTalks.length > 0 ? (
               <div className="atmos-sem-cards">
                 {displayedTalks.map((s) => (
-                  <SeminarCard 
-                    item={s} 
-                    key={`${s.title}-${s.date}`} 
-                    isBookmarked={bookmarkedIds.includes(s.title)}
-                    onToggleBookmark={() => toggleBookmark(s.title)}
+                  <SeminarCard
+                    item={s}
+                    key={`${s.title}-${s.date}`}
                   />
                 ))}
               </div>
@@ -636,11 +602,9 @@ const Seminars = () => {
             {filteredWorkshops.length > 0 ? (
               <div className="atmos-sem-cards atmos-sem-cards--workshop">
                 {filteredWorkshops.map((w) => (
-                  <SeminarCard 
-                    item={w} 
-                    key={w.title} 
-                    isBookmarked={bookmarkedIds.includes(w.title)}
-                    onToggleBookmark={() => toggleBookmark(w.title)}
+                  <SeminarCard
+                    item={w}
+                    key={w.title}
                   />
                 ))}
               </div>

@@ -19,7 +19,7 @@
 .pitch-hero-eyebrow {
   font-family: var(--atmos-mono);
   font-size: 11px;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--atmos-badger);
   margin: 0 0 14px 0;
@@ -28,7 +28,7 @@
 .pitch-hero-title {
   font-family: var(--atmos-serif);
   font-weight: 800;
-  font-size: clamp(38px, 5.5vw, 64px);
+  font-size: var(--type-display);
   line-height: 1.05;
   letter-spacing: -0.03em;
   color: var(--atmos-ink);

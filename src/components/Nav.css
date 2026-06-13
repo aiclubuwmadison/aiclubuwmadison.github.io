@@ -374,18 +374,6 @@
   box-shadow: 0 4px 14px rgba(197, 5, 12, 0.2);
 }
 
-/* ── Scroll Progress Bar ─────────────────────────────────── */
-.atmos-scroll-progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 3px;
-  z-index: 101;
-  background: linear-gradient(to right, var(--atmos-badger), #ff858b);
-  box-shadow: 0 1px 6px var(--atmos-accent-glow);
-  transition: width 80ms ease-out;
-}
-
 /* ── Responsive ─────────────────────────────────────────── */
 @media (max-width: 1024px) {
   .atmos-nav {
