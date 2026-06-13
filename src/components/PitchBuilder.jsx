@@ -159,7 +159,7 @@ const PitchBuilder = () => {
       // 5. Draw Header Branding
       // Small logo/brand mark text
       ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
-      ctx.font = 'bold 16px "JetBrains Mono", "Fira Code", monospace';
+      ctx.font = 'bold 16px "Space Mono", monospace';
       ctx.fillText('AI @ UW–MADISON', 100, 110);
 
       // Draw red Badger dot next to logo
@@ -169,18 +169,18 @@ const PitchBuilder = () => {
       ctx.fill();
 
       ctx.fillStyle = 'rgba(255, 255, 255, 0.25)';
-      ctx.font = '14px "JetBrains Mono", "Fira Code", monospace';
+      ctx.font = '14px "Space Mono", monospace';
       ctx.fillText('STUDENT PROJECT PITCH', w - 300, 110);
 
       // 6. Draw Project Title & Tagline
       ctx.fillStyle = '#ffffff';
-      ctx.font = '800 84px "Inter", "Helvetica Neue", sans-serif';
+      ctx.font = '400 84px "Instrument Serif", Georgia, serif';
       ctx.fillText(projectName || 'Untitled Project', 100, 270);
 
       ctx.fillStyle = '#C5050C'; // UW Red Accent
       if (selectedTheme.id === 'midnight') ctx.fillStyle = '#38bdf8'; // Sky blue for contrast
       if (selectedTheme.id === 'emerald') ctx.fillStyle = '#34d399'; // Emerald for contrast
-      ctx.font = 'italic 600 36px "Inter", "Helvetica Neue", sans-serif';
+      ctx.font = 'italic 400 36px "Instrument Serif", Georgia, serif';
       ctx.fillText(tagline || 'Short project tagline goes here', 100, 345);
 
       // Divider line
@@ -194,11 +194,11 @@ const PitchBuilder = () => {
       // 7. Draw two-column details
       // Left Column: The Problem Statement
       ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
-      ctx.font = 'bold 14px "JetBrains Mono", "Fira Code", monospace';
+      ctx.font = 'bold 14px "Space Mono", monospace';
       ctx.fillText('THE PROBLEM & CHALLENGE', 100, 470);
 
       ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
-      ctx.font = '500 28px/1.6 "Inter", "Helvetica Neue", sans-serif';
+      ctx.font = '500 28px/1.6 "Space Grotesk", system-ui, sans-serif';
       drawTextWithWrap(
         ctx,
         problem || 'State the problem your project solves.',
@@ -211,12 +211,12 @@ const PitchBuilder = () => {
       // Right Column: Roles Needed
       const colRightX = 1250;
       ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
-      ctx.font = 'bold 14px "JetBrains Mono", "Fira Code", monospace';
+      ctx.font = 'bold 14px "Space Mono", monospace';
       ctx.fillText('ROLES & COLLABORATORS NEEDED', colRightX, 470);
 
       if (selectedRoles.length === 0) {
         ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
-        ctx.font = 'italic 22px "Inter", "Helvetica Neue", sans-serif';
+        ctx.font = 'italic 400 22px "Instrument Serif", Georgia, serif';
         ctx.fillText('Open membership - all skills welcome.', colRightX, 530);
       } else {
         let currentY = 530;
@@ -245,7 +245,7 @@ const PitchBuilder = () => {
 
           // Role text
           ctx.fillStyle = '#ffffff';
-          ctx.font = '600 20px "Inter", "Helvetica Neue", sans-serif';
+          ctx.font = '600 20px "Space Grotesk", system-ui, sans-serif';
           ctx.fillText(role, colRightX + 28, currentY + 39);
 
           currentY += 84;
@@ -263,11 +263,11 @@ const PitchBuilder = () => {
 
   return (
     <div className="atmos-root atmos-pitch">
-      <section className="pitch-hero">
-        <div className="atmos-shell">
-          <p className="pitch-hero-eyebrow">Project Incubator</p>
-          <h1 className="pitch-hero-title">Pitch Builder</h1>
-          <p className="pitch-hero-lede">
+      <section className="pitch-hero atmos-page-hero">
+        <div className="atmos-shell atmos-page-hero-content">
+          <p className="atmos-page-hero-eyebrow">Project Incubator</p>
+          <h1 className="atmos-page-hero-title">Pitch Builder</h1>
+          <p className="atmos-page-hero-lede">
             Draft your project idea and generate a beautiful pitch slide matching club standards. 
             Download it as a high-res card to share on Slack or present at recruitment night.
           </p>

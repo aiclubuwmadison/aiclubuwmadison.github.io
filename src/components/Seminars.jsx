@@ -257,12 +257,6 @@ const IconSearch = () => (
   </svg>
 );
 
-const IconBookmark = ({ filled = false }) => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill={filled ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
-  </svg>
-);
-
 const IconArrow = () => (
   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
     <line x1="5" y1="12" x2="19" y2="12" />
@@ -270,7 +264,12 @@ const IconArrow = () => (
   </svg>
 );
 
-const SeminarCard = ({ item, isBookmarked, onToggleBookmark }) => {
+const getFirstSentence = (text) => {
+  const match = text.match(/^(.+?[.!?])(?:\s|$)/s);
+  return match ? match[1].trim() : text;
+};
+
+const SeminarCard = ({ item }) => {
   const [expanded, setExpanded] = useState(false);
   const [calOpen, setCalOpen] = useState(false);
   const calRef = useRef(null);
@@ -304,16 +303,9 @@ const SeminarCard = ({ item, isBookmarked, onToggleBookmark }) => {
             ))}
           </ul>
         </div>
-        <button 
-          className={`atmos-sem-bookmark${isBookmarked ? ' active' : ''}`} 
-          onClick={onToggleBookmark}
-          aria-label={isBookmarked ? "Remove bookmark" : "Bookmark event"}
-        >
-          <IconBookmark filled={isBookmarked} />
-        </button>
       </div>
       <p className={`atmos-sem-abstract${expanded ? ' atmos-sem-abstract--expanded' : ''}`}>
-        {item.description}
+        {expanded ? item.description : getFirstSentence(item.description)}
       </p>
       <div className="atmos-sem-actions-row">
         <button className="atmos-sem-view-link" onClick={() => setExpanded((v) => !v)}>
@@ -362,38 +354,15 @@ const SeminarCard = ({ item, isBookmarked, onToggleBookmark }) => {
 
 const Seminars = () => {
   useEffect(() => {
-    document.title = 'Seminars | AI@UW';
+    document.title = 'Events | AI@UW';
   }, []);
-
-  const [bookmarkedIds, setBookmarkedIds] = useState(() => {
-    try {
-      const saved = localStorage.getItem('atmos_bookmarked_seminars');
-      const parsed = saved ? JSON.parse(saved) : [];
-      return Array.isArray(parsed) ? parsed : [];
-    } catch {
-      return [];
-    }
-  });
-
-  useEffect(() => {
-    try {
-      localStorage.setItem('atmos_bookmarked_seminars', JSON.stringify(bookmarkedIds));
-    } catch {
-      // Ignore
-    }
-  }, [bookmarkedIds]);
-
-  const toggleBookmark = (title) => {
-    setBookmarkedIds((prev) =>
-      prev.includes(title) ? prev.filter((id) => id !== title) : [...prev, title]
-    );
-  };
 
   const [activeTab, setActiveTab] = useState('all');
   const [topicFilter, setTopicFilter] = useState('');
   const [yearFilter, setYearFilter] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [autocompleteOpen, setAutocompleteOpen] = useState(false);
+  const [topicsExpanded, setTopicsExpanded] = useState(false);
   const searchWrapRef = useRef(null);
 
   const allTopics = useMemo(() => {
@@ -460,6 +429,15 @@ const Seminars = () => {
               An archive of<br />
               <span style={{color:'var(--atmos-badger)'}}>talks</span> &amp; workshops<span className="atmos-sem-title-dot">.</span>
             </h1>
+            <p className="atmos-sem-lede">Weekly ML talks and workshops since 2024.</p>
+            <a
+              className="atmos-sem-hero-cta"
+              href="https://discord.gg/TTSykcZAg4"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Join Discord <IconArrow />
+            </a>
           </div>
           <div className="atmos-sem-hero-image" aria-hidden="true">
             <img src="/images/seminars/hero.jpg" alt="" fetchpriority="high" />
@@ -467,108 +445,115 @@ const Seminars = () => {
         </header>
 
         {/* FILTER BAR */}
-        <div className="atmos-sem-filter-bar">
-          <div className="atmos-sem-tabs">
-            <button
-              className={`atmos-sem-tab${activeTab === 'all' ? ' active' : ''}`}
-              onClick={() => setActiveTab('all')}
-            >
-              <IconGrid /> All
-            </button>
-            <button
-              className={`atmos-sem-tab${activeTab === 'talks' ? ' active' : ''}`}
-              onClick={() => setActiveTab('talks')}
-            >
-              <IconMic /> Talks
-            </button>
-            <button
-              className={`atmos-sem-tab${activeTab === 'workshops' ? ' active' : ''}`}
-              onClick={() => setActiveTab('workshops')}
-            >
-              <IconWrench /> Workshops
-            </button>
-          </div>
-          <div className="atmos-sem-filters">
-            <select
-              className="atmos-sem-select"
-              value={topicFilter}
-              onChange={(e) => setTopicFilter(e.target.value)}
-            >
-              <option value="">All Topics</option>
-              {allTopics.map((t) => (
-                <option key={t} value={t}>{t}</option>
-              ))}
-            </select>
-            <select
-              className="atmos-sem-select"
-              value={yearFilter}
-              onChange={(e) => setYearFilter(e.target.value)}
-            >
-              <option value="">All Years</option>
-              {allYears.map((y) => (
-                <option key={y} value={y}>{y}</option>
-              ))}
-            </select>
-            <div className="atmos-sem-search-wrap" ref={searchWrapRef}>
-              <input
-                className="atmos-sem-search"
-                placeholder="Search talks..."
-                value={searchQuery}
-                onChange={(e) => {
-                  setSearchQuery(e.target.value);
-                  setAutocompleteOpen(true);
-                }}
-                onFocus={() => setAutocompleteOpen(true)}
-              />
-              <span className="atmos-sem-search-icon"><IconSearch /></span>
-              {autocompleteOpen && autocompleteMatches.length > 0 && (
-                <div className="atmos-sem-autocomplete-dropdown" role="listbox">
-                  {autocompleteMatches.map((item) => (
-                    <button
-                      key={`${item.title}-${item.date}`}
-                      type="button"
-                      className="atmos-sem-autocomplete-item"
-                      role="option"
-                      onClick={() => {
-                        setSearchQuery(item.title);
-                        setAutocompleteOpen(false);
-                      }}
-                    >
-                      <span className={`atmos-sem-autocomplete-badge atmos-sem-autocomplete-badge--${item.type}`}>
-                        {item.type === 'workshop' ? 'Workshop' : 'Talk'}
-                      </span>
-                      <span className="atmos-sem-autocomplete-title" title={item.title}>
-                        {item.title}
-                      </span>
-                    </button>
-                  ))}
-                </div>
-              )}
+        <div className="atmos-sem-filter-stack">
+          <div className="atmos-sem-filter-bar">
+            <div className="atmos-sem-tabs-pill">
+              <button
+                className={`atmos-sem-tab${activeTab === 'all' ? ' active' : ''}`}
+                onClick={() => setActiveTab('all')}
+              >
+                <IconGrid /> All
+              </button>
+              <button
+                className={`atmos-sem-tab${activeTab === 'talks' ? ' active' : ''}`}
+                onClick={() => setActiveTab('talks')}
+              >
+                <IconMic /> Talks
+              </button>
+              <button
+                className={`atmos-sem-tab${activeTab === 'workshops' ? ' active' : ''}`}
+                onClick={() => setActiveTab('workshops')}
+              >
+                <IconWrench /> Workshops
+              </button>
+            </div>
+            <div className="atmos-sem-filters">
+              <select
+                className="atmos-sem-select"
+                value={yearFilter}
+                onChange={(e) => setYearFilter(e.target.value)}
+                aria-label="Filter by year"
+              >
+                <option value="">All Years</option>
+                {allYears.map((y) => (
+                  <option key={y} value={y}>{y}</option>
+                ))}
+              </select>
+              <div className="atmos-sem-search-wrap" ref={searchWrapRef}>
+                <input
+                  className="atmos-sem-search"
+                  placeholder="Search talks..."
+                  value={searchQuery}
+                  onChange={(e) => {
+                    setSearchQuery(e.target.value);
+                    setAutocompleteOpen(true);
+                  }}
+                  onFocus={() => setAutocompleteOpen(true)}
+                />
+                <span className="atmos-sem-search-icon"><IconSearch /></span>
+                {autocompleteOpen && autocompleteMatches.length > 0 && (
+                  <div className="atmos-sem-autocomplete-dropdown" role="listbox">
+                    {autocompleteMatches.map((item) => (
+                      <button
+                        key={`${item.title}-${item.date}`}
+                        type="button"
+                        className="atmos-sem-autocomplete-item"
+                        role="option"
+                        onClick={() => {
+                          setSearchQuery(item.title);
+                          setAutocompleteOpen(false);
+                        }}
+                      >
+                        <span className={`atmos-sem-autocomplete-badge atmos-sem-autocomplete-badge--${item.type}`}>
+                          {item.type === 'workshop' ? 'Workshop' : 'Talk'}
+                        </span>
+                        <span className="atmos-sem-autocomplete-title" title={item.title}>
+                          {item.title}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* TOPIC TAG CLOUD */}
-        <div className="atmos-sem-tag-cloud-container">
-          <span className="atmos-sem-tag-cloud-label">Filter by Topic:</span>
-          <div className="atmos-sem-tag-cloud">
+          <div className={`atmos-sem-topics${topicsExpanded ? ' atmos-sem-topics--open' : ''}`}>
             <button
               type="button"
-              className={`atmos-sem-cloud-tag${!topicFilter ? ' active' : ''}`}
-              onClick={() => setTopicFilter('')}
+              className="atmos-sem-topics-toggle"
+              onClick={() => setTopicsExpanded((v) => !v)}
+              aria-expanded={topicsExpanded}
             >
-              All Topics
+              <span className="atmos-sem-topics-toggle-label">Topics</span>
+              {topicFilter ? (
+                <span className="atmos-sem-topics-active">{topicFilter}</span>
+              ) : (
+                <span className="atmos-sem-topics-count">{allTopics.length} tags</span>
+              )}
+              <span className="atmos-sem-topics-chevron" aria-hidden="true" />
             </button>
-            {allTopics.map((tag) => (
-              <button
-                key={tag}
-                type="button"
-                className={`atmos-sem-cloud-tag${topicFilter === tag ? ' active' : ''}`}
-                onClick={() => setTopicFilter(tag === topicFilter ? '' : tag)}
-              >
-                {tag}
-              </button>
-            ))}
+            {topicsExpanded && (
+              <div className="atmos-sem-tag-cloud">
+                <button
+                  type="button"
+                  className={`atmos-sem-cloud-tag${!topicFilter ? ' active' : ''}`}
+                  onClick={() => setTopicFilter('')}
+                >
+                  All
+                </button>
+                {allTopics.map((tag) => (
+                  <button
+                    key={tag}
+                    type="button"
+                    className={`atmos-sem-cloud-tag${topicFilter === tag ? ' active' : ''}`}
+                    onClick={() => setTopicFilter(tag === topicFilter ? '' : tag)}
+                  >
+                    {tag}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         </div>
 
@@ -581,23 +566,21 @@ const Seminars = () => {
                 <h2 className="atmos-sem-sub-title">Talks given by our speakers.</h2>
               </div>
               {hasMoreTalks && (
-                <a
+                <button
+                  type="button"
                   className="atmos-sem-view-all"
-                  href="#"
-                  onClick={(e) => { e.preventDefault(); setActiveTab('talks'); }}
+                  onClick={() => setActiveTab('talks')}
                 >
                   View all talks <IconArrow />
-                </a>
+                </button>
               )}
             </div>
             {displayedTalks.length > 0 ? (
               <div className="atmos-sem-cards">
                 {displayedTalks.map((s) => (
-                  <SeminarCard 
-                    item={s} 
-                    key={`${s.title}-${s.date}`} 
-                    isBookmarked={bookmarkedIds.includes(s.title)}
-                    onToggleBookmark={() => toggleBookmark(s.title)}
+                  <SeminarCard
+                    item={s}
+                    key={`${s.title}-${s.date}`}
                   />
                 ))}
               </div>
@@ -616,23 +599,21 @@ const Seminars = () => {
                 <h2 className="atmos-sem-sub-title">Hands-on, applied sessions.</h2>
               </div>
               {activeTab === 'all' && (
-                <a
+                <button
+                  type="button"
                   className="atmos-sem-view-all"
-                  href="#"
-                  onClick={(e) => { e.preventDefault(); setActiveTab('workshops'); }}
+                  onClick={() => setActiveTab('workshops')}
                 >
                   View all workshops <IconArrow />
-                </a>
+                </button>
               )}
             </div>
             {filteredWorkshops.length > 0 ? (
               <div className="atmos-sem-cards atmos-sem-cards--workshop">
                 {filteredWorkshops.map((w) => (
-                  <SeminarCard 
-                    item={w} 
-                    key={w.title} 
-                    isBookmarked={bookmarkedIds.includes(w.title)}
-                    onToggleBookmark={() => toggleBookmark(w.title)}
+                  <SeminarCard
+                    item={w}
+                    key={w.title}
                   />
                 ))}
               </div>

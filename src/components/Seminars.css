@@ -30,6 +30,7 @@
   max-width: 480px;
   height: auto;
   display: block;
+  border-radius: var(--radius-lg);
 }
 
 @media (max-width: 768px) {
@@ -46,8 +47,8 @@
 .atmos-seminars .atmos-sem-title {
   font-family: var(--atmos-serif);
   font-weight: 800;
-  font-size: clamp(40px, 5.5vw, 72px);
-  line-height: 1.04;
+  font-size: var(--type-display);
+  line-height: 1.05;
   letter-spacing: -0.03em;
   color: var(--atmos-ink);
   margin: 0 0 20px;
@@ -57,55 +58,81 @@
   color: var(--atmos-badger);
 }
 
+.atmos-seminars .atmos-sem-lede {
+  font-family: var(--atmos-sans);
+  font-size: clamp(15px, 1.4vw, 18px);
+  line-height: 1.6;
+  color: var(--atmos-ink-soft);
+  margin: 0 0 16px;
+  max-width: 36ch;
+}
+
+.atmos-seminars .atmos-sem-hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--atmos-badger);
+  text-decoration: none;
+  width: fit-content;
+  transition: gap 220ms ease;
+}
+
+.atmos-seminars .atmos-sem-hero-cta:hover {
+  gap: 10px;
+}
 
 
-/* ── FILTER BAR ─────────────────────────────────────────── */
+
+/* ── FILTER STACK ───────────────────────────────────────── */
+.atmos-seminars .atmos-sem-filter-stack {
+  margin: 40px 0 48px;
+  background: var(--atmos-glass-control);
+  backdrop-filter: var(--atmos-glass-blur);
+  -webkit-backdrop-filter: var(--atmos-glass-blur);
+  border: 1px solid var(--atmos-hairline);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
 .atmos-seminars .atmos-sem-filter-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
-  padding: 20px 0;
-  border-top: 1px solid var(--atmos-hairline);
-  border-bottom: 1px solid var(--atmos-hairline);
-  margin: 40px 0 48px;
+  gap: 20px;
+  padding: 14px 16px;
   flex-wrap: wrap;
 }
 
-.atmos-seminars .atmos-sem-tabs {
+.atmos-seminars .atmos-sem-tabs-pill {
   display: flex;
   align-items: center;
-  gap: 2px;
+  gap: 4px;
+  padding: 4px;
+  background: rgba(15, 23, 42, 0.04);
+  border-radius: 999px;
+  flex-shrink: 0;
 }
 
 .atmos-seminars .atmos-sem-tab {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  padding: 9px 16px;
-  font-size: 13.5px;
-  font-weight: 500;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 600;
   color: var(--atmos-ink-soft);
   background: none;
   border: none;
-  position: relative;
   cursor: pointer;
-  transition: color 180ms ease;
-  border-radius: 6px 6px 0 0;
-  margin-bottom: -1px;
+  transition: color 180ms ease, background 180ms ease, box-shadow 180ms ease;
+  border-radius: 999px;
+  white-space: nowrap;
 }
 
 .atmos-seminars .atmos-sem-tab::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background-color: var(--atmos-badger);
-  transform: scaleX(0);
-  transform-origin: bottom center;
-  transition: transform 240ms cubic-bezier(0.4, 0, 0.2, 1);
+  display: none;
 }
 
 .atmos-seminars .atmos-sem-tab:hover {
@@ -114,11 +141,8 @@
 
 .atmos-seminars .atmos-sem-tab.active {
   color: var(--atmos-badger);
-  font-weight: 600;
-}
-
-.atmos-seminars .atmos-sem-tab.active::after {
-  transform: scaleX(1);
+  background: var(--atmos-glass-bg-strong);
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.06);
 }
 
 .atmos-seminars .atmos-sem-filters {
@@ -126,25 +150,28 @@
   align-items: center;
   gap: 10px;
   flex-wrap: wrap;
+  margin-left: auto;
 }
 
 .atmos-seminars .atmos-sem-select {
   appearance: none;
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 10px center;
-  background-color: #fff;
+  background-color: var(--atmos-glass-bg-strong);
+  backdrop-filter: var(--atmos-glass-blur);
+  -webkit-backdrop-filter: var(--atmos-glass-blur);
   border: 1px solid var(--atmos-hairline);
-  border-radius: 7px;
-  padding: 8px 32px 8px 13px;
+  border-radius: 999px;
+  padding: 8px 32px 8px 14px;
   font-size: 13px;
   color: var(--atmos-ink);
   cursor: pointer;
   transition: border-color 180ms ease;
-  min-width: 120px;
+  min-width: 110px;
 }
 
 .atmos-seminars .atmos-sem-select:focus {
   outline: none;
-  border-color: rgba(197,5,12,0.4);
+  border-color: rgba(197, 5, 12, 0.4);
 }
 
 .atmos-seminars .atmos-sem-search-wrap {
@@ -155,12 +182,14 @@
 
 .atmos-seminars .atmos-sem-search {
   border: 1px solid var(--atmos-hairline);
-  border-radius: 7px;
-  padding: 8px 36px 8px 13px;
+  border-radius: 999px;
+  padding: 8px 36px 8px 14px;
   font-size: 13px;
   color: var(--atmos-ink);
-  background: #fff;
-  width: 220px;
+  background: var(--atmos-glass-bg-strong);
+  backdrop-filter: var(--atmos-glass-blur);
+  -webkit-backdrop-filter: var(--atmos-glass-blur);
+  width: min(220px, 100%);
   transition: border-color 180ms ease;
 }
 
@@ -170,20 +199,115 @@
 
 .atmos-seminars .atmos-sem-search:focus {
   outline: none;
-  border-color: rgba(197,5,12,0.4);
+  border-color: rgba(197, 5, 12, 0.4);
 }
 
 .atmos-seminars .atmos-sem-search-icon {
   position: absolute;
-  right: 10px;
+  right: 12px;
   color: var(--atmos-ink-mute);
   display: flex;
   pointer-events: none;
 }
 
+/* ── Collapsible topics ─────────────────────────────────── */
+.atmos-seminars .atmos-sem-topics {
+  border-top: 1px solid var(--atmos-hairline);
+}
+
+.atmos-seminars .atmos-sem-topics-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 16px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: var(--atmos-sans);
+  text-align: left;
+  transition: background 160ms ease;
+}
+
+.atmos-seminars .atmos-sem-topics-toggle:hover {
+  background: rgba(15, 23, 42, 0.03);
+}
+
+.atmos-seminars .atmos-sem-topics-toggle-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--atmos-ink-mute);
+}
+
+.atmos-seminars .atmos-sem-topics-count {
+  font-size: 12px;
+  color: var(--atmos-ink-soft);
+}
+
+.atmos-seminars .atmos-sem-topics-active {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--atmos-badger);
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: rgba(197, 5, 12, 0.1);
+  border: 1px solid rgba(197, 5, 12, 0.2);
+}
+
+.atmos-seminars .atmos-sem-topics-chevron {
+  margin-left: auto;
+  width: 8px;
+  height: 8px;
+  border-right: 1.5px solid var(--atmos-ink-soft);
+  border-bottom: 1.5px solid var(--atmos-ink-soft);
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform 200ms ease;
+}
+
+.atmos-seminars .atmos-sem-topics--open .atmos-sem-topics-chevron {
+  transform: rotate(-135deg) translateY(2px);
+}
+
+.atmos-seminars .atmos-sem-tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0 16px 14px;
+  max-height: 132px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.atmos-seminars .atmos-sem-cloud-tag {
+  font-family: var(--atmos-sans);
+  font-size: 11.5px;
+  font-weight: 500;
+  padding: 5px 11px;
+  border-radius: 999px;
+  border: 1px solid var(--atmos-hairline);
+  background: var(--atmos-glass-bg-strong);
+  color: var(--atmos-ink-soft);
+  cursor: pointer;
+  transition: color 160ms ease, border-color 160ms ease, background 160ms ease;
+}
+
+.atmos-seminars .atmos-sem-cloud-tag:hover {
+  color: var(--atmos-ink);
+  border-color: var(--atmos-ink-soft);
+}
+
+.atmos-seminars .atmos-sem-cloud-tag.active {
+  background: rgba(197, 5, 12, 0.1);
+  color: var(--atmos-badger);
+  border-color: rgba(197, 5, 12, 0.35);
+  font-weight: 600;
+}
+
 /* ── SECTION ────────────────────────────────────────────── */
 .atmos-seminars .atmos-sem-section {
-  margin-bottom: clamp(48px, 6vw, 80px);
+  margin-bottom: clamp(64px, 8vw, 96px);
 }
 
 /* ── SUB-SECTION HEADER ─────────────────────────────────── */
@@ -198,9 +322,10 @@
 }
 
 .atmos-seminars .atmos-sem-sub-eyebrow {
+  font-family: var(--atmos-sans);
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: var(--ls-eyebrow);
   text-transform: uppercase;
   color: var(--atmos-badger);
   margin-bottom: 8px;
@@ -224,6 +349,11 @@
   color: var(--atmos-badger);
   text-decoration: none;
   white-space: nowrap;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 0;
   transition: gap 180ms ease;
 }
 
@@ -240,27 +370,27 @@
 
 /* ── CARD ────────────────────────────────────────────────── */
 .atmos-seminars .atmos-sem-card {
-  border: 1px solid var(--atmos-hairline);
-  border-radius: 14px;
+  border: var(--surface-border);
+  border-radius: var(--surface-radius);
   padding: clamp(18px, 2.2vw, 26px);
   display: flex;
   flex-direction: column;
   gap: 14px;
-  background: var(--atmos-paper);
+  background: var(--atmos-paper-tint);
   transition: border-color 220ms ease, transform 220ms cubic-bezier(0.2,0.8,0.2,1), box-shadow 220ms ease, background 280ms ease;
 }
 
 .atmos-seminars .atmos-sem-card:hover {
   border-color: rgba(197,5,12,0.25);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 28px rgba(0,0,0,0.07);
+  background: var(--atmos-paper-tint);
+  box-shadow: var(--shadow-md);
 }
 
 .atmos-seminars .atmos-sem-card--workshop {
-  background: var(--atmos-paper-deep);
+  background: var(--atmos-paper-tint);
 }
 
-/* Top row: date badge + content + bookmark */
+/* Top row: date badge + content */
 .atmos-seminars .atmos-sem-card-row {
   display: flex;
   align-items: flex-start;
@@ -309,26 +439,7 @@
   gap: 6px;
 }
 
-/* Bookmark icon */
-.atmos-seminars .atmos-sem-bookmark {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--atmos-ink-mute);
-  padding: 2px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  transition: color 180ms ease;
-  margin-left: auto;
-}
-
-.atmos-seminars .atmos-sem-bookmark:hover,
-.atmos-seminars .atmos-sem-bookmark.active {
-  color: var(--atmos-badger);
-}
-
-/* Title */
+/* Card content: title + speaker + tags */
 .atmos-seminars .atmos-sem-talk {
   font-family: var(--atmos-serif);
   font-size: clamp(15px, 1.5vw, 17.5px);
@@ -375,15 +486,11 @@
   line-height: 1.7;
   color: var(--atmos-ink-soft);
   margin: 0;
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
   flex: 1;
 }
 
 .atmos-seminars .atmos-sem-abstract--expanded {
-  -webkit-line-clamp: unset;
+  /* full abstract shown when expanded */
 }
 
 /* View details button */
@@ -423,12 +530,34 @@
 @media (max-width: 760px) {
   .atmos-seminars .atmos-sem-filter-bar {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .atmos-seminars .atmos-sem-tabs-pill {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .atmos-seminars .atmos-sem-tab {
+    flex: 1;
+    justify-content: center;
+    padding: 8px 10px;
   }
 
   .atmos-seminars .atmos-sem-filters {
     width: 100%;
+    margin-left: 0;
+  }
+
+  .atmos-seminars .atmos-sem-select {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .atmos-seminars .atmos-sem-search-wrap {
+    flex: 1;
+    min-width: 0;
   }
 
   .atmos-seminars .atmos-sem-search {
@@ -449,29 +578,46 @@
 }
 
 /* ── Dark mode (Seminars) ─────────────────────────────── */
-[data-theme="dark"] .atmos-seminars {
-  background: #0a0a0a;
-  --atmos-paper: #141414;
-  --atmos-paper-deep: #0a0a0a;
-  --atmos-ink: #f1f5f9;
-  --atmos-ink-soft: #cbd5e1;
-  --atmos-ink-mute: #64748b;
-  --atmos-hairline: rgba(255, 255, 255, 0.10);
+/* Hero image: light media tile so the white-bg illustration reads clearly */
+[data-theme="dark"] .atmos-seminars .atmos-sem-hero-image {
+  position: relative;
+  background: #ececf1;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--surface-radius);
+  padding: clamp(14px, 2.5vw, 22px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+}
+
+[data-theme="dark"] .atmos-seminars .atmos-sem-hero-image img {
+  mix-blend-mode: normal;
+  filter: none;
+  opacity: 1;
 }
 
 /* Filter selects: hardcoded white background + light chevron */
 [data-theme="dark"] .atmos-seminars .atmos-sem-select {
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23cbd5e1' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 10px center;
-  background-color: #141414;
+  background-color: var(--atmos-glass-control);
 }
 
-/* Search input: hardcoded white background */
+/* Search input */
 [data-theme="dark"] .atmos-seminars .atmos-sem-search {
-  background: #141414;
+  background: var(--atmos-glass-control);
+  backdrop-filter: var(--atmos-glass-blur);
+  -webkit-backdrop-filter: var(--atmos-glass-blur);
 }
 
-/* Card hover: bump shadow for visibility on dark */
+/* Card: glass tokens in dark mode */
+[data-theme="dark"] .atmos-seminars .atmos-sem-card {
+  background: var(--atmos-paper-tint);
+}
+
+[data-theme="dark"] .atmos-seminars .atmos-sem-card--workshop {
+  background: var(--atmos-paper-tint);
+}
+
 [data-theme="dark"] .atmos-seminars .atmos-sem-card:hover {
+  background: var(--atmos-paper-tint);
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5);
 }
 
@@ -521,9 +667,9 @@
   position: absolute;
   bottom: calc(100% + 6px);
   right: 0;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: var(--atmos-glass-panel);
+  backdrop-filter: var(--atmos-glass-blur);
+  -webkit-backdrop-filter: var(--atmos-glass-blur);
   border: 1px solid var(--atmos-hairline);
   border-radius: 8px;
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
@@ -573,7 +719,9 @@
 }
 
 [data-theme="dark"] .atmos-seminars .atmos-sem-cal-dropdown {
-  background: rgba(20, 20, 20, 0.9);
+  background: var(--atmos-glass-panel);
+  backdrop-filter: var(--atmos-glass-blur);
+  -webkit-backdrop-filter: var(--atmos-glass-blur);
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
 }
 
@@ -583,63 +731,26 @@
   color: var(--atmos-badger);
 }
 
-/* ── Topic Tag Cloud ─────────────────────────────────── */
-.atmos-seminars .atmos-sem-tag-cloud-container {
-  margin: -24px 0 40px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+[data-theme="dark"] .atmos-seminars .atmos-sem-tabs-pill {
+  background: rgba(255, 255, 255, 0.05);
 }
 
-.atmos-seminars .atmos-sem-tag-cloud-label {
-  font-size: 11.5px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--atmos-ink-mute);
+[data-theme="dark"] .atmos-seminars .atmos-sem-tab.active {
+  background: var(--atmos-glass-panel);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
 }
 
-.atmos-seminars .atmos-sem-tag-cloud {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.atmos-seminars .atmos-sem-cloud-tag {
-  font-family: var(--atmos-sans);
-  font-size: 12px;
-  font-weight: 500;
-  padding: 6px 14px;
-  border-radius: 999px;
-  border: 1px solid var(--atmos-hairline);
-  background: var(--atmos-paper);
-  color: var(--atmos-ink-soft);
-  cursor: pointer;
-  transition: all 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
-}
-
-.atmos-seminars .atmos-sem-cloud-tag:hover {
-  color: var(--atmos-ink);
-  border-color: var(--atmos-ink-soft);
-  transform: translateY(-1px);
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
-}
-
-.atmos-seminars .atmos-sem-cloud-tag.active {
-  background: rgba(197, 5, 12, 0.08);
-  color: var(--atmos-badger);
-  border-color: var(--atmos-badger);
-  font-weight: 600;
-  box-shadow: inset 0 1px 2px rgba(197, 5, 12, 0.05);
+[data-theme="dark"] .atmos-seminars .atmos-sem-topics-toggle:hover {
+  background: rgba(255, 255, 255, 0.04);
 }
 
 [data-theme="dark"] .atmos-seminars .atmos-sem-cloud-tag {
-  background: #141414;
+  background: var(--atmos-glass-panel);
 }
 
 [data-theme="dark"] .atmos-seminars .atmos-sem-cloud-tag.active {
-  background: rgba(197, 5, 12, 0.22);
+  background: rgba(255, 110, 117, 0.12);
+  border-color: rgba(255, 110, 117, 0.35);
 }
 
 /* ── Smart Autocomplete Search ─────────────────────── */
@@ -650,9 +761,9 @@
   width: 320px;
   max-height: 260px;
   overflow-y: auto;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: var(--atmos-glass-panel);
+  backdrop-filter: var(--atmos-glass-blur);
+  -webkit-backdrop-filter: var(--atmos-glass-blur);
   border: 1px solid var(--atmos-hairline);
   border-radius: 8px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
@@ -729,7 +840,9 @@
 
 /* Dark mode overrides for autocomplete dropdown */
 [data-theme="dark"] .atmos-seminars .atmos-sem-autocomplete-dropdown {
-  background: rgba(20, 20, 20, 0.9);
+  background: var(--atmos-glass-panel);
+  backdrop-filter: var(--atmos-glass-blur);
+  -webkit-backdrop-filter: var(--atmos-glass-blur);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 

@@ -19,8 +19,8 @@
 .atmos-contact .atmos-contact-title {
   font-family: var(--atmos-serif);
   font-weight: 800;
-  font-size: clamp(40px, 5.5vw, 72px);
-  line-height: 1.04;
+  font-size: var(--type-display);
+  line-height: 1.05;
   letter-spacing: -0.03em;
   color: var(--atmos-ink);
   margin: 0;
@@ -79,11 +79,11 @@
   padding: 16px 22px 16px 16px;
   border: 1px solid var(--atmos-hairline);
   border-radius: 16px;
-  background: #fff;
+  background: var(--atmos-paper);
   font-family: var(--atmos-sans);
   text-decoration: none;
   color: var(--atmos-ink);
-  box-shadow: 0 1px 2px rgba(15, 17, 21, 0.03);
+  box-shadow: none;
   transition: border-color 200ms ease, transform 200ms ease,
     box-shadow 200ms ease, background 280ms ease;
 }
@@ -91,7 +91,7 @@
 .atmos-contact .atmos-channel-card:hover {
   border-color: rgba(197, 5, 12, 0.35);
   transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(197, 5, 12, 0.08);
+  box-shadow: var(--shadow-md);
 }
 
 .atmos-contact .atmos-channel-icon {
@@ -177,16 +177,9 @@
 .atmos-contact .atmos-form-eyebrow {
   font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--atmos-badger);
-}
-
-.atmos-contact .atmos-form-roman {
-  font-size: 11px;
-  color: var(--atmos-ink-mute);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
 }
 
 /* CONTACT FORM STYLES -------------------------------------- */
@@ -218,7 +211,9 @@
   font-family: var(--atmos-sans);
   font-size: 14.5px;
   color: var(--atmos-ink);
-  background: var(--atmos-paper, #ffffff);
+  background: var(--atmos-glass-control);
+  backdrop-filter: var(--atmos-glass-blur);
+  -webkit-backdrop-filter: var(--atmos-glass-blur);
   border: 1px solid var(--atmos-hairline);
   border-radius: 12px;
   padding: 12px 16px;
@@ -240,38 +235,16 @@
 }
 
 .atmos-contact .contact-form-submit-btn {
-  font-family: var(--atmos-sans);
-  font-size: 14px;
-  font-weight: 600;
-  color: #ffffff;
-  background: var(--atmos-badger);
-  border: none;
-  border-radius: 12px;
-  padding: 14px 24px;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
   align-self: flex-start;
-  transition: background 200ms ease, transform 200ms ease, box-shadow 200ms ease;
-  box-shadow: 0 4px 14px var(--atmos-accent-glow);
 }
 
-.atmos-contact .contact-form-submit-btn:hover {
-  background: #a8040a;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(197, 5, 12, 0.25);
+.atmos-contact .contact-form-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
-.atmos-contact .contact-form-submit-btn:active {
-  transform: translateY(0);
-}
-
-[data-theme="dark"] .atmos-contact .contact-form-submit-btn:hover {
-  background: #ff858b;
-  box-shadow: 0 6px 20px rgba(255, 110, 117, 0.4);
-  color: #0d1117;
+.atmos-contact .contact-form-submit-btn:active:not(:disabled) {
+  transform: none;
 }
 
 /* SUCCESS STATE STYLES ------------------------------------- */
@@ -334,38 +307,10 @@
   border-color: var(--atmos-ink-soft);
 }
 
-/* PAGE FOOT ------------------------------------------------ */
-.atmos-contact .atmos-contact-foot {
-  margin-top: 48px;
-  padding-top: 24px;
-  border-top: 1px solid var(--atmos-hairline);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--atmos-ink-mute);
-}
-
-.atmos-contact .atmos-contact-foot em {
-  font-style: italic;
-  letter-spacing: 0;
-  text-transform: none;
-  color: var(--atmos-ink-soft);
-}
-
 /* RESPONSIVE ----------------------------------------------- */
 @media (max-width: 760px) {
   .atmos-contact .atmos-contact-row {
     grid-template-columns: 1fr;
-  }
-
-  .atmos-contact .atmos-contact-foot {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
   }
 
   .atmos-contact .atmos-form-head {
@@ -411,24 +356,14 @@
 }
 
 /* ── Dark mode (Contact) ─────────────────────────────────── */
-[data-theme="dark"] .atmos-contact {
-  background: #0a0a0a;
-  --atmos-paper: #141414;
-  --atmos-paper-deep: #0a0a0a;
-  --atmos-ink: #f1f5f9;
-  --atmos-ink-soft: #cbd5e1;
-  --atmos-ink-mute: #64748b;
-  --atmos-hairline: rgba(255, 255, 255, 0.10);
-}
-
 /* Channel cards: dark surface + deeper shadows */
 [data-theme="dark"] .atmos-contact .atmos-channel-card {
-  background: #141414;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  background: var(--atmos-paper-tint);
+  box-shadow: none;
 }
 
 [data-theme="dark"] .atmos-contact .atmos-channel-card:hover {
-  box-shadow: 0 6px 18px rgba(197, 5, 12, 0.18);
+  box-shadow: var(--shadow-md);
 }
 
 /* Channel icon halo: bump red opacity so it reads on dark */

@@ -1,21 +1,17 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import './Involvement.css';
 import { Link } from 'react-router-dom';
-import { 
-  User, 
-  Calendar, 
-  Mail, 
-  GraduationCap, 
-  Lightbulb, 
-  Clock, 
-  Users, 
-  LogIn, 
-  UserPlus, 
+import {
+  User,
+  Calendar,
+  Mail,
+  GraduationCap,
+  Lightbulb,
+  Clock,
+  Users,
+  LogIn,
+  UserPlus,
   MessageCircle,
-  Search,
-  HelpCircle,
-  CheckCircle,
-  X 
 } from 'lucide-react';
 
 const FAQS = [
@@ -40,7 +36,7 @@ const FAQS = [
     Icon: Calendar,
   },
   {
-    q: 'How do I join AI@UW’s official mailing list?',
+    q: "How do I join AI@UW's official mailing list?",
     a: (
       <>
         Our email list is moderated through Google Forms — If you'd like to receive emails regarding club events and projects, please join our discord and sign up through the linktr.ee on our instagram page <a href="https://www.instagram.com/aiclubuw/" target="_blank" rel="noopener noreferrer">instagram.com/aiclubuw</a> or the following <a href="https://linktr.ee/aiclubuw" target="_blank" rel="noopener noreferrer">linktr.ee/aiclubuw.</a>
@@ -111,37 +107,14 @@ const FAQS = [
   },
 ];
 
-const getElementText = (node) => {
-  if (!node) return '';
-  if (typeof node === 'string') return node;
-  if (typeof node === 'number') return String(node);
-  if (Array.isArray(node)) return node.map(getElementText).join(' ');
-  if (node.props && node.props.children) return getElementText(node.props.children);
-  return '';
-};
-
 const Involvement = () => {
-  const [faqList, setFaqList] = useState(FAQS);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [newQuestion, setNewQuestion] = useState('');
-  const [notification, setNotification] = useState(null);
   const [openFaq, setOpenFaq] = useState(null);
 
   const toggleFaq = (q) => setOpenFaq((prev) => (prev === q ? null : q));
 
   useEffect(() => {
-    document.title = 'FAQ | AI@UW';
+    document.title = 'Get Involved | AI@UW';
   }, []);
-
-  const filteredFaqs = useMemo(() => {
-    if (!searchQuery.trim()) return faqList;
-    const q = searchQuery.toLowerCase();
-    return faqList.filter((item) => {
-      const questionText = item.q.toLowerCase();
-      const answerText = getElementText(item.a).toLowerCase();
-      return questionText.includes(q) || answerText.includes(q);
-    });
-  }, [faqList, searchQuery]);
 
   useEffect(() => {
     const io = new IntersectionObserver((entries) => {
@@ -165,49 +138,20 @@ const Involvement = () => {
     });
 
     return () => io.disconnect();
-  }, [filteredFaqs]);
-
-  useEffect(() => {
-    if (!notification) return;
-    const timer = setTimeout(() => {
-      setNotification(null);
-    }, 4500);
-    return () => clearTimeout(timer);
-  }, [notification]);
-
-  const handleSubmitQuestion = (e) => {
-    e.preventDefault();
-    if (!newQuestion.trim()) return;
-
-    const newItem = {
-      q: newQuestion.trim(),
-      a: "This question has been submitted by a community member and is currently pending review by the AI@UW team. An official answer will be published shortly!",
-      tag: 'Pending Review / Community Question',
-      Icon: HelpCircle,
-      isPending: true,
-    };
-
-    setFaqList((prev) => [...prev, newItem]);
-    setNewQuestion('');
-    setNotification({
-      message: "Demo Submission: Submitted for local preview (officer review is simulated).",
-      id: Date.now()
-    });
-  };
+  }, []);
 
   return (
     <div className="atmos-root atmos-involvement">
       <div className="atmos-shell">
         <div className="atmos-faq-layout">
 
-          {/* Left Column */}
           <div className="atmos-faq-left atmos-reveal">
             <span className="faq-label">FAQ</span>
             <h1 className="faq-heading">
               Ask anything.<br />
               We're here to help<span className="faq-heading-period">.</span>
             </h1>
-            <p className="faq-subtitle">Find quick answers to the most commonly asked questions.</p>
+            <p className="faq-subtitle">Joining, meetings, projects, and mailing list.</p>
 
             <div className="faq-contact-card">
               <div className="faq-contact-card-icon">
@@ -219,131 +163,44 @@ const Involvement = () => {
                 <Link to="/contact" className="faq-contact-card-link">Contact Us →</Link>
               </div>
             </div>
-
           </div>
 
-          {/* Right Column */}
           <div className="atmos-faq-right">
-            {/* FAQ Search Bar */}
-            <div className="faq-search-container atmos-reveal">
-              <div className="faq-search-wrap">
-                <input
-                  type="text"
-                  className="faq-search-input"
-                  placeholder="Search questions or answers..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-                <span className="faq-search-icon">
-                  <Search size={18} />
-                </span>
-                {searchQuery && (
-                  <button 
-                    type="button" 
-                    className="faq-search-clear" 
-                    onClick={() => setSearchQuery('')}
-                    aria-label="Clear search"
-                  >
-                    <X size={15} />
-                  </button>
-                )}
-              </div>
-            </div>
-
-            {/* FAQ List Card */}
             <div className="faq-right-card">
-              {filteredFaqs.length > 0 ? (
-                <ul className="atmos-faq-list">
-                  {filteredFaqs.map((item) => (
-                    <li key={item.q} className="atmos-faq-row atmos-reveal">
-                      <div className="atmos-faq-item">
-                        <button
-                          type="button"
-                          className="atmos-faq-toggle-btn"
-                          onClick={() => toggleFaq(item.q)}
-                          aria-expanded={openFaq === item.q}
-                        >
-                          <div className="faq-row-inner">
-                            <div className="faq-row-icon"><item.Icon size={17} /></div>
-                            <div className="faq-row-text-wrap">
-                              <h2 className="atmos-faq-q">{item.q}</h2>
-                              {item.isPending && (
-                                <span className="faq-pending-tag">Pending Review / Community Question</span>
-                              )}
-                            </div>
+              <ul className="atmos-faq-list">
+                {FAQS.map((item) => (
+                  <li key={item.q} className="atmos-faq-row atmos-reveal">
+                    <div className="atmos-faq-item">
+                      <button
+                        type="button"
+                        className="atmos-faq-toggle-btn"
+                        onClick={() => toggleFaq(item.q)}
+                        aria-expanded={openFaq === item.q}
+                      >
+                        <div className="faq-row-inner">
+                          <div className="faq-row-icon"><item.Icon size={17} /></div>
+                          <div className="faq-row-text-wrap">
+                            <h2 className="atmos-faq-q">{item.q}</h2>
                           </div>
-                          <span className={`atmos-faq-toggle-icon${openFaq === item.q ? ' is-open' : ''}`} aria-hidden="true">›</span>
-                        </button>
-                        <div className={`atmos-faq-answer-panel${openFaq === item.q ? ' is-open' : ''}`} role="region">
-                          <div className="atmos-faq-answer-inner">
-                            <div className="atmos-faq-a">
-                              <p className="atmos-faq-a-body">{item.a}</p>
-                            </div>
+                        </div>
+                        <span className={`atmos-faq-toggle-icon${openFaq === item.q ? ' is-open' : ''}`} aria-hidden="true">›</span>
+                      </button>
+                      <div className={`atmos-faq-answer-panel${openFaq === item.q ? ' is-open' : ''}`} role="region">
+                        <div className="atmos-faq-answer-inner">
+                          <div className="atmos-faq-a">
+                            <p className="atmos-faq-a-body">{item.a}</p>
                           </div>
                         </div>
                       </div>
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <div className="faq-empty-state">
-                  <p className="faq-empty-title">No matching questions found</p>
-                  <p className="faq-empty-subtitle">Try adjusting your keywords, or submit your question below to get it answered.</p>
-                </div>
-              )}
+                    </div>
+                  </li>
+                ))}
+              </ul>
             </div>
-
-            {/* Q&A Submission Form */}
-            <div className="faq-submit-card atmos-reveal">
-              <h3 className="faq-submit-title">Can't find your question?</h3>
-              <p className="faq-submit-text">Submit a new question to the community. It will be displayed below under a pending status until reviewed by our team.</p>
-              
-              <form onSubmit={handleSubmitQuestion} className="faq-submit-form">
-                <div className="faq-submit-textarea-wrap">
-                  <textarea
-                    className="faq-submit-textarea"
-                    placeholder="Type your question here (e.g. Do I need experience with PyTorch?)..."
-                    value={newQuestion}
-                    onChange={(e) => setNewQuestion(e.target.value)}
-                    rows={3}
-                    maxLength={300}
-                    required
-                  />
-                  <div className="faq-submit-char-count">
-                    {newQuestion.length}/300
-                  </div>
-                </div>
-                <button type="submit" className="faq-submit-btn">
-                  Submit Question
-                </button>
-              </form>
-            </div>
-
           </div>
 
         </div>
       </div>
-
-      {/* Success Notification Toast */}
-      {notification && (
-        <div className="faq-toast" role="alert">
-          <div className="faq-toast-icon">
-            <CheckCircle size={18} />
-          </div>
-          <div className="faq-toast-content">
-            <p className="faq-toast-title">Question Submitted</p>
-            <p className="faq-toast-message">{notification.message}</p>
-          </div>
-          <button 
-            type="button" 
-            className="faq-toast-close" 
-            onClick={() => setNotification(null)}
-            aria-label="Close notification"
-          >
-            <X size={15} />
-          </button>
-        </div>
-      )}
     </div>
   );
 };

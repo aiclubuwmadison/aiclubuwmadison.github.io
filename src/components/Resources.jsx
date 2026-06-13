@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { 
   BookOpen, 
   Cpu, 
@@ -335,28 +336,69 @@ const Resources = () => {
   return (
     <div className="atmos-root atmos-resources">
       {/* 1. HERO / HEADER SECTION */}
-      <section className="res-hero">
+      <section className="res-hero atmos-page-hero">
         <div className="atmos-shell">
-          <div className="res-hero-content">
-            <p className="res-hero-eyebrow">AI@UW Knowledge Hub</p>
-            <h1 className="res-hero-title">Learning Resources</h1>
-            <p className="res-hero-lede">
-              Accelerate your engineering journey. Access core curriculum guides, 
-              curated academic literature, and stay updated with live Artificial Intelligence news.
+          <div className="atmos-page-hero-content">
+            <p className="atmos-page-hero-eyebrow">AI@UW Knowledge Hub</p>
+            <h1 className="atmos-page-hero-title">Learning Resources</h1>
+            <p className="atmos-page-hero-lede">
+              Guides, papers, and news to learn AI.
             </p>
+            <a href="#guides" className="atmos-page-hero-cta">
+              Browse guides <span aria-hidden="true">↓</span>
+            </a>
           </div>
         </div>
       </section>
 
-      {/* 2. LIVE AI NEWS FEED */}
+      {/* 2. GUIDES & SKILLS DIRECTORY */}
+      <section className="res-section res-section-tinted" id="guides">
+        <div className="atmos-shell">
+          <div className="atmos-section-head">
+            <div>
+              <span className="atmos-section-eyebrow">Curriculum Directory</span>
+              <h2 className="atmos-section-title">Core AI Guides</h2>
+            </div>
+          </div>
+
+          <div className="res-skills-grid">
+            {SKILLS_DATA.map((skill) => (
+              <Link className="res-skill-card" to="/involvement" key={skill.id}>
+                <div className={`res-card-visual visual-${skill.colorPreset}`}>
+                  <SkillVisual preset={skill.colorPreset} />
+                  <span className="res-card-category-badge">
+                    {getSkillIcon(skill.id)}
+                    {skill.title}
+                  </span>
+                </div>
+                
+                <div className="res-card-body">
+                  <h3 className="res-card-title">{skill.title}</h3>
+                  <p className="res-card-desc">{skill.description}</p>
+                  
+                  <div className="res-card-footer">
+                    <div className="res-tag-group">
+                      {skill.tags.map((tag) => (
+                        <span className="res-tag-chip" key={tag}>{tag}</span>
+                      ))}
+                    </div>
+                    <span className="res-card-cta">Explore at events <span>→</span></span>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 3. LIVE AI NEWS FEED */}
       <section className="res-section">
         <div className="atmos-shell">
           <div className="atmos-section-head">
             <div>
-              <span className="atmos-section-eyebrow">Algolia Hacker News Stream</span>
+              <span className="atmos-section-eyebrow">AI News</span>
               <h2 className="atmos-section-title">Live AI News Feed</h2>
             </div>
-            <span className="atmos-section-aside">01 / Signal</span>
           </div>
 
           {/* Search and Feedback Banner */}
@@ -461,46 +503,6 @@ const Resources = () => {
         </div>
       </section>
 
-      {/* 3. GUIDES & SKILLS DIRECTORY */}
-      <section className="res-section res-section-tinted">
-        <div className="atmos-shell">
-          <div className="atmos-section-head">
-            <div>
-              <span className="atmos-section-eyebrow">Curriculum Directory</span>
-              <h2 className="atmos-section-title">Core AI Guides</h2>
-            </div>
-            <span className="atmos-section-aside">02 / Skillsets</span>
-          </div>
-
-          <div className="res-skills-grid">
-            {SKILLS_DATA.map((skill) => (
-              <div className="res-skill-card" key={skill.id}>
-                <div className={`res-card-visual visual-${skill.colorPreset}`}>
-                  <SkillVisual preset={skill.colorPreset} />
-                  <span className="res-card-category-badge">
-                    {getSkillIcon(skill.id)}
-                    {skill.title}
-                  </span>
-                </div>
-                
-                <div className="res-card-body">
-                  <h3 className="res-card-title">{skill.title}</h3>
-                  <p className="res-card-desc">{skill.description}</p>
-                  
-                  <div className="res-card-footer">
-                    <div className="res-tag-group">
-                      {skill.tags.map((tag) => (
-                        <span className="res-tag-chip" key={tag}>{tag}</span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* 4. RECOMMENDED READINGS */}
       <section className="res-section">
         <div className="atmos-shell">
@@ -509,7 +511,6 @@ const Resources = () => {
               <span className="atmos-section-eyebrow">Literature List</span>
               <h2 className="atmos-section-title">Recommended Readings</h2>
             </div>
-            <span className="atmos-section-aside">03 / Research</span>
           </div>
 
           <div className="res-readings-list">

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Cpu, MessageSquare, Eye, Sparkles, FolderGit2 } from 'lucide-react';
 import './Projects.css';
 
@@ -29,7 +30,6 @@ const PROJECTS_DATA = [
     category: 'Robotics',
     description: 'Developed an autonomous navigation system using computer vision, RTK-GPS sensor fusion, and ROS2 to pilot a custom-built physical rover across unstructured terrain.',
     tech: ['ROS2', 'Python', 'C++', 'OpenCV', 'PyTorch'],
-    team: ['Project Lead', 'Team Member 1', 'Team Member 2'],
     repo: 'https://github.com/aiclubuwmadison/autonomous-rover',
     colorPreset: 'red'
   },
@@ -40,7 +40,6 @@ const PROJECTS_DATA = [
     category: 'NLP',
     description: 'Fine-tuned a Llama-3 model on open-source clinical notes datasets to summarize patient records and extract diagnostic event timelines with high medical accuracy.',
     tech: ['PyTorch', 'HuggingFace', 'Llama-3', 'FastAPI', 'React'],
-    team: ['Project Lead', 'Team Member 1', 'Team Member 2'],
     repo: 'https://github.com/aiclubuwmadison/clinician-assistant',
     colorPreset: 'azure'
   },
@@ -51,7 +50,6 @@ const PROJECTS_DATA = [
     category: 'CV',
     description: 'Built a semantic segmentation pipeline using a customized UNet architecture to identify and outline wildfire hotspots from satellite and real-time drone imagery.',
     tech: ['PyTorch', 'UNet', 'TensorRT', 'Python', 'GDAL'],
-    team: ['Project Lead', 'Team Member 1', 'Team Member 2'],
     repo: 'https://github.com/aiclubuwmadison/wildfire-eye',
     colorPreset: 'orange'
   },
@@ -62,7 +60,6 @@ const PROJECTS_DATA = [
     category: 'Agents',
     description: 'An autonomous agent that assists students by checking compile errors in real-time, explaining algorithms, and suggesting codebase fixes in a sandboxed Docker environment.',
     tech: ['LangChain', 'Claude API', 'Node.js', 'Docker', 'React'],
-    team: ['Project Lead', 'Team Member 1', 'Team Member 2'],
     repo: 'https://github.com/aiclubuwmadison/study-agent',
     colorPreset: 'purple'
   },
@@ -73,7 +70,6 @@ const PROJECTS_DATA = [
     category: 'Robotics',
     description: 'Implemented multi-agent reinforcement learning (MARL) algorithms to coordinate drone swarms in target tracking and collision avoidance within simulated environments.',
     tech: ['ROS', 'Python', 'Ray/RLlib', 'C++', 'Gazebo'],
-    team: ['Project Lead', 'Team Member 1', 'Team Member 2'],
     repo: 'https://github.com/aiclubuwmadison/swarm-coordinator',
     colorPreset: 'emerald'
   },
@@ -84,7 +80,6 @@ const PROJECTS_DATA = [
     category: 'NLP',
     description: 'Fine-tuned transformer-based models specifically on a corpus of legal briefs and terms of service documents to produce highly accurate, plain-English legal summaries.',
     tech: ['PyTorch', 'HuggingFace', 'Transformers', 'Flask'],
-    team: ['Project Lead', 'Team Member 1', 'Team Member 2'],
     repo: 'https://github.com/aiclubuwmadison/legal-summarizer',
     colorPreset: 'purple'
   },
@@ -95,7 +90,6 @@ const PROJECTS_DATA = [
     category: 'Agents',
     description: 'An AI agent that interacts with real-time Madison transit APIs to create optimized travel plans for students, adapting dynamically to weather, delays, and class schedules.',
     tech: ['LangGraph', 'Python', 'FastAPI', 'Google Maps API'],
-    team: ['Project Lead', 'Team Member 1', 'Team Member 2'],
     repo: 'https://github.com/aiclubuwmadison/campus-navigator',
     colorPreset: 'orange'
   }
@@ -185,27 +179,29 @@ const Projects = () => {
 
   return (
     <div className="atmos-root atmos-projects">
-      <section className="projects-hero">
+      <section className="projects-hero atmos-page-hero">
         <div className="atmos-shell">
-          <div className="projects-hero-content">
-            <p className="projects-hero-eyebrow">AI@UW Showcase</p>
-            <h1 className="projects-hero-title">Student Projects</h1>
-            <p className="projects-hero-lede">
-              Explore cutting-edge systems, models, and platforms built by our members. 
-              From physical robots to fine-tuned transformer networks, we learn by building.
+          <div className="atmos-page-hero-content">
+            <p className="atmos-page-hero-eyebrow">AI@UW Showcase</p>
+            <h1 className="atmos-page-hero-title">Student Projects</h1>
+            <p className="atmos-page-hero-lede">
+              Real AI systems built by UW students.
             </p>
-            <div className="projects-notice-banner">
-              <span className="projects-notice-badge">Template Showcase</span>
-              <p className="projects-notice-text">
-                Note: The projects listed below represent template showcases and hypothetical portfolio examples of the types of engineering projects AI@UW members collaborate on. Active project recruitment for this semester will open soon.
-              </p>
-            </div>
+            <Link to="/contact" className="atmos-page-hero-cta">
+              Join a team <span aria-hidden="true">→</span>
+            </Link>
           </div>
         </div>
       </section>
 
       <section className="projects-grid-section">
         <div className="atmos-shell">
+          <div className="projects-notice-banner">
+            <p className="projects-notice-text">
+              Sample portfolio projects — contact us to join a team.
+            </p>
+          </div>
+
           {/* Tab Filters */}
           <div className="projects-tabs-container">
             <div className="projects-tabs">
@@ -244,15 +240,14 @@ const Projects = () => {
 
                   {/* Tech Stack Chips */}
                   <div className="project-card-tech">
-                    {p.tech.map((t) => (
+                    {p.tech.slice(0, 3).map((t) => (
                       <span className="project-tech-chip" key={t}>{t}</span>
                     ))}
-                  </div>
-
-                  {/* Team Credits */}
-                  <div className="project-card-team">
-                    <span className="project-team-label">Team:</span>
-                    <span className="project-team-members">{p.team.join(', ')}</span>
+                    {p.tech.length > 3 && (
+                      <span className="project-tech-chip project-tech-chip--more">
+                        +{p.tech.length - 3} more
+                      </span>
+                    )}
                   </div>
 
                   {/* Repo Link */}

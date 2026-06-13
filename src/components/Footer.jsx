@@ -1,4 +1,8 @@
+import { Link } from 'react-router-dom';
+import { NAV_ITEMS } from '../constants/nav';
 import './Footer.css';
+
+const DISCORD_URL = 'https://discord.gg/TTSykcZAg4';
 
 const IconInstagram = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -21,6 +25,12 @@ const IconLinkedIn = () => (
 const IconSuggestions = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+  </svg>
+);
+
+const IconDiscord = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M19.27 5.33A18.13 18.13 0 0 0 14.7 4l-.21.42a17.3 17.3 0 0 0-4.97 0L9.3 4a18.13 18.13 0 0 0-4.57 1.33C2.05 9.27 1.32 13.1 1.68 16.88a18.4 18.4 0 0 0 5.57 2.81c.45-.61.85-1.26 1.19-1.94-.65-.24-1.27-.54-1.86-.89.16-.11.31-.23.46-.35a13 13 0 0 0 11.92 0c.15.12.3.24.46.35-.59.35-1.21.65-1.86.9.34.67.74 1.32 1.19 1.93a18.4 18.4 0 0 0 5.57-2.81c.43-4.39-.74-8.18-3.05-11.55ZM8.52 14.5c-1.1 0-2-.99-2-2.2s.88-2.2 2-2.2c1.13 0 2.03 1 2 2.2 0 1.21-.88 2.2-2 2.2Zm6.96 0c-1.1 0-2-.99-2-2.2s.88-2.2 2-2.2c1.13 0 2.03 1 2 2.2 0 1.21-.87 2.2-2 2.2Z" />
   </svg>
 );
 
@@ -49,7 +59,17 @@ const Footer = () => {
 
           <div className="atmos-footer-links">
             <a
-              className="atmos-footer-link atmos-footer-instagram"
+              className="atmos-footer-link"
+              href={DISCORD_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Discord"
+            >
+              <IconDiscord />
+              Discord
+            </a>
+            <a
+              className="atmos-footer-link"
               href="https://www.instagram.com/aiclubuw/"
               target="_blank"
               rel="noopener noreferrer"
@@ -59,7 +79,7 @@ const Footer = () => {
               Instagram
             </a>
             <a
-              className="atmos-footer-link atmos-footer-linkedin"
+              className="atmos-footer-link"
               href="https://www.linkedin.com/company/aiclub-uwmadison"
               target="_blank"
               rel="noopener noreferrer"
@@ -69,7 +89,7 @@ const Footer = () => {
               LinkedIn
             </a>
             <a
-              className="atmos-footer-link atmos-footer-suggestions"
+              className="atmos-footer-link"
               href="https://docs.google.com/forms/d/e/1FAIpQLSdpbz1I_cmMtlJIx5LDufsIFybab7qvBPqHW42fXVBLcDGZNQ/viewform?usp=publish-editor"
               target="_blank"
               rel="noopener noreferrer"
@@ -80,19 +100,13 @@ const Footer = () => {
             </a>
           </div>
         </div>
-        <hr className="atmos-footer-rule-soft" aria-hidden="true" />
-
-        <div className="atmos-footer-bottom">
-          <div className="atmos-footer-copy">
-            &copy; {new Date().getFullYear()} AI@UW
-          </div>
-          <div className="atmos-footer-pag">
-            Nurturing AI <span className="atmos-footer-pag-cur">for all</span>
-          </div>
-          <div className="atmos-footer-place">
-            Madison, WI
-          </div>
-        </div>
+        <nav className="atmos-footer-nav" aria-label="Site">
+          {NAV_ITEMS.map(({ to, label }) => (
+            <Link key={to} className="atmos-footer-nav-link" to={to}>
+              {label}
+            </Link>
+          ))}
+        </nav>
       </div>
     </footer>
   );

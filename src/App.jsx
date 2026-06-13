@@ -1,5 +1,5 @@
-import { lazy, Suspense } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { lazy, Suspense, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from "react-router-dom";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 
@@ -13,13 +13,22 @@ const Resources = lazy(() => import("./components/Resources"));
 const PitchBuilder = lazy(() => import("./components/PitchBuilder"));
 const Sandbox = lazy(() => import("./components/Sandbox"));
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
+
 function App() {
   return (
     <div>
       <Router>
+        <ScrollToTop />
         <Nav />
         <div id="body-wrapper">
-          <Suspense fallback={null}>
+          <Suspense fallback={<div className="atmos-route-loading" aria-live="polite">Loading…</div>}>
             <Routes>
               <Route
                 path="/"
@@ -27,7 +36,7 @@ function App() {
               />
               <Route
                 path="/about"
-                element={<><About /><Footer /></>}
+                element={<Navigate to="/" replace />}
               />
               <Route
                 path="/involvement"

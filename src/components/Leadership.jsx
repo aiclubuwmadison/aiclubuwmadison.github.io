@@ -1,17 +1,4 @@
 import { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import {
-  Mail,
-  Network,
-  MessageSquare,
-  Eye,
-  Bot,
-  HeartHandshake,
-  Users,
-  FolderGit2,
-  LayoutGrid,
-  CalendarDays,
-} from 'lucide-react';
 import './Leadership.css';
 
 const PORTRAIT_PLACEHOLDER = '/images/portraits/_placeholder.svg';
@@ -152,16 +139,13 @@ const IconLinkedIn = () => (
   </svg>
 );
 const Socials = ({ link }) => (
-  <div className="lead-socials">
-    {link && (
+  link ? (
+    <div className="lead-socials">
       <a href={link} target="_blank" rel="noopener noreferrer" className="lead-social-btn" aria-label="LinkedIn">
         <IconLinkedIn />
       </a>
-    )}
-    <span className="lead-social-btn lead-social-btn--inert" aria-label="Email">
-      <Mail size={14} strokeWidth={2} aria-hidden="true" />
-    </span>
-  </div>
+    </div>
+  ) : null
 );
 
 const FeaturedCard = ({ m }) => {
@@ -261,7 +245,7 @@ const Leadership = () => {
     [
       { file: 'arun.jpg',       title: 'Event Head',                         name: 'Arun Sivarajah' },
       { file: 'alexey.jpg',     title: 'Head of Project and Study Groups',   name: 'Alexey Gorbunov',    link: 'https://www.linkedin.com/in/alexey-gorbunov-b2153a19a/' },
-      { file: 'ethan.jpg',      title: 'Webmaster',                          name: 'Ethan Wheeler',       link: 'https://www.linkedin.com/in/ethan-wheeler-abcdef/' },
+      { file: 'ethan.jpg',      title: 'Webmaster',                          name: 'Ethan Wheeler' },
     ],
     [
       { file: 'dane.jpg',       title: 'Advisor, Harvey D. Spangler Professor of Engineering', name: 'Dane Morgan', link: 'https://directory.engr.wisc.edu/mse/faculty/morgan_dane' },
@@ -328,15 +312,6 @@ const Leadership = () => {
   const featured   = allCurrent.slice(0, 2);
   const team       = allCurrent.slice(2);
 
-  const FOCUS_TOPICS = [
-    { Icon: Network,        label: 'Machine Learning' },
-    { Icon: MessageSquare,  label: 'NLP' },
-    { Icon: Eye,            label: 'Computer Vision' },
-    { Icon: Bot,            label: 'Robotics' },
-    { Icon: HeartHandshake, label: 'AI for Social Good' },
-    { Icon: Users,          label: 'Human-AI Interaction' },
-  ];
-
   return (
     <div className="atmos-root atmos-leadership">
 
@@ -344,13 +319,14 @@ const Leadership = () => {
       <section className="lead-hero">
         <div className="atmos-shell lead-hero-shell">
           <div className="lead-hero-left">
+            <p className="atmos-page-hero-eyebrow">Leadership</p>
             <h1 className="lead-hero-title">
               The people<br /><em>behind</em> AI@UW.
             </h1>
-            <p className="lead-hero-lede">
-              Students and mentors guiding AI@UW across projects, research, and community.
+            <p className="atmos-page-hero-lede lead-hero-lede">
+              Meet the students running AI@UW.
             </p>
-            <a href="#officers" className="lead-hero-cta">
+            <a href="#officers" className="atmos-page-hero-cta lead-hero-cta">
               Meet the team <span>↓</span>
             </a>
           </div>
@@ -376,35 +352,11 @@ const Leadership = () => {
               </div>
             </div>
             <p className="lead-hero-tagline">
-              Built by students.<br />
-              Driven by curiosity.<br />
-              United by <em>impact</em>.
+              Built by students. Driven by curiosity. United by <em>impact</em>.
             </p>
           </div>
         </div>
       </section>
-
-      {/* ── STATS ──────────────────────────────────────────── */}
-      <div className="atmos-shell">
-        <div className="lead-stats">
-          <div className="lead-stat">
-            <Users className="lead-stat-icon" strokeWidth={1.7} aria-hidden="true" />
-            <div><span className="lead-stat-num">2000+</span><span className="lead-stat-label">Members</span></div>
-          </div>
-          <div className="lead-stat">
-            <FolderGit2 className="lead-stat-icon" strokeWidth={1.7} aria-hidden="true" />
-            <div><span className="lead-stat-num">40+</span><span className="lead-stat-label">Active Projects</span></div>
-          </div>
-          <div className="lead-stat">
-            <LayoutGrid className="lead-stat-icon" strokeWidth={1.7} aria-hidden="true" />
-            <div><span className="lead-stat-num">15+</span><span className="lead-stat-label">Research Groups</span></div>
-          </div>
-          <div className="lead-stat">
-            <CalendarDays className="lead-stat-icon" strokeWidth={1.7} aria-hidden="true" />
-            <div><span className="lead-stat-num">Weekly</span><span className="lead-stat-label">Seminars &amp; Workshops</span></div>
-          </div>
-        </div>
-      </div>
 
       {/* ── OFFICERS ───────────────────────────────────────── */}
       <section className="lead-officers" id="officers">
@@ -431,34 +383,6 @@ const Leadership = () => {
         </div>
       </section>
 
-      {/* ── FOCUS SECTION ──────────────────────────────────── */}
-      <section className="lead-focus">
-        <div className="atmos-shell">
-          <div className="lead-focus-card">
-            <div className="lead-focus-left">
-              <p className="lead-section-eyebrow">What We&rsquo;re Focused On</p>
-              <h2 className="lead-focus-title">Building the future through AI.</h2>
-            </div>
-            <div className="lead-focus-topics">
-              {FOCUS_TOPICS.map(({ Icon, label }) => (
-                <div className="lead-focus-topic" key={label}>
-                  <span className="lead-focus-topic-icon">
-                    <Icon size={16} strokeWidth={1.8} aria-hidden="true" />
-                  </span>
-                  {label}
-                </div>
-              ))}
-            </div>
-            <div className="lead-focus-cta">
-              <p>Interested in leading a project or team?</p>
-              <Link to="/contact" className="lead-focus-link">
-                Become a Member <span>→</span>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* ── ARCHIVE ────────────────────────────────────────── */}
       <section className="lead-archive-section">
         <div className="atmos-shell">
@@ -467,16 +391,6 @@ const Leadership = () => {
               <p className="lead-section-eyebrow">Archive</p>
               <h2 className="lead-section-title">Past terms</h2>
             </div>
-            <span className="lead-section-aside lead-archive-select">
-              Select a term
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                <rect x="1" y="1" width="14" height="14" rx="3" stroke="currentColor" strokeWidth="1.3"/>
-                <path d="M4 6h8M4 9.5h5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/>
-              </svg>
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                <path d="M3 5l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </span>
           </div>
 
           <div className="lead-archive-wrap">
