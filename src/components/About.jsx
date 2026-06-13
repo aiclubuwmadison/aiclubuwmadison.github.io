@@ -147,7 +147,7 @@ const About = () => {
     }, { threshold: 0.08 });
 
     const elements = document.querySelectorAll(
-      ".about-story, .about-what, .about-areas, .about-cta-banner, .about-stat, .about-what-card, .about-area-tag"
+      ".about-stat, .about-what-card, .about-area-tag"
     );
 
     elements.forEach((el, i) => {
@@ -164,15 +164,18 @@ const About = () => {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+    const hero = canvas.closest('.about-hero');
+    if (!hero) return;
+
     const ctx = canvas.getContext('2d');
     let animId;
     let rot = 0;
+    let running = false;
 
     let canvasW = 0;
     let canvasH = 0;
 
     function setup() {
-      // Disable drawing loop entirely if screen width < 480px (CSS hides the canvas)
       if (window.innerWidth < 480) {
         cancelAnimationFrame(animId);
         return;
@@ -187,7 +190,11 @@ const About = () => {
     }
 
     function draw() {
-      if (window.innerWidth < 480) return;
+      if (!running || window.innerWidth < 480) {
+        animId = 0;
+        return;
+      }
+
       const w = canvasW, h = canvasH;
       ctx.clearRect(0, 0, w, h);
       const cx = w * 0.5, cy = h * 0.5;
@@ -195,7 +202,7 @@ const About = () => {
       const coreR = maxR * 0.31;
 
       const goldenAngle = 2.39996323;
-      const N = 750;
+      const N = 500;
       const isDark = document.documentElement.dataset.theme === 'dark';
 
       for (let i = 1; i <= N; i++) {
@@ -238,10 +245,35 @@ const About = () => {
       animId = requestAnimationFrame(draw);
     }
 
-    setup();
-    draw();
-    window.addEventListener('resize', setup);
-    return () => { cancelAnimationFrame(animId); window.removeEventListener('resize', setup); };
+    function start() {
+      if (running) return;
+      running = true;
+      setup();
+      if (!animId) draw();
+    }
+
+    function stop() {
+      running = false;
+      cancelAnimationFrame(animId);
+      animId = 0;
+    }
+
+    const io = new IntersectionObserver(
+      ([entry]) => (entry.isIntersecting ? start() : stop()),
+      { threshold: 0.05 }
+    );
+    io.observe(hero);
+
+    const onResize = () => {
+      if (running) setup();
+    };
+    window.addEventListener('resize', onResize);
+
+    return () => {
+      stop();
+      io.disconnect();
+      window.removeEventListener('resize', onResize);
+    };
   }, []);
 
   return (

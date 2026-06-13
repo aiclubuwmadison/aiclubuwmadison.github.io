@@ -187,6 +187,7 @@
   width: 100%;
   height: 100%;
   display: block;
+  pointer-events: none;
 }
 
 /* ── White center circle + logo ──────────────────────────── */
@@ -844,14 +845,25 @@
 
 /* ── Dark mode (hero block only) ─────────────────────────── */
 [data-theme="dark"] .about-hero {
-  background: #0a0a0a;
-  /* Full-bleed: extend dark bg to viewport edges while keeping content max-width */
-  box-shadow: 0 0 0 100vmax #0a0a0a;
-  clip-path: inset(0 -100vmax);
+  position: relative;
+  isolation: isolate;
+  background: transparent;
   --atmos-ink: #f1f5f9;
   --atmos-ink-soft: #cbd5e1;
   --atmos-ink-mute: #64748b;
   --atmos-hairline: rgba(255, 255, 255, 0.10);
+}
+
+[data-theme="dark"] .about-hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  background: #0a0a0a;
 }
 
 [data-theme="dark"] .about-spiral-center {
