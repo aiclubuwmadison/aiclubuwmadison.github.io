@@ -58,8 +58,7 @@ const Contact = () => {
               </h1>
 
               <p className="atmos-contact-lede">
-                We&rsquo;d love to hear from you. Reach out to collaborate,
-                ask questions, or share your ideas.
+                Email, Discord, or the form below.
               </p>
 
               <ul className="atmos-channel-list">
@@ -148,15 +147,7 @@ const Contact = () => {
               </div>
 
               <p className="atmos-contact-lede" style={{ margin: 0 }}>
-                If there's anything else you want to say, share it via the form below (which lets you optionally include your name and email) or the raw{' '}
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href="https://docs.google.com/forms/d/e/1FAIpQLSdpbz1I_cmMtlJIx5LDufsIFybab7qvBPqHW42fXVBLcDGZNQ/viewform?usp=publish-editor"
-                >
-                  Student Suggestion Box
-                </a>
-                .
+                Share your thoughts, suggestions, or questions using the form below. Name and email are optional.
               </p>
 
               {submitted ? (

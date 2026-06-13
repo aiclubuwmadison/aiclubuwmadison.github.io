@@ -194,18 +194,18 @@ const Projects = () => {
               Explore cutting-edge systems, models, and platforms built by our members. 
               From physical robots to fine-tuned transformer networks, we learn by building.
             </p>
-            <div className="projects-notice-banner">
-              <span className="projects-notice-badge">Template Showcase</span>
-              <p className="projects-notice-text">
-                Note: The projects listed below represent template showcases and hypothetical portfolio examples of the types of engineering projects AI@UW members collaborate on. Active project recruitment for this semester will open soon.
-              </p>
-            </div>
           </div>
         </div>
       </section>
 
       <section className="projects-grid-section">
         <div className="atmos-shell">
+          <div className="projects-notice-banner">
+            <p className="projects-notice-text">
+              Sample portfolio projects — contact us to join a team.
+            </p>
+          </div>
+
           {/* Tab Filters */}
           <div className="projects-tabs-container">
             <div className="projects-tabs">

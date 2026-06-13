@@ -46,8 +46,8 @@
 .atmos-seminars .atmos-sem-title {
   font-family: var(--atmos-serif);
   font-weight: 800;
-  font-size: clamp(40px, 5.5vw, 72px);
-  line-height: 1.04;
+  font-size: var(--type-display);
+  line-height: 1.05;
   letter-spacing: -0.03em;
   color: var(--atmos-ink);
   margin: 0 0 20px;
@@ -281,7 +281,7 @@
 
 /* ── SECTION ────────────────────────────────────────────── */
 .atmos-seminars .atmos-sem-section {
-  margin-bottom: clamp(48px, 6vw, 80px);
+  margin-bottom: clamp(64px, 8vw, 96px);
 }
 
 /* ── SUB-SECTION HEADER ─────────────────────────────────── */
@@ -298,7 +298,7 @@
 .atmos-seminars .atmos-sem-sub-eyebrow {
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--atmos-badger);
   margin-bottom: 8px;
@@ -344,24 +344,22 @@
   display: flex;
   flex-direction: column;
   gap: 14px;
-  background: var(--atmos-glass-panel);
-  backdrop-filter: var(--atmos-glass-blur);
-  -webkit-backdrop-filter: var(--atmos-glass-blur);
+  background: var(--atmos-paper-tint);
   transition: border-color 220ms ease, transform 220ms cubic-bezier(0.2,0.8,0.2,1), box-shadow 220ms ease, background 280ms ease;
 }
 
 .atmos-seminars .atmos-sem-card:hover {
   border-color: rgba(197,5,12,0.25);
-  background: var(--atmos-glass-panel-hover);
+  background: var(--atmos-paper-tint);
   transform: translateY(-3px);
   box-shadow: 0 8px 28px rgba(0,0,0,0.07);
 }
 
 .atmos-seminars .atmos-sem-card--workshop {
-  background: var(--atmos-glass-control);
+  background: var(--atmos-paper-tint);
 }
 
-/* Top row: date badge + content + bookmark */
+/* Top row: date badge + content */
 .atmos-seminars .atmos-sem-card-row {
   display: flex;
   align-items: flex-start;
@@ -410,26 +408,7 @@
   gap: 6px;
 }
 
-/* Bookmark icon */
-.atmos-seminars .atmos-sem-bookmark {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--atmos-ink-mute);
-  padding: 2px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  transition: color 180ms ease;
-  margin-left: auto;
-}
-
-.atmos-seminars .atmos-sem-bookmark:hover,
-.atmos-seminars .atmos-sem-bookmark.active {
-  color: var(--atmos-badger);
-}
-
-/* Title */
+/* Card content: title + speaker + tags */
 .atmos-seminars .atmos-sem-talk {
   font-family: var(--atmos-serif);
   font-size: clamp(15px, 1.5vw, 17.5px);
@@ -476,15 +455,11 @@
   line-height: 1.7;
   color: var(--atmos-ink-soft);
   margin: 0;
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
   flex: 1;
 }
 
 .atmos-seminars .atmos-sem-abstract--expanded {
-  -webkit-line-clamp: unset;
+  /* full abstract shown when expanded */
 }
 
 /* View details button */
@@ -597,19 +572,15 @@
 
 /* Card: glass tokens in dark mode */
 [data-theme="dark"] .atmos-seminars .atmos-sem-card {
-  background: var(--atmos-glass-panel);
-  backdrop-filter: var(--atmos-glass-blur);
-  -webkit-backdrop-filter: var(--atmos-glass-blur);
+  background: var(--atmos-paper-tint);
 }
 
 [data-theme="dark"] .atmos-seminars .atmos-sem-card--workshop {
-  background: var(--atmos-glass-control);
+  background: var(--atmos-paper-tint);
 }
 
 [data-theme="dark"] .atmos-seminars .atmos-sem-card:hover {
-  background: var(--atmos-glass-panel-hover);
-  backdrop-filter: var(--atmos-glass-blur);
-  -webkit-backdrop-filter: var(--atmos-glass-blur);
+  background: var(--atmos-paper-tint);
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5);
 }
 
