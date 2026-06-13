@@ -12,12 +12,12 @@ AI@UW is an interdisciplinary community of over 2,000 students and faculty dedic
 - **Build Tool:** [Vite 8](https://vitejs.dev/)
 - **Routing:** [React Router 7](https://reactrouter.com/) (`BrowserRouter`)
 - **Icons:** [lucide-react](https://lucide.dev/)
-- **Fonts:** Neue Montreal (self-hosted in `public/fonts/`), [`@fontsource/google-sans`](https://www.npmjs.com/package/@fontsource/google-sans), and Inter (loaded from Google Fonts).
-- **Styling:** Vanilla CSS — one co-located `.css` file per component, no UI framework. The design language is modern and "atmospheric"; the mobile navigation uses a hand-rolled burger menu.
+- **Fonts:** Space Grotesk, Instrument Serif, and Space Mono (loaded from Google Fonts in `index.html`)
+- **Styling:** Vanilla CSS — one co-located `.css` file per component, no UI framework. The design language is modern and "atmospheric"; the mobile navigation uses a hand-rolled burger menu. Dark mode uses the View Transitions API for a circular reveal (`src/utils/themeTransition.js`).
 
 Routes are code-split with `React.lazy` and `<Suspense>`, so each page is loaded on demand.
 
-The contact form is an embedded Google Form (`<iframe>`), so the site is fully static — no backend required.
+The contact page uses a native quick-message form that POSTs to Google Forms (`mode: no-cors`), with a link to the full-page Google Form. The site is fully static — no backend required.
 
 ## Getting Started
 
@@ -34,6 +34,10 @@ The contact form is an embedded Google Form (`<iframe>`), so the site is fully s
 2. Install dependencies:
    ```bash
    npm install
+   ```
+3. Optional — install the commit hook that blocks Cursor co-author trailers:
+   ```bash
+   cp scripts/git-hooks/prepare-commit-msg .git/hooks/prepare-commit-msg && chmod +x .git/hooks/prepare-commit-msg
    ```
 
 ### Development
@@ -76,33 +80,36 @@ To verify a build before pushing, run `npm run preview` locally.
 ```text
 ├── public/                 # Static assets served as-is
 │   ├── CNAME               # Custom domain (ai.cs.wisc.edu)
-│   ├── fonts/              # Self-hosted Neue Montreal font files + fonts.css
-│   ├── images/             # Logos, leadership portraits, seminar hero
+│   ├── images/             # Leadership portraits, seminar hero, logos
 │   └── logo.svg            # Favicon
 ├── src/
 │   ├── components/         # One page/feature per file, each with a sibling .css
 │   │   ├── Nav.jsx         # Top navigation + mobile burger menu
 │   │   ├── Footer.jsx
-│   │   ├── About.jsx       # Home / about page
+│   │   ├── About.jsx       # Home page (route `/`)
 │   │   ├── Involvement.jsx
 │   │   ├── Leadership.jsx
-│   │   ├── Contact.jsx     # Embedded Google Form
+│   │   ├── Contact.jsx     # Quick-message form + Google Form link
 │   │   ├── Seminars.jsx
 │   │   ├── Projects.jsx
 │   │   ├── Resources.jsx
 │   │   ├── PitchBuilder.jsx
 │   │   └── Sandbox.jsx
+│   ├── utils/
+│   │   └── themeTransition.js  # Dark-mode circular reveal animation
 │   ├── App.jsx             # Router + route definitions (lazy-loaded pages)
 │   ├── main.jsx            # Entry point + SPA redirect shim
 │   ├── index.css           # Global styles
-│   └── App.css
-├── index.html              # Vite HTML entry
+│   └── App.css             # Design tokens and shared atmospheric styles
+├── scripts/
+│   └── git-hooks/          # Optional prepare-commit-msg hook
+├── index.html              # Vite HTML entry + Google Fonts links
 ├── vite.config.js          # Vite configuration
 └── eslint.config.js        # ESLint flat config
 ```
 
 ### Routes
-`/` and `/about` (About), `/involvement`, `/leadership`, `/contact`, `/seminars`, `/projects`, `/resources`, `/pitch` (PitchBuilder), and `/sandbox`.
+`/` (About), `/involvement`, `/leadership`, `/contact`, `/seminars`, `/projects`, `/resources`, `/pitch` (PitchBuilder), and `/sandbox`. `/about` redirects to `/`. Every route renders `<Footer />` alongside the page.
 
 ## Contributing
 

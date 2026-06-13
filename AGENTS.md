@@ -15,34 +15,31 @@ No test runner is configured.
 
 ### Frontend Stack
 Vite + React 19 SPA for the AI@UW club site. Stack:
-- **Core:** React 19, Vite
-- **UI Libraries:** Material UI (MUI) v6, `lucide-react`, `react-burger-menu`
+- **Core:** React 19, Vite 8
+- **UI:** `lucide-react` icons; hand-rolled mobile nav (no UI component library)
 - **Routing:** `react-router-dom` v7. Entry is `src/main.jsx` → `src/App.jsx`.
+- **Fonts:** Space Grotesk, Instrument Serif, Space Mono (Google Fonts via `index.html`)
 
 ### Routing
-`App.jsx` uses `BrowserRouter` with one route per top-level page component in `src/components/` (`About`, `Involvement`, `Leadership`, `Contact`, `Seminars`, `Projects`, `PitchBuilder`, `Sandbox`). `<Nav />` is rendered once outside `<Routes>`. Every route except `/` renders `<Footer />` inline alongside the page via `<><Page /><Footer /></>`. New pages should follow the same pattern.
+`App.jsx` uses `BrowserRouter` with one route per top-level page component in `src/components/` (`About`, `Involvement`, `Leadership`, `Contact`, `Seminars`, `Projects`, `Resources`, `PitchBuilder`, `Sandbox`). `<Nav />` is rendered once outside `<Routes>`. Every route renders `<Footer />` inline alongside the page via `<><Page /><Footer /></>`. `/about` redirects to `/`. New pages should follow the same pattern.
 
 ### Styling & Design
-The project relies heavily on Vanilla CSS (`.css` files alongside `.jsx` components) to achieve its custom "Atmospheric Modern" design (e.g., specific typography, HSL dark/light colors, glassmorphism, and subtle visual animations). Avoid introducing CSS-in-JS or Tailwind CSS unless explicitly requested by the user.
+The project relies heavily on Vanilla CSS (`.css` files alongside `.jsx` components) to achieve its custom "Atmospheric Modern" design (e.g., specific typography, HSL dark/light colors, glassmorphism, and subtle visual animations). Design tokens live in `src/App.css`. Dark mode toggle uses the View Transitions API via `src/utils/themeTransition.js`. Avoid introducing CSS-in-JS or Tailwind CSS unless explicitly requested by the user.
 
 ### Component Structure
-Page-level components live directly under `src/components/`. Reusable primitives live in:
-- `src/components/typographic/` (if any are re-introduced)
-- `src/components/display/`
-
-Prefer composing existing custom components over styling MUI from scratch.
+Page-level components live directly under `src/components/`. Shared utilities live in `src/utils/`. Prefer composing existing custom components over adding new dependencies.
 
 ### Static Assets
-Served from `public/` (e.g. `public/images/{logos,portraits,seminarSpeakers}`, `public/fonts`). Reference them with absolute `/images/...` paths in code.
+Served from `public/` (e.g. `public/images/portraits`, `public/images/seminars`). Reference them with absolute `/images/...` paths in code.
 
 ### GitHub Pages SPA Shim
-`src/main.jsx` reads `?redirect=/path` from the URL and rewrites `window.history` before React mounts. This pairs with a `404.html` redirect helper used by GitHub Pages so deep links work on a static host. Do not remove the shim without also removing the 404 handler.
+`src/main.jsx` reads `?redirect=/path` from the URL and rewrites `window.history` before React mounts, so deep links work on a static host.
 
 ### Custom Domain
 `CNAME` contains `ai.cs.wisc.edu`; the site is published at that host.
 
 ### Contact Form
-The site is fully static — there is no backend. `Contact.jsx` embeds a Google Form via iframe (`docs.google.com/forms/d/e/1FAIpQLSd...`) instead of submitting to a server.
+The site is fully static — there is no backend. `Contact.jsx` submits a quick-message form to Google Forms via `fetch` (`mode: no-cors`) and links to the full-page Google Form for longer submissions.
 
 ## Workflow Guidelines
 
@@ -51,15 +48,10 @@ The site is fully static — there is no backend. `Contact.jsx` embeds a Google 
 - **Terminate subagents upon task completion.** Once a task is fully completed, verified, and merged/committed, terminate/delete all subagents and their workspaces to keep the repository clean, provided we are not going to work with them again. Always ask the user for explicit approval before performing this termination.
 - **Linting & Code Quality:** Ensure all new code compiles cleanly and passes the linter by running `npm run lint`.
 
-## Critical Deployment Workflow
+## Deployment Workflow
 
-This repository uses a specific branch-based deployment strategy. **Never push development code directly to the `master` branch.**
+All development happens on the `dev` branch. **Do not push source code to `master`.**
 
-1. **Development:** All feature work, bug fixes, and redesigns happen on the `dev` branch.
-2. **Building:** Run `npm run build` on the `dev` branch to compile assets to the `dist/` directory.
-3. **Deployment:** The `master` branch is reserved *exclusively* for the compiled output (`dist/`).
-   - Copy the contents of `dist/` to a temporary location outside the repository.
-   - Switch to the `master` branch.
-   - Delete all existing files.
-   - Paste the compiled files from the temporary location.
-   - Commit and push to `master`.
+Deployment is automated: pushing to `dev` triggers `.github/workflows/pages.yml`, which runs `npm ci`, `npm run build`, and publishes `dist/` to GitHub Pages via the GitHub Actions artifact flow. Repo Settings → Pages → Source must be "GitHub Actions".
+
+To verify locally before pushing: `npm run build` then `npm run preview`.
