@@ -1,0 +1,13 @@
+---
+description: Agent workflow — commits, research, tooling
+alwaysApply: true
+---
+
+## Commits
+
+- Never add `Co-authored-by: Cursor` (or any Cursor/agent co-author trailer) to commit messages.
+- Write commit messages in the repo's existing style; focus on why, not a file list.
+
+## Research
+
+- Use web search when a question needs current docs, API behavior, browser support, CVEs, or other facts that may have changed since training data.
