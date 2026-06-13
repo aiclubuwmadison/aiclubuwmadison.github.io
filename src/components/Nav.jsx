@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { flushSync } from "react-dom";
 import { Link, useLocation } from "react-router-dom";
 import { Sun, Moon } from "lucide-react";
 import { animateThemeChange } from "../utils/themeTransition";
+import { NAV_ITEMS } from "../constants/nav";
 import "./Nav.css";
 
 const getInitialTheme = () => {
@@ -12,25 +13,28 @@ const getInitialTheme = () => {
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 };
 
-const NAV_ITEMS = [
-  { to: "/about", label: "About Us" },
-  { to: "/leadership", label: "Leadership" },
-  { to: "/seminars", label: "Seminars" },
-  { to: "/projects", label: "Projects" },
-  { to: "/resources", label: "Resources" },
-  { to: "/involvement", label: "FAQ" },
-  { to: "/contact", label: "Contact" }
-];
-
 const Nav = () => {
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [prevPathname, setPrevPathname] = useState(location.pathname);
   const [scrolled, setScrolled] = useState(false);
   const [theme, setTheme] = useState(getInitialTheme);
   const [iconAnimKey, setIconAnimKey] = useState(0);
   const [iconTheme, setIconTheme] = useState(null);
+  const panelRef = useRef(null);
+  const burgerRef = useRef(null);
+  const prevFocusRef = useRef(null);
 
-  const isActive = (to) => location.pathname === to;
+  const isActive = (to) => {
+    const path = location.pathname;
+    if (path === "/") return false;
+    return path === to;
+  };
+
+  if (location.pathname !== prevPathname) {
+    setPrevPathname(location.pathname);
+    setMobileOpen(false);
+  }
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -72,6 +76,60 @@ const Nav = () => {
       cancelAnimationFrame(rafId);
     };
   }, []);
+
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
+
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") setMobileOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [mobileOpen]);
+
+  useEffect(() => {
+    if (!mobileOpen) return;
+    prevFocusRef.current = document.activeElement;
+    const panel = panelRef.current;
+    if (!panel) return;
+
+    const focusable = panel.querySelectorAll(
+      'a[href], button:not([disabled])'
+    );
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    first?.focus();
+
+    const trapTab = (e) => {
+      if (e.key !== "Tab" || focusable.length === 0) return;
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last?.focus();
+        }
+      } else if (document.activeElement === last) {
+        e.preventDefault();
+        first?.focus();
+      }
+    };
+
+    panel.addEventListener("keydown", trapTab);
+    const burger = burgerRef.current;
+    return () => {
+      panel.removeEventListener("keydown", trapTab);
+      burger?.focus();
+    };
+  }, [mobileOpen]);
 
   return (
     <>
@@ -138,10 +196,12 @@ const Nav = () => {
 
           {/* Burger */}
           <button
+            ref={burgerRef}
             type="button"
             className={`atmos-nav-burger${mobileOpen ? " atmos-nav-burger--open" : ""}`}
             aria-expanded={mobileOpen}
             aria-controls="atmos-nav-mobile-panel"
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
             onClick={() => setMobileOpen((v) => !v)}
           >
             <span className="atmos-nav-burger-bar" />
@@ -152,14 +212,33 @@ const Nav = () => {
         </div>
       </header>
 
+      {mobileOpen && (
+        <div
+          className="atmos-nav-mobile-backdrop"
+          onClick={() => setMobileOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
       {/* Mobile panel */}
       <div
+        ref={panelRef}
         id="atmos-nav-mobile-panel"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Site menu"
         className={
           "atmos-nav-mobile-panel" +
           (mobileOpen ? " atmos-nav-mobile-open" : "")
         }
       >
+        <Link
+          to="/contact"
+          className="atmos-nav-mobile-cta"
+          onClick={() => setMobileOpen(false)}
+        >
+          Join <span aria-hidden="true">→</span>
+        </Link>
         <nav>
           {NAV_ITEMS.map((item) => (
             <Link
@@ -190,13 +269,6 @@ const Nav = () => {
           </span>
           <span>{theme === "dark" ? "Light mode" : "Dark mode"}</span>
         </button>
-        <Link
-          to="/contact"
-          className="atmos-nav-mobile-cta"
-          onClick={() => setMobileOpen(false)}
-        >
-          Join <span aria-hidden="true">→</span>
-        </Link>
       </div>
     </>
   );

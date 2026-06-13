@@ -113,7 +113,7 @@ const Involvement = () => {
   const toggleFaq = (q) => setOpenFaq((prev) => (prev === q ? null : q));
 
   useEffect(() => {
-    document.title = 'FAQ | AI@UW';
+    document.title = 'Get Involved | AI@UW';
   }, []);
 
   useEffect(() => {

@@ -50,7 +50,7 @@
   gap: clamp(40px, 6vw, 96px);
   max-width: var(--atmos-max);
   margin: 0 auto;
-  padding: clamp(48px, 6vw, 80px) var(--atmos-gutter);
+  padding: var(--space-hero-y) var(--atmos-gutter);
   box-sizing: border-box;
 }
 
@@ -72,10 +72,10 @@
 
 .about-hero-title {
   font-family: var(--atmos-serif);
-  font-weight: 500;
-  font-size: clamp(40px, 5.5vw, 72px);
-  line-height: 1.12;
-  letter-spacing: -0.01em;
+  font-weight: 600;
+  font-size: var(--type-display);
+  line-height: var(--lh-display);
+  letter-spacing: var(--ls-display);
   color: var(--atmos-ink);
   margin: 0;
 }
@@ -120,57 +120,7 @@
   margin-top: clamp(4px, 1vw, 8px);
 }
 
-/* Shared button base */
-.about-btn-primary,
-.about-btn-ghost {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--atmos-sans);
-  font-size: 13.5px;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  padding: 13px 22px 12px;
-  border-radius: 999px;
-  border: 1.5px solid transparent;
-  cursor: pointer;
-  text-decoration: none;
-  transition: background 220ms ease, color 220ms ease,
-              border-color 220ms ease, transform 220ms ease,
-              box-shadow 220ms ease;
-  white-space: nowrap;
-}
-
-.about-btn-primary {
-  background: var(--atmos-badger);
-  color: #fff;
-  border-color: var(--atmos-badger);
-  box-shadow: 0 4px 16px rgba(197, 5, 12, 0.28);
-}
-.about-btn-primary:hover {
-  background: transparent;
-  color: var(--atmos-badger);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 22px rgba(197, 5, 12, 0.18);
-}
-
-.about-btn-arr {
-  display: inline-block;
-  transition: transform 220ms ease;
-}
-.about-btn-primary:hover .about-btn-arr {
-  transform: translateX(3px);
-}
-
-.about-btn-ghost {
-  background: transparent;
-  color: var(--atmos-ink-soft);
-  border-color: var(--atmos-hairline);
-}
-.about-btn-ghost:hover {
-  border-color: var(--atmos-ink);
-  color: var(--atmos-ink);
-}
+/* Shared button base — primary styles live in App.css (.atmos-btn-primary) */
 
 /* RIGHT COLUMN — spiral canvas */
 .about-hero-right {
@@ -235,7 +185,7 @@
 /* ── OUR STORY ──────────────────────────────────────────── */
 .about-story {
   background: var(--atmos-paper-deep);
-  padding: var(--space-section-y, clamp(64px, 8vw, 96px)) 0;
+  padding: var(--space-section-y) 0;
 }
 
 .about-story-inner {
@@ -290,8 +240,6 @@
 
 .about-stat {
   background: var(--atmos-glass-panel);
-  backdrop-filter: var(--atmos-glass-blur);
-  -webkit-backdrop-filter: var(--atmos-glass-blur);
   border: 1px solid var(--atmos-hairline);
   border-radius: 16px;
   padding: 24px 20px;
@@ -300,12 +248,11 @@
   align-items: center;
   text-align: center;
   gap: 10px;
-  transition: background 280ms ease, border-color 220ms ease, box-shadow 220ms ease, transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: background 280ms ease, border-color 220ms ease, box-shadow 220ms ease;
 }
 .about-stat:hover {
   border-color: rgba(197, 5, 12, 0.18);
   box-shadow: 0 12px 28px rgba(0,0,0,0.06), 0 4px 12px rgba(197, 5, 12, 0.04);
-  transform: translateY(-4px) scale(1.025);
 }
 
 .about-stat-icon {
@@ -353,8 +300,8 @@
 
 /* ── WHAT WE DO ─────────────────────────────────────────── */
 .about-what {
-  background: #fff;
-  padding: var(--space-section-y, clamp(64px, 8vw, 96px)) 0;
+  background: var(--atmos-paper);
+  padding: var(--space-section-y) 0;
 }
 
 .about-what-title {
@@ -378,24 +325,23 @@
 }
 
 .about-what-card {
-  border: 1px solid var(--atmos-hairline);
-  border-radius: 18px;
+  border: var(--surface-border);
+  border-radius: var(--surface-radius);
   display: flex;
   flex-direction: column;
   background: var(--atmos-glass-panel);
-  backdrop-filter: var(--atmos-glass-blur);
-  -webkit-backdrop-filter: var(--atmos-glass-blur);
   overflow: hidden;
-  transition: background 280ms ease, border-color 280ms ease, box-shadow 280ms ease, transform 380ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  text-decoration: none;
+  color: inherit;
+  transition: background 280ms ease, border-color 280ms ease, box-shadow 280ms ease;
 }
 
 .about-what-card:hover {
   border-color: rgba(197, 5, 12, 0.15);
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(197, 5, 12, 0.03);
-  transform: translateY(-6px) scale(1.015);
 }
 
-/* Visual area: contains icon + SVG illustration with subtle grid pattern or clean gradient */
+/* Visual area: SVG illustration with subtle gradient */
 .about-what-card-visual {
   position: relative;
   height: 190px;
@@ -405,34 +351,6 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-}
-
-/* Icon: rounded square, top-left */
-.about-what-icon {
-  position: absolute;
-  top: 16px;
-  left: 16px;
-  width: 42px;
-  height: 42px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.95);
-  border: 1px solid rgba(197, 5, 12, 0.12);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--atmos-badger);
-  z-index: 2;
-  flex-shrink: 0;
-  transition: transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1), background-color 220ms ease;
-}
-.about-what-card:hover .about-what-icon {
-  transform: scale(1.08);
-  background-color: #ffffff;
-}
-.about-what-icon svg {
-  width: 18px;
-  height: 18px;
 }
 
 .about-what-illus-wrap {
@@ -489,8 +407,8 @@
 
 /* ── AREAS WE EXPLORE ───────────────────────────────────── */
 .about-areas {
-  background: #fef5f5;
-  padding: var(--space-section-y, clamp(64px, 8vw, 96px)) 0;
+  background: var(--atmos-paper-deep);
+  padding: var(--space-section-y) 0;
   position: relative;
   overflow: hidden;
 }
@@ -547,7 +465,6 @@
 .about-area-tag:hover {
   border-color: rgba(197, 5, 12, 0.22);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04), 0 2px 6px rgba(197, 5, 12, 0.02);
-  transform: translateY(-2px) scale(1.025);
 }
 
 .about-area-icon {
@@ -584,86 +501,6 @@
   color: var(--atmos-ink-mute);
 }
 
-/* ── CTA BANNER ─────────────────────────────────────────── */
-.about-cta-banner {
-  background: transparent;
-  padding: var(--space-section-y, clamp(64px, 8vw, 96px)) 0;
-}
-
-.about-cta-inner {
-  background: linear-gradient(135deg, #09090b 0%, #18181b 100%);
-  border: 1px solid rgba(197, 5, 12, 0.18);
-  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.12), 0 0 32px rgba(197, 5, 12, 0.03);
-  border-radius: 24px;
-  padding: clamp(32px, 5vw, 48px) clamp(24px, 5vw, 56px);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 32px;
-  flex-wrap: wrap;
-}
-
-.about-cta-left {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-}
-
-.about-cta-icon-wrap {
-  width: 56px;
-  height: 56px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fca5a5;
-  flex-shrink: 0;
-}
-.about-cta-icon-wrap svg {
-  width: 24px;
-  height: 24px;
-}
-
-.about-cta-title {
-  font-family: var(--atmos-serif);
-  font-size: clamp(20px, 2.2vw, 26px);
-  font-weight: 500;
-  color: #ffffff;
-  margin: 0 0 6px;
-  letter-spacing: -0.01em;
-}
-
-.about-cta-sub {
-  font-size: 14.5px;
-  color: #a1a1aa;
-  margin: 0;
-}
-
-.about-cta-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  font-size: 14px;
-  font-weight: 600;
-  color: #0f172a;
-  background: #ffffff;
-  padding: 14px 28px;
-  border-radius: 12px;
-  text-decoration: none;
-  white-space: nowrap;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: background 220ms ease, color 220ms ease, box-shadow 220ms ease, transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1), gap 220ms ease;
-}
-.about-cta-btn:hover {
-  background: var(--atmos-badger);
-  color: #ffffff;
-  box-shadow: 0 8px 24px rgba(197, 5, 12, 0.35);
-  transform: translateY(-2px);
-  gap: 13px;
-}
-
 
 /* ── RESPONSIVE ─────────────────────────────────────────── */
 
@@ -684,8 +521,8 @@
     grid-template-columns: 1fr;
     min-height: auto;
     gap: clamp(20px, 4vw, 36px);
-    padding-top: clamp(28px, 7vw, 48px);
-    padding-bottom: clamp(40px, 6vw, 72px);
+    padding-top: var(--space-hero-y);
+    padding-bottom: var(--space-hero-y);
   }
   .about-hero-left {
     max-width: 640px;
@@ -718,8 +555,7 @@
     padding-right: clamp(18px, 5vw, 28px);
   }
   .about-hero-title {
-    font-size: clamp(36px, 11vw, 52px);
-    letter-spacing: -0.025em;
+    letter-spacing: var(--ls-display);
   }
   .about-hero-lede {
     max-width: 34ch;
@@ -752,19 +588,6 @@
   .about-story-stats {
     grid-template-columns: repeat(2, 1fr);
   }
-  .about-cta-inner {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .about-cta-left {
-    align-items: flex-start;
-    gap: 14px;
-  }
-  .about-cta-btn {
-    width: 100%;
-    justify-content: center;
-    box-sizing: border-box;
-  }
 }
 
 @media (max-width: 480px) {
@@ -776,8 +599,7 @@
     align-items: flex-start;
   }
   .about-hero-title {
-    font-size: clamp(34px, 10.5vw, 44px);
-    line-height: 1.08;
+    line-height: var(--lh-display);
   }
   .about-hero-lede {
     max-width: none;
@@ -825,13 +647,6 @@
   }
   .about-area-tag {
     padding: 13px 14px;
-  }
-  .about-cta-left {
-    flex-direction: column;
-  }
-  .about-cta-icon-wrap {
-    width: 48px;
-    height: 48px;
   }
 }
 
@@ -885,14 +700,8 @@
   --atmos-hairline: rgba(255, 255, 255, 0.10);
 }
 
-[data-theme="dark"] .about-what {
-  background: #0a0a0a;
-}
-
 [data-theme="dark"] .about-stat {
   background: var(--atmos-glass-panel);
-  backdrop-filter: var(--atmos-glass-blur);
-  -webkit-backdrop-filter: var(--atmos-glass-blur);
   border-color: rgba(255, 255, 255, 0.05);
 }
 
@@ -907,8 +716,6 @@
 
 [data-theme="dark"] .about-what-card {
   background: var(--atmos-glass-panel);
-  backdrop-filter: var(--atmos-glass-blur);
-  -webkit-backdrop-filter: var(--atmos-glass-blur);
   border-color: rgba(255, 255, 255, 0.05);
 }
 
@@ -922,23 +729,12 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-[data-theme="dark"] .about-what-icon {
-  background: #1c1c1c;
-  border-color: rgba(255, 255, 255, 0.08);
-  color: #fca5a5;
-}
-
-/* ── Dark mode (Areas We Explore + CTA Banner) ───────────── */
-[data-theme="dark"] .about-areas,
-[data-theme="dark"] .about-cta-banner {
+/* ── Dark mode (Areas We Explore) ───────────── */
+[data-theme="dark"] .about-areas {
   --atmos-ink: #f1f5f9;
   --atmos-ink-soft: #cbd5e1;
   --atmos-ink-mute: #64748b;
   --atmos-hairline: rgba(255, 255, 255, 0.10);
-}
-
-[data-theme="dark"] .about-areas {
-  background: #0a0a0a;
 }
 
 [data-theme="dark"] .about-area-tag {
@@ -953,15 +749,6 @@
 
 [data-theme="dark"] .about-area-more {
   border-color: rgba(255, 255, 255, 0.12);
-}
-
-[data-theme="dark"] .about-cta-banner {
-  background: transparent;
-}
-
-[data-theme="dark"] .about-cta-inner {
-  background: linear-gradient(135deg, #050505 0%, #121212 100%);
-  border-color: rgba(197, 5, 12, 0.28);
 }
 
 [data-theme="dark"] .atmos-about {

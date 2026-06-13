@@ -354,7 +354,7 @@ const SeminarCard = ({ item }) => {
 
 const Seminars = () => {
   useEffect(() => {
-    document.title = 'Seminars | AI@UW';
+    document.title = 'Events | AI@UW';
   }, []);
 
   const [activeTab, setActiveTab] = useState('all');
@@ -429,6 +429,15 @@ const Seminars = () => {
               An archive of<br />
               <span style={{color:'var(--atmos-badger)'}}>talks</span> &amp; workshops<span className="atmos-sem-title-dot">.</span>
             </h1>
+            <p className="atmos-sem-lede">Weekly ML talks and workshops since 2024.</p>
+            <a
+              className="atmos-sem-hero-cta"
+              href="https://discord.gg/TTSykcZAg4"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Join Discord <IconArrow />
+            </a>
           </div>
           <div className="atmos-sem-hero-image" aria-hidden="true">
             <img src="/images/seminars/hero.jpg" alt="" fetchpriority="high" />
@@ -557,13 +566,13 @@ const Seminars = () => {
                 <h2 className="atmos-sem-sub-title">Talks given by our speakers.</h2>
               </div>
               {hasMoreTalks && (
-                <a
+                <button
+                  type="button"
                   className="atmos-sem-view-all"
-                  href="#"
-                  onClick={(e) => { e.preventDefault(); setActiveTab('talks'); }}
+                  onClick={() => setActiveTab('talks')}
                 >
                   View all talks <IconArrow />
-                </a>
+                </button>
               )}
             </div>
             {displayedTalks.length > 0 ? (
@@ -590,13 +599,13 @@ const Seminars = () => {
                 <h2 className="atmos-sem-sub-title">Hands-on, applied sessions.</h2>
               </div>
               {activeTab === 'all' && (
-                <a
+                <button
+                  type="button"
                   className="atmos-sem-view-all"
-                  href="#"
-                  onClick={(e) => { e.preventDefault(); setActiveTab('workshops'); }}
+                  onClick={() => setActiveTab('workshops')}
                 >
                   View all workshops <IconArrow />
-                </a>
+                </button>
               )}
             </div>
             {filteredWorkshops.length > 0 ? (

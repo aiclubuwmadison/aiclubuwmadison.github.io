@@ -147,7 +147,7 @@ const Contact = () => {
               </div>
 
               <p className="atmos-contact-lede" style={{ margin: 0 }}>
-                Share your thoughts, suggestions, or questions using the form below. Name and email are optional.
+                Name and email are optional.
               </p>
 
               {submitted ? (
@@ -211,7 +211,7 @@ const Contact = () => {
                   </div>
                   <button
                     type="submit"
-                    className="contact-form-submit-btn"
+                    className="atmos-btn-primary contact-form-submit-btn"
                     disabled={loading}
                   >
                     {loading ? 'Sending...' : 'Submit Message'}

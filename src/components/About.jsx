@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './About.css';
 
 // Wave decoration for Areas section
@@ -130,10 +130,13 @@ const CommunityIllus = () => {
 
 const About = () => {
   const canvasRef = useRef(null);
+  const { pathname } = useLocation();
 
   useEffect(() => {
-    document.title = 'About Us | AI@UW';
-  }, []);
+    document.title = pathname === '/'
+      ? 'AI@UW | UW–Madison AI Club'
+      : 'About | AI@UW';
+  }, [pathname]);
 
   // IntersectionObserver for scroll reveals
   useEffect(() => {
@@ -168,6 +171,7 @@ const About = () => {
     if (!hero) return;
 
     const ctx = canvas.getContext('2d');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let animId;
     let rot = 0;
     let running = false;
@@ -241,8 +245,12 @@ const About = () => {
         ctx.fill();
       }
 
-      rot += 0.0014;
-      animId = requestAnimationFrame(draw);
+      if (!prefersReducedMotion) {
+        rot += 0.0014;
+        animId = requestAnimationFrame(draw);
+      } else {
+        animId = 0;
+      }
     }
 
     function start() {
@@ -290,8 +298,7 @@ const About = () => {
             curious about AI.
           </h1>
           <p className="about-hero-lede">
-            UW–Madison's student AI club. All majors welcome.{' '}
-            <Link to="/seminars" className="about-hero-lede-link">Explore events</Link>
+            UW–Madison's student AI club. All majors welcome.
           </p>
           <div className="about-hero-ctas">
             <Link className="about-btn-primary" to="/contact">
@@ -330,16 +337,15 @@ const About = () => {
 
             <div className="about-story-stats">
               {[
-                { icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.74"/></svg>, num: '2,000+', label: 'Members', desc: 'Across all years and majors' },
-                { icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>, num: '50+', label: 'Projects', desc: 'Built, shipped, and shared' },
-                { icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>, num: '100+', label: 'Events', desc: 'Talks, workshops, and socials' },
-                { icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>, num: '10+', label: 'Domains', desc: 'Exploring the future of AI' },
+                { icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.74"/></svg>, num: '2,000+', label: 'Members' },
+                { icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>, num: '50+', label: 'Projects' },
+                { icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>, num: '100+', label: 'Events' },
+                { icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>, num: '10+', label: 'Domains' },
               ].map((s) => (
                 <div className="about-stat" key={s.label}>
                   <div className="about-stat-icon">{s.icon}</div>
                   <div className="about-stat-num">{s.num}</div>
                   <div className="about-stat-label">{s.label}</div>
-                  <div className="about-stat-desc">{s.desc}</div>
                 </div>
               ))}
             </div>
@@ -361,35 +367,32 @@ const About = () => {
           <div className="about-what-cards">
             {[
               {
-                icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M12 2a7 7 0 00-4 12.9V17a1 1 0 001 1h6a1 1 0 001-1v-2.1A7 7 0 0012 2z"/><line x1="9" y1="21" x2="15" y2="21"/></svg>,
                 title: 'Research',
                 desc: 'Dive deep into cutting-edge AI through reading groups, tech talks, and collaborative research.',
                 Illus: ResearchIllus,
+                to: '/seminars',
               },
               {
-                icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M16 18l6-6-6-6M8 6L2 12l6 6"/></svg>,
                 title: 'Project Teams',
                 desc: 'Join interdisciplinary teams to build real-world AI projects from idea to impact.',
                 Illus: ProjectsIllus,
                 to: '/projects',
               },
               {
-                icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>,
                 title: 'Workshops',
                 desc: 'Hands-on sessions for all levels — learn, practice, and grow your skills.',
                 Illus: WorkshopsIllus,
                 to: '/seminars',
               },
               {
-                icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.74"/></svg>,
                 title: 'Community',
                 desc: 'A supportive, inclusive space to meet peers, share ideas, and make lasting connections.',
                 Illus: CommunityIllus,
+                to: '/involvement',
               },
-            ].map(({ icon, title, desc, Illus, to }) => (
-              <div className="about-what-card" key={title}>
+            ].map(({ title, desc, Illus, to }) => (
+              <Link className="about-what-card" to={to} key={title}>
                 <div className="about-what-card-visual">
-                  <div className="about-what-icon">{icon}</div>
                   <div className="about-what-illus-wrap" aria-hidden="true">
                     <Illus />
                   </div>
@@ -397,12 +400,9 @@ const About = () => {
                 <div className="about-what-card-body">
                   <h3 className="about-what-card-title">{title}</h3>
                   <p className="about-what-card-desc">{desc}</p>
-                  {to
-                    ? <Link className="about-what-explore" to={to}>Explore <span>→</span></Link>
-                    : <a className="about-what-explore" href="#">Explore <span>→</span></a>
-                  }
+                  <span className="about-what-explore">Explore <span>→</span></span>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -443,26 +443,6 @@ const About = () => {
               <svg className="about-area-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><circle cx="5" cy="12" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="19" cy="12" r="1" fill="currentColor"/></svg>
               <span className="about-area-label">And more...</span>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── CTA BANNER ───────────────────────────────────────── */}
-      <section className="about-cta-banner">
-        <div className="about-shell">
-          <div className="about-cta-inner">
-            <div className="about-cta-left">
-              <div className="about-cta-icon-wrap">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-              </div>
-              <div>
-                <h3 className="about-cta-title">Questions?</h3>
-                <p className="about-cta-sub">Reach out anytime.</p>
-              </div>
-            </div>
-            <Link className="about-cta-btn" to="/contact">
-              Contact Us <span>→</span>
-            </Link>
           </div>
         </div>
       </section>

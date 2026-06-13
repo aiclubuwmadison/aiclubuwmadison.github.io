@@ -242,38 +242,16 @@
 }
 
 .atmos-contact .contact-form-submit-btn {
-  font-family: var(--atmos-sans);
-  font-size: 14px;
-  font-weight: 600;
-  color: #ffffff;
-  background: var(--atmos-badger);
-  border: none;
-  border-radius: 12px;
-  padding: 14px 24px;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
   align-self: flex-start;
-  transition: background 200ms ease, transform 200ms ease, box-shadow 200ms ease;
-  box-shadow: 0 4px 14px var(--atmos-accent-glow);
 }
 
-.atmos-contact .contact-form-submit-btn:hover {
-  background: #a8040a;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(197, 5, 12, 0.25);
+.atmos-contact .contact-form-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
-.atmos-contact .contact-form-submit-btn:active {
-  transform: translateY(0);
-}
-
-[data-theme="dark"] .atmos-contact .contact-form-submit-btn:hover {
-  background: #ff858b;
-  box-shadow: 0 6px 20px rgba(255, 110, 117, 0.4);
-  color: #0d1117;
+.atmos-contact .contact-form-submit-btn:active:not(:disabled) {
+  transform: none;
 }
 
 /* SUCCESS STATE STYLES ------------------------------------- */
@@ -413,16 +391,6 @@
 }
 
 /* ── Dark mode (Contact) ─────────────────────────────────── */
-[data-theme="dark"] .atmos-contact {
-  background: #0a0a0a;
-  --atmos-paper: #141414;
-  --atmos-paper-deep: #0a0a0a;
-  --atmos-ink: #f1f5f9;
-  --atmos-ink-soft: #cbd5e1;
-  --atmos-ink-mute: #64748b;
-  --atmos-hairline: rgba(255, 255, 255, 0.10);
-}
-
 /* Channel cards: dark surface + deeper shadows */
 [data-theme="dark"] .atmos-contact .atmos-channel-card {
   background: var(--atmos-paper-tint);

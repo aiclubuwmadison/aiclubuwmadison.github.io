@@ -271,16 +271,6 @@
 }
 
 /* ── Dark mode (Involvement / FAQ) ─────────────────────── */
-[data-theme="dark"] .atmos-involvement {
-  background: #0a0a0a;
-  --atmos-paper: #141414;
-  --atmos-paper-deep: #0a0a0a;
-  --atmos-ink: #f1f5f9;
-  --atmos-ink-soft: #cbd5e1;
-  --atmos-ink-mute: #64748b;
-  --atmos-hairline: rgba(255, 255, 255, 0.10);
-}
-
 /* Left column contact card */
 [data-theme="dark"] .faq-contact-card {
   background: var(--atmos-paper-tint);

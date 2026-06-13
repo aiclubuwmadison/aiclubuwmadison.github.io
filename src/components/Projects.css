@@ -23,9 +23,9 @@
 }
 
 .projects-hero-eyebrow {
-  font-family: var(--atmos-mono);
+  font-family: var(--atmos-sans);
   font-size: 11px;
-  letter-spacing: 0.18em;
+  letter-spacing: var(--ls-eyebrow);
   text-transform: uppercase;
   color: var(--atmos-badger);
   margin: 0;
@@ -47,6 +47,29 @@
   line-height: 1.6;
   color: var(--atmos-ink-soft);
   margin: 0;
+}
+
+.projects-hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--atmos-badger);
+  text-decoration: none;
+  width: fit-content;
+  margin: 0 auto;
+  transition: gap 220ms ease;
+}
+
+.projects-hero-cta:hover {
+  gap: 10px;
+}
+
+.project-tech-chip--more {
+  color: var(--atmos-ink-mute);
+  background: transparent;
+  border-style: dashed;
 }
 
 /* TAB FILTERS --------------------------------------------- */
@@ -134,7 +157,6 @@
 }
 
 .project-card:hover {
-  transform: translateY(-4px);
   border-color: rgba(197, 5, 12, 0.25);
   box-shadow: var(--shadow-md);
 }
@@ -188,7 +210,6 @@
   border-radius: 999px;
   color: var(--atmos-ink);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  backdrop-filter: blur(8px);
   z-index: 2;
 }
 
@@ -318,18 +339,6 @@
 /* =========================================================
    DARK MODE ADJUSTMENTS
    ========================================================= */
-[data-theme="dark"] .atmos-projects {
-  background: #0a0a0a;
-  --atmos-paper: #141414;
-  --atmos-paper-deep: #0a0a0a;
-  --atmos-paper-tint: #1e1e1e;
-  --atmos-ink: #f1f5f9;
-  --atmos-ink-soft: #cbd5e1;
-  --atmos-ink-mute: #64748b;
-  --atmos-hairline: rgba(255, 255, 255, 0.10);
-  --atmos-hairline-soft: rgba(255, 255, 255, 0.05);
-}
-
 [data-theme="dark"] .projects-tabs {
   background: var(--atmos-glass-control);
 }

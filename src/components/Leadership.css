@@ -19,11 +19,17 @@
 }
 .lead-hero-left { display: flex; flex-direction: column; gap: clamp(16px,2vw,24px); }
 
-.lead-eyebrow {
-  display: flex; align-items: center; gap: 10px;
-  font-size: 11px; font-weight: 600; letter-spacing: 0.18em;
-  text-transform: uppercase; color: var(--atmos-badger); margin: 0;
+.lead-hero-left .atmos-page-hero-eyebrow,
+.lead-hero-left .atmos-page-hero-lede {
+  margin-left: 0;
+  margin-right: 0;
+  text-align: left;
 }
+
+.lead-hero-left .atmos-page-hero-cta {
+  margin: 0;
+}
+
 .lead-hero-title {
   font-family: var(--atmos-serif); font-weight: 800;
   font-size: var(--type-display); line-height: 1.05;
@@ -35,15 +41,9 @@
 }
 
 .lead-hero-lede {
-  font-size: clamp(14px,1.3vw,16px); line-height: 1.7;
-  color: var(--atmos-ink-soft); max-width: 38ch; margin: 0;
+  max-width: 38ch;
 }
-.lead-hero-cta {
-  display: inline-flex; align-items: center; gap: 6px;
-  font-size: 14px; font-weight: 600; color: var(--atmos-badger);
-  text-decoration: none; width: fit-content;
-  transition: gap 220ms ease;
-}
+
 .lead-hero-cta:hover { gap: 10px; }
 
 /* Photo collage */
@@ -210,8 +210,7 @@
   transition: transform 220ms ease;
 }
 .lead-featured-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 36px rgba(0,0,0,0.24);
+  box-shadow: var(--shadow-md);
 }
 .lead-featured-card:hover .lead-featured-arrow {
   transform: translate(2px, -2px);
@@ -249,7 +248,6 @@
   transition: transform 200ms cubic-bezier(0.2,0.8,0.2,1), box-shadow 200ms, background 280ms ease, border-color 280ms ease;
 }
 .lead-team-card:hover {
-  transform: translateY(-3px);
   box-shadow: var(--shadow-md);
 }
 .lead-team-photo {
@@ -309,10 +307,8 @@
   display: grid; grid-template-columns: 1fr 1.4fr 1fr;
   gap: clamp(24px,3.5vw,56px); align-items: center;
   border: 1px solid var(--atmos-hairline);
-  border-radius: 16px;
+  border-radius: var(--surface-radius);
   background: var(--atmos-glass-panel);
-  backdrop-filter: var(--atmos-glass-blur);
-  -webkit-backdrop-filter: var(--atmos-glass-blur);
   padding: clamp(24px,3vw,40px);
 }
 .lead-focus-title {
@@ -453,16 +449,6 @@
 }
 
 /* ── Dark mode (entire Leadership page) ──────────────────── */
-[data-theme="dark"] .atmos-leadership {
-  background: #0a0a0a;
-  --atmos-paper: #141414;
-  --atmos-paper-deep: #0a0a0a;
-  --atmos-ink: #f1f5f9;
-  --atmos-ink-soft: #cbd5e1;
-  --atmos-ink-mute: #64748b;
-  --atmos-hairline: rgba(255, 255, 255, 0.10);
-}
-
 /* Hero photo collage: fade bottom edge to dark instead of white */
 [data-theme="dark"] .lead-cc::after {
   background: linear-gradient(

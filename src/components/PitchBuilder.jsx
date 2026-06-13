@@ -263,11 +263,11 @@ const PitchBuilder = () => {
 
   return (
     <div className="atmos-root atmos-pitch">
-      <section className="pitch-hero">
-        <div className="atmos-shell">
-          <p className="pitch-hero-eyebrow">Project Incubator</p>
-          <h1 className="pitch-hero-title">Pitch Builder</h1>
-          <p className="pitch-hero-lede">
+      <section className="pitch-hero atmos-page-hero">
+        <div className="atmos-shell atmos-page-hero-content">
+          <p className="atmos-page-hero-eyebrow">Project Incubator</p>
+          <h1 className="atmos-page-hero-title">Pitch Builder</h1>
+          <p className="atmos-page-hero-lede">
             Draft your project idea and generate a beautiful pitch slide matching club standards. 
             Download it as a high-res card to share on Slack or present at recruitment night.
           </p>

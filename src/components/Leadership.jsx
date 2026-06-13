@@ -245,7 +245,7 @@ const Leadership = () => {
     [
       { file: 'arun.jpg',       title: 'Event Head',                         name: 'Arun Sivarajah' },
       { file: 'alexey.jpg',     title: 'Head of Project and Study Groups',   name: 'Alexey Gorbunov',    link: 'https://www.linkedin.com/in/alexey-gorbunov-b2153a19a/' },
-      { file: 'ethan.jpg',      title: 'Webmaster',                          name: 'Ethan Wheeler',       link: 'https://www.linkedin.com/in/ethan-wheeler-abcdef/' },
+      { file: 'ethan.jpg',      title: 'Webmaster',                          name: 'Ethan Wheeler' },
     ],
     [
       { file: 'dane.jpg',       title: 'Advisor, Harvey D. Spangler Professor of Engineering', name: 'Dane Morgan', link: 'https://directory.engr.wisc.edu/mse/faculty/morgan_dane' },
@@ -319,13 +319,14 @@ const Leadership = () => {
       <section className="lead-hero">
         <div className="atmos-shell lead-hero-shell">
           <div className="lead-hero-left">
+            <p className="atmos-page-hero-eyebrow">Leadership</p>
             <h1 className="lead-hero-title">
               The people<br /><em>behind</em> AI@UW.
             </h1>
-            <p className="lead-hero-lede">
-              Students and mentors guiding AI@UW across projects, research, and community.
+            <p className="atmos-page-hero-lede lead-hero-lede">
+              Meet the students running AI@UW.
             </p>
-            <a href="#officers" className="lead-hero-cta">
+            <a href="#officers" className="atmos-page-hero-cta lead-hero-cta">
               Meet the team <span>↓</span>
             </a>
           </div>
@@ -351,9 +352,7 @@ const Leadership = () => {
               </div>
             </div>
             <p className="lead-hero-tagline">
-              Built by students.<br />
-              Driven by curiosity.<br />
-              United by <em>impact</em>.
+              Built by students. Driven by curiosity. United by <em>impact</em>.
             </p>
           </div>
         </div>
