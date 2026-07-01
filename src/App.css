@@ -270,6 +270,10 @@ body,
   height: 100%;
 }
 
+/* Only the old snapshot animates (shrinking away in a circle around the
+   toggle). The new snapshot stays fully visible underneath the whole time —
+   animating both independently left a gap between the shrinking and growing
+   circles (most visible on the side of the screen opposite the toggle). */
 ::view-transition-old(root) {
   z-index: 2;
   animation-name: atmos-theme-circle-in;
@@ -277,16 +281,6 @@ body,
 
 ::view-transition-new(root) {
   z-index: 1;
-  animation-name: atmos-theme-circle-out;
-}
-
-@keyframes atmos-theme-circle-out {
-  from {
-    clip-path: circle(0px at var(--reveal-x) var(--reveal-y));
-  }
-  to {
-    clip-path: circle(var(--reveal-radius) at var(--reveal-x) var(--reveal-y));
-  }
 }
 
 @keyframes atmos-theme-circle-in {
