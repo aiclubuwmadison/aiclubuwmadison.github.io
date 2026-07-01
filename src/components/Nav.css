@@ -383,7 +383,10 @@
 }
 
 /* ── Responsive ─────────────────────────────────────────── */
-@media (max-width: 1024px) {
+/* Raised from 1024px: the nav now has 8 links, and the absolutely-centered
+   link pill (see .atmos-nav-center) can overlap the CTA/theme toggle on the
+   right before 1024px width is reached. 1200px keeps a safe margin. */
+@media (max-width: 1200px) {
   .atmos-nav {
     height: 64px;
   }
