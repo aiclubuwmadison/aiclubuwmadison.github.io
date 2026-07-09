@@ -1,5 +1,5 @@
 /* =========================================================
-   ATMOSPHERIC MODERN — Nav (Glass command bar)
+   ATMOSPHERIC MODERN — Nav (Liquid Glass floating capsule)
    ========================================================= */
 
 /* ── Nav shell ──────────────────────────────────────────── */
@@ -8,6 +8,11 @@
   to   { opacity: 1; }
 }
 
+/*
+ * The header itself is a transparent positioning strip; the visible
+ * material lives on .atmos-nav-inner (the capsule). Side gaps stay
+ * click-through via pointer-events.
+ */
 .atmos-nav {
   position: fixed;
   top: 0;
@@ -16,55 +21,94 @@
   z-index: 100;
   height: var(--atmos-nav-height, 68px);
   box-sizing: border-box;
+  padding: 10px var(--atmos-gutter, 24px) 0;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   font-family: var(--atmos-sans);
-
-  /*
-   * Real frosted glass:
-   * - low-alpha fill (tokens) so page content shows through
-   * - backdrop-filter blurs whatever is painted under the fixed bar
-   * - soft bottom fade keeps the lower edge open (Apple-like material)
-   */
-  background-color: var(--atmos-glass-bg);
-  background-image: linear-gradient(
-    to bottom,
-    color-mix(in srgb, var(--atmos-glass-bg) 100%, transparent) 0%,
-    color-mix(in srgb, var(--atmos-glass-bg) 55%, transparent) 100%
-  );
-  backdrop-filter: var(--atmos-glass-blur);
-  -webkit-backdrop-filter: var(--atmos-glass-blur);
-  /* Specular top edge + soft outer hairline */
-  border-bottom: 1px solid var(--atmos-glass-edge-outer);
-  box-shadow: inset 0 1px 0 0 var(--atmos-glass-specular);
-
-  /* opacity-only entrance — avoid permanent transform stacking quirks */
-  animation: navEntrance 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
-  transition:
-    border-color 280ms ease,
-    box-shadow 280ms ease,
-    background-color 280ms ease,
-    background-image 280ms ease;
+  background: none;
+  border: none;
+  pointer-events: none;
 }
 
-/* Scrolled — denser fill for readability over busy content */
-.atmos-nav--scrolled {
-  background-color: var(--atmos-glass-bg-strong);
-  background-image: none;
-  border-bottom-color: var(--atmos-glass-edge-outer);
-  box-shadow:
-    inset 0 1px 0 0 var(--atmos-glass-specular),
-    0 1px 0 rgba(0, 0, 0, 0.04),
-    0 8px 28px rgba(0, 0, 0, 0.08);
-}
-
+/*
+ * Liquid Glass capsule:
+ * - highly translucent fill; backdrop-filter blurs + saturates what's
+ *   behind so the material picks up the page's color
+ * - ::before draws the refractive rim (gradient hairline, brightest
+ *   where "light" hits the top-left edge)
+ * - ::after adds the specular sheen + inner glow that fakes lensing
+ * - soft ambient shadow lifts the capsule off the page
+ */
 .atmos-nav-inner {
-  position: static;
+  /* rim / sheen intensities (overridden for dark mode below) */
+  --lg-rim: rgba(255, 255, 255, 0.9);
+  --lg-rim-soft: rgba(255, 255, 255, 0.28);
+  --lg-glow: rgba(255, 255, 255, 0.38);
+
+  pointer-events: auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
   width: 100%;
+  padding: 0 10px;
+  border-radius: 999px;
+  background-color: var(--atmos-glass-bg);
+  /* -webkit- first: the minifier merges these and keeps the last */
+  -webkit-backdrop-filter: var(--atmos-glass-blur);
+  backdrop-filter: var(--atmos-glass-blur);
+  box-shadow:
+    0 0 0 1px var(--atmos-glass-edge-outer),
+    0 2px 8px -4px rgba(15, 23, 42, 0.08),
+    0 12px 32px -18px rgba(15, 23, 42, 0.22);
+  transition: background-color 280ms ease, box-shadow 280ms ease;
+  /* opacity-only entrance; `backwards` fill so the finished animation
+     releases the element (a held fill would break backdrop-filter) */
+  animation: navEntrance 420ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+/* Refractive rim — gradient hairline masked to the capsule edge */
+.atmos-nav-inner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    115deg,
+    var(--lg-rim) 0%,
+    var(--lg-rim-soft) 28%,
+    transparent 52%,
+    var(--lg-rim-soft) 80%,
+    var(--lg-rim) 100%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Specular sheen + inner glow (lensing illusion) */
+.atmos-nav-inner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(140% 180% at 16% -60%, var(--lg-glow) 0%, transparent 58%);
+  box-shadow:
+    inset 0 1px 1px var(--lg-rim-soft),
+    inset 0 0 18px -10px var(--lg-glow);
+  pointer-events: none;
+}
+
+/* Scrolled — denser fill + deeper lift for readability over busy content */
+.atmos-nav--scrolled .atmos-nav-inner {
+  background-color: var(--atmos-glass-bg-strong);
+  box-shadow:
+    0 0 0 1px var(--atmos-glass-edge-outer),
+    0 4px 14px -6px rgba(15, 23, 42, 0.14),
+    0 18px 44px -16px rgba(15, 23, 42, 0.28);
 }
 
 /* ── Centered nav links ─────────────────────────────────── */
@@ -276,22 +320,21 @@
 }
 
 /* ── Burger (mobile) ────────────────────────────────────── */
+/* Sits on the capsule, which already blurs — no local blur needed */
 .atmos-nav-burger {
   display: none;
   flex-direction: column;
   justify-content: center;
   gap: 5px;
   background: var(--atmos-glass-control);
-  border: 1px solid var(--atmos-glass-edge-outer);
-  border-radius: 8px;
+  border: 1px solid var(--atmos-hairline);
+  border-radius: 999px;
   padding: 10px 12px;
   cursor: pointer;
-  width: 42px;
+  width: 44px;
   height: 38px;
-  /* Light local blur only — avoid stacking heavy full-viewport blurs */
-  backdrop-filter: blur(12px) saturate(1.4);
-  -webkit-backdrop-filter: blur(12px) saturate(1.4);
-  box-shadow: inset 0 1px 0 0 var(--atmos-glass-specular);
+  position: relative;
+  z-index: 2;
   transition: border-color 180ms ease, background 180ms ease;
 }
 
@@ -326,7 +369,6 @@
 .atmos-nav-mobile-backdrop {
   position: fixed;
   inset: 0;
-  top: 68px;
   z-index: 98;
   background: rgba(0, 0, 0, 0.22);
   backdrop-filter: none;
@@ -334,25 +376,32 @@
 }
 
 /* ── Mobile panel ───────────────────────────────────────── */
+/* Floating glass card, same material language as the capsule */
 .atmos-nav-mobile-panel {
+  --lg-rim: rgba(255, 255, 255, 0.9);
+  --lg-rim-soft: rgba(255, 255, 255, 0.28);
+
   position: fixed;
-  top: 68px;
-  left: 0;
-  right: 0;
+  top: calc(var(--atmos-nav-height, 68px) + 8px);
+  left: 12px;
+  right: 12px;
+  border-radius: 28px;
   background: var(--atmos-glass-bg-strong);
-  backdrop-filter: var(--atmos-glass-blur);
   -webkit-backdrop-filter: var(--atmos-glass-blur);
-  border-bottom: 1px solid var(--atmos-glass-edge-outer);
-  padding: 12px var(--atmos-gutter) 28px;
+  backdrop-filter: var(--atmos-glass-blur);
+  padding: 18px 22px 24px;
   display: flex;
   flex-direction: column;
   z-index: 99;
   box-shadow:
-    inset 0 1px 0 0 var(--atmos-glass-specular),
-    0 12px 36px rgba(0, 0, 0, 0.1);
+    0 0 0 1px var(--atmos-glass-edge-outer),
+    inset 0 1px 1px var(--lg-rim-soft),
+    inset 0 1px 0 0 var(--lg-rim),
+    0 16px 44px -12px rgba(0, 0, 0, 0.18);
   opacity: 0;
   pointer-events: none;
-  transform: translateY(-8px);
+  transform: translateY(-8px) scale(0.98);
+  transform-origin: top center;
   transition: opacity 280ms cubic-bezier(0.22, 1, 0.36, 1),
               transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -360,7 +409,7 @@
 .atmos-nav-mobile-panel.atmos-nav-mobile-open {
   opacity: 1;
   pointer-events: auto;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
 }
 
 .atmos-nav-mobile-panel nav {
@@ -377,7 +426,7 @@
   text-decoration: none;
   padding: 13px 12px;
   margin: 0 -12px;
-  border-radius: 10px;
+  border-radius: 999px;
   transition: color 160ms ease, background 160ms ease;
 }
 
@@ -409,12 +458,12 @@
 }
 
 /* ── Responsive ─────────────────────────────────────────── */
-/* Raised from 1024px: the nav now has 8 links, and the absolutely-centered
+/* Raised from 1024px: the nav has 8 links, and the absolutely-centered
    link pill (see .atmos-nav-center) can overlap the CTA/theme toggle on the
    right before 1024px width is reached. 1200px keeps a safe margin. */
 @media (max-width: 1200px) {
   .atmos-nav {
-    height: var(--atmos-nav-height, 64px);
+    padding: 8px var(--atmos-gutter, 20px) 0;
   }
 
   .atmos-nav-inner {
@@ -433,14 +482,6 @@
   .atmos-nav-brand-mark img {
     width: 40px;
     height: 40px;
-  }
-
-  .atmos-nav-mobile-panel {
-    top: 64px;
-  }
-
-  .atmos-nav-mobile-backdrop {
-    top: 64px;
   }
 
   .atmos-nav-actions {
@@ -462,18 +503,26 @@
   --atmos-hairline-soft: rgba(255, 255, 255, 0.06);
 }
 
-[data-theme="dark"] .atmos-nav {
-  background-color: var(--atmos-glass-bg);
-  box-shadow: inset 0 1px 0 0 var(--atmos-glass-specular);
+/* Dimmer rim/sheen — dark glass reflects less light */
+[data-theme="dark"] .atmos-nav-inner,
+[data-theme="dark"] .atmos-nav-mobile-panel {
+  --lg-rim: rgba(255, 255, 255, 0.3);
+  --lg-rim-soft: rgba(255, 255, 255, 0.08);
+  --lg-glow: rgba(255, 255, 255, 0.09);
 }
 
-[data-theme="dark"] .atmos-nav--scrolled {
-  background-color: var(--atmos-glass-bg-strong);
-  background-image: none;
+[data-theme="dark"] .atmos-nav-inner {
   box-shadow:
-    inset 0 1px 0 0 var(--atmos-glass-specular),
-    0 1px 0 rgba(0, 0, 0, 0.45),
-    0 10px 32px rgba(0, 0, 0, 0.45);
+    0 0 0 1px var(--atmos-glass-edge-outer),
+    0 2px 8px -4px rgba(0, 0, 0, 0.35),
+    0 14px 36px -16px rgba(0, 0, 0, 0.55);
+}
+
+[data-theme="dark"] .atmos-nav--scrolled .atmos-nav-inner {
+  box-shadow:
+    0 0 0 1px var(--atmos-glass-edge-outer),
+    0 4px 14px -6px rgba(0, 0, 0, 0.5),
+    0 20px 48px -16px rgba(0, 0, 0, 0.65);
 }
 
 [data-theme="dark"] .atmos-nav-brand-mark img {
@@ -498,8 +547,9 @@
 [data-theme="dark"] .atmos-nav-mobile-panel {
   background: var(--atmos-glass-bg-strong);
   box-shadow:
-    inset 0 1px 0 0 var(--atmos-glass-specular),
-    0 12px 36px rgba(0, 0, 0, 0.55);
+    0 0 0 1px var(--atmos-glass-edge-outer),
+    inset 0 1px 0 0 var(--lg-rim),
+    0 18px 48px -12px rgba(0, 0, 0, 0.6);
 }
 
 [data-theme="dark"] .atmos-nav-burger {
@@ -515,17 +565,17 @@
   background: rgba(0, 0, 0, 0.48);
 }
 
-/* Reduced transparency: drop residual local blurs on burger */
+/* Reduced transparency: solid fills (tokens flip in App.css), no blur,
+   and drop the decorative rim/sheen layers */
 @media (prefers-reduced-transparency: reduce) {
-  .atmos-nav-burger {
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    background: var(--atmos-paper);
-  }
-
-  .atmos-nav,
+  .atmos-nav-inner,
   .atmos-nav-mobile-panel {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
+  }
+
+  .atmos-nav-inner::before,
+  .atmos-nav-inner::after {
+    display: none;
   }
 }
