@@ -12,20 +12,19 @@ node_modules
 .pnp
 .pnp.js
 
-# Build outputs
+# Build / Vite outputs
 dist
 dist-ssr
 build/
 temp_build/
 .vite/
 
-
-# Local env files
+# Local env files (Vite: .env, .env.local, .env.[mode], .env.[mode].local)
 .env
-.env.local
-.env.*.local
+.env.*
+!.env.example
 
-# Editor directories and files
+# Editor / OS
 .vscode/*
 !.vscode/extensions.json
 .idea
@@ -36,10 +35,9 @@ temp_build/
 *.sln
 *.sw?
 
-# Misc
+# Project-local / tooling (not source)
 .teach/
 .claude/
-CLAUDE.md
 GEMINI.md
 design-previews/
 preview/

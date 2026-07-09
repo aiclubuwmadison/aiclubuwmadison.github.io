@@ -8,14 +8,10 @@ body {
   color: var(--atmos-ink);
 }
 
+/* Nav is fixed; page roots (.atmos-root) supply top padding so their
+   backgrounds still paint under the glass bar. */
 #body-wrapper {
-  padding-top: 68px;
-}
-
-@media (max-width: 1024px) {
-  #body-wrapper {
-    padding-top: 64px;
-  }
+  padding-top: 0;
 }
 
 code {

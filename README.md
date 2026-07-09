@@ -2,112 +2,142 @@
 
 The official website for **AI@UW**, the premier student-led artificial intelligence collective at the University of Wisconsin–Madison.
 
+**Live site:** [ai.cs.wisc.edu](https://ai.cs.wisc.edu)
+
 ## Overview
 
-AI@UW is an interdisciplinary community of over 2,000 students and faculty dedicated to exploring both applied and theoretical artificial intelligence. This repository contains the source code for our web presence, featuring information about our projects, leadership, seminars, resources, and ways to get involved.
+AI@UW is an interdisciplinary community of over 2,000 students and faculty dedicated to exploring both applied and theoretical artificial intelligence. This repository holds the static front-end for our web presence — projects, leadership, events, resources, and ways to get involved.
+
+There is no application backend in this repo. Contact uses a Google Forms POST; everything else is client-side.
 
 ## Tech Stack
 
-- **Framework:** [React 19](https://react.dev/)
-- **Build Tool:** [Vite 8](https://vitejs.dev/)
-- **Routing:** [React Router 7](https://reactrouter.com/) (`BrowserRouter`)
-- **Icons:** [lucide-react](https://lucide.dev/)
-- **Fonts:** Space Grotesk, Instrument Serif, and Space Mono (loaded from Google Fonts in `index.html`)
-- **Styling:** Vanilla CSS — one co-located `.css` file per component, no UI framework. The design language is modern and "atmospheric"; the mobile navigation uses a hand-rolled burger menu. Dark mode uses the View Transitions API for a circular reveal (`src/utils/themeTransition.js`).
+| Layer | Choice |
+|-------|--------|
+| Core | [React 19](https://react.dev/) (JSX only) |
+| Build | [Vite 8](https://vitejs.dev/) |
+| Routing | [React Router 7](https://reactrouter.com/) (`BrowserRouter`) |
+| Icons | [lucide-react](https://lucide.dev/) |
+| Fonts | Space Grotesk, Instrument Serif, Space Mono (Google Fonts via `index.html`) |
+| Styling | Vanilla CSS co-located with each component (no Tailwind / UI kit) |
 
-Routes are code-split with `React.lazy` and `<Suspense>`, so each page is loaded on demand.
-
-The contact page uses a native quick-message form that POSTs to Google Forms (`mode: no-cors`), with a link to the full-page Google Form. The site is fully static — no backend required.
+Pages are code-split with `React.lazy` and `<Suspense>`. Dark mode uses the View Transitions API for a circular reveal (`src/utils/themeTransition.js`).
 
 ## Getting Started
 
 ### Prerequisites
-- [Node.js](https://nodejs.org/) (Node 20+ recommended — matches the CI build)
+
+- [Node.js](https://nodejs.org/) **20+** (matches CI)
 - npm
 
 ### Installation
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/aiclubuwmadison/aiclubuwmadison.github.io.git
-   cd aiclubuwmadison.github.io
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
+
+```bash
+git clone https://github.com/aiclubuwmadison/aiclubuwmadison.github.io.git
+cd aiclubuwmadison.github.io
+git checkout dev
+npm install
+```
+
+Development happens on the **`dev`** branch. Do not treat `master` as the source-of-truth working branch.
 
 ### Development
-Start the development server. Ensure you are working off the `dev` branch.
+
 ```bash
 npm run dev
 ```
 
-### Other Scripts
-```bash
-npm run lint       # ESLint (flat config in eslint.config.js)
-npm run preview    # Serve the production build locally for verification
-```
+### Scripts
 
-### Building for Production
-Create an optimized production build:
-```bash
-npm run build
-```
-The output is generated in the `dist/` directory.
+| Command | Purpose |
+|---------|---------|
+| `npm run dev` | Vite dev server with HMR |
+| `npm run build` | Production build → `dist/` |
+| `npm run preview` | Serve `dist/` locally for verification |
+| `npm run lint` | ESLint (flat config in `eslint.config.js`) |
 
 ## Hosting
 
-The site is published at **ai.cs.wisc.edu** via GitHub Pages (custom domain configured in `public/CNAME`). Because GitHub Pages is a static host, `src/main.jsx` contains a small SPA shim that reads `?redirect=/path` from the URL on load and rewrites `window.history` before React mounts, so deep links into client-side routes resolve to the correct page.
+The site is published at **[ai.cs.wisc.edu](https://ai.cs.wisc.edu)** on GitHub Pages. The custom domain is set in `public/CNAME`.
+
+Because GitHub Pages is a static host, deep links need a small SPA shim: `src/main.jsx` reads `?redirect=/path` on load and rewrites `window.history` before React mounts so `BrowserRouter` lands on the correct route. Paths must start with `/`; `//` and `\` are rejected.
 
 ## Deployment
 
-Deployment is fully automated via GitHub Actions (`.github/workflows/pages.yml`). Pushing to the `dev` branch (or running the workflow manually) triggers a job that:
+Deployment is automated — **do not** manually copy `dist/` (or a CRA-era `build/`) onto `master`.
 
-1. Installs dependencies with `npm ci` (Node 20)
-2. Runs `npm run build` to produce `dist/`
-3. Uploads `dist/` as a Pages artifact and deploys it to GitHub Pages
+Pushing to **`dev`** (or running the workflow manually) triggers [`.github/workflows/pages.yml`](.github/workflows/pages.yml), which:
 
-To verify a build before pushing, run `npm run preview` locally.
+1. Installs with `npm ci` on **Node 20**
+2. Runs `npm run build` → `dist/`
+3. Uploads `dist/` as a GitHub Pages artifact and deploys it
 
-**Repo settings required (one-time):** Settings → Pages → Source must be set to "GitHub Actions".
+**One-time repo setting:** Settings → Pages → Source → **GitHub Actions**.
+
+To check a production build locally before pushing:
+
+```bash
+npm run build
+npm run preview
+```
 
 ## Project Structure
 
 ```text
-├── public/                 # Static assets served as-is
-│   ├── CNAME               # Custom domain (ai.cs.wisc.edu)
-│   ├── images/             # Leadership portraits, seminar hero, logos
-│   └── logo.svg            # Favicon
+├── public/                    # Static assets served as-is
+│   ├── CNAME                  # Custom domain (ai.cs.wisc.edu)
+│   ├── images/                # Portraits, seminar hero, logos
+│   └── logo.svg
 ├── src/
-│   ├── components/         # One page/feature per file, each with a sibling .css
-│   │   ├── Nav.jsx         # Top navigation + mobile burger menu
+│   ├── components/            # Pages + Nav + Footer (flat; sibling .css)
+│   │   ├── Nav.jsx
 │   │   ├── Footer.jsx
-│   │   ├── About.jsx       # Home page (route `/`)
+│   │   ├── About.jsx          # Home (`/`)
 │   │   ├── Involvement.jsx
 │   │   ├── Leadership.jsx
-│   │   ├── Contact.jsx     # Quick-message form + Google Form link
-│   │   ├── Seminars.jsx
+│   │   ├── Contact.jsx
+│   │   ├── Seminars.jsx       # Events page
 │   │   ├── Projects.jsx
 │   │   ├── Resources.jsx
 │   │   ├── PitchBuilder.jsx
 │   │   └── Sandbox.jsx
+│   ├── constants/
+│   │   └── nav.js             # Shared NAV_ITEMS for Nav + Footer
 │   ├── utils/
-│   │   └── themeTransition.js  # Dark-mode circular reveal animation
-│   ├── App.jsx             # Router + route definitions (lazy-loaded pages)
-│   ├── main.jsx            # Entry point + SPA redirect shim
-│   ├── index.css           # Global styles
-│   └── App.css             # Design tokens and shared atmospheric styles
-├── index.html              # Vite HTML entry + Google Fonts links
-├── vite.config.js          # Vite configuration
-└── eslint.config.js        # ESLint flat config
+│   │   └── themeTransition.js # Dark-mode circular reveal
+│   ├── App.jsx                # Router + lazy routes
+│   ├── main.jsx               # Entry + SPA redirect shim
+│   ├── index.css              # Global styles
+│   └── App.css                # Design tokens + shared “atmos” styles
+├── index.html
+├── vite.config.js
+└── eslint.config.js
 ```
 
+Nav labels and order live in `src/constants/nav.js` so the top nav and footer stay in sync.
+
 ### Routes
-`/` (About), `/involvement`, `/leadership`, `/contact`, `/seminars`, `/projects`, `/resources`, `/pitch` (PitchBuilder), and `/sandbox`. `/about` redirects to `/`. Every route renders `<Footer />` alongside the page.
+
+| Path | Page | Notes |
+|------|------|--------|
+| `/` | About | Home |
+| `/about` | → `/` | Redirect |
+| `/involvement` | Involvement | Nav: **Get Involved** |
+| `/leadership` | Leadership | |
+| `/contact` | Contact | Google Forms quick-message + full form link |
+| `/seminars` | Seminars | Nav: **Events** |
+| `/projects` | Projects | |
+| `/resources` | Resources | |
+| `/pitch` | PitchBuilder | Not `/pitchbuilder` |
+| `/sandbox` | Sandbox | |
+
+`<Nav />` is rendered once outside `<Routes>`. Each route renders the page plus `<Footer />`.
 
 ## Contributing
 
 We welcome contributions from the community! If you're interested in improving the website, please join our [Discord](https://discord.gg/TTSykcZAg4) and reach out to the webmasters.
+
+For deeper architecture notes aimed at automated agents and maintainers, see [`AGENTS.md`](AGENTS.md).
 
 ## License
 

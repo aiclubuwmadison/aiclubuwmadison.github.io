@@ -76,11 +76,18 @@ button:focus-visible,
   --atmos-mono: "Space Mono", ui-monospace, monospace;
   --atmos-max: 1320px;
   --atmos-gutter: clamp(20px, 4vw, 56px);
-  --atmos-glass-blur: blur(20px) saturate(1.4);
-  --atmos-glass-bg: rgba(255, 255, 255, 0.88);
-  --atmos-glass-bg-strong: rgba(255, 255, 255, 0.96);
+  /* Nav offset — page roots pad content; backgrounds still paint under fixed chrome */
+  --atmos-nav-height: 68px;
+  /* Frosted glass — low alpha so blur + content underneath actually read */
+  --atmos-glass-blur: blur(40px) saturate(1.8);
+  --atmos-glass-bg: rgba(255, 255, 255, 0.22);
+  --atmos-glass-bg-strong: rgba(255, 255, 255, 0.42);
   --atmos-glass-panel: var(--atmos-paper-tint);
-  --atmos-glass-control: rgba(255, 255, 255, 0.82);
+  --atmos-glass-control: rgba(255, 255, 255, 0.4);
+  /* Specular edge tokens for chrome (nav, floating controls) */
+  --atmos-glass-edge: rgba(255, 255, 255, 0.65);
+  --atmos-glass-edge-outer: rgba(15, 23, 42, 0.08);
+  --atmos-glass-specular: rgba(255, 255, 255, 0.85);
 
   /* Apple-inspired design tokens */
   --type-display: clamp(48px, 7.5vw, 80px);
@@ -121,12 +128,59 @@ button:focus-visible,
   --atmos-hairline-soft: rgba(255, 255, 255, 0.04);
   --atmos-badger:       #ff6e75;
   --atmos-accent-glow:  rgba(255, 110, 117, 0.15);
-  --atmos-glass-bg: rgba(10, 10, 10, 0.82);
-  --atmos-glass-bg-strong: rgba(10, 10, 10, 0.95);
+  --atmos-glass-bg: rgba(12, 12, 14, 0.32);
+  --atmos-glass-bg-strong: rgba(12, 12, 14, 0.55);
   --atmos-glass-panel: var(--atmos-paper-tint);
-  --atmos-glass-control: rgba(10, 10, 10, 0.82);
+  --atmos-glass-control: rgba(18, 18, 20, 0.45);
+  --atmos-glass-edge: rgba(255, 255, 255, 0.16);
+  --atmos-glass-edge-outer: rgba(255, 255, 255, 0.1);
+  --atmos-glass-specular: rgba(255, 255, 255, 0.18);
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.24), 0 1px 2px rgba(0, 0, 0, 0.16);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.32), 0 2px 4px rgba(0, 0, 0, 0.16);
+}
+
+/* Prefer solid / near-opaque glass when transparency is reduced (a11y) */
+@media (prefers-reduced-transparency: reduce) {
+  :root {
+    --atmos-glass-blur: none;
+    --atmos-glass-bg: rgba(255, 255, 255, 0.97);
+    --atmos-glass-bg-strong: #ffffff;
+    --atmos-glass-control: rgba(255, 255, 255, 0.97);
+    --atmos-glass-edge: rgba(15, 23, 42, 0.08);
+    --atmos-glass-edge-outer: rgba(15, 23, 42, 0.08);
+    --atmos-glass-specular: transparent;
+  }
+
+  [data-theme="dark"] {
+    --atmos-glass-bg: rgba(10, 10, 10, 0.97);
+    --atmos-glass-bg-strong: #0a0a0a;
+    --atmos-glass-control: rgba(10, 10, 10, 0.97);
+    --atmos-glass-edge: rgba(255, 255, 255, 0.1);
+    --atmos-glass-edge-outer: rgba(255, 255, 255, 0.08);
+    --atmos-glass-specular: transparent;
+  }
+}
+
+/* No backdrop-filter support: solid paper fills so chrome stays readable */
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  :root {
+    --atmos-glass-blur: none;
+    --atmos-glass-bg: #ffffff;
+    --atmos-glass-bg-strong: #ffffff;
+    --atmos-glass-control: #ffffff;
+    --atmos-glass-edge: #e2e8f0;
+    --atmos-glass-edge-outer: #e2e8f0;
+    --atmos-glass-specular: transparent;
+  }
+
+  [data-theme="dark"] {
+    --atmos-glass-bg: #0a0a0a;
+    --atmos-glass-bg-strong: #0a0a0a;
+    --atmos-glass-control: #0a0a0a;
+    --atmos-glass-edge: rgba(255, 255, 255, 0.1);
+    --atmos-glass-edge-outer: rgba(255, 255, 255, 0.08);
+    --atmos-glass-specular: transparent;
+  }
 }
 
 /* Elevated card surfaces on dark page wrappers */
@@ -320,6 +374,8 @@ body,
 
 
 .atmos-root {
+  /* Padding (not #body-wrapper) so page backgrounds fill under the fixed nav */
+  padding-top: var(--atmos-nav-height);
   background: var(--atmos-paper);
   color: var(--atmos-ink);
   font-family: var(--atmos-sans);
@@ -327,6 +383,13 @@ body,
   line-height: var(--lh-body);
   position: relative;
   overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+@media (max-width: 1200px) {
+  :root {
+    --atmos-nav-height: 64px;
+  }
 }
 .atmos-root::before {
   display: none;
