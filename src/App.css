@@ -76,16 +76,18 @@ button:focus-visible,
   --atmos-mono: "Space Mono", ui-monospace, monospace;
   --atmos-max: 1320px;
   --atmos-gutter: clamp(20px, 4vw, 56px);
-  /* Frosted glass — translucent fills + strong blur (Apple-inspired, not liquid) */
-  --atmos-glass-blur: blur(32px) saturate(1.65);
-  --atmos-glass-bg: rgba(255, 255, 255, 0.55);
-  --atmos-glass-bg-strong: rgba(255, 255, 255, 0.74);
+  /* Nav offset — page roots pad content; backgrounds still paint under fixed chrome */
+  --atmos-nav-height: 68px;
+  /* Frosted glass — low alpha so blur + content underneath actually read */
+  --atmos-glass-blur: blur(40px) saturate(1.8);
+  --atmos-glass-bg: rgba(255, 255, 255, 0.22);
+  --atmos-glass-bg-strong: rgba(255, 255, 255, 0.42);
   --atmos-glass-panel: var(--atmos-paper-tint);
-  --atmos-glass-control: rgba(255, 255, 255, 0.62);
+  --atmos-glass-control: rgba(255, 255, 255, 0.4);
   /* Specular edge tokens for chrome (nav, floating controls) */
-  --atmos-glass-edge: rgba(255, 255, 255, 0.55);
-  --atmos-glass-edge-outer: rgba(15, 23, 42, 0.06);
-  --atmos-glass-specular: rgba(255, 255, 255, 0.72);
+  --atmos-glass-edge: rgba(255, 255, 255, 0.65);
+  --atmos-glass-edge-outer: rgba(15, 23, 42, 0.08);
+  --atmos-glass-specular: rgba(255, 255, 255, 0.85);
 
   /* Apple-inspired design tokens */
   --type-display: clamp(48px, 7.5vw, 80px);
@@ -126,13 +128,13 @@ button:focus-visible,
   --atmos-hairline-soft: rgba(255, 255, 255, 0.04);
   --atmos-badger:       #ff6e75;
   --atmos-accent-glow:  rgba(255, 110, 117, 0.15);
-  --atmos-glass-bg: rgba(14, 14, 16, 0.52);
-  --atmos-glass-bg-strong: rgba(14, 14, 16, 0.72);
+  --atmos-glass-bg: rgba(12, 12, 14, 0.32);
+  --atmos-glass-bg-strong: rgba(12, 12, 14, 0.55);
   --atmos-glass-panel: var(--atmos-paper-tint);
-  --atmos-glass-control: rgba(14, 14, 16, 0.58);
-  --atmos-glass-edge: rgba(255, 255, 255, 0.12);
-  --atmos-glass-edge-outer: rgba(255, 255, 255, 0.06);
-  --atmos-glass-specular: rgba(255, 255, 255, 0.1);
+  --atmos-glass-control: rgba(18, 18, 20, 0.45);
+  --atmos-glass-edge: rgba(255, 255, 255, 0.16);
+  --atmos-glass-edge-outer: rgba(255, 255, 255, 0.1);
+  --atmos-glass-specular: rgba(255, 255, 255, 0.18);
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.24), 0 1px 2px rgba(0, 0, 0, 0.16);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.32), 0 2px 4px rgba(0, 0, 0, 0.16);
 }
@@ -372,6 +374,8 @@ body,
 
 
 .atmos-root {
+  /* Padding (not #body-wrapper) so page backgrounds fill under the fixed nav */
+  padding-top: var(--atmos-nav-height);
   background: var(--atmos-paper);
   color: var(--atmos-ink);
   font-family: var(--atmos-sans);
@@ -379,6 +383,13 @@ body,
   line-height: var(--lh-body);
   position: relative;
   overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+@media (max-width: 1200px) {
+  :root {
+    --atmos-nav-height: 64px;
+  }
 }
 .atmos-root::before {
   display: none;

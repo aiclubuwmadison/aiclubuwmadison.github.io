@@ -4,8 +4,8 @@
 
 /* ── Nav shell ──────────────────────────────────────────── */
 @keyframes navEntrance {
-  from { opacity: 0; transform: translateY(-6px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 .atmos-nav {
@@ -14,32 +14,48 @@
   left: 0;
   right: 0;
   z-index: 100;
-  height: 68px;
+  height: var(--atmos-nav-height, 68px);
   box-sizing: border-box;
   display: flex;
   align-items: center;
   font-family: var(--atmos-sans);
 
-  /* Frosted glass fill — content subtly reads through blur */
-  background: var(--atmos-glass-bg);
+  /*
+   * Real frosted glass:
+   * - low-alpha fill (tokens) so page content shows through
+   * - backdrop-filter blurs whatever is painted under the fixed bar
+   * - soft bottom fade keeps the lower edge open (Apple-like material)
+   */
+  background-color: var(--atmos-glass-bg);
+  background-image: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--atmos-glass-bg) 100%, transparent) 0%,
+    color-mix(in srgb, var(--atmos-glass-bg) 55%, transparent) 100%
+  );
   backdrop-filter: var(--atmos-glass-blur);
   -webkit-backdrop-filter: var(--atmos-glass-blur);
   /* Specular top edge + soft outer hairline */
   border-bottom: 1px solid var(--atmos-glass-edge-outer);
   box-shadow: inset 0 1px 0 0 var(--atmos-glass-specular);
 
+  /* opacity-only entrance — avoid permanent transform stacking quirks */
   animation: navEntrance 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
-  transition: border-color 280ms ease, box-shadow 280ms ease, background 280ms ease;
+  transition:
+    border-color 280ms ease,
+    box-shadow 280ms ease,
+    background-color 280ms ease,
+    background-image 280ms ease;
 }
 
-/* Scrolled — denser fill for readability over page content */
+/* Scrolled — denser fill for readability over busy content */
 .atmos-nav--scrolled {
-  background: var(--atmos-glass-bg-strong);
+  background-color: var(--atmos-glass-bg-strong);
+  background-image: none;
   border-bottom-color: var(--atmos-glass-edge-outer);
   box-shadow:
     inset 0 1px 0 0 var(--atmos-glass-specular),
     0 1px 0 rgba(0, 0, 0, 0.04),
-    0 8px 28px rgba(0, 0, 0, 0.06);
+    0 8px 28px rgba(0, 0, 0, 0.08);
 }
 
 .atmos-nav-inner {
@@ -398,7 +414,7 @@
    right before 1024px width is reached. 1200px keeps a safe margin. */
 @media (max-width: 1200px) {
   .atmos-nav {
-    height: 64px;
+    height: var(--atmos-nav-height, 64px);
   }
 
   .atmos-nav-inner {
@@ -447,12 +463,13 @@
 }
 
 [data-theme="dark"] .atmos-nav {
-  background: var(--atmos-glass-bg);
+  background-color: var(--atmos-glass-bg);
   box-shadow: inset 0 1px 0 0 var(--atmos-glass-specular);
 }
 
 [data-theme="dark"] .atmos-nav--scrolled {
-  background: var(--atmos-glass-bg-strong);
+  background-color: var(--atmos-glass-bg-strong);
+  background-image: none;
   box-shadow:
     inset 0 1px 0 0 var(--atmos-glass-specular),
     0 1px 0 rgba(0, 0, 0, 0.45),
