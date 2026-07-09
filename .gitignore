@@ -39,7 +39,6 @@ temp_build/
 # Misc
 .teach/
 .claude/
-CLAUDE.md
 GEMINI.md
 design-previews/
 preview/
