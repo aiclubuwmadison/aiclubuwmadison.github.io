@@ -384,6 +384,7 @@
   border-color: rgba(197,5,12,0.25);
   background: var(--atmos-paper-tint);
   box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
 }
 
 .atmos-seminars .atmos-sem-card--workshop {
@@ -860,4 +861,20 @@
   background: rgba(255, 255, 255, 0.08);
   color: #cbd5e1;
   border-color: rgba(255, 255, 255, 0.15);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .atmos-seminars .atmos-sem-card,
+  .atmos-seminars .atmos-sem-card:hover {
+    transform: none !important;
+  }
+
+  .atmos-seminars .atmos-sem-card {
+    transition: border-color 200ms ease, box-shadow 200ms ease, background 200ms ease !important;
+  }
+
+  .atmos-seminars .atmos-sem-hero-cta,
+  .atmos-seminars .atmos-sem-view-all {
+    transition: color 200ms ease !important;
+  }
 }

@@ -231,14 +231,24 @@
   gap: 8px;
   white-space: nowrap;
   flex-shrink: 0;
-  transition: background 200ms ease, box-shadow 200ms ease, gap 200ms ease;
+  transition:
+    background 200ms ease,
+    box-shadow 200ms ease,
+    gap 200ms ease,
+    transform 200ms ease;
   box-shadow: var(--shadow-sm);
 }
 
 .atmos-nav-cta:hover {
   background: #a8040a;
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-md);
   gap: 11px;
+  transform: translateY(-1px);
+}
+
+.atmos-nav-cta:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: var(--shadow-sm);
 }
 
 .atmos-nav-cta-arrow {
@@ -260,14 +270,22 @@
   width: 36px;
   height: 36px;
   padding: 0;
-  background: transparent;
+  background: var(--atmos-glass-control);
+  backdrop-filter: var(--atmos-glass-blur);
+  -webkit-backdrop-filter: var(--atmos-glass-blur);
   border: 1px solid var(--atmos-hairline);
   border-radius: 999px;
   color: var(--atmos-ink);
   cursor: pointer;
   flex-shrink: 0;
-  transition: border-color 180ms ease, color 180ms ease, transform 200ms ease;
+  transition:
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 200ms ease,
+    background 200ms ease,
+    box-shadow 200ms ease;
   overflow: visible;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
 }
 
 .atmos-nav-theme-toggle-icon {
@@ -294,7 +312,13 @@
 
 .atmos-nav-theme-toggle:hover {
   border-color: var(--atmos-ink-soft);
+  background: var(--atmos-glass-bg-strong);
+  box-shadow: var(--shadow-sm);
   transform: rotate(-12deg);
+}
+
+.atmos-nav-theme-toggle:active {
+  transform: rotate(0deg) scale(0.96);
 }
 
 .atmos-nav-mobile-theme-toggle {
@@ -577,5 +601,31 @@
   .atmos-nav-inner::before,
   .atmos-nav-inner::after {
     display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .atmos-nav-theme-toggle,
+  .atmos-nav-theme-toggle:hover,
+  .atmos-nav-theme-toggle:active {
+    transform: none !important;
+  }
+
+  .atmos-nav-theme-toggle-icon {
+    animation: none !important;
+  }
+
+  .atmos-nav-cta,
+  .atmos-nav-cta:hover,
+  .atmos-nav-cta:active {
+    transform: none !important;
+  }
+
+  .atmos-nav-cta:hover .atmos-nav-cta-arrow {
+    transform: none !important;
+  }
+
+  .atmos-nav-brand:hover .atmos-nav-brand-mark {
+    transform: none !important;
   }
 }
