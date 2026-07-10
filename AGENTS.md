@@ -102,7 +102,7 @@ Conventions:
 - Prefer CSS variables (`--atmos-*`, `--type-*`, `--motion-*`) over hard-coded colors.
 - Shared primitives: `.atmos-shell`, `.atmos-page-hero*`, `.atmos-btn-primary`, scroll-reveal classes.
 - Page-specific classes often use short prefixes (`about-*`, `lead-*`, `projects-*`, etc.).
-- Dark mode: `Nav` persists `localStorage` key `"theme"` and sets `data-theme` on `<html>`; animation via `src/utils/themeTransition.js` (View Transitions circular wipe; respects `prefers-reduced-motion`).
+- Dark mode: default follows system (`prefers-color-scheme`). `Nav` sets `data-theme` on `<html>`; an early script in `index.html` avoids FOUC. Explicit toggle persists `localStorage` key `"theme"` (`light`|`dark`); until then the site tracks OS changes. Animation via `src/utils/themeTransition.js` (View Transitions circular wipe; respects `prefers-reduced-motion`).
 
 ### Component structure
 

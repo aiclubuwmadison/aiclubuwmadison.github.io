@@ -6,11 +6,21 @@ import { animateThemeChange } from "../utils/themeTransition";
 import { NAV_ITEMS } from "../constants/nav";
 import "./Nav.css";
 
+const THEME_KEY = "theme";
+
+const getSystemTheme = () =>
+  window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+
+/** Explicit user choice from localStorage, or null to follow system. */
+const getStoredTheme = () => {
+  if (typeof window === "undefined") return null;
+  const stored = window.localStorage.getItem(THEME_KEY);
+  return stored === "light" || stored === "dark" ? stored : null;
+};
+
 const getInitialTheme = () => {
   if (typeof window === "undefined") return "light";
-  const stored = window.localStorage.getItem("theme");
-  if (stored === "light" || stored === "dark") return stored;
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  return getStoredTheme() ?? getSystemTheme();
 };
 
 const Nav = () => {
@@ -35,10 +45,22 @@ const Nav = () => {
     setMobileOpen(false);
   }
 
+  // Apply resolved theme to <html>. Do not write localStorage here —
+  // only an explicit toggle should pin a preference (default = system).
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
-    window.localStorage.setItem("theme", theme);
   }, [theme]);
+
+  // Keep in sync with OS theme while the user has not chosen light/dark.
+  useEffect(() => {
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
+    const onSystemChange = () => {
+      if (getStoredTheme() !== null) return;
+      setTheme(media.matches ? "dark" : "light");
+    };
+    media.addEventListener("change", onSystemChange);
+    return () => media.removeEventListener("change", onSystemChange);
+  }, []);
 
   const handleThemeToggle = (event) => {
     const nextTheme = theme === "dark" ? "light" : "dark";
@@ -51,6 +73,7 @@ const Nav = () => {
 
     animateThemeChange(theme, nextTheme, originX, originY, (newTheme) => {
       flushSync(() => {
+        window.localStorage.setItem(THEME_KEY, newTheme);
         setTheme(newTheme);
         setIconTheme(null);
       });

@@ -61,6 +61,7 @@ button:focus-visible,
    Obsidian background, Slate text, Azure/Electric accents.
    ========================================================= */
 :root {
+  color-scheme: light;
   --atmos-paper: #ffffff;
   --atmos-paper-deep: #f8fafc;
   --atmos-paper-tint: #f1f5f9;
@@ -118,6 +119,7 @@ button:focus-visible,
 }
 
 [data-theme="dark"] {
+  color-scheme: dark;
   --atmos-paper:        #0a0a0a;
   --atmos-paper-deep:   #0a0a0a;
   --atmos-paper-tint:   #141414;
