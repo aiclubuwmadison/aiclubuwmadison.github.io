@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Cpu, MessageSquare, Eye, Sparkles, FolderGit2 } from 'lucide-react';
 import './Projects.css';
@@ -176,6 +176,35 @@ const Projects = () => {
   const filteredProjects = activeTab === 'All'
     ? PROJECTS_DATA
     : PROJECTS_DATA.filter((p) => p.category === activeTab);
+
+  // Scroll-reveal for the project cards grid. The grid re-renders on category
+  // filter changes, so a persistent observer (kept in a ref) is reused across
+  // renders and only cards not yet flagged get observed each pass.
+  const projObserverRef = useRef(null);
+
+  useEffect(() => {
+    if (!projObserverRef.current) {
+      projObserverRef.current = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('sr-visible');
+            projObserverRef.current.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08 });
+    }
+    const io = projObserverRef.current;
+    const cards = document.querySelectorAll('.project-card');
+    cards.forEach((el, i) => {
+      if (el.dataset.srReady) return;
+      el.dataset.srReady = '1';
+      el.classList.add('sr-hidden');
+      el.style.transitionDelay = `${Math.min((i % 6) * 70, 280)}ms`;
+      io.observe(el);
+    });
+  }, [activeTab]);
+
+  useEffect(() => () => projObserverRef.current?.disconnect(), []);
 
   return (
     <div className="atmos-root atmos-projects">

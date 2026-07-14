@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   BookOpen, 
@@ -332,6 +332,61 @@ const Resources = () => {
     const authorMatch = item.author?.toLowerCase().includes(query);
     return titleMatch || authorMatch;
   });
+
+  // Scroll-reveal for the static sections below the hero: the guides grid
+  // and the readings list never change after mount, so a single observer
+  // created once (and disconnected on unmount) is enough here.
+  useEffect(() => {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('sr-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    const elements = document.querySelectorAll('.res-skill-card, .res-reading-row');
+    elements.forEach((el, i) => {
+      el.classList.add('sr-hidden');
+      el.style.transitionDelay = `${Math.min((i % 6) * 70, 280)}ms`;
+      io.observe(el);
+    });
+
+    return () => io.disconnect();
+  }, []);
+
+  // Scroll-reveal for the live news feed. Cards arrive asynchronously (fetch
+  // resolves after mount) and can change again on manual refresh or search
+  // filtering, so — unlike the static sections above — this keeps a
+  // persistent observer in a ref and only observes cards not yet flagged on
+  // each pass. Skeleton placeholders (`.res-skeleton`) are excluded so
+  // loading state never gets treated as revealable content.
+  const newsObserverRef = useRef(null);
+
+  useEffect(() => {
+    if (!newsObserverRef.current) {
+      newsObserverRef.current = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('sr-visible');
+            newsObserverRef.current.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08 });
+    }
+    const io = newsObserverRef.current;
+    const cards = document.querySelectorAll('.res-news-card:not(.res-skeleton)');
+    cards.forEach((el, i) => {
+      if (el.dataset.srReady) return;
+      el.dataset.srReady = '1';
+      el.classList.add('sr-hidden');
+      el.style.transitionDelay = `${Math.min((i % 6) * 70, 280)}ms`;
+      io.observe(el);
+    });
+  }, [news, searchQuery, loading]);
+
+  useEffect(() => () => newsObserverRef.current?.disconnect(), []);
 
   return (
     <div className="atmos-root atmos-resources">
