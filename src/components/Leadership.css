@@ -354,6 +354,7 @@
   .lead-featured-card, .lead-team-card, .lead-social-btn,
   .lead-hero-cta, .atmos-archive-toggle,
   .atmos-archive-panel, .atmos-archive-glyph { transition: none !important; }
+  .lead-collage-spiral img { animation: none; }
 }
 
 /* ── Dark mode (entire Leadership page) ──────────────────── */

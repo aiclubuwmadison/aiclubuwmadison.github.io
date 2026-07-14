@@ -232,6 +232,30 @@ const Leadership = () => {
     document.title = 'Leadership | AI@UW';
   }, []);
 
+  // IntersectionObserver for scroll reveals
+  useEffect(() => {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add('sr-visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    const elements = document.querySelectorAll(
+      '.lead-officers .lead-featured-card, .lead-officers .lead-team-card, .lead-archive-wrap .atmos-archive'
+    );
+
+    elements.forEach((el, i) => {
+      el.classList.add('sr-hidden');
+      el.style.transitionDelay = `${(i % 4) * 80}ms`;
+      io.observe(el);
+    });
+
+    return () => io.disconnect();
+  }, []);
+
   const [expanded, setExpanded] = useState({ dec24Dec25Leaders: false, currentLeaders: false, pastLeaders: false });
   const toggle = (id) => setExpanded((p) => ({ ...p, [id]: !p[id] }));
   const waveRef = useWaveCanvas();
