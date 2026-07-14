@@ -350,6 +350,7 @@ export default function Sandbox() {
   const networkRef = useRef(null);
   const canvasRef = useRef(null);
   const analysisPendingRef = useRef(false);
+  const boundaryFrameCountRef = useRef(0);
 
   // Boundary Draw Function
   const drawBoundary = useCallback((canvas, net) => {
@@ -424,48 +425,76 @@ export default function Sandbox() {
     setIsRunning(false);
   }, [hiddenLayers]);
   
-  // Force boundary canvas repaint when networkState or dataset updates
+  // Force boundary canvas repaint when networkState or dataset updates.
+  // The decision boundary evolves more gradually than the raw weights, and
+  // recomputing it costs a forward pass per grid cell (~4225 of them), so
+  // during continuous training we only redraw every other commit. Outside
+  // training (Step/Reset/dataset changes) we always redraw immediately so
+  // manual actions still get instant feedback.
   useEffect(() => {
-    if (networkState && canvasRef.current) {
-      drawBoundary(canvasRef.current, networkState);
+    if (!networkState || !canvasRef.current) return;
+
+    if (isRunning) {
+      boundaryFrameCountRef.current += 1;
+      if (boundaryFrameCountRef.current % 2 !== 0) return;
+    } else {
+      boundaryFrameCountRef.current = 0;
     }
-  }, [networkState, drawBoundary]);
+
+    drawBoundary(canvasRef.current, networkState);
+  }, [networkState, drawBoundary, isRunning]);
   
   // Training loop execution
   useEffect(() => {
     if (!isRunning) return;
-    
+
     let animId;
-    const loop = () => {
+    // Training math runs on every rAF tick (so convergence speed/behavior is
+    // unchanged), but committing that state to React — which cascades into a
+    // full SVG rebuild (renderNNArchitecture) and a per-cell canvas redraw
+    // (drawBoundary) — is throttled to a fixed ~30fps cadence. Without this,
+    // a 120/144Hz display forces 120-144 full re-renders/sec, which is far
+    // more than perceptible and causes visible jank during training.
+    const VISUAL_UPDATE_INTERVAL_MS = 1000 / 30;
+    let lastCommitTime = 0;
+    let epochsSinceCommit = 0;
+    let latestLoss = 0;
+
+    const loop = (timestamp) => {
       const net = networkRef.current;
       if (!net) return;
-      
-      let currentLoss = 0;
+
       // Run 6 epochs per frame for smooth real-time visual velocity
       for (let e = 0; e < 6; e++) {
         const shuffled = [...dataset].sort(() => Math.random() - 0.5);
         const batchSize = 16;
         for (let i = 0; i < shuffled.length; i += batchSize) {
           const batch = shuffled.slice(i, i + batchSize);
-          currentLoss = trainStep(net, batch, activation, learningRate);
+          latestLoss = trainStep(net, batch, activation, learningRate);
         }
       }
-      
-      setNetworkState({
-        weights: net.weights.map((w) => w.map((r) => [...r])),
-        biases: net.biases.map((b) => [...b]),
-      });
-      setEpoch((prev) => prev + 6);
-      setLoss(currentLoss);
-      setLossHistory((prev) => {
-        const next = [...prev, currentLoss];
-        if (next.length > 120) next.shift();
-        return next;
-      });
-      
+      epochsSinceCommit += 6;
+
+      if (timestamp - lastCommitTime >= VISUAL_UPDATE_INTERVAL_MS) {
+        lastCommitTime = timestamp;
+
+        setNetworkState({
+          weights: net.weights.map((w) => w.map((r) => [...r])),
+          biases: net.biases.map((b) => [...b]),
+        });
+        setEpoch((prev) => prev + epochsSinceCommit);
+        setLoss(latestLoss);
+        setLossHistory((prev) => {
+          const next = [...prev, latestLoss];
+          if (next.length > 120) next.shift();
+          return next;
+        });
+        epochsSinceCommit = 0;
+      }
+
       animId = requestAnimationFrame(loop);
     };
-    
+
     animId = requestAnimationFrame(loop);
     return () => cancelAnimationFrame(animId);
   }, [isRunning, dataset, activation, learningRate]);
