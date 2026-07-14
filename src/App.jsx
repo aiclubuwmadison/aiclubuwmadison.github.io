@@ -16,7 +16,18 @@ const Sandbox = lazy(() => import("./components/Sandbox"));
 function ScrollToTop() {
   const { pathname } = useLocation();
   useEffect(() => {
+    // `html { scroll-behavior: smooth }` (App.css) would otherwise make this
+    // animate on every route change. `behavior: "instant"` is only reliably
+    // supported in Chrome/Firefox (not part of the ScrollToOptions spec, and
+    // unsupported in Safari), so instead temporarily force the CSS property
+    // to "auto" around the scroll — this is the cross-browser-safe way to
+    // guarantee an instant jump while leaving in-page smooth scrolling
+    // (e.g. anchor links) untouched afterward.
+    const root = document.documentElement;
+    const previousScrollBehavior = root.style.scrollBehavior;
+    root.style.scrollBehavior = "auto";
     window.scrollTo(0, 0);
+    root.style.scrollBehavior = previousScrollBehavior;
   }, [pathname]);
   return null;
 }

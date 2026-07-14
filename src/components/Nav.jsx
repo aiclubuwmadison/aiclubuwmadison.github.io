@@ -124,6 +124,11 @@ const Nav = () => {
     const panel = panelRef.current;
     if (!panel) return;
 
+    // Capture the route the panel opened on, so the cleanup below can tell
+    // a navigation-triggered close (link click, or route change while open)
+    // apart from a manual close (Escape, burger toggle, outside click).
+    const openedPathname = location.pathname;
+
     const focusable = panel.querySelectorAll(
       'a[href], button:not([disabled])'
     );
@@ -148,9 +153,16 @@ const Nav = () => {
     const burger = burgerRef.current;
     return () => {
       panel.removeEventListener("keydown", trapTab);
-      burger?.focus();
+      // window.location.pathname is read live (not the closure-captured
+      // `location` from render) so it reflects any navigation that already
+      // happened by the time this cleanup runs. Only return focus to the
+      // burger when the menu closed WITHOUT a navigation — not after the
+      // user intentionally navigated away via a link click.
+      if (window.location.pathname === openedPathname) {
+        burger?.focus();
+      }
     };
-  }, [mobileOpen]);
+  }, [mobileOpen, location.pathname]);
 
   return (
     <>
