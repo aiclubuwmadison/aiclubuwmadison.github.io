@@ -519,3 +519,26 @@
   border-color: var(--atmos-badger);
   color: #fff;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .pitch-slide-container {
+    transition: background 150ms ease !important;
+  }
+
+  .theme-preset-btn,
+  .theme-preset-btn:hover {
+    transform: none !important;
+  }
+
+  .theme-preset-btn {
+    transition: border-color 150ms ease, box-shadow 150ms ease, background 150ms ease !important;
+  }
+
+  .download-slide-btn:hover:not(:disabled) {
+    transform: none !important;
+  }
+
+  .download-slide-btn {
+    transition: background 150ms ease, color 150ms ease, box-shadow 150ms ease !important;
+  }
+}

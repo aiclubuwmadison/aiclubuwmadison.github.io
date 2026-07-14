@@ -685,3 +685,20 @@
   border-radius: 4px;
   color: var(--atmos-badger);
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .nn-btn-train,
+  .nn-btn-train:hover {
+    transform: none !important;
+  }
+
+  .nn-btn {
+    transition: background 150ms ease, box-shadow 150ms ease, color 150ms ease !important;
+  }
+
+  .layer-btn,
+  .counter-btn,
+  .canvas-btn {
+    transition: border-color 150ms ease, color 150ms ease, background 150ms ease !important;
+  }
+}

@@ -628,4 +628,12 @@
   .atmos-nav-brand:hover .atmos-nav-brand-mark {
     transform: none !important;
   }
+
+  .atmos-nav-burger-bar {
+    transition: none !important;
+  }
+
+  .atmos-nav-mobile-panel {
+    transition: opacity 150ms ease !important;
+  }
 }

@@ -713,3 +713,14 @@
 [data-theme="dark"] .res-skeleton-row {
   background: rgba(255, 255, 255, 0.04);
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .res-refreshing {
+    animation: none !important;
+  }
+
+  .res-skeleton-title::after,
+  .res-skeleton-row::after {
+    animation: none !important;
+  }
+}

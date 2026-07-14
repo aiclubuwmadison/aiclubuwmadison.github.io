@@ -106,6 +106,7 @@ button:focus-visible,
   --space-8: 40px;
   --motion-fast: 200ms;
   --motion-base: 280ms;
+  --motion-slow: 460ms;
   --ease-out: cubic-bezier(0.25, 0.1, 0.25, 1);
   --radius-sm: 8px;
   --radius-md: 12px;
