@@ -172,7 +172,7 @@ const Nav = () => {
 
           <Link to="/" className="atmos-nav-brand" aria-label="AI@UW home">
             <span className="atmos-nav-brand-mark" aria-hidden="true">
-              <img src="/images/logo.png" alt="AI@UW" />
+              <img src="/images/logo.webp" alt="AI@UW" />
             </span>
           </Link>
 

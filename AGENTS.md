@@ -127,9 +127,9 @@ Conventions:
 Served from `public/`. Reference with **absolute** root paths:
 
 ```js
-src="/images/logo.png"
-src="/images/portraits/hriday.png"
-src="/images/seminars/hero.jpg"
+src="/images/logo.webp"
+src="/images/portraits/hriday.webp"
+src="/images/seminars/hero.webp"
 ```
 
 Do not import portraits through the module graph unless intentionally hashing them.

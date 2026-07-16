@@ -310,7 +310,7 @@ const About = () => {
         <div className="about-hero-right" aria-hidden="true">
           <canvas ref={canvasRef} className="about-spiral-canvas" />
           <div className="about-spiral-center">
-            <img src="/images/logo.png" alt="" className="about-spiral-logo" />
+            <img src="/images/logo.webp" alt="" className="about-spiral-logo" />
           </div>
         </div>
       </section>

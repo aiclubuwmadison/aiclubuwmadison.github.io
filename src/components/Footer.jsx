@@ -43,7 +43,7 @@ const Footer = () => {
           <div className="atmos-footer-brand">
             <img
               className="atmos-footer-logo"
-              src="/images/logo.png"
+              src="/images/logo.webp"
               alt=""
               aria-hidden="true"
               loading="lazy"
