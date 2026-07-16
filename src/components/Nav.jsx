@@ -3,6 +3,7 @@ import { flushSync } from "react-dom";
 import { Link, useLocation } from "react-router-dom";
 import { Sun, Moon } from "lucide-react";
 import { animateThemeChange } from "../utils/themeTransition";
+import { prefetchRoute } from "../utils/routePrefetch";
 import { NAV_ITEMS } from "../constants/nav";
 import "./Nav.css";
 
@@ -181,6 +182,8 @@ const Nav = () => {
                 <li key={item.to}>
                   <Link
                     to={item.to}
+                    onMouseEnter={() => prefetchRoute(item.to)}
+                    onFocus={() => prefetchRoute(item.to)}
                     className={
                       "atmos-nav-link" +
                       (isActive(item.to) ? " atmos-nav-link-active" : "")
@@ -274,6 +277,8 @@ const Nav = () => {
               key={item.to}
               to={item.to}
               onClick={() => setMobileOpen(false)}
+              onTouchStart={() => prefetchRoute(item.to)}
+              onFocus={() => prefetchRoute(item.to)}
               className={
                 "atmos-nav-mobile-link" +
                 (isActive(item.to) ? " atmos-nav-link-active" : "")

@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from "react-router-dom";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
+import { prefetchAllRoutesWhenIdle } from "./utils/routePrefetch";
 
 const About = lazy(() => import("./components/About"));
 const Involvement = lazy(() => import("./components/Involvement"));
@@ -33,6 +34,10 @@ function ScrollToTop() {
 }
 
 function App() {
+  useEffect(() => {
+    prefetchAllRoutesWhenIdle();
+  }, []);
+
   return (
     <div>
       <Router>
