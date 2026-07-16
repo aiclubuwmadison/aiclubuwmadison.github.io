@@ -214,7 +214,7 @@
   color: var(--atmos-ink-mute);
   font-family: var(--atmos-sans);
   font-size: 28px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1;
   transition: transform 300ms cubic-bezier(.2,.7,.2,1), color 300ms ease;
 }
