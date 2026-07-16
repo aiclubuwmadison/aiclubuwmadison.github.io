@@ -270,9 +270,8 @@
   width: 36px;
   height: 36px;
   padding: 0;
+  /* Sits on the capsule, which already blurs — no local blur needed. */
   background: var(--atmos-glass-control);
-  backdrop-filter: var(--atmos-glass-blur);
-  -webkit-backdrop-filter: var(--atmos-glass-blur);
   border: 1px solid var(--atmos-hairline);
   border-radius: 999px;
   color: var(--atmos-ink);

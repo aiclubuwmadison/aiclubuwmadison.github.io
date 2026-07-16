@@ -556,6 +556,8 @@ export default function Sandbox() {
   
   // ── DIGIT RECOGNITION CANVAS STATES ────────────────────
   const digitCanvasRef = useRef(null);
+  const drawRectRef = useRef(null);
+  const lastAnalysisTsRef = useRef(0);
   const [isDrawing, setIsDrawing] = useState(false);
   const [predictions, setPredictions] = useState(Array(10).fill(0));
   const [featureGrid, setFeatureGrid] = useState(Array(8).fill(0).map(() => Array(8).fill(0)));
@@ -571,8 +573,11 @@ export default function Sandbox() {
     const canvas = digitCanvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
+    // Cache for the whole gesture — drawStroke runs on every raw
+    // mousemove/touchmove and the canvas can't move mid-drag.
     const rect = canvas.getBoundingClientRect();
-    
+    drawRectRef.current = rect;
+
     // Retrieve coordinates based on touch or mouse event
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
     const clientY = e.touches ? e.touches[0].clientY : e.clientY;
@@ -596,8 +601,8 @@ export default function Sandbox() {
     const canvas = digitCanvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
-    const rect = canvas.getBoundingClientRect();
-    
+    const rect = drawRectRef.current || canvas.getBoundingClientRect();
+
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
     const clientY = e.touches ? e.touches[0].clientY : e.clientY;
     
@@ -607,19 +612,27 @@ export default function Sandbox() {
     ctx.lineTo(x, y);
     ctx.stroke();
     
-    // Analyze digit in real-time, throttled to animation frames
+    // Analyze digit in real-time. getImageData + a full-pixel scan are far
+    // too expensive to run every frame on a high-refresh display, so beyond
+    // the rAF gate, cap analysis to ~15fps; stopDrawing runs a final pass.
     if (!analysisPendingRef.current) {
       analysisPendingRef.current = true;
-      requestAnimationFrame(() => {
-        analyzeDrawing();
+      requestAnimationFrame((ts) => {
         analysisPendingRef.current = false;
+        if (ts - lastAnalysisTsRef.current < 66) return;
+        lastAnalysisTsRef.current = ts;
+        analyzeDrawing();
       });
     }
     e.preventDefault();
   };
   
   const stopDrawing = () => {
+    if (!isDrawing) return;
     setIsDrawing(false);
+    // Final pass so the readout reflects ink drawn after the last
+    // throttled analysis.
+    analyzeDrawing();
   };
   
   const clearDigitCanvas = () => {
