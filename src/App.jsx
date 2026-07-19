@@ -1,18 +1,18 @@
-import { lazy, Suspense, useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from "react-router-dom";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
+import RouteErrorBoundary from "./components/RouteErrorBoundary";
 import { prefetchAllRoutesWhenIdle } from "./utils/routePrefetch";
+import { lazyWithRetry } from "./utils/lazyWithRetry";
 
-const About = lazy(() => import("./components/About"));
-const Involvement = lazy(() => import("./components/Involvement"));
-const Leadership = lazy(() => import("./components/Leadership"));
-const Contact = lazy(() => import("./components/Contact"));
-const Seminars = lazy(() => import("./components/Seminars"));
-const Projects = lazy(() => import("./components/Projects"));
-const Resources = lazy(() => import("./components/Resources"));
-const PitchBuilder = lazy(() => import("./components/PitchBuilder"));
-const Sandbox = lazy(() => import("./components/Sandbox"));
+const About = lazyWithRetry(() => import("./components/About"), { name: "about" });
+const Involvement = lazyWithRetry(() => import("./components/Involvement"), { name: "involvement" });
+const Leadership = lazyWithRetry(() => import("./components/Leadership"), { name: "leadership" });
+const Contact = lazyWithRetry(() => import("./components/Contact"), { name: "contact" });
+const Seminars = lazyWithRetry(() => import("./components/Seminars"), { name: "seminars" });
+const Projects = lazyWithRetry(() => import("./components/Projects"), { name: "projects" });
+const Resources = lazyWithRetry(() => import("./components/Resources"), { name: "resources" });
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -44,8 +44,9 @@ function App() {
         <ScrollToTop />
         <Nav />
         <div id="body-wrapper">
-          <Suspense fallback={<div className="atmos-route-loading" aria-live="polite">Loading…</div>}>
-            <Routes>
+          <RouteErrorBoundary>
+            <Suspense fallback={<div className="atmos-route-loading" aria-live="polite">Loading…</div>}>
+              <Routes>
               <Route
                 path="/"
                 element={<><About /><Footer /></>}
@@ -78,16 +79,9 @@ function App() {
                 path="/resources"
                 element={<><Resources /><Footer /></>}
               />
-              <Route
-                path="/pitch"
-                element={<><PitchBuilder /><Footer /></>}
-              />
-              <Route
-                path="/sandbox"
-                element={<><Sandbox /><Footer /></>}
-              />
-            </Routes>
-          </Suspense>
+              </Routes>
+            </Suspense>
+          </RouteErrorBoundary>
         </div>
       </Router>
     </div>
