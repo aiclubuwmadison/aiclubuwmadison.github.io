@@ -133,7 +133,7 @@
 .lead-cc-4 img { object-position: center 20%; }
 
 .lead-hero-tagline {
-  font-size: 13px; line-height: 1.8; color: var(--atmos-ink-soft);
+  font-size: 14px; line-height: 1.6; color: var(--atmos-ink-soft);
   text-align: right; margin: 0;
 }
 .lead-hero-tagline em { font-style: normal; color: var(--atmos-badger); font-weight: 600; }
@@ -147,7 +147,7 @@
   margin-bottom: clamp(28px,3.5vw,48px); gap: 20px;
 }
 .lead-section-eyebrow {
-  font-size: 11px; font-weight: 600; letter-spacing: 0.18em;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.18em;
   text-transform: uppercase; color: var(--atmos-badger); margin: 0 0 8px;
 }
 .lead-section-title {
@@ -191,7 +191,7 @@
   transform: translate(2px, -2px);
 }
 .lead-card-role {
-  font-size: 10px; font-weight: 700; letter-spacing: 0.18em;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
   text-transform: uppercase; color: var(--atmos-badger);
   background: none; padding: 4px 0;
   align-self: flex-start; width: fit-content;
@@ -207,7 +207,7 @@
   color: #fff; margin: 0; line-height: 1.05;
 }
 .lead-featured-desc {
-  font-size: 14px; line-height: 1.55; color: rgba(255,255,255,0.72); margin: 0;
+  font-size: 15.5px; line-height: 1.55; color: rgba(255,255,255,0.78); margin: 0;
 }
 
 /* ── TEAM GRID ───────────────────────────────────────────── */
@@ -237,7 +237,7 @@
 .lead-team-card > .lead-card-role {
   margin: 16px 16px 0;
   color: var(--atmos-badger); background: none; padding: 0;
-  font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
 }
 
 .lead-team-name {
@@ -246,7 +246,7 @@
   color: var(--atmos-ink); margin: 6px 16px 0; line-height: 1.2;
 }
 .lead-team-desc {
-  font-size: 12.5px; line-height: 1.6; color: var(--atmos-ink-soft);
+  font-size: 14.5px; line-height: 1.55; color: var(--atmos-ink-soft);
   margin: 8px 16px 0; flex: 1;
 }
 

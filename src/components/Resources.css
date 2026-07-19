@@ -89,7 +89,7 @@
   gap: 6px;
   padding: 6px 12px;
   font-family: var(--atmos-mono);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.04em;
   background: rgba(255, 255, 255, 0.92);
@@ -118,8 +118,8 @@
 
 .res-card-desc {
   font-family: var(--atmos-sans);
-  font-size: 14.5px;
-  line-height: 1.6;
+  font-size: var(--type-body-sm);
+  line-height: var(--lh-body-sm);
   color: var(--atmos-ink-soft);
   margin: 0 0 20px 0;
   flex-grow: 1;
@@ -157,7 +157,7 @@
 
 .res-tag-chip {
   font-family: var(--atmos-mono);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 550;
   padding: 4px 10px;
   background: var(--atmos-paper-tint);
@@ -241,8 +241,8 @@
 
 .res-reading-desc {
   font-family: var(--atmos-sans);
-  font-size: 14px;
-  line-height: 1.55;
+  font-size: 15px;
+  line-height: 1.6;
   color: var(--atmos-ink-soft);
   margin: 0;
 }
@@ -255,7 +255,7 @@
 
 .res-reading-chip {
   font-family: var(--atmos-mono);
-  font-size: 10px;
+  font-size: 11px;
   padding: 2px 8px;
   background: rgba(15, 23, 42, 0.04);
   color: var(--atmos-ink-soft);
@@ -328,7 +328,7 @@
 .res-search-input {
   width: 100%;
   font-family: var(--atmos-sans);
-  font-size: 14.5px;
+  font-size: 16px;
   padding: 12px 16px 12px 48px;
   background: var(--atmos-glass-control);
   border: 1px solid var(--atmos-hairline);

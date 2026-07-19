@@ -73,12 +73,12 @@ button:focus-visible,
   --atmos-badger: #C5050C;
   --atmos-accent-glow: rgba(197, 5, 12, 0.12);
   --atmos-serif: "Instrument Serif", Georgia, serif;
-  --atmos-sans: "Space Grotesk", system-ui, sans-serif;
+  --atmos-sans: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   --atmos-mono: "Space Mono", ui-monospace, monospace;
   --atmos-max: 1320px;
   --atmos-gutter: clamp(20px, 4vw, 56px);
   /* Nav offset — page roots pad content; backgrounds still paint under fixed chrome */
-  --atmos-nav-height: 68px;
+  --atmos-nav-height: 84px;
   /* Frosted glass — low alpha so blur + content underneath actually read */
   --atmos-glass-blur: blur(40px) saturate(1.8);
   --atmos-glass-bg: rgba(255, 255, 255, 0.22);
@@ -94,6 +94,8 @@ button:focus-visible,
   --type-display: clamp(48px, 7.5vw, 80px);
   --type-title-lg: clamp(28px, 4vw, 40px);
   --type-body: 17px;
+  /* Secondary/card description copy — one legible step down from body */
+  --type-body-sm: 15.5px;
   --lh-display: 1.05;
   --ls-display: -0.02em;
   --ls-eyebrow: 0.12em;
@@ -114,7 +116,8 @@ button:focus-visible,
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
   --focus-ring: 0 0 0 3px rgba(197, 5, 12, 0.35);
-  --lh-body: 1.47059;
+  --lh-body: 1.6;
+  --lh-body-sm: 1.55;
   --surface-radius: var(--radius-lg);
   --surface-border: 1px solid var(--atmos-hairline);
 }
@@ -125,8 +128,8 @@ button:focus-visible,
   --atmos-paper-deep:   #0a0a0a;
   --atmos-paper-tint:   #141414;
   --atmos-ink:          #f1f5f9;
-  --atmos-ink-soft:     #8b949e;
-  --atmos-ink-mute:     #6e7681;
+  --atmos-ink-soft:     #adb6c0;
+  --atmos-ink-mute:     #8b939d;
   --atmos-hairline:     rgba(255, 255, 255, 0.08);
   --atmos-hairline-soft: rgba(255, 255, 255, 0.04);
   --atmos-badger:       #ff6e75;
@@ -192,9 +195,7 @@ button:focus-visible,
 [data-theme="dark"] .atmos-seminars,
 [data-theme="dark"] .atmos-leadership,
 [data-theme="dark"] .atmos-contact,
-[data-theme="dark"] .atmos-involvement,
-[data-theme="dark"] .atmos-pitch,
-[data-theme="dark"] .atmos-sandbox {
+[data-theme="dark"] .atmos-involvement {
   background: var(--atmos-paper);
   --atmos-paper: #141414;
   --atmos-paper-deep: #0a0a0a;
@@ -217,7 +218,7 @@ button:focus-visible,
 
 .atmos-page-hero-eyebrow {
   font-family: var(--atmos-mono);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: var(--ls-eyebrow);
   text-transform: uppercase;
   color: var(--atmos-badger);
@@ -282,10 +283,8 @@ body,
 .atmos-contact,
 .atmos-involvement,
 .atmos-leadership,
-.atmos-pitch,
 .atmos-projects,
 .atmos-resources,
-.atmos-sandbox,
 .atmos-seminars,
 .about-hero,
 .about-story,
@@ -306,9 +305,7 @@ body,
 .lead-featured-card,
 .lead-team-card,
 .lead-social-btn,
-.atmos-sem-card,
-.pitch-form-card,
-.pitch-slide-container {
+.atmos-sem-card {
   transition: background 250ms ease, background-color 250ms ease, color 250ms ease, border-color 250ms ease, box-shadow 250ms ease;
 }
 
@@ -360,10 +357,8 @@ body,
 .atmos-theme-transitioning .atmos-contact,
 .atmos-theme-transitioning .atmos-involvement,
 .atmos-theme-transitioning .atmos-leadership,
-.atmos-theme-transitioning .atmos-pitch,
 .atmos-theme-transitioning .atmos-projects,
 .atmos-theme-transitioning .atmos-resources,
-.atmos-theme-transitioning .atmos-sandbox,
 .atmos-theme-transitioning .atmos-seminars {
   transition: none !important;
 }
@@ -391,7 +386,7 @@ body,
 
 @media (max-width: 1200px) {
   :root {
-    --atmos-nav-height: 64px;
+    --atmos-nav-height: 76px;
   }
 }
 .atmos-root::before {
@@ -427,7 +422,7 @@ body,
   font-family: var(--atmos-mono);
   font-style: normal;
   font-weight: 400;
-  font-size: 11px;
+  font-size: 12px;
   color: var(--atmos-badger);
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -484,8 +479,7 @@ body,
 }
 
 /* ── Shared buttons ─────────────────────────────────────── */
-.atmos-btn-primary,
-.about-btn-primary {
+.atmos-btn-primary {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -510,27 +504,16 @@ body,
   white-space: nowrap;
 }
 
-.atmos-btn-primary:hover,
-.about-btn-primary:hover {
+.atmos-btn-primary:hover {
   background: transparent;
   color: var(--atmos-badger);
   box-shadow: var(--shadow-md);
   transform: translateY(-1px);
 }
 
-.atmos-btn-primary:active,
-.about-btn-primary:active {
+.atmos-btn-primary:active {
   transform: translateY(0) scale(0.98);
   box-shadow: var(--shadow-sm);
-}
-
-.about-btn-arr {
-  display: inline-block;
-  transition: transform var(--motion-fast) var(--ease-out);
-}
-
-.about-btn-primary:hover .about-btn-arr {
-  transform: translateX(3px);
 }
 
 /* ── Global link underline animation ─────────────────────
@@ -557,11 +540,8 @@ body,
   .atmos-nav-theme-toggle-icon { animation: none !important; }
 
   .atmos-btn-primary,
-  .about-btn-primary,
   .atmos-btn-primary:hover,
-  .about-btn-primary:hover,
-  .atmos-btn-primary:active,
-  .about-btn-primary:active {
+  .atmos-btn-primary:active {
     transform: none !important;
   }
 }

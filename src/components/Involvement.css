@@ -23,7 +23,7 @@
 .faq-label {
   display: block;
   font-family: var(--atmos-sans);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   color: var(--atmos-badger);
   text-transform: uppercase;
@@ -104,7 +104,7 @@
 
 .faq-contact-card-body {
   font-family: var(--atmos-sans);
-  font-size: 15px;
+  font-size: 16px;
   color: var(--atmos-ink-soft);
   line-height: 1.6;
   margin: 0 0 12px;

@@ -1,7 +1,7 @@
 /* =========================================================
    ATMOSPHERIC MODERN — Contact page
    Scoped to .atmos-contact
-   Matches About page design system: white bg, Inter font,
+   Matches About page design system: white bg, system UI font,
    UW red (#C5050C) accent via --atmos-badger.
    ========================================================= */
 
@@ -34,10 +34,10 @@
 /* HERO LEDE ------------------------------------------------ */
 .atmos-contact .atmos-contact-lede {
   font-family: var(--atmos-sans);
-  font-size: 15px;
-  line-height: 1.75;
+  font-size: 16.5px;
+  line-height: 1.6;
   color: var(--atmos-ink-soft);
-  max-width: 52ch;
+  max-width: 60ch;
   margin: 0;
 }
 
@@ -175,7 +175,7 @@
 }
 
 .atmos-contact .atmos-form-eyebrow {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -209,7 +209,7 @@
 .atmos-contact .contact-form-textarea {
   width: 100%;
   font-family: var(--atmos-sans);
-  font-size: 14.5px;
+  font-size: 16px;
   color: var(--atmos-ink);
   background: var(--atmos-glass-control);
   backdrop-filter: var(--atmos-glass-blur);
@@ -282,10 +282,10 @@
 
 .atmos-contact .contact-success-message {
   font-family: var(--atmos-sans);
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.6;
   color: var(--atmos-ink-soft);
-  max-width: 36ch;
+  max-width: 42ch;
   margin: 0;
 }
 
