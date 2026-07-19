@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   BookOpen, 
@@ -358,35 +358,33 @@ const Resources = () => {
 
   // Scroll-reveal for the live news feed. Cards arrive asynchronously (fetch
   // resolves after mount) and can change again on manual refresh or search
-  // filtering, so — unlike the static sections above — this keeps a
-  // persistent observer in a ref and only observes cards not yet flagged on
-  // each pass. Skeleton placeholders (`.res-skeleton`) are excluded so
-  // loading state never gets treated as revealable content.
-  const newsObserverRef = useRef(null);
-
+  // filtering. A fresh observer is created per run and disconnected on cleanup,
+  // so React StrictMode's mount → unmount → remount cycle can't leave cards
+  // observed by a disconnected observer (which previously stranded every card
+  // at opacity:0). Cards already revealed keep `sr-visible`; only not-yet-
+  // revealed cards are hidden and (re)observed. Skeleton placeholders
+  // (`.res-skeleton`) are excluded so loading state never gets treated as
+  // revealable content.
   useEffect(() => {
-    if (!newsObserverRef.current) {
-      newsObserverRef.current = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('sr-visible');
-            newsObserverRef.current.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.08 });
-    }
-    const io = newsObserverRef.current;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('sr-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
     const cards = document.querySelectorAll('.res-news-card:not(.res-skeleton)');
     cards.forEach((el, i) => {
-      if (el.dataset.srReady) return;
-      el.dataset.srReady = '1';
+      if (el.classList.contains('sr-visible')) return;
       el.classList.add('sr-hidden');
       el.style.transitionDelay = `${Math.min((i % 6) * 70, 280)}ms`;
       io.observe(el);
     });
-  }, [news, searchQuery, loading]);
 
-  useEffect(() => () => newsObserverRef.current?.disconnect(), []);
+    return () => io.disconnect();
+  }, [news, searchQuery, loading]);
 
   return (
     <div className="atmos-root atmos-resources">

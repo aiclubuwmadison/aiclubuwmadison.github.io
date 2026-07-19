@@ -418,36 +418,32 @@ const Seminars = () => {
   const showTalks = activeTab === 'all' || activeTab === 'talks';
   const showWorkshops = activeTab === 'all' || activeTab === 'workshops';
 
-  // Scroll-reveal for seminar/workshop cards. The card list is re-filtered by
-  // tab/topic/year/search, so a single persistent IntersectionObserver is kept
-  // in a ref (rather than recreated + disconnected each run) and only newly
-  // rendered cards get observed on each pass — this avoids abandoning cards
-  // that were mid-observation when a filter change swaps the observer out.
-  const semObserverRef = useRef(null);
-
+  // Scroll-reveal for seminar/workshop cards. A fresh observer is created per
+  // run and disconnected on cleanup, so React StrictMode's mount → unmount →
+  // remount cycle can't leave cards observed by a disconnected observer (which
+  // previously stranded every card at opacity:0). Cards already revealed keep
+  // `sr-visible`; only not-yet-revealed cards are hidden and (re)observed, so
+  // filter changes still animate in newly rendered cards.
   useEffect(() => {
-    if (!semObserverRef.current) {
-      semObserverRef.current = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('sr-visible');
-            semObserverRef.current.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.08 });
-    }
-    const io = semObserverRef.current;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('sr-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
     const cards = document.querySelectorAll('.atmos-sem-card');
     cards.forEach((el, i) => {
-      if (el.dataset.srReady) return;
-      el.dataset.srReady = '1';
+      if (el.classList.contains('sr-visible')) return;
       el.classList.add('sr-hidden');
       el.style.transitionDelay = `${Math.min((i % 6) * 70, 280)}ms`;
       io.observe(el);
     });
-  }, [activeTab, topicFilter, yearFilter, searchQuery]);
 
-  useEffect(() => () => semObserverRef.current?.disconnect(), []);
+    return () => io.disconnect();
+  }, [activeTab, topicFilter, yearFilter, searchQuery]);
 
   return (
     <div className="atmos-root atmos-seminars">
