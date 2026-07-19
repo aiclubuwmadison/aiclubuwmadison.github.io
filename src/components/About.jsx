@@ -300,11 +300,6 @@ const About = () => {
           <p className="about-hero-lede">
             UW–Madison's student AI club. All majors welcome.
           </p>
-          <div className="about-hero-ctas">
-            <Link className="about-btn-primary" to="/contact">
-              Join <span className="about-btn-arr">→</span>
-            </Link>
-          </div>
         </div>
 
         <div className="about-hero-right" aria-hidden="true">
