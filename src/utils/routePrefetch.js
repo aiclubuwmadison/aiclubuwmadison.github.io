@@ -11,8 +11,6 @@ const routeImporters = {
   "/seminars": () => import("../components/Seminars"),
   "/projects": () => import("../components/Projects"),
   "/resources": () => import("../components/Resources"),
-  "/pitch": () => import("../components/PitchBuilder"),
-  "/sandbox": () => import("../components/Sandbox"),
 };
 
 const prefetched = new Set();

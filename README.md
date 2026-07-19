@@ -98,9 +98,7 @@ npm run preview
 │   │   ├── Contact.jsx
 │   │   ├── Seminars.jsx       # Events page
 │   │   ├── Projects.jsx
-│   │   ├── Resources.jsx
-│   │   ├── PitchBuilder.jsx
-│   │   └── Sandbox.jsx
+│   │   └── Resources.jsx
 │   ├── constants/
 │   │   └── nav.js             # Shared NAV_ITEMS for Nav + Footer
 │   ├── utils/
@@ -128,8 +126,6 @@ Nav labels and order live in `src/constants/nav.js` so the top nav and footer st
 | `/seminars` | Seminars | Nav: **Events** |
 | `/projects` | Projects | |
 | `/resources` | Resources | |
-| `/pitch` | PitchBuilder | Not `/pitchbuilder` |
-| `/sandbox` | Sandbox | |
 
 `<Nav />` is rendered once outside `<Routes>`. Each route renders the page plus `<Footer />`.
 

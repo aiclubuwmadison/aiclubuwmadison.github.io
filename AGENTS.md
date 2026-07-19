@@ -76,8 +76,6 @@ Root-level `images/` and unused `public/fonts/` assets are legacy — **do not**
 | `/seminars` | `Seminars` | Nav label: **Events** |
 | `/projects` | `Projects` | |
 | `/resources` | `Resources` | |
-| `/pitch` | `PitchBuilder` | Not `/pitchbuilder` |
-| `/sandbox` | `Sandbox` | |
 
 Conventions:
 
