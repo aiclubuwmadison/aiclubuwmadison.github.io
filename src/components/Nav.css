@@ -185,8 +185,9 @@
 }
 
 .atmos-nav-link {
+  position: relative;
   font-family: var(--atmos-sans);
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
   color: var(--atmos-ink-soft);
   letter-spacing: 0.01em;
@@ -196,29 +197,49 @@
   display: inline-flex;
   align-items: center;
   white-space: nowrap;
-  transition: color 180ms ease, background 180ms ease;
+  transition: color 180ms ease;
+}
+
+/* Underline indicator — grows from center on hover */
+.atmos-nav-link::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 2px;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .atmos-nav-link:hover {
   color: var(--atmos-ink);
-  background: rgba(15, 23, 42, 0.04);
 }
 
-/* Active link — soft red tint pill */
+.atmos-nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* Active link — persistent red underline */
 .atmos-nav-link-active {
   color: var(--atmos-badger);
-  background: rgba(197, 5, 12, 0.1);
+}
+
+.atmos-nav-link-active::after {
+  transform: scaleX(1);
 }
 
 .atmos-nav-link-active:hover {
   color: var(--atmos-badger);
-  background: rgba(197, 5, 12, 0.14);
 }
 
 /* ── CTA button ─────────────────────────────────────────── */
 .atmos-nav-cta {
   font-family: var(--atmos-sans);
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
   color: #fff;
   background: var(--atmos-badger);
@@ -234,15 +255,13 @@
   transition:
     background 200ms ease,
     box-shadow 200ms ease,
-    gap 200ms ease,
     transform 200ms ease;
   box-shadow: var(--shadow-sm);
 }
 
 .atmos-nav-cta:hover {
-  background: #a8040a;
+  background: #ff1a24;
   box-shadow: var(--shadow-md);
-  gap: 11px;
   transform: translateY(-1px);
 }
 
@@ -254,11 +273,6 @@
 .atmos-nav-cta-arrow {
   display: inline-flex;
   align-items: center;
-  transition: transform 200ms ease;
-}
-
-.atmos-nav-cta:hover .atmos-nav-cta-arrow {
-  transform: translateX(2px);
 }
 
 /* ── Theme toggle ───────────────────────────────────────── */
