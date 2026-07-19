@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { NAV_ITEMS } from '../constants/nav';
+import { prefetchRoute } from '../utils/routePrefetch';
 import './Footer.css';
 
 const DISCORD_URL = 'https://discord.gg/TTSykcZAg4';
@@ -42,7 +43,7 @@ const Footer = () => {
           <div className="atmos-footer-brand">
             <img
               className="atmos-footer-logo"
-              src="/images/logo.png"
+              src="/images/logo.webp"
               alt=""
               aria-hidden="true"
               loading="lazy"
@@ -102,7 +103,13 @@ const Footer = () => {
         </div>
         <nav className="atmos-footer-nav" aria-label="Site">
           {NAV_ITEMS.map(({ to, label }) => (
-            <Link key={to} className="atmos-footer-nav-link" to={to}>
+            <Link
+              key={to}
+              className="atmos-footer-nav-link"
+              to={to}
+              onMouseEnter={() => prefetchRoute(to)}
+              onFocus={() => prefetchRoute(to)}
+            >
               {label}
             </Link>
           ))}

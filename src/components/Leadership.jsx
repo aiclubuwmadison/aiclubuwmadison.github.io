@@ -232,78 +232,102 @@ const Leadership = () => {
     document.title = 'Leadership | AI@UW';
   }, []);
 
+  // IntersectionObserver for scroll reveals
+  useEffect(() => {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add('sr-visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    const elements = document.querySelectorAll(
+      '.lead-officers .lead-featured-card, .lead-officers .lead-team-card, .lead-archive-wrap .atmos-archive'
+    );
+
+    elements.forEach((el, i) => {
+      el.classList.add('sr-hidden');
+      el.style.transitionDelay = `${(i % 4) * 80}ms`;
+      io.observe(el);
+    });
+
+    return () => io.disconnect();
+  }, []);
+
   const [expanded, setExpanded] = useState({ dec24Dec25Leaders: false, currentLeaders: false, pastLeaders: false });
   const toggle = (id) => setExpanded((p) => ({ ...p, [id]: !p[id] }));
   const waveRef = useWaveCanvas();
 
   const PastLeadershipData = [
     [
-      { file: 'anniruddh.jpg',  title: 'President',                          name: 'Anniruddh Kumar' },
+      { file: 'anniruddh.webp',  title: 'President',                          name: 'Anniruddh Kumar' },
       { file: '_placeholder.svg', title: 'Vice President',                     name: 'Tanish Nahata',       link: 'https://www.linkedin.com/in/tanish-nahata' },
       { file: '_placeholder.svg', title: 'Head of PR',                         name: 'Taha Sawar',          link: 'https://www.linkedin.com/in/sawar/' },
     ],
     [
-      { file: 'arun.jpg',       title: 'Event Head',                         name: 'Arun Sivarajah' },
-      { file: 'alexey.jpg',     title: 'Head of Project and Study Groups',   name: 'Alexey Gorbunov',    link: 'https://www.linkedin.com/in/alexey-gorbunov-b2153a19a/' },
-      { file: 'ethan.jpg',      title: 'Webmaster',                          name: 'Ethan Wheeler' },
+      { file: 'arun.webp',       title: 'Event Head',                         name: 'Arun Sivarajah' },
+      { file: 'alexey.webp',     title: 'Head of Project and Study Groups',   name: 'Alexey Gorbunov',    link: 'https://www.linkedin.com/in/alexey-gorbunov-b2153a19a/' },
+      { file: 'ethan.webp',      title: 'Webmaster',                          name: 'Ethan Wheeler' },
     ],
     [
-      { file: 'dane.jpg',       title: 'Advisor, Harvey D. Spangler Professor of Engineering', name: 'Dane Morgan', link: 'https://directory.engr.wisc.edu/mse/faculty/morgan_dane' },
+      { file: 'dane.webp',       title: 'Advisor, Harvey D. Spangler Professor of Engineering', name: 'Dane Morgan', link: 'https://directory.engr.wisc.edu/mse/faculty/morgan_dane' },
     ],
   ];
 
   const SeptDec24LeadershipData = [
     [
-      { file: 'Monish.jpg',     title: 'President',              name: 'Monish Vijay Kumar',            link: 'https://www.linkedin.com/in/monish-bangalore-vijay-kumar-a0411720a/' },
-      { file: 'Monyka.jpeg',    title: 'Director of Marketing',  name: 'Ratcheny (Monyka) Lee',         link: 'https://www.linkedin.com/in/ratchenymonycalee/' },
-      { file: 'vardaan.jpg',    title: 'Secretary',              name: 'Vardaan Kapoor',                link: 'https://www.linkedin.com/in/vardaankapoor/' },
+      { file: 'Monish.webp',     title: 'President',              name: 'Monish Vijay Kumar',            link: 'https://www.linkedin.com/in/monish-bangalore-vijay-kumar-a0411720a/' },
+      { file: 'Monyka.webp',    title: 'Director of Marketing',  name: 'Ratcheny (Monyka) Lee',         link: 'https://www.linkedin.com/in/ratchenymonycalee/' },
+      { file: 'vardaan.webp',    title: 'Secretary',              name: 'Vardaan Kapoor',                link: 'https://www.linkedin.com/in/vardaankapoor/' },
     ],
     [
-      { file: 'debo.jpg',       title: 'Events Manager',         name: 'Debo Jyoti Paul',               link: 'https://www.linkedin.com/in/debojp/' },
-      { file: 'Ira.png',        title: 'Club Meetings Manager',  name: 'Ira Hande',                     link: 'https://www.linkedin.com/in/ira-hande/' },
-      { file: 'akash.jpeg',     title: 'Treasurer',              name: 'Akash Goda',                    link: 'https://www.linkedin.com/in/akashgoda/' },
+      { file: 'debo.webp',       title: 'Events Manager',         name: 'Debo Jyoti Paul',               link: 'https://www.linkedin.com/in/debojp/' },
+      { file: 'Ira.webp',        title: 'Club Meetings Manager',  name: 'Ira Hande',                     link: 'https://www.linkedin.com/in/ira-hande/' },
+      { file: 'akash.webp',     title: 'Treasurer',              name: 'Akash Goda',                    link: 'https://www.linkedin.com/in/akashgoda/' },
     ],
     [
-      { file: 'rohun.jpeg',     title: 'Editorial Assistant',    name: 'Rohun Bakshi',                  link: 'https://www.linkedin.com/in/rohun-bakshi/' },
+      { file: 'rohun.webp',     title: 'Editorial Assistant',    name: 'Rohun Bakshi',                  link: 'https://www.linkedin.com/in/rohun-bakshi/' },
     ],
   ];
 
   const Dec24Dec25LeadershipData = [
     [
-      { file: 'vardaan.jpg',    title: 'President',              name: 'Vardaan Kapoor',                link: 'https://www.linkedin.com/in/vardaankapoor/' },
-      { file: 'debo.jpg',       title: 'Vice President',         name: 'Debo Jyoti Paul',               link: 'https://www.linkedin.com/in/debojp/' },
-      { file: 'Ira.png',        title: 'Club Meetings Manager',  name: 'Ira Hande',                     link: 'https://www.linkedin.com/in/ira-hande/' },
+      { file: 'vardaan.webp',    title: 'President',              name: 'Vardaan Kapoor',                link: 'https://www.linkedin.com/in/vardaankapoor/' },
+      { file: 'debo.webp',       title: 'Vice President',         name: 'Debo Jyoti Paul',               link: 'https://www.linkedin.com/in/debojp/' },
+      { file: 'Ira.webp',        title: 'Club Meetings Manager',  name: 'Ira Hande',                     link: 'https://www.linkedin.com/in/ira-hande/' },
     ],
     [
-      { file: 'kashish.jpeg',   title: 'Communications Manager', name: 'Kashish Agarwal',               link: 'https://www.linkedin.com/in/kashishuw/' },
-      { file: 'akash.jpeg',     title: 'Treasurer',              name: 'Akash Goda',                    link: 'https://www.linkedin.com/in/akashgoda/' },
-      { file: 'charith.png',    title: 'Secretary',              name: 'Charith Reddy Pareddy',         link: 'https://www.linkedin.com/in/charith-reddy-pareddy-61252b329/' },
+      { file: 'kashish.webp',   title: 'Communications Manager', name: 'Kashish Agarwal',               link: 'https://www.linkedin.com/in/kashishuw/' },
+      { file: 'akash.webp',     title: 'Treasurer',              name: 'Akash Goda',                    link: 'https://www.linkedin.com/in/akashgoda/' },
+      { file: 'charith.webp',    title: 'Secretary',              name: 'Charith Reddy Pareddy',         link: 'https://www.linkedin.com/in/charith-reddy-pareddy-61252b329/' },
     ],
     [
-      { file: 'rohun.jpeg',     title: 'Editorial Assistant',    name: 'Rohun Bakshi',                  link: 'https://www.linkedin.com/in/rohun-bakshi/' },
-      { file: 'shikha.jpeg',    title: 'Social Media Manager',   name: 'Shikha Ashara',                 link: 'https://www.linkedin.com/in/shikha-ashara/' },
-      { file: 'sukrut.jpeg',    title: 'Student Tech Advisor',   name: 'Sukrut Chikodikar',             link: 'https://www.linkedin.com/in/schikodikar/' },
+      { file: 'rohun.webp',     title: 'Editorial Assistant',    name: 'Rohun Bakshi',                  link: 'https://www.linkedin.com/in/rohun-bakshi/' },
+      { file: 'shikha.webp',    title: 'Social Media Manager',   name: 'Shikha Ashara',                 link: 'https://www.linkedin.com/in/shikha-ashara/' },
+      { file: 'sukrut.webp',    title: 'Student Tech Advisor',   name: 'Sukrut Chikodikar',             link: 'https://www.linkedin.com/in/schikodikar/' },
     ],
   ];
 
   const CurrentLeadershipData = [
     [
-      { file: 'hriday.png',     title: 'President',              name: 'Hriday Sethi',                  link: 'https://www.linkedin.com/in/hridyanshsethi/' },
-      { file: 'rishabh.jpeg',   title: 'Vice President',         name: 'Rishabh Aggarwal',              link: 'https://www.linkedin.com/in/rishabh-aggarwal-b03ab8211' },
-      { file: 'samarth.png',    title: 'Secretary',              name: 'Samarth Bhargava',              link: 'https://www.linkedin.com/in/samarth010/' },
+      { file: 'hriday.webp',     title: 'President',              name: 'Hriday Sethi',                  link: 'https://www.linkedin.com/in/hridyanshsethi/' },
+      { file: 'rishabh.webp',   title: 'Vice President',         name: 'Rishabh Aggarwal',              link: 'https://www.linkedin.com/in/rishabh-aggarwal-b03ab8211' },
+      { file: 'samarth.webp',    title: 'Secretary',              name: 'Samarth Bhargava',              link: 'https://www.linkedin.com/in/samarth010/' },
     ],
     [
-      { file: 'shikha.jpeg',    title: 'Marketing Head',         name: 'Shikha Ashara',                 link: 'https://www.linkedin.com/in/shikha-ashara/' },
-      { file: 'arnav.jpg',      title: 'Communications Manager', name: 'Arnav Batra',                   link: 'https://www.linkedin.com/in/batraarnav/' },
-      { file: 'swati.jpg',      title: 'Event Organizer',        name: 'Swati Banwani',                 link: 'https://www.linkedin.com/in/swati-banwani-8497ab1b8/' },
+      { file: 'shikha.webp',    title: 'Marketing Head',         name: 'Shikha Ashara',                 link: 'https://www.linkedin.com/in/shikha-ashara/' },
+      { file: 'arnav.webp',      title: 'Communications Manager', name: 'Arnav Batra',                   link: 'https://www.linkedin.com/in/batraarnav/' },
+      { file: 'swati.webp',      title: 'Event Organizer',        name: 'Swati Banwani',                 link: 'https://www.linkedin.com/in/swati-banwani-8497ab1b8/' },
     ],
     [
-      { file: 'sam.jpg',        title: 'Project Manager',        name: 'Sam Avramov',                   link: 'https://www.linkedin.com/in/samavramov/' },
-      { file: 'yug.png',        title: 'Project Manager',        name: 'Yug Marwaha',                   link: 'https://www.linkedin.com/in/yug-marwaha-881b53321' },
-      { file: 'kartik.jpg',     title: 'Project Manager',        name: 'Kartik Gangwar',                link: 'https://www.linkedin.com/in/kartik-gangwar' },
+      { file: 'sam.webp',        title: 'Project Manager',        name: 'Sam Avramov',                   link: 'https://www.linkedin.com/in/samavramov/' },
+      { file: 'yug.webp',        title: 'Project Manager',        name: 'Yug Marwaha',                   link: 'https://www.linkedin.com/in/yug-marwaha-881b53321' },
+      { file: 'kartik.webp',     title: 'Project Manager',        name: 'Kartik Gangwar',                link: 'https://www.linkedin.com/in/kartik-gangwar' },
     ],
     [
-      { file: 'jack.png',              title: 'Project Manager', name: 'Jack Koteles',   link: 'https://www.linkedin.com/in/jackkoteles/' },
+      { file: 'jack.webp',              title: 'Project Manager', name: 'Jack Koteles',   link: 'https://www.linkedin.com/in/jackkoteles/' },
       { file: '_placeholder.svg',      title: 'Project Manager', name: 'Adhyot Singh',   link: 'https://www.linkedin.com/in/adhyotsingh/' },
     ],
   ];
@@ -336,19 +360,19 @@ const Leadership = () => {
             <div className="lead-collage">
               <div className="lead-collage-bg" aria-hidden="true" />
               <div className="lead-cc lead-cc-1">
-                <img src="/images/portraits/hriday.png"   alt="Hriday Sethi"     loading="eager" fetchpriority="high" />
+                <img src="/images/portraits/hriday.webp"   alt="Hriday Sethi"     loading="eager" fetchpriority="high" />
               </div>
               <div className="lead-cc lead-cc-2">
-                <img src="/images/portraits/rishabh.jpeg" alt="Rishabh Aggarwal" loading="eager" fetchpriority="high" />
+                <img src="/images/portraits/rishabh.webp" alt="Rishabh Aggarwal" loading="eager" fetchpriority="high" />
               </div>
               <div className="lead-cc lead-cc-3">
-                <img src="/images/portraits/shikha.jpeg"  alt="Shikha Ashara"    loading="eager" />
+                <img src="/images/portraits/shikha.webp"  alt="Shikha Ashara"    loading="eager" />
               </div>
               <div className="lead-cc lead-cc-4">
-                <img src="/images/portraits/samarth.png"  alt="Samarth Bhargava" loading="eager" />
+                <img src="/images/portraits/samarth.webp"  alt="Samarth Bhargava" loading="eager" />
               </div>
               <div className="lead-collage-spiral" aria-hidden="true">
-                <img src="/images/logo.png" alt="" />
+                <img src="/images/logo.webp" alt="" />
               </div>
             </div>
             <p className="lead-hero-tagline">

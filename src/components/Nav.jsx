@@ -3,14 +3,25 @@ import { flushSync } from "react-dom";
 import { Link, useLocation } from "react-router-dom";
 import { Sun, Moon } from "lucide-react";
 import { animateThemeChange } from "../utils/themeTransition";
+import { prefetchRoute } from "../utils/routePrefetch";
 import { NAV_ITEMS } from "../constants/nav";
 import "./Nav.css";
 
+const THEME_KEY = "theme";
+
+const getSystemTheme = () =>
+  window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+
+/** Explicit user choice from localStorage, or null to follow system. */
+const getStoredTheme = () => {
+  if (typeof window === "undefined") return null;
+  const stored = window.localStorage.getItem(THEME_KEY);
+  return stored === "light" || stored === "dark" ? stored : null;
+};
+
 const getInitialTheme = () => {
   if (typeof window === "undefined") return "light";
-  const stored = window.localStorage.getItem("theme");
-  if (stored === "light" || stored === "dark") return stored;
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  return getStoredTheme() ?? getSystemTheme();
 };
 
 const Nav = () => {
@@ -35,10 +46,22 @@ const Nav = () => {
     setMobileOpen(false);
   }
 
+  // Apply resolved theme to <html>. Do not write localStorage here —
+  // only an explicit toggle should pin a preference (default = system).
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
-    window.localStorage.setItem("theme", theme);
   }, [theme]);
+
+  // Keep in sync with OS theme while the user has not chosen light/dark.
+  useEffect(() => {
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
+    const onSystemChange = () => {
+      if (getStoredTheme() !== null) return;
+      setTheme(media.matches ? "dark" : "light");
+    };
+    media.addEventListener("change", onSystemChange);
+    return () => media.removeEventListener("change", onSystemChange);
+  }, []);
 
   const handleThemeToggle = (event) => {
     const nextTheme = theme === "dark" ? "light" : "dark";
@@ -51,6 +74,7 @@ const Nav = () => {
 
     animateThemeChange(theme, nextTheme, originX, originY, (newTheme) => {
       flushSync(() => {
+        window.localStorage.setItem(THEME_KEY, newTheme);
         setTheme(newTheme);
         setIconTheme(null);
       });
@@ -101,6 +125,11 @@ const Nav = () => {
     const panel = panelRef.current;
     if (!panel) return;
 
+    // Capture the route the panel opened on, so the cleanup below can tell
+    // a navigation-triggered close (link click, or route change while open)
+    // apart from a manual close (Escape, burger toggle, outside click).
+    const openedPathname = location.pathname;
+
     const focusable = panel.querySelectorAll(
       'a[href], button:not([disabled])'
     );
@@ -125,9 +154,16 @@ const Nav = () => {
     const burger = burgerRef.current;
     return () => {
       panel.removeEventListener("keydown", trapTab);
-      burger?.focus();
+      // window.location.pathname is read live (not the closure-captured
+      // `location` from render) so it reflects any navigation that already
+      // happened by the time this cleanup runs. Only return focus to the
+      // burger when the menu closed WITHOUT a navigation — not after the
+      // user intentionally navigated away via a link click.
+      if (window.location.pathname === openedPathname) {
+        burger?.focus();
+      }
     };
-  }, [mobileOpen]);
+  }, [mobileOpen, location.pathname]);
 
   return (
     <>
@@ -136,7 +172,7 @@ const Nav = () => {
 
           <Link to="/" className="atmos-nav-brand" aria-label="AI@UW home">
             <span className="atmos-nav-brand-mark" aria-hidden="true">
-              <img src="/images/logo.png" alt="AI@UW" />
+              <img src="/images/logo.webp" alt="AI@UW" />
             </span>
           </Link>
 
@@ -146,6 +182,8 @@ const Nav = () => {
                 <li key={item.to}>
                   <Link
                     to={item.to}
+                    onMouseEnter={() => prefetchRoute(item.to)}
+                    onFocus={() => prefetchRoute(item.to)}
                     className={
                       "atmos-nav-link" +
                       (isActive(item.to) ? " atmos-nav-link-active" : "")
@@ -239,6 +277,8 @@ const Nav = () => {
               key={item.to}
               to={item.to}
               onClick={() => setMobileOpen(false)}
+              onTouchStart={() => prefetchRoute(item.to)}
+              onFocus={() => prefetchRoute(item.to)}
               className={
                 "atmos-nav-mobile-link" +
                 (isActive(item.to) ? " atmos-nav-link-active" : "")

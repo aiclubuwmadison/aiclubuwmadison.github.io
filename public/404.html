@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>AI@UW</title>
+    <script>
+      // GitHub Pages serves this file for any unknown path. Paint the right
+      // theme background, then bounce to the SPA shell with the original
+      // location encoded so src/main.jsx can restore it before React mounts.
+      (function () {
+        try {
+          var stored = localStorage.getItem("theme");
+          var dark =
+            stored === "dark" ||
+            (stored !== "light" &&
+              window.matchMedia("(prefers-color-scheme: dark)").matches);
+          document.documentElement.style.background = dark ? "#0a0a0a" : "#ffffff";
+        } catch (e) {}
+        var l = window.location;
+        l.replace("/?redirect=" + encodeURIComponent(l.pathname + l.search + l.hash));
+      })();
+    </script>
+  </head>
+  <body>
+    <noscript><a href="/">AI@UW — go to homepage</a></noscript>
+  </body>
+</html>

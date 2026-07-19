@@ -177,6 +177,33 @@ const Projects = () => {
     ? PROJECTS_DATA
     : PROJECTS_DATA.filter((p) => p.category === activeTab);
 
+  // Scroll-reveal for the project cards grid. A fresh observer is created per
+  // run and disconnected on cleanup, so React StrictMode's mount → unmount →
+  // remount cycle can't leave cards observed by a disconnected observer (which
+  // previously stranded every card at opacity:0). Cards already revealed keep
+  // `sr-visible`; only not-yet-revealed cards are hidden and (re)observed, so
+  // category filter changes still animate in newly rendered cards.
+  useEffect(() => {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('sr-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    const cards = document.querySelectorAll('.project-card');
+    cards.forEach((el, i) => {
+      if (el.classList.contains('sr-visible')) return;
+      el.classList.add('sr-hidden');
+      el.style.transitionDelay = `${Math.min((i % 6) * 70, 280)}ms`;
+      io.observe(el);
+    });
+
+    return () => io.disconnect();
+  }, [activeTab]);
+
   return (
     <div className="atmos-root atmos-projects">
       <section className="projects-hero atmos-page-hero">

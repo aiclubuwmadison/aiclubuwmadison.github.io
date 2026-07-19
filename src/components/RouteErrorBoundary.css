@@ -1,0 +1,42 @@
+.route-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  padding: clamp(64px, 12vw, 120px) var(--atmos-gutter, 24px);
+}
+
+.route-error-inner {
+  max-width: 32rem;
+  text-align: center;
+}
+
+.route-error-eyebrow {
+  margin: 0 0 0.75rem;
+  font-family: var(--atmos-mono, monospace);
+  font-size: 0.8125rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--atmos-badger, #c5050c);
+}
+
+.route-error-title {
+  margin: 0 0 1rem;
+  font-family: var(--atmos-serif, serif);
+  font-size: var(--type-title-lg, 2rem);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--atmos-ink, #0a0a0a);
+}
+
+.route-error-lede {
+  margin: 0 0 2rem;
+  font-family: var(--atmos-sans, sans-serif);
+  font-size: var(--type-body, 1.0625rem);
+  line-height: 1.6;
+  color: var(--atmos-ink-mute, #64748b);
+}
+
+.route-error-btn {
+  cursor: pointer;
+}

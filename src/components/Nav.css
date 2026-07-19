@@ -185,8 +185,9 @@
 }
 
 .atmos-nav-link {
+  position: relative;
   font-family: var(--atmos-sans);
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
   color: var(--atmos-ink-soft);
   letter-spacing: 0.01em;
@@ -196,29 +197,49 @@
   display: inline-flex;
   align-items: center;
   white-space: nowrap;
-  transition: color 180ms ease, background 180ms ease;
+  transition: color 180ms ease;
+}
+
+/* Underline indicator — grows from center on hover */
+.atmos-nav-link::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 2px;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .atmos-nav-link:hover {
   color: var(--atmos-ink);
-  background: rgba(15, 23, 42, 0.04);
 }
 
-/* Active link — soft red tint pill */
+.atmos-nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* Active link — persistent red underline */
 .atmos-nav-link-active {
   color: var(--atmos-badger);
-  background: rgba(197, 5, 12, 0.1);
+}
+
+.atmos-nav-link-active::after {
+  transform: scaleX(1);
 }
 
 .atmos-nav-link-active:hover {
   color: var(--atmos-badger);
-  background: rgba(197, 5, 12, 0.14);
 }
 
 /* ── CTA button ─────────────────────────────────────────── */
 .atmos-nav-cta {
   font-family: var(--atmos-sans);
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
   color: #fff;
   background: var(--atmos-badger);
@@ -231,24 +252,27 @@
   gap: 8px;
   white-space: nowrap;
   flex-shrink: 0;
-  transition: background 200ms ease, box-shadow 200ms ease, gap 200ms ease;
+  transition:
+    background 200ms ease,
+    box-shadow 200ms ease,
+    transform 200ms ease;
   box-shadow: var(--shadow-sm);
 }
 
 .atmos-nav-cta:hover {
-  background: #a8040a;
+  background: #ff1a24;
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.atmos-nav-cta:active {
+  transform: translateY(0) scale(0.98);
   box-shadow: var(--shadow-sm);
-  gap: 11px;
 }
 
 .atmos-nav-cta-arrow {
   display: inline-flex;
   align-items: center;
-  transition: transform 200ms ease;
-}
-
-.atmos-nav-cta:hover .atmos-nav-cta-arrow {
-  transform: translateX(2px);
 }
 
 /* ── Theme toggle ───────────────────────────────────────── */
@@ -260,14 +284,21 @@
   width: 36px;
   height: 36px;
   padding: 0;
-  background: transparent;
+  /* Sits on the capsule, which already blurs — no local blur needed. */
+  background: var(--atmos-glass-control);
   border: 1px solid var(--atmos-hairline);
   border-radius: 999px;
   color: var(--atmos-ink);
   cursor: pointer;
   flex-shrink: 0;
-  transition: border-color 180ms ease, color 180ms ease, transform 200ms ease;
+  transition:
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 200ms ease,
+    background 200ms ease,
+    box-shadow 200ms ease;
   overflow: visible;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
 }
 
 .atmos-nav-theme-toggle-icon {
@@ -294,7 +325,13 @@
 
 .atmos-nav-theme-toggle:hover {
   border-color: var(--atmos-ink-soft);
+  background: var(--atmos-glass-bg-strong);
+  box-shadow: var(--shadow-sm);
   transform: rotate(-12deg);
+}
+
+.atmos-nav-theme-toggle:active {
+  transform: rotate(0deg) scale(0.96);
 }
 
 .atmos-nav-mobile-theme-toggle {
@@ -577,5 +614,39 @@
   .atmos-nav-inner::before,
   .atmos-nav-inner::after {
     display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .atmos-nav-theme-toggle,
+  .atmos-nav-theme-toggle:hover,
+  .atmos-nav-theme-toggle:active {
+    transform: none !important;
+  }
+
+  .atmos-nav-theme-toggle-icon {
+    animation: none !important;
+  }
+
+  .atmos-nav-cta,
+  .atmos-nav-cta:hover,
+  .atmos-nav-cta:active {
+    transform: none !important;
+  }
+
+  .atmos-nav-cta:hover .atmos-nav-cta-arrow {
+    transform: none !important;
+  }
+
+  .atmos-nav-brand:hover .atmos-nav-brand-mark {
+    transform: none !important;
+  }
+
+  .atmos-nav-burger-bar {
+    transition: none !important;
+  }
+
+  .atmos-nav-mobile-panel {
+    transition: opacity 150ms ease !important;
   }
 }

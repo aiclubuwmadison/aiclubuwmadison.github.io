@@ -13,6 +13,32 @@ const Contact = () => {
     document.title = 'Contact | AI@UW';
   }, []);
 
+  // IntersectionObserver for scroll reveals
+  useEffect(() => {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add('sr-visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    const elements = document.querySelectorAll(
+      '.atmos-channel-card, .atmos-contact-right'
+    );
+
+    elements.forEach((el, i) => {
+      el.classList.add('sr-hidden');
+      if (el.classList.contains('atmos-channel-card')) {
+        el.style.transitionDelay = `${(i % 4) * 80}ms`;
+      }
+      io.observe(el);
+    });
+
+    return () => io.disconnect();
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!message.trim()) return;

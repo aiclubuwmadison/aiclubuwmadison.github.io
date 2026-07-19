@@ -23,7 +23,7 @@
 .faq-label {
   display: block;
   font-family: var(--atmos-sans);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   color: var(--atmos-badger);
   text-transform: uppercase;
@@ -55,14 +55,27 @@
 }
 
 .faq-contact-card {
-  background: var(--atmos-paper);
+  background: var(--atmos-glass-control, var(--atmos-paper));
+  backdrop-filter: var(--atmos-glass-blur);
+  -webkit-backdrop-filter: var(--atmos-glass-blur);
   border: 1px solid var(--atmos-hairline);
-  border-radius: 16px;
+  border-radius: var(--radius-lg, 16px);
   padding: 20px 24px;
   display: flex;
   align-items: flex-start;
   gap: 16px;
-  box-shadow: none;
+  box-shadow: var(--shadow-sm);
+  transition:
+    border-color var(--motion-base, 280ms) var(--ease-out, ease),
+    box-shadow var(--motion-base, 280ms) var(--ease-out, ease),
+    transform var(--motion-base, 280ms) var(--ease-out, ease),
+    background 280ms ease;
+}
+
+.faq-contact-card:hover {
+  border-color: rgba(197, 5, 12, 0.28);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
 }
 
 .faq-contact-card-icon {
@@ -91,7 +104,7 @@
 
 .faq-contact-card-body {
   font-family: var(--atmos-sans);
-  font-size: 15px;
+  font-size: 16px;
   color: var(--atmos-ink-soft);
   line-height: 1.6;
   margin: 0 0 12px;
@@ -201,7 +214,7 @@
   color: var(--atmos-ink-mute);
   font-family: var(--atmos-sans);
   font-size: 28px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1;
   transition: transform 300ms cubic-bezier(.2,.7,.2,1), color 300ms ease;
 }
@@ -245,14 +258,19 @@
   text-underline-offset: 4px;
 }
 
-@keyframes atmosFaqOpen {
-  from { opacity: 0; transform: translateY(4px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .atmos-faq-item[open] .atmos-faq-a {
-    animation: none;
+  .faq-contact-card,
+  .faq-contact-card:hover {
+    transform: none !important;
+    transition: border-color 200ms ease, box-shadow 200ms ease, background 200ms ease !important;
+  }
+
+  .atmos-faq-toggle-icon {
+    transition: color 200ms ease !important;
+  }
+
+  .atmos-faq-answer-panel {
+    transition: none !important;
   }
 }
 
@@ -270,8 +288,12 @@
 /* ── Dark mode (Involvement / FAQ) ─────────────────────── */
 /* Left column contact card */
 [data-theme="dark"] .faq-contact-card {
-  background: var(--atmos-paper-tint);
-  box-shadow: none;
+  background: var(--atmos-glass-control, var(--atmos-paper-tint));
+  box-shadow: var(--shadow-sm);
+}
+
+[data-theme="dark"] .faq-contact-card:hover {
+  border-color: rgba(255, 110, 117, 0.35);
 }
 
 [data-theme="dark"] .faq-contact-card-icon {

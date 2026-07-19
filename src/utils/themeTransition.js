@@ -22,11 +22,18 @@ function clearRevealOrigin() {
   root.style.removeProperty("--reveal-radius");
 }
 
+// Bumped on every call; lets a stale in-flight transition's cleanup detect
+// that it has been superseded and skip running (avoids the flash/double-fade
+// glitch from rapid double-clicks on the theme toggle).
+let transitionToken = 0;
+
 /**
  * Circular reveal using View Transitions API snapshots so page content
  * stays visible during the wipe (old theme circles in, new theme circles out).
  */
 export function animateThemeChange(_currentTheme, nextTheme, originX, originY, onThemeSwap) {
+  const token = ++transitionToken;
+
   if (prefersReducedMotion()) {
     onThemeSwap(nextTheme);
     return;
@@ -36,6 +43,9 @@ export function animateThemeChange(_currentTheme, nextTheme, originX, originY, o
   document.documentElement.classList.add("atmos-theme-transitioning");
 
   const finish = () => {
+    // A newer call has started since this one — let its own cleanup run
+    // instead, so we don't tear down state mid-flight.
+    if (token !== transitionToken) return;
     document.documentElement.classList.remove("atmos-theme-transitioning");
     clearRevealOrigin();
   };

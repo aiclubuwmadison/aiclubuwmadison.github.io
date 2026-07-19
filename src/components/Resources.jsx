@@ -333,6 +333,59 @@ const Resources = () => {
     return titleMatch || authorMatch;
   });
 
+  // Scroll-reveal for the static sections below the hero: the guides grid
+  // and the readings list never change after mount, so a single observer
+  // created once (and disconnected on unmount) is enough here.
+  useEffect(() => {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('sr-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    const elements = document.querySelectorAll('.res-skill-card, .res-reading-row');
+    elements.forEach((el, i) => {
+      el.classList.add('sr-hidden');
+      el.style.transitionDelay = `${Math.min((i % 6) * 70, 280)}ms`;
+      io.observe(el);
+    });
+
+    return () => io.disconnect();
+  }, []);
+
+  // Scroll-reveal for the live news feed. Cards arrive asynchronously (fetch
+  // resolves after mount) and can change again on manual refresh or search
+  // filtering. A fresh observer is created per run and disconnected on cleanup,
+  // so React StrictMode's mount → unmount → remount cycle can't leave cards
+  // observed by a disconnected observer (which previously stranded every card
+  // at opacity:0). Cards already revealed keep `sr-visible`; only not-yet-
+  // revealed cards are hidden and (re)observed. Skeleton placeholders
+  // (`.res-skeleton`) are excluded so loading state never gets treated as
+  // revealable content.
+  useEffect(() => {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('sr-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    const cards = document.querySelectorAll('.res-news-card:not(.res-skeleton)');
+    cards.forEach((el, i) => {
+      if (el.classList.contains('sr-visible')) return;
+      el.classList.add('sr-hidden');
+      el.style.transitionDelay = `${Math.min((i % 6) * 70, 280)}ms`;
+      io.observe(el);
+    });
+
+    return () => io.disconnect();
+  }, [news, searchQuery, loading]);
+
   return (
     <div className="atmos-root atmos-resources">
       {/* 1. HERO / HEADER SECTION */}
