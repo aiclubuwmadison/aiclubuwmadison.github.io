@@ -1,17 +1,165 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Mail, Newspaper, MapPin, ArrowRight, Check } from 'lucide-react';
 import './Contact.css';
 
+const GUIDE_MS = 3000;
+
+/** Curved arrow from the nav Join CTA to the contact form (fixed overlay). */
+const JoinFormGuide = ({ active, targetId }) => {
+  const [geometry, setGeometry] = useState(null);
+
+  const measure = useCallback(() => {
+    const form = document.getElementById(targetId);
+    if (!form) return;
+
+    const desktopCta = document.querySelector('.atmos-nav-cta');
+    const mobileCta = document.querySelector('.atmos-nav-mobile-cta');
+    let fromEl = null;
+
+    if (desktopCta) {
+      const style = window.getComputedStyle(desktopCta);
+      if (style.display !== 'none' && style.visibility !== 'hidden' && desktopCta.getBoundingClientRect().width > 0) {
+        fromEl = desktopCta;
+      }
+    }
+    if (!fromEl && mobileCta) {
+      const rect = mobileCta.getBoundingClientRect();
+      if (rect.width > 0 && rect.height > 0) fromEl = mobileCta;
+    }
+
+    const to = form.getBoundingClientRect();
+    const from = fromEl
+      ? fromEl.getBoundingClientRect()
+      : { left: window.innerWidth / 2, top: 72, width: 0, height: 0, bottom: 72, right: window.innerWidth / 2 };
+
+    const x1 = from.left + from.width / 2;
+    const y1 = from.bottom;
+    const x2 = to.left + Math.min(to.width * 0.5, Math.max(48, to.width * 0.35));
+    const y2 = to.top + 28;
+    const midY = y1 + (y2 - y1) * 0.45;
+    const path = `M ${x1} ${y1} C ${x1} ${midY}, ${x2} ${midY}, ${x2} ${y2}`;
+
+    setGeometry({
+      path,
+      w: window.innerWidth,
+      h: window.innerHeight,
+      x2,
+      y2,
+    });
+  }, [targetId]);
+
+  useEffect(() => {
+    if (!active) {
+      const clearId = window.setTimeout(() => setGeometry(null), 0);
+      return () => window.clearTimeout(clearId);
+    }
+
+    const t0 = window.setTimeout(measure, 0);
+    const t1 = window.setTimeout(measure, 120);
+    const t2 = window.setTimeout(measure, 480);
+    const t3 = window.setTimeout(measure, 900);
+    window.addEventListener('resize', measure);
+    window.addEventListener('scroll', measure, { passive: true });
+
+    return () => {
+      window.clearTimeout(t0);
+      window.clearTimeout(t1);
+      window.clearTimeout(t2);
+      window.clearTimeout(t3);
+      window.removeEventListener('resize', measure);
+      window.removeEventListener('scroll', measure);
+    };
+  }, [active, measure]);
+
+  if (!active || !geometry) return null;
+
+  return (
+    <div className="join-form-guide" aria-hidden="true">
+      <svg
+        className="join-form-guide-svg"
+        width={geometry.w}
+        height={geometry.h}
+        viewBox={`0 0 ${geometry.w} ${geometry.h}`}
+      >
+        <defs>
+          <marker
+            id="join-form-arrowhead"
+            markerWidth="12"
+            markerHeight="12"
+            refX="10"
+            refY="6"
+            orient="auto"
+            markerUnits="userSpaceOnUse"
+          >
+            <path d="M0,0 L12,6 L0,12 Z" className="join-form-guide-head" />
+          </marker>
+        </defs>
+        <path
+          d={geometry.path}
+          className="join-form-guide-path"
+          markerEnd="url(#join-form-arrowhead)"
+          fill="none"
+        />
+      </svg>
+      <span
+        className="join-form-guide-pulse"
+        style={{ left: geometry.x2, top: geometry.y2 }}
+      />
+    </div>
+  );
+};
+
 const Contact = () => {
+  const location = useLocation();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [showJoinGuide, setShowJoinGuide] = useState(false);
 
   useEffect(() => {
     document.title = 'Contact | AI@UW';
   }, []);
+
+  // Guide arrow from "Join the club" → form (~3s)
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const fromJoin =
+      params.get('join') === '1' ||
+      location.hash === '#join-form' ||
+      Boolean(location.state?.guideToForm);
+
+    if (!fromJoin) return undefined;
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let endTimer = 0;
+
+    const scrollTimer = window.setTimeout(() => {
+      const form = document.getElementById('join-form');
+      form?.scrollIntoView({
+        behavior: reducedMotion ? 'auto' : 'smooth',
+        block: 'center',
+      });
+      if (!reducedMotion) {
+        setShowJoinGuide(true);
+        form?.classList.add('is-join-guided');
+      }
+    }, 60);
+
+    endTimer = window.setTimeout(() => {
+      setShowJoinGuide(false);
+      document.getElementById('join-form')?.classList.remove('is-join-guided');
+    }, GUIDE_MS + 60);
+
+    return () => {
+      window.clearTimeout(scrollTimer);
+      window.clearTimeout(endTimer);
+      setShowJoinGuide(false);
+      document.getElementById('join-form')?.classList.remove('is-join-guided');
+    };
+  }, [location.search, location.hash, location.state, location.key]);
 
   // IntersectionObserver for scroll reveals
   useEffect(() => {
@@ -167,7 +315,7 @@ const Contact = () => {
               </ul>
             </div>
 
-            <div className="atmos-contact-right">
+            <div className="atmos-contact-right" id="join-form">
               <div className="atmos-form-head">
                 <span className="atmos-form-eyebrow">Send us your thoughts</span>
               </div>
@@ -261,6 +409,8 @@ const Contact = () => {
 
         </div>
       </section>
+
+      <JoinFormGuide active={showJoinGuide} targetId="join-form" />
     </div>
   );
 };
