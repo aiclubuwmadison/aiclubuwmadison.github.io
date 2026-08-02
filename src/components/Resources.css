@@ -394,3 +394,40 @@
     animation: none !important;
   }
 }
+
+/* ── New UI 2: intelligence reading terminal ───────────── */
+.atmos-resources { font-family: var(--atmos-sans); }
+.atmos-resources .atmos-page-hero-title,
+.atmos-resources .atmos-section-title { font-family: var(--atmos-serif); }
+.atmos-resources .atmos-page-hero-lede,
+.atmos-resources .atmos-page-hero-cta { font-family: var(--atmos-sans); }
+.res-hero { padding-top: var(--space-hero-y); }
+.res-news-controls {
+  padding: 10px;
+  border: 1px solid var(--atmos-hairline);
+  border-radius: var(--radius-md);
+  background: var(--atmos-paper-tint);
+}
+.res-search-input,
+.res-refresh-btn { border-radius: 10px; }
+.res-news-stream { grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr)); }
+.res-news-card {
+  border-radius: var(--radius-lg);
+  background: var(--atmos-paper-tint);
+  box-shadow: var(--shadow-sm);
+}
+.res-news-card:hover { box-shadow: var(--shadow-md); }
+.res-news-card-title {
+  font-family: var(--atmos-serif);
+  font-size: clamp(22px, 2.1vw, 28px);
+  font-weight: 600;
+  letter-spacing: -.025em;
+}
+.res-news-meta-row,
+.res-search-clear,
+.res-refresh-btn,
+.res-news-hover-hint { font-family: var(--atmos-mono); }
+.res-banner-fallback {
+  border-radius: var(--radius-md);
+  border-left: 3px solid var(--atmos-badger);
+}

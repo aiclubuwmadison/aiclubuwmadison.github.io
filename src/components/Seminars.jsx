@@ -338,7 +338,7 @@ const Seminars = () => {
             </a>
           </div>
           <div className="atmos-sem-hero-image" aria-hidden="true">
-            <img src="/images/seminars/hero.webp" alt="" width="1200" height="800" fetchpriority="high" />
+            <img src="/images/seminars/hero.webp" alt="" width="1200" height="800" fetchPriority="high" />
           </div>
         </header>
 

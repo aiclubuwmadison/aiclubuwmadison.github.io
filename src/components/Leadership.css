@@ -449,6 +449,44 @@
   .lead-collage-spiral img { animation: none; }
 }
 
+/* ── New UI 2: people behind the signal ────────────────── */
+.lead-hero { padding-top: var(--space-hero-y); }
+.lead-hero-title {
+  font-weight: 600;
+  line-height: .96;
+  letter-spacing: -.045em;
+}
+.lead-collage { border-radius: 32px; }
+.lead-cc {
+  border-radius: var(--radius-lg);
+  border: 1px solid color-mix(in srgb, var(--atmos-hairline) 75%, transparent);
+  box-shadow: var(--shadow-md);
+}
+.lead-collage-spiral { border-radius: 20px; transform: rotate(4deg); }
+.lead-section-head { border-top: 1px solid var(--atmos-hairline); }
+.lead-section-title {
+  font-family: var(--atmos-serif);
+  font-weight: 600;
+  letter-spacing: -.035em;
+}
+.lead-featured-card,
+.lead-team-card {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--atmos-hairline);
+  box-shadow: var(--shadow-sm);
+}
+.lead-team-card { background: var(--atmos-paper-tint); }
+.lead-team-photo { border-radius: calc(var(--radius-lg) - 5px); }
+.lead-card-role,
+.atmos-archive-term { font-family: var(--atmos-mono); letter-spacing: .08em; }
+.lead-featured-name,
+.lead-team-name { font-family: var(--atmos-serif); letter-spacing: -.02em; }
+.atmos-archive { border-color: var(--atmos-hairline); }
+
+@media (max-width: 860px) {
+  .lead-collage-spiral { transform: none; }
+}
+
 /* ── Dark mode (entire Leadership page) ──────────────────── */
 /* Hero photo collage: fade bottom edge to dark instead of white */
 [data-theme="dark"] .lead-cc::after {

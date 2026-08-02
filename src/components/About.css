@@ -606,6 +606,62 @@
   }
 }
 
+/* ── New UI 2: Wisconsin signal studio ─────────────────── */
+.about-hero {
+  min-height: min(790px, calc(100vh - var(--atmos-nav-height)));
+  grid-template-columns: minmax(0, 0.92fr) minmax(420px, 1.08fr);
+}
+.about-hero-left { position: relative; z-index: 2; }
+.about-hero-eyebrow,
+.about-eyebrow {
+  font-weight: 500;
+  letter-spacing: 0.16em;
+}
+.about-hero-title { font-weight: 600; max-width: 10ch; }
+.about-hero-title em {
+  text-decoration: none;
+  font-weight: 500;
+}
+.about-hero-lede {
+  border-left: 2px solid var(--atmos-badger);
+  padding-left: 20px;
+}
+.about-hero-right::after {
+  content: "NEURAL FIELD / UW–MADISON";
+  position: absolute;
+  right: 3%;
+  bottom: 4%;
+  font: 500 10px/1 var(--atmos-mono);
+  letter-spacing: .12em;
+  color: var(--atmos-ink-mute);
+}
+.about-story { background: var(--atmos-paper-deep); }
+.about-stat,
+.about-what-card,
+.about-area-tag {
+  border-radius: var(--radius-lg);
+  border-color: var(--atmos-hairline);
+  box-shadow: var(--shadow-sm);
+}
+.about-stat { background: var(--atmos-paper); }
+.about-stat-num,
+.about-story-title,
+.about-what-title,
+.about-areas-title { font-family: var(--atmos-serif); letter-spacing: -.035em; }
+.about-what-card { background: var(--atmos-paper-tint); }
+.about-what-card:hover,
+.about-area-tag:hover { box-shadow: var(--shadow-md); }
+
+@media (max-width: 860px) {
+  .about-hero { min-height: auto; grid-template-columns: 1fr; }
+  .about-hero-title { max-width: 12ch; }
+}
+
+@media (max-width: 480px) {
+  .about-hero { padding-top: 56px; }
+  .about-hero-right { display: none; }
+}
+
 /* ── Dark mode (hero block only) ─────────────────────────── */
 [data-theme="dark"] .about-hero {
   position: relative;
@@ -741,4 +797,3 @@
 [data-theme="dark"] .about-areas-deco path {
   stroke: rgba(255, 110, 117, 0.18);
 }
-

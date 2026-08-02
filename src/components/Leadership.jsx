@@ -401,10 +401,10 @@ const Leadership = () => {
             <div className="lead-collage">
               <div className="lead-collage-bg" aria-hidden="true" />
               <div className="lead-cc lead-cc-1">
-                <img src="/images/portraits/hriday.webp"   alt="Hriday Sethi"     loading="eager" fetchpriority="high" />
+                <img src="/images/portraits/hriday.webp"   alt="Hriday Sethi"     loading="eager" fetchPriority="high" />
               </div>
               <div className="lead-cc lead-cc-2">
-                <img src="/images/portraits/rishabh.webp" alt="Rishabh Aggarwal" loading="eager" fetchpriority="high" />
+                <img src="/images/portraits/rishabh.webp" alt="Rishabh Aggarwal" loading="eager" fetchPriority="high" />
               </div>
               <div className="lead-cc lead-cc-3">
                 <img src="/images/portraits/shikha.webp"  alt="Shikha Ashara"    loading="eager" />

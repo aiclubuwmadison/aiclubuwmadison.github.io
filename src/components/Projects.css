@@ -348,3 +348,48 @@
     transition: color 200ms ease, background 200ms ease, box-shadow 200ms ease !important;
   }
 }
+
+/* ── New UI 2: applied intelligence index ──────────────── */
+.projects-hero { padding-top: var(--space-hero-y); }
+.projects-tabs {
+  border-radius: var(--radius-md);
+  background: var(--atmos-paper-tint);
+  box-shadow: var(--shadow-sm);
+}
+.projects-tab {
+  border-radius: 9px;
+  font-family: var(--atmos-mono);
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.projects-grid { gap: clamp(24px, 3.2vw, 40px); }
+.project-card {
+  border-radius: var(--radius-lg);
+  background: var(--atmos-paper-tint);
+  box-shadow: var(--shadow-sm);
+}
+.project-card:nth-child(3n + 1) { transform-origin: left center; }
+.project-card-visual {
+  height: 210px;
+  background:
+    linear-gradient(var(--atmos-hairline-soft) 1px, transparent 1px),
+    linear-gradient(90deg, var(--atmos-hairline-soft) 1px, transparent 1px),
+    var(--atmos-paper);
+  background-size: 32px 32px;
+}
+.project-card-category-badge,
+.project-tech-chip { font-family: var(--atmos-mono); letter-spacing: .04em; }
+.project-card-title {
+  font-family: var(--atmos-serif);
+  font-size: clamp(27px, 2.5vw, 34px);
+  font-weight: 600;
+  letter-spacing: -.03em;
+}
+.project-repo-link { border-top: 1px solid var(--atmos-hairline); padding-top: 18px; }
+.projects-notice-banner {
+  border-radius: var(--radius-md);
+  border-left: 3px solid var(--atmos-badger);
+  background: var(--atmos-paper-deep);
+}

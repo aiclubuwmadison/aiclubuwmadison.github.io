@@ -355,6 +355,44 @@
   }
 }
 
+/* ── New UI 2: open channel ────────────────────────────── */
+.atmos-contact .atmos-contact-hero { padding-top: var(--space-hero-y); }
+.atmos-contact .atmos-contact-title {
+  font-weight: 600;
+  line-height: .96;
+  letter-spacing: -.045em;
+}
+.atmos-contact .atmos-contact-row {
+  grid-template-columns: minmax(0, .9fr) minmax(360px, 1.1fr);
+  align-items: start;
+}
+.atmos-contact .atmos-channel-card {
+  border-radius: var(--radius-md);
+  background: transparent;
+  box-shadow: none;
+}
+.atmos-contact .atmos-channel-icon { border-radius: 12px; }
+.atmos-contact .atmos-channel-title { letter-spacing: -.02em; }
+.atmos-contact .atmos-contact-right {
+  padding: clamp(26px, 4vw, 44px);
+  border: 1px solid var(--atmos-hairline);
+  border-top: 3px solid var(--atmos-badger);
+  border-radius: var(--radius-lg);
+  background: var(--atmos-paper-tint);
+  box-shadow: var(--shadow-md);
+}
+.atmos-contact .atmos-form-eyebrow,
+.atmos-contact .contact-form-label { font-family: var(--atmos-mono); letter-spacing: .08em; }
+.atmos-contact .contact-form-input,
+.atmos-contact .contact-form-textarea {
+  border-radius: var(--radius-sm);
+  background: var(--atmos-paper);
+}
+
+@media (max-width: 760px) {
+  .atmos-contact .atmos-contact-row { grid-template-columns: 1fr; }
+}
+
 /* ── Dark mode (Contact) ─────────────────────────────────── */
 /* Channel cards: dark surface + deeper shadows */
 [data-theme="dark"] .atmos-contact .atmos-channel-card {
@@ -374,4 +412,3 @@
 [data-theme="dark"] .atmos-contact .atmos-channel-card:hover .atmos-channel-icon {
   background-color: rgba(255, 110, 117, 0.24);
 }
-

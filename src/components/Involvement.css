@@ -285,6 +285,40 @@
   }
 }
 
+/* ── New UI 2: membership field notes ─────────────────── */
+.atmos-involvement {
+  padding-top: var(--space-hero-y);
+  background: transparent;
+}
+.atmos-faq-layout { grid-template-columns: minmax(260px, .86fr) minmax(0, 1.4fr); }
+.faq-heading {
+  font-weight: 600;
+  letter-spacing: -.045em;
+  line-height: .96;
+}
+.faq-label { font-family: var(--atmos-mono); font-weight: 500; }
+.faq-contact-card {
+  border-radius: var(--radius-lg);
+  background: var(--atmos-paper-deep);
+  box-shadow: none;
+}
+.faq-contact-card-icon { border-radius: 12px; }
+.faq-right-card {
+  overflow: hidden;
+  border: 1px solid var(--atmos-hairline);
+  border-radius: var(--radius-lg);
+  background: var(--atmos-paper-tint);
+  box-shadow: var(--shadow-sm);
+}
+.atmos-faq-row { padding-inline: clamp(20px, 3vw, 34px); }
+.atmos-faq-row:hover { background: color-mix(in srgb, var(--atmos-badger) 4%, transparent); }
+.atmos-faq-q { font-weight: 650; letter-spacing: -.015em; }
+.faq-row-icon { font-family: var(--atmos-mono); color: var(--atmos-badger); }
+
+@media (max-width: 900px) {
+  .atmos-faq-layout { grid-template-columns: 1fr; }
+}
+
 /* ── Dark mode (Involvement / FAQ) ─────────────────────── */
 /* Left column contact card */
 [data-theme="dark"] .faq-contact-card {

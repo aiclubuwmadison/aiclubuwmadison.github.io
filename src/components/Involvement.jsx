@@ -128,8 +128,6 @@ const Involvement = () => {
 
     const elements = document.querySelectorAll(".atmos-reveal, .atmos-faq-row");
     elements.forEach((el, i) => {
-      if (el.dataset.srReady) return;
-      el.dataset.srReady = "1";
       el.classList.add("sr-hidden");
       if (el.classList.contains("atmos-faq-row")) {
         el.style.transitionDelay = `${Math.min((i % 5) * 70, 280)}ms`;
