@@ -221,4 +221,49 @@
   --atmos-hairline: rgba(255, 255, 255, 0.10);
 }
 
+/* ── Research colophon ─────────────────────────────────── */
+.atmos-footer {
+  background:
+    linear-gradient(90deg, var(--atmos-badger) 0 86px, transparent 86px) top left / 100% 3px no-repeat,
+    var(--atmos-paper-deep);
+}
+
+.atmos-footer-top {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) auto;
+  text-align: left;
+  align-items: end;
+  padding: clamp(56px, 8vw, 88px) 0 42px;
+}
+
+.atmos-footer-brand { justify-self: start; }
+.atmos-footer-links { justify-content: flex-end; }
+.atmos-footer-wordmark {
+  font-weight: 600;
+  font-size: clamp(34px, 4vw, 52px);
+  letter-spacing: -0.045em;
+}
+.atmos-footer-eyebrow,
+.atmos-footer-nav-link {
+  font-family: var(--atmos-mono);
+}
+.atmos-footer-nav {
+  justify-content: flex-start;
+  border-top: 1px solid var(--atmos-hairline);
+  padding: 24px 0 38px;
+}
+.atmos-footer-nav-link {
+  padding: 7px 0;
+  border-radius: 0;
+  font-size: 11px;
+  letter-spacing: 0.09em;
+}
+.atmos-footer-nav-link:hover { background: transparent; }
+
+@media (max-width: 760px) {
+  .atmos-footer-top { grid-template-columns: 1fr; align-items: start; }
+  .atmos-footer-links { justify-content: flex-start; }
+  .atmos-footer-nav { justify-content: flex-start; gap: 12px 22px; }
+}
+
 /* Social links use global badger hover via .atmos-footer-link */

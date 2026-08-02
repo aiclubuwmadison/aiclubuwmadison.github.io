@@ -62,21 +62,21 @@ button:focus-visible,
    ========================================================= */
 :root {
   color-scheme: light;
-  --atmos-paper: #ffffff;
-  --atmos-paper-deep: #f8fafc;
-  --atmos-paper-tint: #f1f5f9;
-  --atmos-ink: #0f172a;
-  --atmos-ink-soft: #475569;
-  --atmos-ink-mute: #64748b; /* WCAG AA accessible contrast in Light Mode */
-  --atmos-hairline: #e2e8f0;
-  --atmos-hairline-soft: #f1f5f9;
+  --atmos-paper: #fbfaf8;
+  --atmos-paper-deep: #f2f0ec;
+  --atmos-paper-tint: #f6f4f1;
+  --atmos-ink: #171717;
+  --atmos-ink-soft: #4f4b47;
+  --atmos-ink-mute: #6d6862;
+  --atmos-hairline: #ddd9d3;
+  --atmos-hairline-soft: #ebe8e3;
   --atmos-badger: #C5050C;
   --atmos-accent-glow: rgba(197, 5, 12, 0.12);
-  --atmos-font: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-  --atmos-serif: var(--atmos-font);
+  --atmos-font: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --atmos-serif: "Newsreader", Georgia, serif;
   --atmos-sans: var(--atmos-font);
-  --atmos-mono: var(--atmos-font);
-  --atmos-max: 1320px;
+  --atmos-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  --atmos-max: 1280px;
   --atmos-gutter: clamp(20px, 4vw, 56px);
   /* Nav offset — page roots pad content; backgrounds still paint under fixed chrome */
   --atmos-nav-height: 84px;
@@ -92,16 +92,16 @@ button:focus-visible,
   --atmos-glass-specular: rgba(255, 255, 255, 0.85);
 
   /* Apple-inspired design tokens */
-  --type-display: clamp(48px, 7.5vw, 80px);
-  --type-title-lg: clamp(28px, 4vw, 40px);
-  --type-body: 17px;
+  --type-display: clamp(54px, 7.2vw, 94px);
+  --type-title-lg: clamp(32px, 4vw, 48px);
+  --type-body: 16.5px;
   /* Secondary/card description copy — one legible step down from body */
   --type-body-sm: 15.5px;
-  --lh-display: 1.05;
-  --ls-display: -0.02em;
-  --ls-eyebrow: 0.12em;
-  --space-section-y: clamp(64px, 9vw, 120px);
-  --space-hero-y: clamp(56px, 9vw, 120px);
+  --lh-display: 0.96;
+  --ls-display: -0.045em;
+  --ls-eyebrow: 0.15em;
+  --space-section-y: clamp(80px, 10vw, 144px);
+  --space-hero-y: clamp(72px, 10vw, 144px);
   --space-4: 16px;
   --space-5: 20px;
   --space-6: 24px;
@@ -111,13 +111,13 @@ button:focus-visible,
   --motion-base: 280ms;
   --motion-slow: 460ms;
   --ease-out: cubic-bezier(0.25, 0.1, 0.25, 1);
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --shadow-sm: 0 1px 2px rgba(28, 25, 23, 0.05), 0 8px 24px -20px rgba(28, 25, 23, 0.2);
+  --shadow-md: 0 18px 50px -30px rgba(28, 25, 23, 0.34), 0 2px 8px rgba(28, 25, 23, 0.05);
   --focus-ring: 0 0 0 3px rgba(197, 5, 12, 0.35);
-  --lh-body: 1.6;
+  --lh-body: 1.7;
   --lh-body-sm: 1.55;
   --surface-radius: var(--radius-lg);
   --surface-border: 1px solid var(--atmos-hairline);
@@ -125,12 +125,12 @@ button:focus-visible,
 
 [data-theme="dark"] {
   color-scheme: dark;
-  --atmos-paper:        #0a0a0a;
-  --atmos-paper-deep:   #0a0a0a;
-  --atmos-paper-tint:   #141414;
-  --atmos-ink:          #f1f5f9;
-  --atmos-ink-soft:     #adb6c0;
-  --atmos-ink-mute:     #8b939d;
+  --atmos-paper:        #11100f;
+  --atmos-paper-deep:   #0b0a09;
+  --atmos-paper-tint:   #1a1817;
+  --atmos-ink:          #f5f2ed;
+  --atmos-ink-soft:     #c4beb7;
+  --atmos-ink-mute:     #948d85;
   --atmos-hairline:     rgba(255, 255, 255, 0.08);
   --atmos-hairline-soft: rgba(255, 255, 255, 0.04);
   --atmos-badger:       #ff6e75;
@@ -383,6 +383,7 @@ body,
   position: relative;
   overflow-x: hidden;
   box-sizing: border-box;
+  isolation: isolate;
 }
 
 @media (max-width: 1200px) {
@@ -391,7 +392,20 @@ body,
   }
 }
 .atmos-root::before {
-  display: none;
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 0;
+  display: block;
+  height: min(760px, 70vh);
+  background:
+    radial-gradient(circle at 86% 16%, var(--atmos-accent-glow), transparent 26%),
+    linear-gradient(90deg, transparent 49.92%, color-mix(in srgb, var(--atmos-badger) 9%, transparent) 50%, transparent 50.08%),
+    linear-gradient(color-mix(in srgb, var(--atmos-hairline) 55%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--atmos-hairline) 55%, transparent) 1px, transparent 1px);
+  background-size: auto, auto, 48px 48px, 48px 48px;
+  mask-image: linear-gradient(to bottom, #000 0%, transparent 94%);
+  pointer-events: none;
 }
 .atmos-root::after {
   display: none;
@@ -418,6 +432,16 @@ body,
   padding-top: clamp(64px, 9vw, 120px);
   padding-bottom: clamp(28px, 4vw, 48px);
   border-top: 1px solid var(--atmos-hairline);
+  position: relative;
+}
+.atmos-section-head::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 72px;
+  height: 3px;
+  background: var(--atmos-badger);
 }
 .atmos-section-eyebrow {
   font-family: var(--atmos-mono);
@@ -432,9 +456,9 @@ body,
 .atmos-section-title {
   font-family: var(--atmos-serif);
   font-weight: 700;
-  font-size: clamp(34px, 4.6vw, 60px);
-  line-height: 1.04;
-  letter-spacing: -0.02em;
+  font-size: clamp(40px, 5vw, 68px);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
   margin: 0;
   color: var(--atmos-ink);
 }
@@ -473,10 +497,14 @@ body,
    Applied dynamically by ScrollReveal in About/Involvement. */
 .sr-hidden {
   opacity: 0;
-  transition: opacity var(--motion-fast) ease;
+  transform: translateY(18px);
+  filter: blur(3px);
+  transition: opacity 650ms var(--ease-out), transform 650ms var(--ease-out), filter 650ms var(--ease-out);
 }
 .sr-visible {
   opacity: 1 !important;
+  transform: translateY(0);
+  filter: blur(0);
 }
 
 /* ── Shared buttons ─────────────────────────────────────── */
