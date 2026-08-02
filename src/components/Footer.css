@@ -53,17 +53,17 @@
 }
 
 .atmos-footer-wordmark {
-  font-family: var(--atmos-serif);
-  font-weight: 800;
-  font-size: clamp(28px, 3vw, 36px);
+  font-family: var(--atmos-sans);
+  font-weight: 700;
+  font-size: clamp(26px, 2.8vw, 34px);
   line-height: 1;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.03em;
   color: var(--atmos-ink);
   margin: 0;
 }
 
 .atmos-footer-wordmark .atmos-footer-at {
-  font-style: italic;
+  font-style: normal;
   color: var(--atmos-badger);
   font-weight: 700;
 }
@@ -239,9 +239,9 @@
 .atmos-footer-brand { justify-self: start; }
 .atmos-footer-links { justify-content: flex-end; }
 .atmos-footer-wordmark {
-  font-weight: 600;
-  font-size: clamp(34px, 4vw, 52px);
-  letter-spacing: -0.045em;
+  font-weight: 700;
+  font-size: clamp(28px, 3vw, 36px);
+  letter-spacing: -0.03em;
 }
 .atmos-footer-eyebrow,
 .atmos-footer-nav-link {
