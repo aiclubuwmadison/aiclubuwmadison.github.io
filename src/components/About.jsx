@@ -140,12 +140,12 @@ const About = () => {
     }, { threshold: 0.08 });
 
     const elements = document.querySelectorAll(
-      ".about-stat, .about-what-card, .about-area-tag"
+      ".about-stat, .about-what-card"
     );
 
     elements.forEach((el, i) => {
       el.classList.add("sr-hidden");
-      if (el.classList.contains("about-stat") || el.classList.contains("about-what-card") || el.classList.contains("about-area-tag")) {
+      if (el.classList.contains("about-stat") || el.classList.contains("about-what-card")) {
         el.style.transitionDelay = `${(i % 4) * 80}ms`;
       }
       io.observe(el);
