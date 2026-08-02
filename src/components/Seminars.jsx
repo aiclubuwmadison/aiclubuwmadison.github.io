@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
+import { Mic, Wrench } from 'lucide-react';
 import './Seminars.css';
 
 const seminars = [];
@@ -485,7 +486,15 @@ const Seminars = () => {
                 ))}
               </div>
             ) : (
-              <p className="atmos-sem-empty">Coming soon.</p>
+              <div className="atmos-sem-coming-soon" role="status">
+                <div className="atmos-sem-coming-soon-icon" aria-hidden="true">
+                  <Mic size={22} />
+                </div>
+                <p className="atmos-sem-coming-soon-label">Coming soon</p>
+                <p className="atmos-sem-coming-soon-copy">
+                  Speaker talks and past seminars will land here soon.
+                </p>
+              </div>
             )}
           </section>
         )}
@@ -518,7 +527,15 @@ const Seminars = () => {
                 ))}
               </div>
             ) : (
-              <p className="atmos-sem-empty">Coming soon.</p>
+              <div className="atmos-sem-coming-soon" role="status">
+                <div className="atmos-sem-coming-soon-icon" aria-hidden="true">
+                  <Wrench size={22} />
+                </div>
+                <p className="atmos-sem-coming-soon-label">Coming soon</p>
+                <p className="atmos-sem-coming-soon-copy">
+                  Hands-on workshops and tutorials will land here soon.
+                </p>
+              </div>
             )}
           </section>
         )}

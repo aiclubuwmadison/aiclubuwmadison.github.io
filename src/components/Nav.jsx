@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { flushSync } from "react-dom";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { Sun, Moon, X } from "lucide-react";
 import { animateThemeChange } from "../utils/themeTransition";
 import { prefetchRoute } from "../utils/routePrefetch";
@@ -26,6 +26,7 @@ const getInitialTheme = () => {
 
 const Nav = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [prevPathname, setPrevPathname] = useState(location.pathname);
   const [scrolled, setScrolled] = useState(false);
@@ -78,6 +79,15 @@ const Nav = () => {
   const themeLabel = theme === "dark" ? "Switch to light mode" : "Switch to dark mode";
   const activeIconTheme = iconTheme ?? theme;
   const ThemeIcon = activeIconTheme === "dark" ? Sun : Moon;
+
+  /** Navigate to Contact and request a short on-page guide arrow. */
+  const handleJoinClub = (event) => {
+    event.preventDefault();
+    setMobileOpen(false);
+    navigate("/contact?join=1#contact-us", {
+      state: { guideToContact: Date.now() },
+    });
+  };
 
   useEffect(() => {
     let rafId;
@@ -204,7 +214,11 @@ const Nav = () => {
 
           <div className="atmos-nav-actions">
             {/* CTA */}
-            <Link to="/contact" className="atmos-nav-cta">
+            <Link
+              to="/contact?join=1#contact-us"
+              className="atmos-nav-cta"
+              onClick={handleJoinClub}
+            >
               Join the club
               <span className="atmos-nav-cta-arrow" aria-hidden="true">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -324,9 +338,9 @@ const Nav = () => {
           </button>
 
           <Link
-            to="/contact"
+            to="/contact?join=1#contact-us"
             className="atmos-nav-mobile-cta"
-            onClick={() => setMobileOpen(false)}
+            onClick={handleJoinClub}
           >
             Join the club <span aria-hidden="true">→</span>
           </Link>

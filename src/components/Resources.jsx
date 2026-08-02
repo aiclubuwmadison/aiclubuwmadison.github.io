@@ -7,6 +7,8 @@ import {
   ThumbsUp,
   RefreshCw,
   AlertCircle,
+  Sparkles,
+  Plug,
 } from 'lucide-react';
 import './Resources.css';
 
@@ -203,10 +205,10 @@ const Resources = () => {
             <p className="atmos-page-hero-eyebrow">AI@UW Knowledge Hub</p>
             <h1 className="atmos-page-hero-title">Learning Resources</h1>
             <p className="atmos-page-hero-lede">
-              Live AI news from the community.
+              Live AI news, agent skills, and MCP resources for building with AI.
             </p>
             <a href="#news" className="atmos-page-hero-cta">
-              Browse news <span aria-hidden="true">↓</span>
+              Browse resources <span aria-hidden="true">↓</span>
             </a>
           </div>
         </div>
@@ -317,6 +319,54 @@ const Resources = () => {
                 </button>
               </div>
             )}
+          </div>
+        </div>
+      </section>
+
+      <section className="res-section" id="skills">
+        <div className="atmos-shell">
+          <div className="atmos-section-head">
+            <div>
+              <span className="atmos-section-eyebrow">Agent toolkit</span>
+              <h2 className="atmos-section-title">Agent Skills</h2>
+            </div>
+          </div>
+          <p className="res-section-lede">
+            Reusable skills and playbooks you can load into AI coding agents —
+            procedures, conventions, and workflows that make agents more effective.
+          </p>
+          <div className="res-coming-soon" role="status">
+            <div className="res-coming-soon-icon" aria-hidden="true">
+              <Sparkles size={22} />
+            </div>
+            <p className="res-coming-soon-label">Coming soon</p>
+            <p className="res-coming-soon-copy">
+              Curated agent skills will land here soon.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="res-section res-section--last" id="mcp">
+        <div className="atmos-shell">
+          <div className="atmos-section-head">
+            <div>
+              <span className="atmos-section-eyebrow">Integrations</span>
+              <h2 className="atmos-section-title">MCP</h2>
+            </div>
+          </div>
+          <p className="res-section-lede">
+            Model Context Protocol servers and guides — connect agents to tools,
+            data sources, and services in a standard way.
+          </p>
+          <div className="res-coming-soon" role="status">
+            <div className="res-coming-soon-icon" aria-hidden="true">
+              <Plug size={22} />
+            </div>
+            <p className="res-coming-soon-label">Coming soon</p>
+            <p className="res-coming-soon-copy">
+              MCP resources and server recommendations will land here soon.
+            </p>
           </div>
         </div>
       </section>

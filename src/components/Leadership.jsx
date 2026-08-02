@@ -168,7 +168,6 @@ const FeaturedCard = ({ m }) => {
       className="lead-featured-card"
       style={{ backgroundImage: `linear-gradient(to right, rgba(18,18,22,0.72) 28%, rgba(18,18,22,0.0) 55%), url('${src}')` }}
     >
-      <div className="lead-featured-arrow" aria-hidden="true">↗</div>
       <span className="lead-card-role lead-card-role--light">{m.title}</span>
       <h3 className="lead-featured-name">{m.name}</h3>
       <p className="lead-featured-desc">{ROLE_DESC[m.title] || ''}</p>
@@ -429,7 +428,7 @@ const Leadership = () => {
           <div className="lead-section-head">
             <div>
               <p className="lead-section-eyebrow">Currently Serving</p>
-              <h2 className="lead-section-title">Officers &amp; Project Leads</h2>
+              <h2 className="lead-section-title">Leadership</h2>
             </div>
             <span className="lead-section-aside">2025 — 2026</span>
           </div>

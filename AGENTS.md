@@ -70,7 +70,7 @@ Root-level `images/` and unused `public/fonts/` assets are legacy — **do not**
 |------|-----------|--------|
 | `/` | `About` | Home |
 | `/about` | → `/` | `Navigate` replace |
-| `/involvement` | `Involvement` | “Get Involved” |
+| `/involvement` | `Involvement` | Nav: **FAQs** |
 | `/leadership` | `Leadership` | |
 | `/contact` | `Contact` | |
 | `/seminars` | `Seminars` | Nav label: **Events** |

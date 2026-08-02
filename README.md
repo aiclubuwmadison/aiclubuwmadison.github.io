@@ -120,7 +120,7 @@ Nav labels and order live in `src/constants/nav.js` so the top nav and footer st
 |------|------|--------|
 | `/` | About | Home |
 | `/about` | → `/` | Redirect |
-| `/involvement` | Involvement | Nav: **Get Involved** |
+| `/involvement` | Involvement | Nav: **FAQs** |
 | `/leadership` | Leadership | |
 | `/contact` | Contact | Google Forms quick-message + full form link |
 | `/seminars` | Seminars | Nav: **Events** |

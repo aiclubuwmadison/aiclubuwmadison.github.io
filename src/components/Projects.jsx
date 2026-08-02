@@ -22,78 +22,8 @@ const Github = ({ size = 16, className = '' }) => (
 );
 
 
-const PROJECTS_DATA = [
-  {
-    id: 1,
-    title: 'Autonomous Rover',
-    tagline: 'Precision navigation on custom rover chassis',
-    category: 'Robotics',
-    description: 'Developed an autonomous navigation system using computer vision, RTK-GPS sensor fusion, and ROS2 to pilot a custom-built physical rover across unstructured terrain.',
-    tech: ['ROS2', 'Python', 'C++', 'OpenCV', 'PyTorch'],
-    repo: 'https://github.com/aiclubuwmadison/autonomous-rover',
-    colorPreset: 'red'
-  },
-  {
-    id: 2,
-    title: 'ClinicianAssistant',
-    tagline: 'Medical summarization & event extraction LLM',
-    category: 'NLP',
-    description: 'Fine-tuned a Llama-3 model on open-source clinical notes datasets to summarize patient records and extract diagnostic event timelines with high medical accuracy.',
-    tech: ['PyTorch', 'HuggingFace', 'Llama-3', 'FastAPI', 'React'],
-    repo: 'https://github.com/aiclubuwmadison/clinician-assistant',
-    colorPreset: 'azure'
-  },
-  {
-    id: 3,
-    title: 'WildfireEye',
-    tagline: 'Real-time aerial wildfire segmentation',
-    category: 'CV',
-    description: 'Built a semantic segmentation pipeline using a customized UNet architecture to identify and outline wildfire hotspots from satellite and real-time drone imagery.',
-    tech: ['PyTorch', 'UNet', 'TensorRT', 'Python', 'GDAL'],
-    repo: 'https://github.com/aiclubuwmadison/wildfire-eye',
-    colorPreset: 'orange'
-  },
-  {
-    id: 4,
-    title: 'StudyAgent',
-    tagline: 'Autonomous AI study buddy & coding tutor',
-    category: 'Agents',
-    description: 'An autonomous agent that assists students by checking compile errors in real-time, explaining algorithms, and suggesting codebase fixes in a sandboxed Docker environment.',
-    tech: ['LangChain', 'Claude API', 'Node.js', 'Docker', 'React'],
-    repo: 'https://github.com/aiclubuwmadison/study-agent',
-    colorPreset: 'purple'
-  },
-  {
-    id: 5,
-    title: 'SwarmCoordinator',
-    tagline: 'Decentralized multi-agent drone navigation',
-    category: 'Robotics',
-    description: 'Implemented multi-agent reinforcement learning (MARL) algorithms to coordinate drone swarms in target tracking and collision avoidance within simulated environments.',
-    tech: ['ROS', 'Python', 'Ray/RLlib', 'C++', 'Gazebo'],
-    repo: 'https://github.com/aiclubuwmadison/swarm-coordinator',
-    colorPreset: 'emerald'
-  },
-  {
-    id: 6,
-    title: 'LegalSummarizer',
-    tagline: 'Plain-English translation of complex legal contracts',
-    category: 'NLP',
-    description: 'Fine-tuned transformer-based models specifically on a corpus of legal briefs and terms of service documents to produce highly accurate, plain-English legal summaries.',
-    tech: ['PyTorch', 'HuggingFace', 'Transformers', 'Flask'],
-    repo: 'https://github.com/aiclubuwmadison/legal-summarizer',
-    colorPreset: 'purple'
-  },
-  {
-    id: 7,
-    title: 'CampusNavigator',
-    tagline: 'Agentic trip planning across transit networks',
-    category: 'Agents',
-    description: 'An AI agent that interacts with real-time Madison transit APIs to create optimized travel plans for students, adapting dynamically to weather, delays, and class schedules.',
-    tech: ['LangGraph', 'Python', 'FastAPI', 'Google Maps API'],
-    repo: 'https://github.com/aiclubuwmadison/campus-navigator',
-    colorPreset: 'orange'
-  }
-];
+// Populate when student project write-ups are ready. Empty → Coming soon panel.
+const PROJECTS_DATA = [];
 
 const CATEGORIES = ['All', 'NLP', 'CV', 'Robotics', 'Agents'];
 
@@ -223,77 +153,107 @@ const Projects = () => {
 
       <section className="projects-grid-section">
         <div className="atmos-shell">
-          <div className="projects-notice-banner">
-            <p className="projects-notice-text">
-              Sample portfolio projects — contact us to join a team.
-            </p>
-          </div>
-
-          {/* Tab Filters */}
-          <div className="projects-tabs-container">
-            <div className="projects-tabs">
-              {CATEGORIES.map((cat) => (
-                <button
-                  key={cat}
-                  type="button"
-                  className={`projects-tab${activeTab === cat ? ' active' : ''}`}
-                  onClick={() => setActiveTab(cat)}
-                >
-                  {getCategoryIcon(cat)}
-                  <span>{cat}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Projects Grid */}
-          <div className="projects-grid">
-            {filteredProjects.map((p) => (
-              <div className="project-card" key={p.id}>
-                {/* Visual Header */}
-                <div className={`project-card-visual visual-${p.colorPreset}`}>
-                  <ProjectVisual preset={p.colorPreset} />
-                  <span className="project-card-category-badge">
-                    {getCategoryIcon(p.category)}
-                    {p.category}
-                  </span>
-                </div>
-
-                {/* Content */}
-                <div className="project-card-body">
-                  <h3 className="project-card-title">{p.title}</h3>
-                  <p className="project-card-tagline">{p.tagline}</p>
-                  <p className="project-card-desc">{p.description}</p>
-
-                  {/* Tech Stack Chips */}
-                  <div className="project-card-tech">
-                    {p.tech.slice(0, 3).map((t) => (
-                      <span className="project-tech-chip" key={t}>{t}</span>
-                    ))}
-                    {p.tech.length > 3 && (
-                      <span className="project-tech-chip project-tech-chip--more">
-                        +{p.tech.length - 3} more
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Repo Link */}
-                  {p.repo && (
-                    <a
-                      href={p.repo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="project-repo-link"
-                    >
-                      <Github size={16} />
-                      <span>View Repository</span>
-                      <span className="project-repo-arrow">→</span>
-                    </a>
-                  )}
+          {PROJECTS_DATA.length === 0 ? (
+            <>
+              <div className="atmos-section-head">
+                <div>
+                  <span className="atmos-section-eyebrow">Showcase</span>
+                  <h2 className="atmos-section-title">Club projects</h2>
                 </div>
               </div>
-            ))}
-          </div>
+              <p className="projects-section-lede">
+                Robotics, NLP, vision, and agent systems built by UW students —
+                write-ups and repos will land here as teams ship.
+              </p>
+              <div className="projects-coming-soon" role="status">
+                <div className="projects-coming-soon-icon" aria-hidden="true">
+                  <FolderGit2 size={22} />
+                </div>
+                <p className="projects-coming-soon-label">Coming soon</p>
+                <p className="projects-coming-soon-copy">
+                  Student project spotlights are on the way. Want to build with us?{' '}
+                  <Link to="/contact" className="projects-coming-soon-link">
+                    Get in touch
+                  </Link>
+                  .
+                </p>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="projects-notice-banner">
+                <p className="projects-notice-text">
+                  Student projects from AI@UW teams — contact us to join one.
+                </p>
+              </div>
+
+              {/* Tab Filters */}
+              <div className="projects-tabs-container">
+                <div className="projects-tabs">
+                  {CATEGORIES.map((cat) => (
+                    <button
+                      key={cat}
+                      type="button"
+                      className={`projects-tab${activeTab === cat ? ' active' : ''}`}
+                      onClick={() => setActiveTab(cat)}
+                    >
+                      {getCategoryIcon(cat)}
+                      <span>{cat}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Projects Grid */}
+              <div className="projects-grid">
+                {filteredProjects.map((p) => (
+                  <div className="project-card" key={p.id}>
+                    {/* Visual Header */}
+                    <div className={`project-card-visual visual-${p.colorPreset}`}>
+                      <ProjectVisual preset={p.colorPreset} />
+                      <span className="project-card-category-badge">
+                        {getCategoryIcon(p.category)}
+                        {p.category}
+                      </span>
+                    </div>
+
+                    {/* Content */}
+                    <div className="project-card-body">
+                      <h3 className="project-card-title">{p.title}</h3>
+                      <p className="project-card-tagline">{p.tagline}</p>
+                      <p className="project-card-desc">{p.description}</p>
+
+                      {/* Tech Stack Chips */}
+                      <div className="project-card-tech">
+                        {p.tech.slice(0, 3).map((t) => (
+                          <span className="project-tech-chip" key={t}>{t}</span>
+                        ))}
+                        {p.tech.length > 3 && (
+                          <span className="project-tech-chip project-tech-chip--more">
+                            +{p.tech.length - 3} more
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Repo Link */}
+                      {p.repo && (
+                        <a
+                          href={p.repo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="project-repo-link"
+                        >
+                          <Github size={16} />
+                          <span>View Repository</span>
+                          <span className="project-repo-arrow">→</span>
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </section>
     </div>

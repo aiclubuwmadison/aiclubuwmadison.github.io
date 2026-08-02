@@ -2,16 +2,6 @@ import { useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './About.css';
 
-// Wave decoration for Areas section
-const AreasDecoration = () => (
-  <svg className="about-areas-deco" viewBox="0 0 800 300" fill="none" aria-hidden="true">
-    <path d="M-20,240 C160,175 290,65 470,45 S700,85 820,60"  stroke="rgba(197,5,12,0.28)" strokeWidth="1.6" fill="none"/>
-    <path d="M-20,260 C165,190 298,78 478,58 S708,98 828,73"  stroke="rgba(197,5,12,0.18)" strokeWidth="1.1" fill="none"/>
-    <path d="M-20,278 C170,205 306,92 486,72 S716,112 836,87" stroke="rgba(197,5,12,0.11)" strokeWidth="0.8" fill="none"/>
-    <path d="M-20,222 C155,160 282,50 462,30 S692,70 812,47"  stroke="rgba(197,5,12,0.14)" strokeWidth="0.7" fill="none"/>
-  </svg>
-);
-
 // Isometric cube: (x,y) = center of top diamond, s = size
 const IsoCube = ({ x, y, s = 20, color = 'white' }) => {
   const w = Math.round(s * 0.866);
@@ -150,12 +140,12 @@ const About = () => {
     }, { threshold: 0.08 });
 
     const elements = document.querySelectorAll(
-      ".about-stat, .about-what-card, .about-area-tag"
+      ".about-stat, .about-what-card"
     );
 
     elements.forEach((el, i) => {
       el.classList.add("sr-hidden");
-      if (el.classList.contains("about-stat") || el.classList.contains("about-what-card") || el.classList.contains("about-area-tag")) {
+      if (el.classList.contains("about-stat") || el.classList.contains("about-what-card")) {
         el.style.transitionDelay = `${(i % 4) * 80}ms`;
       }
       io.observe(el);
@@ -399,45 +389,6 @@ const About = () => {
                 </div>
               </Link>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── AREAS WE EXPLORE ─────────────────────────────────── */}
-      <section className="about-areas">
-        <AreasDecoration />
-        <div className="about-shell">
-          <p className="about-eyebrow">Areas We Explore</p>
-          <h2 className="about-areas-title">
-            AI is everywhere<span className="about-what-dot">.</span> So are we<span className="about-what-dot">.</span>
-          </h2>
-          <p className="about-areas-sub">
-            From core machine learning to real-world impact, we explore<br />
-            the full spectrum of AI and beyond.
-          </p>
-
-          <div className="about-areas-tags">
-            {[
-              { label: 'Machine Learning', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="2" x2="9" y2="4"/><line x1="15" y1="2" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="22"/><line x1="15" y1="20" x2="15" y2="22"/><line x1="20" y1="9" x2="22" y2="9"/><line x1="20" y1="14" x2="22" y2="14"/><line x1="2" y1="9" x2="4" y2="9"/><line x1="2" y1="14" x2="4" y2="14"/></svg> },
-              { label: 'NLP', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> },
-              { label: 'Computer Vision', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><circle cx="12" cy="12" r="3"/><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/></svg> },
-              { label: 'Robotics', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M9 21v-4h6v4M12 10V5"/><circle cx="12" cy="3" r="2"/></svg> },
-              { label: 'Agents', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> },
-              { label: 'Data Science', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg> },
-              { label: 'MLOps', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 00-14.14 0M4.93 19.07a10 10 0 0014.14 0"/></svg> },
-              { label: 'AI Ethics', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> },
-              { label: 'AI for Good', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg> },
-              { label: 'Human-AI Interaction', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.74"/></svg> },
-            ].map((t) => (
-              <div className="about-area-tag" key={t.label}>
-                <span className="about-area-icon">{t.icon}</span>
-                <span className="about-area-label">{t.label}</span>
-              </div>
-            ))}
-            <div className="about-area-tag about-area-more">
-              <svg className="about-area-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><circle cx="5" cy="12" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="19" cy="12" r="1" fill="currentColor"/></svg>
-              <span className="about-area-label">And more...</span>
-            </div>
           </div>
         </div>
       </section>

@@ -28,6 +28,70 @@
   padding: clamp(40px, 5vw, 80px) 0 clamp(64px, 8vw, 96px);
 }
 
+.res-section--last {
+  padding-bottom: clamp(48px, 6vw, 72px);
+}
+
+.res-section-lede {
+  margin: 0 0 28px;
+  max-width: 52ch;
+  font-family: var(--atmos-sans);
+  font-size: clamp(15px, 1.4vw, 17px);
+  line-height: 1.55;
+  color: var(--atmos-ink-soft);
+}
+
+/* COMING SOON PLACEHOLDERS -------------------------------- */
+.res-coming-soon {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: clamp(28px, 4vw, 40px);
+  border: 1px dashed var(--atmos-hairline);
+  border-radius: var(--radius-lg, 16px);
+  background: var(--atmos-paper-tint);
+}
+
+.res-coming-soon-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 4px;
+  border-radius: 12px;
+  background: rgba(197, 5, 12, 0.08);
+  color: var(--atmos-badger);
+}
+
+.res-coming-soon-label {
+  margin: 0;
+  font-family: var(--atmos-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--atmos-badger);
+}
+
+.res-coming-soon-copy {
+  margin: 0;
+  font-family: var(--atmos-sans);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--atmos-ink-mute);
+}
+
+[data-theme="dark"] .res-coming-soon {
+  background: var(--atmos-paper-tint);
+  border-color: var(--atmos-hairline);
+}
+
+[data-theme="dark"] .res-coming-soon-icon {
+  background: rgba(197, 5, 12, 0.16);
+}
+
 /* LIVE NEWS FEED ------------------------------------------ */
 .res-news-controls {
   display: flex;
