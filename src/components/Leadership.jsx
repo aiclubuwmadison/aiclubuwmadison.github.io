@@ -138,12 +138,25 @@ const IconLinkedIn = () => (
     <rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
   </svg>
 );
-const Socials = ({ link }) => (
-  link ? (
+const IconPortfolio = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="14" height="14" aria-hidden="true">
+    <circle cx="12" cy="12" r="9"/>
+    <path d="M3 12h18M12 3a15 15 0 010 18M12 3a15 15 0 000 18"/>
+  </svg>
+);
+const Socials = ({ link, portfolio }) => (
+  link || portfolio ? (
     <div className="lead-socials">
-      <a href={link} target="_blank" rel="noopener noreferrer" className="lead-social-btn" aria-label="LinkedIn">
-        <IconLinkedIn />
-      </a>
+      {link && (
+        <a href={link} target="_blank" rel="noopener noreferrer" className="lead-social-btn" aria-label="LinkedIn">
+          <IconLinkedIn />
+        </a>
+      )}
+      {portfolio && (
+        <a href={portfolio} target="_blank" rel="noopener noreferrer" className="lead-social-btn" aria-label="Portfolio">
+          <IconPortfolio />
+        </a>
+      )}
     </div>
   ) : null
 );
@@ -159,7 +172,7 @@ const FeaturedCard = ({ m }) => {
       <span className="lead-card-role lead-card-role--light">{m.title}</span>
       <h3 className="lead-featured-name">{m.name}</h3>
       <p className="lead-featured-desc">{ROLE_DESC[m.title] || ''}</p>
-      <Socials link={m.link} />
+      <Socials link={m.link} portfolio={m.portfolio} />
     </div>
   );
 };
@@ -177,7 +190,7 @@ const RosterCard = ({ m }) => {
       <span className="lead-card-role">{m.title}</span>
       <h4 className="lead-team-name">{m.name}</h4>
       <p className="lead-team-desc">{ROLE_DESC[m.title] || 'Contributing to AI@UW.'}</p>
-      <Socials link={m.link} />
+      <Socials link={m.link} portfolio={m.portfolio} />
     </div>
   );
 };
@@ -347,7 +360,7 @@ const Leadership = () => {
     ],
     [
       { file: 'shikha.webp',    title: 'Marketing Head',         name: 'Shikha Ashara',                 link: 'https://www.linkedin.com/in/shikha-ashara/' },
-      { file: 'arnav.webp',      title: 'Communications Manager', name: 'Arnav Batra',                   link: 'https://www.linkedin.com/in/batraarnav/' },
+      { file: 'arnav.webp',      title: 'Communications Manager', name: 'Arnav Batra',                   link: 'https://www.linkedin.com/in/batraarnav/', portfolio: 'https://arnavbatra.com' },
       { file: 'swati.webp',      title: 'Event Organizer',        name: 'Swati Banwani',                 link: 'https://www.linkedin.com/in/swati-banwani-8497ab1b8/' },
     ],
     [
@@ -357,7 +370,6 @@ const Leadership = () => {
     ],
     [
       { file: 'jack.webp',              title: 'Project Manager', name: 'Jack Koteles',   link: 'https://www.linkedin.com/in/jackkoteles/' },
-      { file: '_placeholder.svg',      title: 'Project Manager', name: 'Adhyot Singh',   link: 'https://www.linkedin.com/in/adhyotsingh/' },
     ],
   ];
 
