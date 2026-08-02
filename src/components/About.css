@@ -374,104 +374,6 @@
 }
 .about-what-explore:hover { gap: 8px; }
 
-/* ── AREAS WE EXPLORE ───────────────────────────────────── */
-.about-areas {
-  background: var(--atmos-paper-deep);
-  padding: var(--space-section-y) 0;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Wave + dots SVG — absolutely behind content */
-.about-areas-deco {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.about-areas .about-shell { position: relative; z-index: 1; }
-
-.about-areas-title {
-  font-family: var(--atmos-serif);
-  font-weight: 500;
-  font-size: clamp(28px, 3.2vw, 44px);
-  letter-spacing: -0.015em;
-  color: var(--atmos-ink);
-  margin: 0 0 14px;
-  line-height: 1.1;
-}
-
-.about-areas-sub {
-  font-size: 16px;
-  line-height: 1.6;
-  color: var(--atmos-ink-soft);
-  margin: 0 0 clamp(28px, 3.5vw, 44px);
-  max-width: 62ch;
-}
-
-/* 5-column tag grid */
-.about-areas-tags {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 12px;
-}
-
-.about-area-tag {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px 18px;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  border-radius: 12px;
-  background: #ffffff;
-  cursor: default;
-  transition: background 280ms ease, border-color 220ms ease, box-shadow 220ms ease, transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.about-area-tag:hover {
-  border-color: rgba(197, 5, 12, 0.22);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04), 0 2px 6px rgba(197, 5, 12, 0.02);
-}
-
-.about-area-icon {
-  width: 22px;
-  height: 22px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--atmos-badger);
-  flex-shrink: 0;
-  transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-.about-area-tag:hover .about-area-icon {
-  transform: scale(1.12);
-}
-.about-area-icon svg,
-.about-area-icon-svg {
-  width: 20px;
-  height: 20px;
-}
-
-.about-area-label {
-  font-size: 13.5px;
-  font-weight: 600;
-  color: var(--atmos-ink);
-  min-width: 0;
-}
-
-.about-area-more {
-  border-style: dashed;
-  border-color: rgba(0,0,0,0.10);
-}
-.about-area-more .about-area-label {
-  color: var(--atmos-ink-mute);
-}
-
-
 /* ── RESPONSIVE ─────────────────────────────────────────── */
 
 @media (max-width: 1024px) {
@@ -512,10 +414,6 @@
   }
 }
 
-@media (max-width: 1024px) {
-  .about-areas-tags { grid-template-columns: repeat(3, 1fr); }
-}
-
 @media (max-width: 680px) {
   .about-shell {
     padding: 0 clamp(18px, 5vw, 28px);
@@ -540,7 +438,6 @@
   .about-what-card-visual {
     height: 180px;
   }
-  .about-areas-tags { grid-template-columns: repeat(2, 1fr); }
   .about-story-stats {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -583,18 +480,8 @@
     text-align: left;
     padding: 18px;
   }
-  .about-what-title,
-  .about-areas-title {
+  .about-what-title {
     font-size: clamp(28px, 9vw, 36px);
-  }
-  .about-areas-sub br {
-    display: none;
-  }
-  .about-areas-tags {
-    grid-template-columns: 1fr;
-  }
-  .about-area-tag {
-    padding: 13px 14px;
   }
 }
 
@@ -637,8 +524,7 @@
 }
 .about-story { background: var(--atmos-paper-deep); }
 .about-stat,
-.about-what-card,
-.about-area-tag {
+.about-what-card {
   border-radius: var(--radius-lg);
   border-color: var(--atmos-hairline);
   box-shadow: var(--shadow-sm);
@@ -646,11 +532,9 @@
 .about-stat { background: var(--atmos-paper); }
 .about-stat-num,
 .about-story-title,
-.about-what-title,
-.about-areas-title { font-family: var(--atmos-serif); letter-spacing: -.035em; }
+.about-what-title { font-family: var(--atmos-serif); letter-spacing: -.035em; }
 .about-what-card { background: var(--atmos-paper-tint); }
-.about-what-card:hover,
-.about-area-tag:hover { box-shadow: var(--shadow-md); }
+.about-what-card:hover { box-shadow: var(--shadow-md); }
 
 @media (max-width: 860px) {
   .about-hero { min-height: auto; grid-template-columns: 1fr; }
@@ -733,28 +617,6 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* ── Dark mode (Areas We Explore) ───────────── */
-[data-theme="dark"] .about-areas {
-  --atmos-ink: #f1f5f9;
-  --atmos-ink-soft: #cbd5e1;
-  --atmos-ink-mute: #64748b;
-  --atmos-hairline: rgba(255, 255, 255, 0.10);
-}
-
-[data-theme="dark"] .about-area-tag {
-  background: #111111;
-  border-color: rgba(255, 255, 255, 0.05);
-}
-
-[data-theme="dark"] .about-area-tag:hover {
-  border-color: rgba(197, 5, 12, 0.35);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4), 0 2px 6px rgba(197, 5, 12, 0.1);
-}
-
-[data-theme="dark"] .about-area-more {
-  border-color: rgba(255, 255, 255, 0.12);
-}
-
 [data-theme="dark"] .atmos-about {
   --cube-white-top: #22252a;
   --cube-white-right: #1c1e22;
@@ -792,8 +654,4 @@
   --node-red: #ff6e75;
   --node-red-stroke: #c5050c;
   --node-edge: #30363d;
-}
-
-[data-theme="dark"] .about-areas-deco path {
-  stroke: rgba(255, 110, 117, 0.18);
 }
