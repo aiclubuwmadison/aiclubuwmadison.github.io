@@ -443,10 +443,12 @@
   animation: join-guide-pulse 1.05s ease-out infinite;
 }
 
-#join-form.is-join-guided {
+#contact-us.is-join-guided {
   border-radius: var(--radius-lg, 16px);
   box-shadow: 0 0 0 2px rgba(197, 5, 12, 0.35), 0 12px 32px rgba(197, 5, 12, 0.08);
   transition: box-shadow 280ms ease;
+  padding: 8px 12px;
+  margin: -8px -12px;
 }
 
 @keyframes join-guide-dash {
@@ -481,8 +483,10 @@
     display: none !important;
   }
 
-  #join-form.is-join-guided {
+  #contact-us.is-join-guided {
     box-shadow: none;
+    padding: 0;
+    margin: 0;
   }
 }
 
@@ -506,7 +510,7 @@
   background-color: rgba(255, 110, 117, 0.24);
 }
 
-[data-theme="dark"] #join-form.is-join-guided {
+[data-theme="dark"] #contact-us.is-join-guided {
   box-shadow: 0 0 0 2px rgba(255, 110, 117, 0.4), 0 12px 32px rgba(0, 0, 0, 0.35);
 }
 

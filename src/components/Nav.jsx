@@ -80,12 +80,12 @@ const Nav = () => {
   const activeIconTheme = iconTheme ?? theme;
   const ThemeIcon = activeIconTheme === "dark" ? Sun : Moon;
 
-  /** Navigate to contact form and request a short on-page guide arrow. */
+  /** Navigate to Contact and request a short on-page guide arrow. */
   const handleJoinClub = (event) => {
     event.preventDefault();
     setMobileOpen(false);
-    navigate("/contact?join=1#join-form", {
-      state: { guideToForm: Date.now() },
+    navigate("/contact?join=1#contact-us", {
+      state: { guideToContact: Date.now() },
     });
   };
 
@@ -215,7 +215,7 @@ const Nav = () => {
           <div className="atmos-nav-actions">
             {/* CTA */}
             <Link
-              to="/contact?join=1#join-form"
+              to="/contact?join=1#contact-us"
               className="atmos-nav-cta"
               onClick={handleJoinClub}
             >
@@ -338,7 +338,7 @@ const Nav = () => {
           </button>
 
           <Link
-            to="/contact?join=1#join-form"
+            to="/contact?join=1#contact-us"
             className="atmos-nav-mobile-cta"
             onClick={handleJoinClub}
           >

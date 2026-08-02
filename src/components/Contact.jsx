@@ -35,9 +35,9 @@ const JoinFormGuide = ({ active, targetId }) => {
 
     const x1 = from.left + from.width / 2;
     const y1 = from.bottom + 4;
-    // Aim at the top-left of the form panel (eyebrow area)
-    const tipX = to.left + Math.min(56, to.width * 0.18);
-    const tipY = to.top + 14;
+    // Aim at the Contact Us heading area
+    const tipX = to.left + Math.min(72, to.width * 0.28);
+    const tipY = to.top + 36;
     // Line stops just above the chevron so dashes don't collide with the tip
     const x2 = tipX;
     const y2 = tipY - 12;
@@ -128,41 +128,44 @@ const Contact = () => {
     document.title = 'Contact | AI@UW';
   }, []);
 
-  // Guide arrow from "Join the club" → form (~3s)
+  // Guide arrow from "Join the club" → Contact Us section (~3s)
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const fromJoin =
       params.get('join') === '1' ||
-      location.hash === '#join-form' ||
-      Boolean(location.state?.guideToForm);
+      location.hash === '#contact-us' ||
+      location.hash === '#join-form' || // legacy
+      Boolean(location.state?.guideToContact) ||
+      Boolean(location.state?.guideToForm); // legacy
 
     if (!fromJoin) return undefined;
 
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let endTimer = 0;
+    const targetId = 'contact-us';
 
     const scrollTimer = window.setTimeout(() => {
-      const form = document.getElementById('join-form');
-      form?.scrollIntoView({
+      const target = document.getElementById(targetId);
+      target?.scrollIntoView({
         behavior: reducedMotion ? 'auto' : 'smooth',
-        block: 'center',
+        block: 'start',
       });
       if (!reducedMotion) {
         setShowJoinGuide(true);
-        form?.classList.add('is-join-guided');
+        target?.classList.add('is-join-guided');
       }
     }, 60);
 
     endTimer = window.setTimeout(() => {
       setShowJoinGuide(false);
-      document.getElementById('join-form')?.classList.remove('is-join-guided');
+      document.getElementById(targetId)?.classList.remove('is-join-guided');
     }, GUIDE_MS + 60);
 
     return () => {
       window.clearTimeout(scrollTimer);
       window.clearTimeout(endTimer);
       setShowJoinGuide(false);
-      document.getElementById('join-form')?.classList.remove('is-join-guided');
+      document.getElementById(targetId)?.classList.remove('is-join-guided');
     };
   }, [location.search, location.hash, location.state, location.key]);
 
@@ -229,7 +232,7 @@ const Contact = () => {
       <section className="atmos-contact-hero">
         <div className="atmos-shell">
           <div className="atmos-contact-row">
-            <div className="atmos-contact-left">
+            <div className="atmos-contact-left" id="contact-us">
               <h1 className="atmos-contact-title">
                 Get in
                 <br />
@@ -320,7 +323,7 @@ const Contact = () => {
               </ul>
             </div>
 
-            <div className="atmos-contact-right" id="join-form">
+            <div className="atmos-contact-right">
               <div className="atmos-form-head">
                 <span className="atmos-form-eyebrow">Send us your thoughts</span>
               </div>
@@ -415,7 +418,7 @@ const Contact = () => {
         </div>
       </section>
 
-      <JoinFormGuide active={showJoinGuide} targetId="join-form" />
+      <JoinFormGuide active={showJoinGuide} targetId="contact-us" />
     </div>
   );
 };
