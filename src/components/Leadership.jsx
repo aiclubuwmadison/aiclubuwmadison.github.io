@@ -206,26 +206,55 @@ const ArchiveRoster = ({ data }) => {
   );
 };
 
-const ArchiveSection = ({ id, num, title, meta, data, isOpen, onToggle }) => (
-  <div className="atmos-archive">
-    <button type="button" className="atmos-archive-toggle" onClick={() => onToggle(id)}
-      aria-expanded={isOpen} aria-controls={`${id}-panel`}>
-      <span className="atmos-archive-label">
-        <span className="atmos-archive-num">{num}</span>
-        <span className="atmos-archive-title">{title}</span>
-      </span>
-      <span className="atmos-archive-meta">
-        <span>{meta}</span>
-        <span className={`atmos-archive-glyph${isOpen ? ' is-open' : ''}`}>›</span>
-      </span>
-    </button>
-    <div id={`${id}-panel`} className={`atmos-archive-panel${isOpen ? ' is-open' : ''}`} role="region">
-      <div className="atmos-archive-panel-inner">
-        <ArchiveRoster data={data} />
+const ArchiveAvatar = ({ member }) => {
+  const src = useResolvedPortrait(member.file);
+  return <img src={src} alt="" loading="lazy" />;
+};
+
+const ArchiveSection = ({ id, term, title, data, isOpen, onToggle }) => {
+  const members = data.flat();
+  const memberCount = members.length;
+  const toggleId = `${id}-toggle`;
+
+  return (
+    <li className={`atmos-archive${isOpen ? ' is-open' : ''}`}>
+      <h3 className="atmos-archive-heading">
+        <button id={toggleId} type="button" className="atmos-archive-toggle" onClick={() => onToggle(id)}
+          aria-expanded={isOpen} aria-controls={`${id}-panel`}>
+          <span className="atmos-archive-spine" aria-hidden="true">
+            <span className="atmos-archive-node"><i /><i /><i /><i /><i /></span>
+          </span>
+          <span className="atmos-archive-label">
+            <span className="atmos-archive-term">{term}</span>
+            <span className="atmos-archive-title">{title}</span>
+          </span>
+          <span className="atmos-archive-preview" aria-hidden="true">
+            <span className="atmos-archive-avatars">
+              {members.slice(0, 4).map((member) => (
+                <ArchiveAvatar key={member.name} member={member} />
+              ))}
+            </span>
+            <span>{memberCount} members</span>
+          </span>
+          <span className="atmos-archive-action">
+            <span>{isOpen ? 'Close roster' : 'View roster'}</span>
+            <span className="atmos-archive-glyph" aria-hidden="true">
+              <svg viewBox="0 0 20 20" fill="none">
+                <path d="m5.5 7.5 4.5 4.5 4.5-4.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
+          </span>
+        </button>
+      </h3>
+      <div id={`${id}-panel`} className={`atmos-archive-panel${isOpen ? ' is-open' : ''}`}
+        role="region" aria-labelledby={toggleId} aria-hidden={!isOpen} inert={!isOpen}>
+        <div className="atmos-archive-panel-inner">
+          <ArchiveRoster data={data} />
+        </div>
       </div>
-    </div>
-  </div>
-);
+    </li>
+  );
+};
 
 const Leadership = () => {
   useEffect(() => {
@@ -408,26 +437,28 @@ const Leadership = () => {
       </section>
 
       {/* ── ARCHIVE ────────────────────────────────────────── */}
-      <section className="lead-archive-section">
+      <section className="lead-archive-section" aria-labelledby="leadership-archive-title">
         <div className="atmos-shell">
-          <div className="lead-section-head">
-            <div>
+          <div className="lead-section-head lead-archive-head">
+            <div className="lead-archive-headcopy">
               <p className="lead-section-eyebrow">Archive</p>
-              <h2 className="lead-section-title">Past terms</h2>
+              <h2 id="leadership-archive-title" className="lead-section-title">Leadership archive</h2>
+              <p className="lead-archive-intro">Explore the people who shaped AI@UW in previous terms.</p>
             </div>
+            <span className="lead-archive-count">3 archived rosters</span>
           </div>
 
-          <div className="lead-archive-wrap">
-            <ArchiveSection id="dec24Dec25Leaders" num="I" title="December 2024 — December 2025"
-              meta="View term" data={Dec24Dec25LeadershipData}
+          <ol className="lead-archive-wrap">
+            <ArchiveSection id="dec24Dec25Leaders" term="2024–25 term" title="December 2024 — December 2025"
+              data={Dec24Dec25LeadershipData}
               isOpen={expanded.dec24Dec25Leaders} onToggle={toggle} />
-            <ArchiveSection id="currentLeaders" num="II" title="September 2024 — December 2024"
-              meta="View term" data={SeptDec24LeadershipData}
+            <ArchiveSection id="currentLeaders" term="Fall 2024" title="September 2024 — December 2024"
+              data={SeptDec24LeadershipData}
               isOpen={expanded.currentLeaders} onToggle={toggle} />
-            <ArchiveSection id="pastLeaders" num="III" title="Past Leadership"
-              meta="View term" data={PastLeadershipData}
+            <ArchiveSection id="pastLeaders" term="Earlier terms" title="Earlier leadership"
+              data={PastLeadershipData}
               isOpen={expanded.pastLeaders} onToggle={toggle} />
-          </div>
+          </ol>
         </div>
       </section>
 

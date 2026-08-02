@@ -159,6 +159,18 @@
   font-size: 13px; color: var(--atmos-ink-mute); white-space: nowrap;
 }
 
+.lead-archive-head { align-items: flex-end; }
+.lead-archive-headcopy { max-width: 620px; }
+.lead-archive-intro {
+  max-width: 46ch; margin: 12px 0 0;
+  color: var(--atmos-ink-soft); font-size: 15px; line-height: 1.6;
+}
+.lead-archive-count {
+  padding-bottom: 6px; color: var(--atmos-ink-mute);
+  font-family: var(--atmos-mono); font-size: 11px;
+  letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap;
+}
+
 /* ── FEATURED CARDS (President + VP) ────────────────────── */
 .lead-featured-grid {
   display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
@@ -274,64 +286,123 @@
 
 /* ── ARCHIVE ─────────────────────────────────────────────── */
 .lead-archive-wrap {
-  border: 1px solid var(--atmos-hairline);
-  border-radius: 16px;
-  overflow: hidden;
-  background: var(--atmos-paper);
+  margin: 0; padding: 0; list-style: none;
+  border-top: 1px solid var(--atmos-hairline);
+  border-bottom: 1px solid var(--atmos-hairline);
 }
 
-.atmos-archive { border-top: 1px solid var(--atmos-hairline); }
-.atmos-archive:first-child { border-top: none; }
+.atmos-archive {
+  position: relative;
+  border-top: 1px solid var(--atmos-hairline);
+}
+.atmos-archive:first-child { border-top: 0; }
+.atmos-archive-heading { margin: 0; }
 
 .atmos-archive-toggle {
-  width: 100%; display: flex; justify-content: space-between; align-items: center;
-  gap: 18px; padding: 22px 28px; background: none; border: none; cursor: pointer;
-  text-align: left; font-family: var(--atmos-sans); font-size: 14px;
-  font-weight: 500; color: var(--atmos-ink);
-  transition: background 180ms ease;
+  position: relative; isolation: isolate;
+  width: 100%; min-height: 96px;
+  display: grid; grid-template-columns: 64px minmax(260px, 1fr) auto auto;
+  align-items: center; gap: clamp(16px, 2.5vw, 36px);
+  padding: 0 12px 0 0; background: transparent; border: 0; cursor: pointer;
+  text-align: left; color: var(--atmos-ink); font-family: var(--atmos-sans);
+  transition: background-color 220ms ease;
 }
-.atmos-archive-toggle:hover { background: rgba(197,5,12,0.025); }
+.atmos-archive-toggle::after {
+  content: ''; position: absolute; inset: 10px 0 10px 64px; z-index: -1;
+  border-radius: 14px; background: transparent;
+  transition: background-color 220ms ease, transform 220ms cubic-bezier(.2,.8,.2,1);
+}
+.atmos-archive-toggle:hover::after { background: var(--atmos-paper-tint); }
+.atmos-archive.is-open .atmos-archive-toggle::after { background: var(--atmos-accent-glow); }
 
-.atmos-archive-label { display: flex; align-items: center; gap: 20px; flex: 1; }
-.atmos-archive-num {
-  font-family: var(--atmos-serif); font-size: clamp(16px,1.8vw,22px);
-  font-weight: 700; font-style: italic;
-  color: var(--atmos-badger); white-space: nowrap; width: 32px;
+.atmos-archive-spine {
+  align-self: stretch; position: relative; display: grid; place-items: center;
+}
+.atmos-archive-spine::before {
+  content: ''; position: absolute; top: 0; bottom: 0; left: 50%; width: 1px;
+  background: var(--atmos-hairline); transform: translateX(-50%);
+}
+.atmos-archive:first-child .atmos-archive-spine::before { top: 50%; }
+.atmos-archive:last-child:not(.is-open) .atmos-archive-spine::before { bottom: 50%; }
+.atmos-archive-node {
+  position: relative; z-index: 1; width: 30px; height: 30px;
+  border: 1px solid var(--atmos-hairline); border-radius: 50%;
+  background: var(--atmos-paper); box-shadow: 0 0 0 7px var(--atmos-paper);
+  transition: border-color 220ms ease, transform 260ms cubic-bezier(.2,.8,.2,1);
+}
+.atmos-archive-node i {
+  position: absolute; width: 3px; height: 3px; border-radius: 50%;
+  background: var(--atmos-badger); opacity: .42;
+}
+.atmos-archive-node i:nth-child(1) { top: 6px; left: 13px; }
+.atmos-archive-node i:nth-child(2) { top: 13px; right: 6px; }
+.atmos-archive-node i:nth-child(3) { top: 12px; left: 12px; width: 5px; height: 5px; opacity: 1; }
+.atmos-archive-node i:nth-child(4) { bottom: 6px; left: 13px; }
+.atmos-archive-node i:nth-child(5) { top: 13px; left: 6px; }
+.atmos-archive-toggle:hover .atmos-archive-node,
+.atmos-archive.is-open .atmos-archive-node {
+  border-color: color-mix(in srgb, var(--atmos-badger) 42%, var(--atmos-hairline));
+  transform: scale(1.08);
+}
+
+.atmos-archive-label {
+  min-width: 0; display: flex; flex-direction: column; gap: 7px;
+}
+.atmos-archive-term {
+  color: var(--atmos-badger); font-family: var(--atmos-mono);
+  font-size: 10px; font-weight: 700; letter-spacing: .11em;
+  text-transform: uppercase;
 }
 .atmos-archive-title {
-  font-family: var(--atmos-sans); font-size: clamp(15px,1.5vw,18px);
-  font-weight: 600; letter-spacing: -0.01em; color: var(--atmos-ink);
+  color: var(--atmos-ink); font-family: var(--atmos-sans);
+  font-size: clamp(16px, 1.5vw, 19px); font-weight: 650;
+  letter-spacing: -0.015em; line-height: 1.25;
 }
-.atmos-archive-meta {
-  display: flex; align-items: center; gap: 8px;
-  font-size: 13px; color: var(--atmos-ink-mute);
+
+.atmos-archive-preview {
+  display: flex; align-items: center; justify-content: flex-end; gap: 12px;
+  color: var(--atmos-ink-mute); font-family: var(--atmos-mono);
+  font-size: 10px; letter-spacing: .06em; text-transform: uppercase;
   white-space: nowrap;
 }
-.atmos-archive-glyph {
-  font-size: 18px; transition: transform 240ms ease; display: inline-block;
-  color: var(--atmos-badger);
+.atmos-archive-avatars { display: flex; padding-left: 8px; }
+.atmos-archive-avatars img {
+  width: 32px; height: 32px; margin-left: -8px; border: 2px solid var(--atmos-paper);
+  border-radius: 50%; background: var(--atmos-paper-tint);
+  object-fit: cover; filter: grayscale(100%); transition: filter 220ms ease, transform 220ms ease;
 }
-.atmos-archive-glyph.is-open { transform: rotate(90deg); }
+.atmos-archive-toggle:hover .atmos-archive-avatars img,
+.atmos-archive.is-open .atmos-archive-avatars img { filter: grayscale(0%); }
+.atmos-archive-avatars img:nth-child(2) { transform: translateY(-2px); }
+.atmos-archive-avatars img:nth-child(3) { transform: translateY(2px); }
+
+.atmos-archive-action {
+  display: flex; align-items: center; gap: 10px; color: var(--atmos-ink-mute);
+  font-size: 12px; font-weight: 600; white-space: nowrap;
+}
+.atmos-archive-glyph {
+  width: 36px; height: 36px; display: grid; place-items: center;
+  border: 1px solid var(--atmos-hairline); border-radius: 50%;
+  background: var(--atmos-paper); color: var(--atmos-badger);
+  transition: transform 260ms cubic-bezier(.2,.8,.2,1), border-color 220ms ease;
+}
+.atmos-archive-glyph svg { width: 18px; height: 18px; }
+.atmos-archive.is-open .atmos-archive-glyph { transform: rotate(180deg); border-color: var(--atmos-badger); }
+
 .atmos-archive-panel {
-  display: grid;
-  grid-template-rows: 0fr;
-  overflow: hidden;
-  opacity: 0;
+  display: grid; grid-template-rows: 0fr; overflow: hidden; opacity: 0;
   transition: grid-template-rows 460ms cubic-bezier(.2,.7,.2,1), opacity 300ms ease;
 }
-.atmos-archive-panel.is-open {
-  grid-template-rows: 1fr;
-  opacity: 1;
-}
+.atmos-archive-panel.is-open { grid-template-rows: 1fr; opacity: 1; }
 .atmos-archive-panel > div {
-  min-height: 0;
-  padding-bottom: 32px;
+  min-height: 0; margin: 0 0 24px 64px;
+  border: 1px solid var(--atmos-hairline); border-radius: 16px;
+  background: var(--atmos-paper-tint); overflow: hidden;
 }
 
 .lead-archive-roster {
-  display: flex; flex-direction: column;
-  gap: clamp(20px, 3vw, 32px);
-  padding: 8px 28px 0;
+  display: flex; flex-direction: column; gap: clamp(20px, 3vw, 32px);
+  padding: clamp(20px, 3vw, 32px);
 }
 
 /* ── RESPONSIVE ──────────────────────────────────────────── */
@@ -343,17 +414,38 @@
   .lead-hero-right { display: none; }
   .lead-featured-grid { grid-template-columns: 1fr; }
   .lead-team-grid { grid-template-columns: repeat(2,1fr); }
+  .lead-archive-head { align-items: flex-start; flex-direction: column; }
+  .atmos-archive-toggle {
+    grid-template-columns: 46px minmax(0, 1fr) auto;
+    gap: 12px; min-height: 104px; padding-right: 4px;
+  }
+  .atmos-archive-toggle::after { left: 46px; }
+  .atmos-archive-spine { grid-row: 1 / span 2; }
+  .atmos-archive-label { grid-column: 2; grid-row: 1; align-self: end; }
+  .atmos-archive-preview {
+    grid-column: 2; grid-row: 2; align-self: start;
+    justify-content: flex-start; flex-direction: row-reverse; width: fit-content;
+  }
+  .atmos-archive-action { grid-column: 3; grid-row: 1 / span 2; }
+  .atmos-archive-panel > div { margin-left: 46px; }
+}
+@media (max-width: 540px) {
+  .lead-team-grid { grid-template-columns: repeat(2,1fr); }
+  .lead-archive-section { padding-top: 44px; }
+  .lead-archive-count { padding-bottom: 0; }
+  .atmos-archive-action > span:first-child { display: none; }
+  .atmos-archive-avatars img { width: 28px; height: 28px; }
+  .lead-archive-roster { padding: 14px; }
+  .atmos-archive-panel > div { margin-bottom: 16px; border-radius: 12px; }
 }
 @media (max-width: 480px) {
   .lead-team-grid { grid-template-columns: 1fr; }
 }
-@media (max-width: 540px) {
-  .lead-team-grid { grid-template-columns: repeat(2,1fr); }
-}
 @media (prefers-reduced-motion: reduce) {
   .lead-featured-card, .lead-team-card, .lead-social-btn,
   .lead-hero-cta, .atmos-archive-toggle,
-  .atmos-archive-panel, .atmos-archive-glyph { transition: none !important; }
+  .atmos-archive-toggle::after, .atmos-archive-panel, .atmos-archive-glyph,
+  .atmos-archive-node, .atmos-archive-avatars img { transition: none !important; }
   .lead-collage-spiral img { animation: none; }
 }
 
@@ -398,5 +490,18 @@
 
 /* Archive toggle hover */
 [data-theme="dark"] .atmos-archive-toggle:hover {
-  background: rgba(197, 5, 12, 0.08);
+  background: transparent;
+}
+[data-theme="dark"] .atmos-archive-toggle:hover::after {
+  background: var(--atmos-paper-tint);
+}
+[data-theme="dark"] .atmos-archive.is-open .atmos-archive-toggle::after {
+  background: var(--atmos-accent-glow);
+}
+[data-theme="dark"] .atmos-archive-node,
+[data-theme="dark"] .atmos-archive-glyph {
+  background: var(--atmos-paper-deep);
+}
+[data-theme="dark"] .atmos-archive-avatars img {
+  border-color: var(--atmos-paper);
 }
