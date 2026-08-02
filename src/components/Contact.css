@@ -412,27 +412,35 @@
 
 .join-form-guide-path {
   stroke: var(--atmos-badger);
-  stroke-width: 2.5;
+  stroke-width: 2.25;
   stroke-linecap: round;
-  stroke-dasharray: 10 8;
-  animation: join-guide-dash 0.9s linear infinite;
-  filter: drop-shadow(0 1px 2px rgba(197, 5, 12, 0.25));
+  stroke-linejoin: round;
+  stroke-dasharray: 8 7;
+  animation: join-guide-dash 0.85s linear infinite;
+  filter: drop-shadow(0 1px 2px rgba(197, 5, 12, 0.2));
 }
 
 .join-form-guide-head {
-  fill: var(--atmos-badger);
+  stroke: var(--atmos-badger);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+  filter: drop-shadow(0 1px 2px rgba(197, 5, 12, 0.2));
 }
 
+/* Soft ring only — solid fill was reading as a blob on the tip */
 .join-form-guide-pulse {
   position: fixed;
-  width: 18px;
-  height: 18px;
-  margin-left: -9px;
-  margin-top: -9px;
+  width: 22px;
+  height: 22px;
+  margin-left: -11px;
+  margin-top: -11px;
   border-radius: 50%;
-  background: var(--atmos-badger);
-  box-shadow: 0 0 0 0 rgba(197, 5, 12, 0.45);
-  animation: join-guide-pulse 1s ease-out infinite;
+  background: transparent;
+  border: 2px solid rgba(197, 5, 12, 0.55);
+  box-shadow: 0 0 0 0 rgba(197, 5, 12, 0.28);
+  animation: join-guide-pulse 1.05s ease-out infinite;
 }
 
 #join-form.is-join-guided {
@@ -447,15 +455,18 @@
 
 @keyframes join-guide-pulse {
   0% {
-    transform: scale(0.85);
-    box-shadow: 0 0 0 0 rgba(197, 5, 12, 0.45);
+    transform: scale(0.7);
+    opacity: 0.95;
+    box-shadow: 0 0 0 0 rgba(197, 5, 12, 0.3);
   }
   70% {
-    transform: scale(1);
-    box-shadow: 0 0 0 14px rgba(197, 5, 12, 0);
+    transform: scale(1.35);
+    opacity: 0.35;
+    box-shadow: 0 0 0 10px rgba(197, 5, 12, 0);
   }
   100% {
-    transform: scale(0.85);
+    transform: scale(1.5);
+    opacity: 0;
     box-shadow: 0 0 0 0 rgba(197, 5, 12, 0);
   }
 }

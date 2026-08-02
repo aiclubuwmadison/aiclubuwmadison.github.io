@@ -34,18 +34,32 @@ const JoinFormGuide = ({ active, targetId }) => {
       : { left: window.innerWidth / 2, top: 72, width: 0, height: 0, bottom: 72, right: window.innerWidth / 2 };
 
     const x1 = from.left + from.width / 2;
-    const y1 = from.bottom;
-    const x2 = to.left + Math.min(to.width * 0.5, Math.max(48, to.width * 0.35));
-    const y2 = to.top + 28;
-    const midY = y1 + (y2 - y1) * 0.45;
-    const path = `M ${x1} ${y1} C ${x1} ${midY}, ${x2} ${midY}, ${x2} ${y2}`;
+    const y1 = from.bottom + 4;
+    // Aim at the top-left of the form panel (eyebrow area)
+    const tipX = to.left + Math.min(56, to.width * 0.18);
+    const tipY = to.top + 14;
+    // Line stops just above the chevron so dashes don't collide with the tip
+    const x2 = tipX;
+    const y2 = tipY - 12;
+    const midY = y1 + (y2 - y1) * 0.5;
+    const path = `M ${x1} ${y1} C ${x1} ${midY}, ${x2} ${y1 + (y2 - y1) * 0.25}, ${x2} ${y2}`;
+
+    // Explicit chevron tip (SVG markers + dash animation often render as a blob)
+    const size = 12;
+    const wing = size * 0.75;
+    const leftX = tipX - wing;
+    const leftY = tipY - size;
+    const rightX = tipX + wing;
+    const rightY = tipY - size;
+    const head = `M ${leftX} ${leftY} L ${tipX} ${tipY} L ${rightX} ${rightY}`;
 
     setGeometry({
       path,
+      head,
       w: window.innerWidth,
       h: window.innerHeight,
-      x2,
-      y2,
+      x2: tipX,
+      y2: tipY,
     });
   }, [targetId]);
 
@@ -82,23 +96,14 @@ const JoinFormGuide = ({ active, targetId }) => {
         height={geometry.h}
         viewBox={`0 0 ${geometry.w} ${geometry.h}`}
       >
-        <defs>
-          <marker
-            id="join-form-arrowhead"
-            markerWidth="12"
-            markerHeight="12"
-            refX="10"
-            refY="6"
-            orient="auto"
-            markerUnits="userSpaceOnUse"
-          >
-            <path d="M0,0 L12,6 L0,12 Z" className="join-form-guide-head" />
-          </marker>
-        </defs>
         <path
           d={geometry.path}
           className="join-form-guide-path"
-          markerEnd="url(#join-form-arrowhead)"
+          fill="none"
+        />
+        <path
+          d={geometry.head}
+          className="join-form-guide-head"
           fill="none"
         />
       </svg>
