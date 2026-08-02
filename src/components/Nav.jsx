@@ -265,7 +265,7 @@ const Nav = () => {
         role="dialog"
         aria-modal={mobileOpen ? "true" : undefined}
         aria-hidden={!mobileOpen}
-        inert={!mobileOpen ? "" : undefined}
+        inert={!mobileOpen}
         aria-label="Site menu"
         className={
           "atmos-nav-mobile-panel" +
