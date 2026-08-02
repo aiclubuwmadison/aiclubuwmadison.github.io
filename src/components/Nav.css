@@ -1,652 +1,726 @@
 /* =========================================================
-   ATMOSPHERIC MODERN — Nav (Liquid Glass floating capsule)
+   ATMOSPHERIC MODERN — Signal Rail navigation
+   The active-route dots echo the club's radial node mark.
    ========================================================= */
 
-/* ── Nav shell ──────────────────────────────────────────── */
 @keyframes navEntrance {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/*
- * The header itself is a transparent positioning strip; the visible
- * material lives on .atmos-nav-inner (the capsule). Side gaps stay
- * click-through via pointer-events.
- */
+@keyframes signalResolve {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 4px) scaleX(0.45);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0) scaleX(1);
+  }
+}
+
 .atmos-nav {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  inset: 0 0 auto;
   z-index: 100;
-  height: var(--atmos-nav-height, 68px);
+  height: var(--atmos-nav-height, 84px);
   box-sizing: border-box;
   padding: 10px var(--atmos-gutter, 24px) 0;
-  display: flex;
-  align-items: stretch;
   font-family: var(--atmos-sans);
-  background: none;
-  border: none;
   pointer-events: none;
 }
 
-/*
- * Liquid Glass capsule:
- * - highly translucent fill; backdrop-filter blurs + saturates what's
- *   behind so the material picks up the page's color
- * - ::before draws the refractive rim (gradient hairline, brightest
- *   where "light" hits the top-left edge)
- * - ::after adds the specular sheen + inner glow that fakes lensing
- * - soft ambient shadow lifts the capsule off the page
- */
 .atmos-nav-inner {
-  /* rim / sheen intensities (overridden for dark mode below) */
-  --lg-rim: rgba(255, 255, 255, 0.9);
-  --lg-rim-soft: rgba(255, 255, 255, 0.28);
-  --lg-glow: rgba(255, 255, 255, 0.38);
+  --nav-rim: rgba(255, 255, 255, 0.76);
+  --nav-surface: rgba(255, 255, 255, 0.62);
+  --nav-surface-strong: rgba(255, 255, 255, 0.88);
 
-  pointer-events: auto;
-  display: flex;
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(156px, 1fr) auto minmax(156px, 1fr);
   align-items: center;
-  justify-content: space-between;
-  gap: 24px;
+  gap: 16px;
   width: 100%;
-  padding: 0 10px;
-  border-radius: 999px;
-  background-color: var(--atmos-glass-bg);
-  /* -webkit- first: the minifier merges these and keeps the last */
-  -webkit-backdrop-filter: var(--atmos-glass-blur);
-  backdrop-filter: var(--atmos-glass-blur);
+  min-height: 64px;
+  box-sizing: border-box;
+  padding: 0 12px 0 14px;
+  overflow: hidden;
+  border: 1px solid var(--atmos-glass-edge-outer);
+  border-radius: 22px;
+  background: var(--nav-surface);
+  -webkit-backdrop-filter: blur(24px) saturate(1.45);
+  backdrop-filter: blur(24px) saturate(1.45);
   box-shadow:
-    0 0 0 1px var(--atmos-glass-edge-outer),
-    0 2px 8px -4px rgba(15, 23, 42, 0.08),
-    0 12px 32px -18px rgba(15, 23, 42, 0.22);
-  transition: background-color 280ms ease, box-shadow 280ms ease;
-  /* opacity-only entrance; `backwards` fill so the finished animation
-     releases the element (a held fill would break backdrop-filter) */
+    inset 0 1px 0 var(--nav-rim),
+    0 10px 32px -22px rgba(15, 23, 42, 0.42);
+  pointer-events: auto;
+  transition:
+    background-color var(--motion-base) var(--ease-out),
+    border-color var(--motion-base) var(--ease-out),
+    box-shadow var(--motion-base) var(--ease-out);
   animation: navEntrance 420ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
 }
 
-/* Refractive rim — gradient hairline masked to the capsule edge */
-.atmos-nav-inner::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(
-    115deg,
-    var(--lg-rim) 0%,
-    var(--lg-rim-soft) 28%,
-    transparent 52%,
-    var(--lg-rim-soft) 80%,
-    var(--lg-rim) 100%
-  );
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  mask-composite: exclude;
-  pointer-events: none;
-}
-
-/* Specular sheen + inner glow (lensing illusion) */
+/* One quiet signal line; the logo and route dots do the visual work. */
 .atmos-nav-inner::after {
   content: "";
   position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: radial-gradient(140% 180% at 16% -60%, var(--lg-glow) 0%, transparent 58%);
-  box-shadow:
-    inset 0 1px 1px var(--lg-rim-soft),
-    inset 0 0 18px -10px var(--lg-glow);
+  right: 22px;
+  bottom: 0;
+  left: 22px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--atmos-accent-glow) 22%,
+    var(--atmos-badger) 50%,
+    var(--atmos-accent-glow) 78%,
+    transparent
+  );
+  opacity: 0.38;
   pointer-events: none;
 }
 
-/* Scrolled — denser fill + deeper lift for readability over busy content */
 .atmos-nav--scrolled .atmos-nav-inner {
-  background-color: var(--atmos-glass-bg-strong);
+  background: var(--nav-surface-strong);
+  border-color: var(--atmos-hairline);
   box-shadow:
-    0 0 0 1px var(--atmos-glass-edge-outer),
-    0 4px 14px -6px rgba(15, 23, 42, 0.14),
-    0 18px 44px -16px rgba(15, 23, 42, 0.28);
-}
-
-/* ── Centered nav links ─────────────────────────────────── */
-.atmos-nav-center {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1;
+    inset 0 1px 0 var(--nav-rim),
+    0 14px 36px -22px rgba(15, 23, 42, 0.5);
 }
 
 /* ── Brand ──────────────────────────────────────────────── */
 .atmos-nav-brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 13px;
-  text-decoration: none;
-  color: var(--atmos-ink);
-  flex-shrink: 0;
   position: relative;
   z-index: 2;
-  transition: opacity 200ms ease;
-}
-
-.atmos-nav-brand:hover {
-  opacity: 0.8;
-}
-
-/* Logo mark */
-.atmos-nav-brand-mark {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  background: transparent;
-  flex-shrink: 0;
-  overflow: hidden;
-  transition: transform 250ms cubic-bezier(0.34, 1.56, 0.64, 1), opacity 200ms ease;
+  justify-self: start;
+  gap: 10px;
+  color: var(--atmos-ink);
+  text-decoration: none;
 }
 
-.atmos-nav-brand:hover .atmos-nav-brand-mark {
-  transform: scale(1.06);
-  opacity: 0.85;
+.atmos-nav-brand-mark {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+  place-items: center;
+  transition: transform 240ms cubic-bezier(0.34, 1.4, 0.64, 1);
 }
 
 .atmos-nav-brand-mark img {
-  width: 44px;
-  height: 44px;
-  object-fit: contain;
   display: block;
-  filter: brightness(0);
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
 }
 
-
-/* ── Nav links ──────────────────────────────────────────── */
-.atmos-nav-links {
-  display: flex;
-  gap: 2px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.atmos-nav-brand:hover .atmos-nav-brand-mark {
+  transform: rotate(8deg) scale(1.06);
 }
 
-.atmos-nav-actions {
-  display: inline-flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 14px;
-  flex-shrink: 0;
+.atmos-nav-wordmark {
+  display: grid;
+  gap: 1px;
+  line-height: 1;
+}
+
+.atmos-nav-wordmark > span:first-child {
+  font-family: var(--atmos-mono);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.055em;
+}
+
+.atmos-nav-wordmark > span:last-child {
+  font-family: var(--atmos-sans);
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--atmos-ink-mute);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+/* ── Primary route rail ─────────────────────────────────── */
+.atmos-nav-center {
   position: relative;
   z-index: 2;
+  justify-self: center;
+}
+
+.atmos-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  margin: 0;
+  padding: 4px;
+  border: 1px solid color-mix(in srgb, var(--atmos-hairline) 82%, transparent);
+  border-radius: 15px;
+  background: color-mix(in srgb, var(--atmos-paper-tint) 68%, transparent);
+  list-style: none;
 }
 
 .atmos-nav-link {
   position: relative;
-  font-family: var(--atmos-sans);
-  font-size: 16px;
-  font-weight: 500;
-  color: var(--atmos-ink-soft);
-  letter-spacing: 0.01em;
-  text-decoration: none;
-  padding: 6px 12px;
-  border-radius: 999px;
   display: inline-flex;
   align-items: center;
+  min-height: 36px;
+  padding: 0 10px 2px;
+  border-radius: 11px;
+  color: var(--atmos-ink-soft);
+  font-family: var(--atmos-sans);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1;
+  text-decoration: none;
   white-space: nowrap;
-  transition: color 180ms ease;
-}
-
-/* Underline indicator — grows from center on hover */
-.atmos-nav-link::after {
-  content: "";
-  position: absolute;
-  left: 12px;
-  right: 12px;
-  bottom: 2px;
-  height: 2px;
-  border-radius: 2px;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: center;
-  transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition:
+    color var(--motion-fast) var(--ease-out),
+    background-color var(--motion-fast) var(--ease-out);
 }
 
 .atmos-nav-link:hover {
   color: var(--atmos-ink);
+  background: color-mix(in srgb, var(--atmos-paper) 72%, transparent);
 }
 
-.atmos-nav-link:hover::after {
-  transform: scaleX(1);
-}
-
-/* Active link — persistent red underline */
-.atmos-nav-link-active {
-  color: var(--atmos-badger);
-}
-
-.atmos-nav-link-active::after {
-  transform: scaleX(1);
-}
-
+.atmos-nav-link-active,
 .atmos-nav-link-active:hover {
   color: var(--atmos-badger);
+  background: var(--atmos-paper);
 }
 
-/* ── CTA button ─────────────────────────────────────────── */
-.atmos-nav-cta {
-  font-family: var(--atmos-sans);
-  font-size: 16px;
-  font-weight: 600;
-  color: #fff;
+.atmos-nav-signal {
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  opacity: 0;
+  transform: translateX(-50%);
+}
+
+.atmos-nav-signal i {
+  display: block;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
   background: var(--atmos-badger);
-  padding: 8px 18px;
-  border-radius: 999px;
-  letter-spacing: 0.01em;
-  text-decoration: none;
+}
+
+.atmos-nav-signal i:nth-child(2) {
+  width: 4px;
+  height: 4px;
+}
+
+.atmos-nav-link:hover .atmos-nav-signal {
+  opacity: 0.35;
+}
+
+.atmos-nav-link-active .atmos-nav-signal {
+  animation: signalResolve 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ── Actions ────────────────────────────────────────────── */
+.atmos-nav-actions {
+  position: relative;
+  z-index: 2;
   display: inline-flex;
   align-items: center;
+  justify-self: end;
   gap: 8px;
-  white-space: nowrap;
-  flex-shrink: 0;
-  transition:
-    background 200ms ease,
-    box-shadow 200ms ease,
-    transform 200ms ease;
-  box-shadow: var(--shadow-sm);
 }
 
-.atmos-nav-cta:hover {
-  background: #ff1a24;
+.atmos-nav-cta,
+.atmos-nav-mobile-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  box-sizing: border-box;
+  padding: 0 16px;
+  border-radius: 12px;
+  background: var(--atmos-badger);
+  box-shadow: var(--shadow-sm);
+  color: #fff;
+  font-family: var(--atmos-sans);
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background-color var(--motion-fast) var(--ease-out),
+    box-shadow var(--motion-fast) var(--ease-out),
+    transform var(--motion-fast) var(--ease-out);
+}
+
+.atmos-nav-cta:hover,
+.atmos-nav-mobile-cta:hover {
+  background: #a8040a;
   box-shadow: var(--shadow-md);
   transform: translateY(-1px);
 }
 
-.atmos-nav-cta:active {
+.atmos-nav-cta:active,
+.atmos-nav-mobile-cta:active {
   transform: translateY(0) scale(0.98);
-  box-shadow: var(--shadow-sm);
 }
 
 .atmos-nav-cta-arrow {
   display: inline-flex;
-  align-items: center;
 }
 
-/* ── Theme toggle ───────────────────────────────────────── */
-.atmos-nav-theme-toggle {
+.atmos-nav-theme-toggle,
+.atmos-nav-mobile-close {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
+  flex: 0 0 auto;
   padding: 0;
-  /* Sits on the capsule, which already blurs — no local blur needed. */
-  background: var(--atmos-glass-control);
   border: 1px solid var(--atmos-hairline);
-  border-radius: 999px;
+  border-radius: 12px;
+  background: var(--atmos-glass-control);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
   color: var(--atmos-ink);
   cursor: pointer;
-  flex-shrink: 0;
   transition:
-    border-color 180ms ease,
-    color 180ms ease,
-    transform 200ms ease,
-    background 200ms ease,
-    box-shadow 200ms ease;
-  overflow: visible;
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+    color var(--motion-fast) var(--ease-out),
+    background-color var(--motion-fast) var(--ease-out),
+    border-color var(--motion-fast) var(--ease-out),
+    transform var(--motion-fast) var(--ease-out);
+}
+
+.atmos-nav-theme-toggle:hover,
+.atmos-nav-mobile-close:hover {
+  border-color: var(--atmos-ink-mute);
+  background: var(--atmos-paper);
+  transform: rotate(-8deg);
 }
 
 .atmos-nav-theme-toggle-icon {
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
   animation: atmosThemeIconIn 480ms cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
 }
 
 @keyframes atmosThemeIconIn {
   0% {
-    transform: scale(0) rotate(-90deg);
     opacity: 0;
+    transform: scale(0) rotate(-90deg);
   }
   55% {
-    transform: scale(1.15) rotate(8deg);
     opacity: 1;
+    transform: scale(1.15) rotate(8deg);
   }
   100% {
-    transform: scale(1) rotate(0deg);
     opacity: 1;
+    transform: scale(1) rotate(0);
   }
 }
 
-.atmos-nav-theme-toggle:hover {
-  border-color: var(--atmos-ink-soft);
-  background: var(--atmos-glass-bg-strong);
-  box-shadow: var(--shadow-sm);
-  transform: rotate(-12deg);
-}
-
-.atmos-nav-theme-toggle:active {
-  transform: rotate(0deg) scale(0.96);
-}
-
-.atmos-nav-mobile-theme-toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 16px;
-  padding: 12px 16px;
-  background: transparent;
-  border: 1px solid var(--atmos-hairline);
-  border-radius: 999px;
-  font-family: var(--atmos-sans);
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--atmos-ink);
-  cursor: pointer;
-  align-self: flex-start;
-  transition: border-color 180ms ease;
-}
-
-.atmos-nav-mobile-theme-toggle:hover {
-  border-color: var(--atmos-ink-soft);
-}
-
-/* ── Burger (mobile) ────────────────────────────────────── */
-/* Sits on the capsule, which already blurs — no local blur needed */
+/* ── Mobile trigger ─────────────────────────────────────── */
 .atmos-nav-burger {
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  gap: 5px;
-  background: var(--atmos-glass-control);
-  border: 1px solid var(--atmos-hairline);
-  border-radius: 999px;
-  padding: 10px 12px;
-  cursor: pointer;
-  width: 44px;
-  height: 38px;
   position: relative;
   z-index: 2;
-  transition: border-color 180ms ease, background 180ms ease;
-}
-
-.atmos-nav-burger:hover {
-  border-color: var(--atmos-ink-soft);
+  display: none;
+  width: 44px;
+  height: 40px;
+  padding: 10px 11px;
+  border: 1px solid var(--atmos-hairline);
+  border-radius: 12px;
+  background: var(--atmos-glass-control);
+  color: var(--atmos-ink);
+  cursor: pointer;
 }
 
 .atmos-nav-burger-bar {
   display: block;
   width: 100%;
   height: 1.5px;
-  background: var(--atmos-ink);
   border-radius: 2px;
-  transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1), opacity 180ms ease;
+  background: currentColor;
   transform-origin: center;
+  transition:
+    transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity var(--motion-fast) ease;
 }
 
-/* Animate bars to X when open */
+.atmos-nav-burger-bar + .atmos-nav-burger-bar {
+  margin-top: 5px;
+}
+
 .atmos-nav-burger--open .atmos-nav-burger-bar:nth-child(1) {
   transform: translateY(6.5px) rotate(45deg);
 }
+
 .atmos-nav-burger--open .atmos-nav-burger-bar:nth-child(2) {
   opacity: 0;
   transform: scaleX(0);
 }
+
 .atmos-nav-burger--open .atmos-nav-burger-bar:nth-child(3) {
   transform: translateY(-6.5px) rotate(-45deg);
 }
 
-/* ── Mobile backdrop ────────────────────────────────────── */
-/* Dim only — no heavy blur (perf: don't stack with nav + panel) */
+/* ── Mobile menu ────────────────────────────────────────── */
 .atmos-nav-mobile-backdrop {
   position: fixed;
   inset: 0;
   z-index: 98;
-  background: rgba(0, 0, 0, 0.22);
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+  background: rgba(15, 23, 42, 0.24);
 }
 
-/* ── Mobile panel ───────────────────────────────────────── */
-/* Floating glass card, same material language as the capsule */
 .atmos-nav-mobile-panel {
-  --lg-rim: rgba(255, 255, 255, 0.9);
-  --lg-rim-soft: rgba(255, 255, 255, 0.28);
+  --nav-rim: rgba(255, 255, 255, 0.76);
 
   position: fixed;
-  top: calc(var(--atmos-nav-height, 68px) + 8px);
-  left: 12px;
-  right: 12px;
-  border-radius: 28px;
-  background: var(--atmos-glass-bg-strong);
-  -webkit-backdrop-filter: var(--atmos-glass-blur);
-  backdrop-filter: var(--atmos-glass-blur);
-  padding: 18px 22px 24px;
-  display: flex;
-  flex-direction: column;
+  top: calc(var(--atmos-nav-height, 76px) + 6px);
+  right: var(--atmos-gutter, 24px);
   z-index: 99;
+  display: flex;
+  width: min(420px, calc(100vw - 40px));
+  max-height: calc(100dvh - var(--atmos-nav-height, 76px) - 22px);
+  box-sizing: border-box;
+  flex-direction: column;
+  padding: 18px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: 1px solid var(--atmos-glass-edge-outer);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.9);
+  -webkit-backdrop-filter: blur(24px) saturate(1.35);
+  backdrop-filter: blur(24px) saturate(1.35);
   box-shadow:
-    0 0 0 1px var(--atmos-glass-edge-outer),
-    inset 0 1px 1px var(--lg-rim-soft),
-    inset 0 1px 0 0 var(--lg-rim),
-    0 16px 44px -12px rgba(0, 0, 0, 0.18);
+    inset 0 1px 0 var(--nav-rim),
+    0 24px 64px -24px rgba(15, 23, 42, 0.42);
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
-  transform: translateY(-8px) scale(0.98);
-  transform-origin: top center;
-  transition: opacity 280ms cubic-bezier(0.22, 1, 0.36, 1),
-              transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateY(-8px) scale(0.985);
+  transform-origin: top right;
+  transition:
+    opacity 220ms var(--ease-out),
+    transform 220ms var(--ease-out),
+    visibility 0s linear 220ms;
 }
 
 .atmos-nav-mobile-panel.atmos-nav-mobile-open {
   opacity: 1;
+  visibility: visible;
   pointer-events: auto;
   transform: translateY(0) scale(1);
+  transition-delay: 0s;
 }
 
-.atmos-nav-mobile-panel nav {
+.atmos-nav-mobile-heading {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 0 14px 4px;
+  border-bottom: 1px solid var(--atmos-hairline);
+  color: var(--atmos-ink-mute);
+  font-family: var(--atmos-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.atmos-nav-mobile-close:hover {
+  transform: rotate(8deg);
+}
+
+.atmos-nav-mobile-links {
+  margin: 0;
+  padding: 10px 0;
+  list-style: none;
+}
+
+.atmos-nav-mobile-links li + li {
+  border-top: 1px solid color-mix(in srgb, var(--atmos-hairline) 72%, transparent);
 }
 
 .atmos-nav-mobile-link {
-  font-family: var(--atmos-sans);
-  font-size: 15px;
-  font-weight: 500;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 50px;
+  padding: 0 10px 0 14px;
+  border-radius: 11px;
   color: var(--atmos-ink-soft);
-  letter-spacing: 0.01em;
+  font-family: var(--atmos-sans);
+  font-size: 18px;
+  font-weight: 600;
   text-decoration: none;
-  padding: 13px 12px;
-  margin: 0 -12px;
-  border-radius: 999px;
-  transition: color 160ms ease, background 160ms ease;
+  transition:
+    color var(--motion-fast) var(--ease-out),
+    background-color var(--motion-fast) var(--ease-out),
+    padding var(--motion-fast) var(--ease-out);
+}
+
+.atmos-nav-mobile-link::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 2px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--atmos-badger);
+  opacity: 0;
+  transform: translateY(-50%) scale(0.4);
+  transition: opacity var(--motion-fast) ease, transform var(--motion-fast) ease;
+}
+
+.atmos-nav-mobile-link > span:last-child {
+  color: var(--atmos-ink-mute);
+  font-size: 14px;
+  opacity: 0.45;
+  transition: transform var(--motion-fast) var(--ease-out), opacity var(--motion-fast) ease;
 }
 
 .atmos-nav-mobile-link:hover {
   color: var(--atmos-ink);
-  background: rgba(15, 23, 42, 0.04);
+  background: var(--atmos-paper-tint);
+  padding-left: 18px;
+}
+
+.atmos-nav-mobile-link:hover > span:last-child {
+  opacity: 0.8;
+  transform: translate(2px, -2px);
 }
 
 .atmos-nav-mobile-link.atmos-nav-link-active {
   color: var(--atmos-badger);
-  background: rgba(197, 5, 12, 0.1);
+  background: var(--atmos-accent-glow);
+  padding-left: 20px;
 }
 
-.atmos-nav-mobile-cta {
-  margin-bottom: 16px;
+.atmos-nav-mobile-link.atmos-nav-link-active::before {
+  opacity: 1;
+  transform: translateY(-50%) scale(1);
+}
+
+.atmos-nav-mobile-footer {
+  display: grid;
+  grid-template-columns: 1fr 1.35fr;
+  gap: 8px;
+  padding-top: 14px;
+  border-top: 1px solid var(--atmos-hairline);
+}
+
+.atmos-nav-mobile-theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--atmos-hairline);
+  border-radius: 12px;
+  background: transparent;
+  color: var(--atmos-ink);
   font-family: var(--atmos-sans);
   font-size: 14px;
   font-weight: 600;
-  color: #fff;
-  background: var(--atmos-badger);
-  border-radius: 999px;
-  padding: 13px 22px;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  align-self: flex-start;
-  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+}
+
+.atmos-nav-mobile-cta {
+  min-height: 44px;
 }
 
 /* ── Responsive ─────────────────────────────────────────── */
-/* Raised from 1024px: the nav has 8 links, and the absolutely-centered
-   link pill (see .atmos-nav-center) can overlap the CTA/theme toggle on the
-   right before 1024px width is reached. 1200px keeps a safe margin. */
-@media (max-width: 1200px) {
-  .atmos-nav {
-    padding: 8px var(--atmos-gutter, 20px) 0;
-  }
-
+@media (max-width: 1180px) and (min-width: 1061px) {
   .atmos-nav-inner {
-    gap: 16px;
+    grid-template-columns: minmax(132px, 1fr) auto minmax(132px, 1fr);
+    min-height: 60px;
+    gap: 10px;
   }
 
-  .atmos-nav-center {
+  .atmos-nav-wordmark > span:last-child {
     display: none;
   }
 
-  .atmos-nav-brand-mark {
-    width: 48px;
-    height: 48px;
+  .atmos-nav-links {
+    padding: 3px;
   }
 
-  .atmos-nav-brand-mark img {
-    width: 40px;
-    height: 40px;
+  .atmos-nav-link {
+    min-height: 34px;
+    padding-right: 8px;
+    padding-left: 8px;
+    font-size: 13px;
   }
 
+  .atmos-nav-cta {
+    min-height: 38px;
+    padding: 0 12px;
+    font-size: 13px;
+  }
+
+  .atmos-nav-theme-toggle {
+    width: 38px;
+    height: 38px;
+  }
+}
+
+@media (max-width: 1060px) {
+  .atmos-nav {
+    padding-top: 8px;
+  }
+
+  .atmos-nav-inner {
+    display: flex;
+    min-height: 60px;
+    padding: 0 10px 0 12px;
+    border-radius: 20px;
+  }
+
+  .atmos-nav-center,
   .atmos-nav-actions {
     display: none;
   }
 
   .atmos-nav-burger {
-    display: flex;
+    display: block;
+    margin-left: auto;
   }
 }
 
-/* ── Dark mode (navbar only — page chrome flips with [data-theme="dark"]) ── */
-[data-theme="dark"] .atmos-nav,
-[data-theme="dark"] .atmos-nav-mobile-panel {
-  --atmos-ink: #f1f5f9;
-  --atmos-ink-soft: #cbd5e1;
-  --atmos-ink-mute: #64748b;
-  --atmos-hairline: rgba(255, 255, 255, 0.10);
-  --atmos-hairline-soft: rgba(255, 255, 255, 0.06);
+@media (max-width: 640px) {
+  .atmos-nav {
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+
+  .atmos-nav-inner {
+    min-height: 56px;
+    border-radius: 18px;
+  }
+
+  .atmos-nav-brand-mark {
+    width: 38px;
+    height: 38px;
+  }
+
+  .atmos-nav-brand-mark img {
+    width: 34px;
+    height: 34px;
+  }
+
+  .atmos-nav-mobile-panel {
+    right: 12px;
+    left: 12px;
+    width: auto;
+    padding: 16px;
+    padding-bottom: max(16px, env(safe-area-inset-bottom));
+    border-radius: 20px;
+    transform-origin: top center;
+  }
 }
 
-/* Dimmer rim/sheen — dark glass reflects less light */
-[data-theme="dark"] .atmos-nav-inner,
-[data-theme="dark"] .atmos-nav-mobile-panel {
-  --lg-rim: rgba(255, 255, 255, 0.3);
-  --lg-rim-soft: rgba(255, 255, 255, 0.08);
-  --lg-glow: rgba(255, 255, 255, 0.09);
+@media (max-width: 420px) {
+  .atmos-nav-mobile-footer {
+    grid-template-columns: 1fr;
+  }
 }
 
+/* ── Dark mode ──────────────────────────────────────────── */
 [data-theme="dark"] .atmos-nav-inner {
+  --nav-rim: rgba(255, 255, 255, 0.12);
+  --nav-surface: rgba(12, 12, 14, 0.62);
+  --nav-surface-strong: rgba(12, 12, 14, 0.9);
+
   box-shadow:
-    0 0 0 1px var(--atmos-glass-edge-outer),
-    0 2px 8px -4px rgba(0, 0, 0, 0.35),
-    0 14px 36px -16px rgba(0, 0, 0, 0.55);
+    inset 0 1px 0 var(--nav-rim),
+    0 14px 38px -20px rgba(0, 0, 0, 0.72);
 }
 
-[data-theme="dark"] .atmos-nav--scrolled .atmos-nav-inner {
-  box-shadow:
-    0 0 0 1px var(--atmos-glass-edge-outer),
-    0 4px 14px -6px rgba(0, 0, 0, 0.5),
-    0 20px 48px -16px rgba(0, 0, 0, 0.65);
+[data-theme="dark"] .atmos-nav-links {
+  background: rgba(255, 255, 255, 0.035);
 }
 
-[data-theme="dark"] .atmos-nav-brand-mark img {
-  filter: brightness(0) invert(1);
-}
-
-[data-theme="dark"] .atmos-nav-link:hover,
-[data-theme="dark"] .atmos-nav-mobile-link:hover {
-  background: rgba(255, 255, 255, 0.06);
+[data-theme="dark"] .atmos-nav-link:hover {
+  background: rgba(255, 255, 255, 0.055);
 }
 
 [data-theme="dark"] .atmos-nav-link-active,
-[data-theme="dark"] .atmos-nav-mobile-link.atmos-nav-link-active {
-  background: rgba(255, 110, 117, 0.12);
-}
-
-[data-theme="dark"] .atmos-nav-link-active:hover,
-[data-theme="dark"] .atmos-nav-mobile-link.atmos-nav-link-active:hover {
-  background: rgba(255, 110, 117, 0.18);
+[data-theme="dark"] .atmos-nav-link-active:hover {
+  background: rgba(255, 255, 255, 0.075);
 }
 
 [data-theme="dark"] .atmos-nav-mobile-panel {
-  background: var(--atmos-glass-bg-strong);
+  --nav-rim: rgba(255, 255, 255, 0.12);
+
+  background: rgba(12, 12, 14, 0.94);
   box-shadow:
-    0 0 0 1px var(--atmos-glass-edge-outer),
-    inset 0 1px 0 0 var(--lg-rim),
-    0 18px 48px -12px rgba(0, 0, 0, 0.6);
-}
-
-[data-theme="dark"] .atmos-nav-burger {
-  background: var(--atmos-glass-control);
-}
-
-[data-theme="dark"] .atmos-nav-cta:hover {
-  background: #ff858b;
-  box-shadow: var(--shadow-sm);
+    inset 0 1px 0 var(--nav-rim),
+    0 28px 72px -24px rgba(0, 0, 0, 0.78);
 }
 
 [data-theme="dark"] .atmos-nav-mobile-backdrop {
-  background: rgba(0, 0, 0, 0.48);
+  background: rgba(0, 0, 0, 0.52);
 }
 
-/* Reduced transparency: solid fills (tokens flip in App.css), no blur,
-   and drop the decorative rim/sheen layers */
+[data-theme="dark"] .atmos-nav-cta:hover,
+[data-theme="dark"] .atmos-nav-mobile-cta:hover {
+  background: #a8040a;
+}
+
+/* ── Capability and preference fallbacks ────────────────── */
 @media (prefers-reduced-transparency: reduce) {
   .atmos-nav-inner,
   .atmos-nav-mobile-panel {
-    backdrop-filter: none;
     -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: var(--atmos-paper);
   }
+}
 
-  .atmos-nav-inner::before,
-  .atmos-nav-inner::after {
-    display: none;
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .atmos-nav-inner,
+  .atmos-nav-mobile-panel {
+    background: var(--atmos-paper);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .atmos-nav-theme-toggle,
-  .atmos-nav-theme-toggle:hover,
-  .atmos-nav-theme-toggle:active {
-    transform: none !important;
-  }
-
+  .atmos-nav-inner,
   .atmos-nav-theme-toggle-icon {
     animation: none !important;
   }
 
+  .atmos-nav-link-active .atmos-nav-signal {
+    opacity: 1;
+    transform: translateX(-50%);
+    animation: none !important;
+  }
+
+  .atmos-nav-brand-mark,
+  .atmos-nav-theme-toggle,
+  .atmos-nav-mobile-close,
   .atmos-nav-cta,
-  .atmos-nav-cta:hover,
-  .atmos-nav-cta:active {
-    transform: none !important;
-  }
-
-  .atmos-nav-cta:hover .atmos-nav-cta-arrow {
-    transform: none !important;
-  }
-
-  .atmos-nav-brand:hover .atmos-nav-brand-mark {
-    transform: none !important;
-  }
-
-  .atmos-nav-burger-bar {
+  .atmos-nav-mobile-cta,
+  .atmos-nav-burger-bar,
+  .atmos-nav-mobile-panel,
+  .atmos-nav-mobile-link,
+  .atmos-nav-mobile-link > span:last-child {
     transition: none !important;
-  }
-
-  .atmos-nav-mobile-panel {
-    transition: opacity 150ms ease !important;
+    transform: none !important;
   }
 }

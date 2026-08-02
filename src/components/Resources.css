@@ -7,6 +7,15 @@
   padding-bottom: clamp(64px, 9vw, 120px);
   background: var(--atmos-paper);
   min-height: 100vh;
+  font-family: var(--atmos-mono);
+}
+
+/* Page-wide mono: override shared atmos type styles */
+.atmos-resources .atmos-page-hero-title,
+.atmos-resources .atmos-page-hero-lede,
+.atmos-resources .atmos-page-hero-cta,
+.atmos-resources .atmos-section-title {
+  font-family: var(--atmos-mono);
 }
 
 /* HERO SECTION -------------------------------------------- */
@@ -19,291 +28,7 @@
   padding: clamp(40px, 5vw, 80px) 0 clamp(64px, 8vw, 96px);
 }
 
-.res-section-tinted {
-  background: var(--atmos-paper-tint);
-  border-top: 1px solid var(--atmos-hairline);
-  border-bottom: 1px solid var(--atmos-hairline);
-}
-
-/* 1. SKILLS DIRECTORY ------------------------------------- */
-.res-skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: clamp(20px, 3vw, 36px);
-  margin-top: 16px;
-}
-
-.res-skill-card {
-  display: flex;
-  flex-direction: column;
-  background: var(--atmos-paper);
-  border: var(--surface-border);
-  border-radius: var(--surface-radius);
-  overflow: hidden;
-  box-shadow: none;
-  text-decoration: none;
-  color: inherit;
-  transition: box-shadow 300ms cubic-bezier(0.2, 0.8, 0.2, 1),
-              border-color 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.res-skill-card:hover {
-  border-color: rgba(197, 5, 12, 0.25);
-  box-shadow: var(--shadow-md);
-}
-
-.res-card-visual {
-  position: relative;
-  height: 160px;
-  background: #f8fafc;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  border-bottom: 1px solid var(--atmos-hairline);
-}
-
-.resource-card-visual-svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-  transition: transform 500ms cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.res-skill-card:hover .resource-card-visual-svg {
-  transform: scale(1.06);
-}
-
-/* Visual presets background gradients */
-.visual-red { background: linear-gradient(135deg, rgba(197, 5, 12, 0.04) 0%, rgba(197, 5, 12, 0.01) 100%); }
-.visual-azure { background: linear-gradient(135deg, rgba(2, 132, 199, 0.05) 0%, rgba(2, 132, 199, 0.01) 100%); }
-.visual-orange { background: linear-gradient(135deg, rgba(234, 88, 12, 0.05) 0%, rgba(234, 88, 12, 0.01) 100%); }
-.visual-purple { background: linear-gradient(135deg, rgba(124, 58, 237, 0.05) 0%, rgba(124, 58, 237, 0.01) 100%); }
-
-.res-card-category-badge {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  font-family: var(--atmos-mono);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  background: rgba(255, 255, 255, 0.92);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: 999px;
-  color: var(--atmos-ink);
-  z-index: 2;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
-}
-
-.res-card-body {
-  display: flex;
-  flex-direction: column;
-  padding: 24px;
-  flex-grow: 1;
-}
-
-.res-card-title {
-  font-family: var(--atmos-serif);
-  font-size: clamp(20px, 2.2vw, 24px);
-  font-weight: 700;
-  color: var(--atmos-ink);
-  margin: 0 0 8px 0;
-  letter-spacing: -0.01em;
-}
-
-.res-card-desc {
-  font-family: var(--atmos-sans);
-  font-size: var(--type-body-sm);
-  line-height: var(--lh-body-sm);
-  color: var(--atmos-ink-soft);
-  margin: 0 0 20px 0;
-  flex-grow: 1;
-}
-
-.res-card-footer {
-  margin-top: auto;
-  border-top: 1px solid var(--atmos-hairline-soft);
-  padding-top: 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.res-card-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-family: var(--atmos-sans);
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--atmos-badger);
-  transition: gap 180ms ease;
-}
-
-.res-skill-card:hover .res-card-cta {
-  gap: 8px;
-}
-
-.res-tag-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.res-tag-chip {
-  font-family: var(--atmos-mono);
-  font-size: 11px;
-  font-weight: 550;
-  padding: 4px 10px;
-  background: var(--atmos-paper-tint);
-  border: 1px solid var(--atmos-hairline);
-  color: var(--atmos-ink-soft);
-  border-radius: 6px;
-}
-
-/* 2. RECOMMENDED READINGS --------------------------------- */
-.res-readings-list {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin-top: 16px;
-}
-
-.res-reading-row {
-  display: grid;
-  grid-template-columns: 1.2fr 2fr 1fr;
-  align-items: center;
-  gap: clamp(16px, 3vw, 40px);
-  padding: 24px;
-  background: var(--atmos-paper);
-  border: 1px solid var(--atmos-hairline);
-  border-radius: 16px;
-  box-shadow: none;
-  transition: all 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.res-reading-row:hover {
-  border-color: rgba(197, 5, 12, 0.2);
-  background: var(--atmos-paper-deep);
-  transform: translateX(4px);
-  box-shadow: var(--shadow-md);
-}
-
-.res-reading-left {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.res-reading-number {
-  font-family: var(--atmos-mono);
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--atmos-ink-mute);
-  font-variant-numeric: tabular-nums;
-  opacity: 0.5;
-}
-
-.res-reading-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.res-reading-title {
-  font-family: var(--atmos-serif);
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 1.3;
-  color: var(--atmos-ink);
-  margin: 0;
-}
-
-.res-reading-author {
-  display: inline-flex;
-  align-items: center;
-  font-family: var(--atmos-sans);
-  font-size: 13px;
-  color: var(--atmos-badger);
-  font-weight: 600;
-}
-
-.res-reading-center {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.res-reading-desc {
-  font-family: var(--atmos-sans);
-  font-size: 15px;
-  line-height: 1.6;
-  color: var(--atmos-ink-soft);
-  margin: 0;
-}
-
-.res-reading-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.res-reading-chip {
-  font-family: var(--atmos-mono);
-  font-size: 11px;
-  padding: 2px 8px;
-  background: rgba(15, 23, 42, 0.04);
-  color: var(--atmos-ink-soft);
-  border-radius: 4px;
-}
-
-.res-reading-right {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.res-reading-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--atmos-sans);
-  font-size: 13px;
-  font-weight: 600;
-  padding: 10px 18px;
-  background: var(--atmos-glass-control);
-  backdrop-filter: var(--atmos-glass-blur);
-  -webkit-backdrop-filter: var(--atmos-glass-blur);
-  border: 1px solid var(--atmos-hairline);
-  color: var(--atmos-ink);
-  border-radius: 999px;
-  text-decoration: none;
-  transition: all 200ms ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
-}
-
-.res-reading-link:hover {
-  background: var(--atmos-badger);
-  color: #ffffff;
-  border-color: var(--atmos-badger);
-  box-shadow: 0 4px 12px rgba(197, 5, 12, 0.2);
-}
-
-.res-link-icon {
-  opacity: 0.6;
-  transition: transform 200ms ease;
-}
-
-.res-reading-link:hover .res-link-icon {
-  opacity: 1;
-  transform: translate(1px, -1px);
-}
-
-/* 3. LIVE NEWS FEED --------------------------------------- */
+/* LIVE NEWS FEED ------------------------------------------ */
 .res-news-controls {
   display: flex;
   gap: 16px;
@@ -327,7 +52,7 @@
 
 .res-search-input {
   width: 100%;
-  font-family: var(--atmos-sans);
+  font-family: var(--atmos-mono);
   font-size: 16px;
   padding: 12px 16px 12px 48px;
   background: var(--atmos-glass-control);
@@ -367,7 +92,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-family: var(--atmos-sans);
+  font-family: var(--atmos-mono);
   font-size: 13.5px;
   font-weight: 600;
   padding: 12px 20px;
@@ -412,7 +137,7 @@
   border-radius: 12px;
   margin-bottom: 24px;
   color: #ea580c;
-  font-family: var(--atmos-sans);
+  font-family: var(--atmos-mono);
   font-size: 13.5px;
 }
 
@@ -456,7 +181,7 @@
 }
 
 .res-news-card-title {
-  font-family: var(--atmos-serif);
+  font-family: var(--atmos-mono);
   font-size: 17px;
   font-weight: 700;
   line-height: 1.4;
@@ -492,7 +217,7 @@
   right: 0;
   background: var(--atmos-badger);
   color: #ffffff;
-  font-family: var(--atmos-sans);
+  font-family: var(--atmos-mono);
   font-size: 11px;
   font-weight: 700;
   padding: 6px 14px;
@@ -516,12 +241,12 @@
   border: 1px dashed var(--atmos-hairline);
   border-radius: 16px;
   color: var(--atmos-ink-soft);
-  font-family: var(--atmos-sans);
+  font-family: var(--atmos-mono);
 }
 
 .res-reset-search-btn {
   margin-top: 12px;
-  font-family: var(--atmos-sans);
+  font-family: var(--atmos-mono);
   font-size: 13px;
   font-weight: 600;
   padding: 8px 16px;
@@ -604,23 +329,12 @@
 }
 
 /* RESPONSIVE LAYOUT --------------------------------------- */
-@media (max-width: 980px) {
-  .res-reading-row {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-  
-  .res-reading-right {
-    justify-content: flex-start;
-  }
-}
-
 @media (max-width: 760px) {
   .res-news-controls {
     flex-direction: column;
     align-items: stretch;
   }
-  
+
   .res-news-stream {
     grid-template-columns: 1fr;
   }
@@ -629,50 +343,6 @@
 /* =========================================================
    DARK MODE ADJUSTMENTS
    ========================================================= */
-[data-theme="dark"] .res-skill-card {
-  background: var(--atmos-paper-tint);
-  box-shadow: none;
-}
-
-[data-theme="dark"] .res-skill-card:hover {
-  background: var(--atmos-paper-tint);
-  box-shadow: var(--shadow-md);
-}
-
-[data-theme="dark"] .res-card-visual {
-  background: #1a1a1a;
-}
-
-[data-theme="dark"] .res-card-category-badge {
-  background: rgba(20, 20, 20, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #f1f5f9;
-}
-
-[data-theme="dark"] .res-reading-row {
-  background: var(--atmos-paper-tint);
-  box-shadow: none;
-}
-
-[data-theme="dark"] .res-reading-row:hover {
-  background: var(--atmos-paper-deep);
-  box-shadow: var(--shadow-md);
-}
-
-[data-theme="dark"] .res-reading-link {
-  background: var(--atmos-glass-control);
-  backdrop-filter: var(--atmos-glass-blur);
-  -webkit-backdrop-filter: var(--atmos-glass-blur);
-  border-color: var(--atmos-hairline);
-  color: #f1f5f9;
-}
-
-[data-theme="dark"] .res-reading-link:hover {
-  background: var(--atmos-badger);
-  color: #ffffff;
-  border-color: var(--atmos-badger);
-}
-
 [data-theme="dark"] .res-search-input {
   background: var(--atmos-glass-control);
   color: #f1f5f9;

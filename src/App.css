@@ -72,9 +72,10 @@ button:focus-visible,
   --atmos-hairline-soft: #f1f5f9;
   --atmos-badger: #C5050C;
   --atmos-accent-glow: rgba(197, 5, 12, 0.12);
-  --atmos-serif: "Instrument Serif", Georgia, serif;
-  --atmos-sans: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-  --atmos-mono: "Space Mono", ui-monospace, monospace;
+  --atmos-font: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --atmos-serif: var(--atmos-font);
+  --atmos-sans: var(--atmos-font);
+  --atmos-mono: var(--atmos-font);
   --atmos-max: 1320px;
   --atmos-gutter: clamp(20px, 4vw, 56px);
   /* Nav offset — page roots pad content; backgrounds still paint under fixed chrome */
