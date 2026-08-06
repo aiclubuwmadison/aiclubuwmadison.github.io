@@ -347,3 +347,138 @@
 [data-theme="dark"] .atmos-faq-row {
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
+
+/* ── Accordion motion ──────────────────────────────────── */
+@keyframes faqRowIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.atmos-faq-row {
+  position: relative;
+  animation: faqRowIn 520ms var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 55ms);
+  transition:
+    background-color var(--motion-fast) ease,
+    border-color var(--motion-fast) ease;
+}
+
+/* Accent rail that grows down the open row */
+.atmos-faq-row::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 2px;
+  background: var(--atmos-badger);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 420ms var(--ease-out);
+}
+
+.atmos-faq-row.is-open::before {
+  transform: scaleY(1);
+}
+
+.atmos-faq-row.is-open {
+  background: color-mix(in srgb, var(--atmos-badger) 5%, transparent);
+}
+
+.atmos-faq-toggle-btn:focus-visible {
+  outline: 2px solid var(--atmos-badger);
+  outline-offset: -6px;
+  border-radius: var(--radius-md);
+}
+
+/* Icon badge: lifts on hover, fills when open */
+.faq-row-icon {
+  transition:
+    transform 320ms var(--ease-out),
+    background-color 320ms var(--ease-out),
+    color 320ms var(--ease-out);
+}
+
+.atmos-faq-row:hover .faq-row-icon {
+  transform: translateY(-2px) scale(1.06);
+  background: color-mix(in srgb, var(--atmos-badger) 13%, transparent);
+}
+
+.atmos-faq-row.is-open .faq-row-icon,
+[data-theme="dark"] .atmos-faq-row.is-open .faq-row-icon {
+  background: var(--atmos-badger);
+  color: var(--atmos-paper);
+  transform: scale(1.06);
+}
+
+.faq-row-text-wrap {
+  transition: transform 320ms var(--ease-out);
+}
+
+.atmos-faq-row:hover .faq-row-text-wrap {
+  transform: translateX(3px);
+}
+
+.atmos-faq-q {
+  transition: color 240ms ease;
+}
+
+.atmos-faq-row.is-open .atmos-faq-q {
+  color: var(--atmos-badger);
+}
+
+.atmos-faq-toggle-icon {
+  transition:
+    transform 340ms cubic-bezier(0.34, 1.32, 0.64, 1),
+    color 300ms ease;
+}
+
+.atmos-faq-row:hover .atmos-faq-toggle-icon {
+  color: var(--atmos-ink);
+}
+
+.atmos-faq-row:hover .atmos-faq-toggle-icon.is-open {
+  color: var(--atmos-badger);
+}
+
+/* Answer copy settles in just behind the panel opening */
+.atmos-faq-a {
+  opacity: 0;
+  transform: translateY(-8px);
+  transition:
+    opacity 200ms ease,
+    transform 340ms var(--ease-out);
+}
+
+.atmos-faq-answer-panel.is-open .atmos-faq-a {
+  opacity: 1;
+  transform: none;
+  transition-delay: 90ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .atmos-faq-row {
+    animation: none !important;
+  }
+
+  .atmos-faq-row::before,
+  .faq-row-icon,
+  .faq-row-text-wrap,
+  .atmos-faq-a {
+    transition: none !important;
+  }
+
+  .atmos-faq-row:hover .faq-row-icon,
+  .atmos-faq-row:hover .faq-row-text-wrap {
+    transform: none;
+  }
+
+  .atmos-faq-a {
+    opacity: 1;
+    transform: none;
+  }
+}

@@ -126,12 +126,9 @@ const Involvement = () => {
       });
     }, { threshold: 0.08 });
 
-    const elements = document.querySelectorAll(".atmos-reveal, .atmos-faq-row");
-    elements.forEach((el, i) => {
+    const elements = document.querySelectorAll(".atmos-reveal");
+    elements.forEach((el) => {
       el.classList.add("sr-hidden");
-      if (el.classList.contains("atmos-faq-row")) {
-        el.style.transitionDelay = `${Math.min((i % 5) * 70, 280)}ms`;
-      }
       io.observe(el);
     });
 
@@ -166,33 +163,50 @@ const Involvement = () => {
           <div className="atmos-faq-right">
             <div className="faq-right-card">
               <ul className="atmos-faq-list">
-                {FAQS.map((item) => (
-                  <li key={item.q} className="atmos-faq-row atmos-reveal">
-                    <div className="atmos-faq-item">
-                      <button
-                        type="button"
-                        className="atmos-faq-toggle-btn"
-                        onClick={() => toggleFaq(item.q)}
-                        aria-expanded={openFaq === item.q}
-                      >
-                        <div className="faq-row-inner">
-                          <div className="faq-row-icon"><item.Icon size={17} /></div>
-                          <div className="faq-row-text-wrap">
-                            <h2 className="atmos-faq-q">{item.q}</h2>
+                {FAQS.map((item, i) => {
+                  const isOpen = openFaq === item.q;
+                  const btnId = `faq-btn-${i}`;
+                  const panelId = `faq-panel-${i}`;
+
+                  return (
+                    <li
+                      key={item.q}
+                      className={`atmos-faq-row${isOpen ? ' is-open' : ''}`}
+                      style={{ '--i': i }}
+                    >
+                      <div className="atmos-faq-item">
+                        <button
+                          type="button"
+                          id={btnId}
+                          className="atmos-faq-toggle-btn"
+                          onClick={() => toggleFaq(item.q)}
+                          aria-expanded={isOpen}
+                          aria-controls={panelId}
+                        >
+                          <div className="faq-row-inner">
+                            <div className="faq-row-icon"><item.Icon size={17} /></div>
+                            <div className="faq-row-text-wrap">
+                              <h2 className="atmos-faq-q">{item.q}</h2>
+                            </div>
                           </div>
-                        </div>
-                        <span className={`atmos-faq-toggle-icon${openFaq === item.q ? ' is-open' : ''}`} aria-hidden="true">›</span>
-                      </button>
-                      <div className={`atmos-faq-answer-panel${openFaq === item.q ? ' is-open' : ''}`} role="region">
-                        <div className="atmos-faq-answer-inner">
-                          <div className="atmos-faq-a">
-                            <p className="atmos-faq-a-body">{item.a}</p>
+                          <span className={`atmos-faq-toggle-icon${isOpen ? ' is-open' : ''}`} aria-hidden="true">›</span>
+                        </button>
+                        <div
+                          id={panelId}
+                          role="region"
+                          aria-labelledby={btnId}
+                          className={`atmos-faq-answer-panel${isOpen ? ' is-open' : ''}`}
+                        >
+                          <div className="atmos-faq-answer-inner">
+                            <div className="atmos-faq-a">
+                              <p className="atmos-faq-a-body">{item.a}</p>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </li>
-                ))}
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           </div>
