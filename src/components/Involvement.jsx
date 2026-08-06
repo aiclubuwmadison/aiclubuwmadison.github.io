@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useRef } from 'react';
+import { Fragment, useState, useEffect, useMemo, useRef } from 'react';
 import './Involvement.css';
 import { Link } from 'react-router-dom';
 import {
@@ -130,6 +130,11 @@ const FAQS = [
 
 const TOPICS = ['All', 'Getting started', 'Meetings', 'Projects', 'Community'];
 
+const HEADING_LINES = [
+  ['Ask', 'anything.'],
+  ["We're", 'here', 'to', 'help'],
+];
+
 const topicCount = (topic) =>
   topic === 'All' ? FAQS.length : FAQS.filter((f) => f.topic === topic).length;
 
@@ -153,6 +158,16 @@ const Involvement = () => {
   const [query, setQuery] = useState('');
   const [topic, setTopic] = useState('All');
   const searchRef = useRef(null);
+  const cardRef = useRef(null);
+
+  /* Soft glow that trails the cursor across the question card. */
+  const trackGlow = (e) => {
+    const el = cardRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    el.style.setProperty('--mx', `${e.clientX - rect.left}px`);
+    el.style.setProperty('--my', `${e.clientY - rect.top}px`);
+  };
 
   const toggleFaq = (q) => setOpenFaq((prev) => (prev === q ? null : q));
 
@@ -217,11 +232,27 @@ const Involvement = () => {
       <div className="atmos-shell">
         <div className="atmos-faq-layout">
 
-          <div className="atmos-faq-left atmos-reveal">
+          <div className="atmos-faq-left">
             <span className="faq-label">FAQ</span>
             <h1 className="faq-heading">
-              Ask anything.<br />
-              We're here to help<span className="faq-heading-period">.</span>
+              {HEADING_LINES.map((line, li) => (
+                <span className="faq-heading-line" key={li}>
+                  {line.map((word, wi) => (
+                    <Fragment key={word}>
+                      {wi > 0 && ' '}
+                      <span
+                        className="faq-heading-word"
+                        style={{ '--d': `${(li * 2 + wi) * 70}ms` }}
+                      >
+                        <span>{word}</span>
+                      </span>
+                    </Fragment>
+                  ))}
+                  {li === HEADING_LINES.length - 1 && (
+                    <span className="faq-heading-period">.</span>
+                  )}
+                </span>
+              ))}
             </h1>
             <p className="faq-subtitle">Joining, meetings, projects, and mailing list.</p>
 
@@ -232,7 +263,9 @@ const Involvement = () => {
               <div className="faq-contact-card-body-wrap">
                 <p className="faq-contact-card-title">Still have questions?</p>
                 <p className="faq-contact-card-body">Can't find what you're looking for? Reach out to us — we'd love to hear from you.</p>
-                <Link to="/contact" className="faq-contact-card-link">Contact Us →</Link>
+                <Link to="/contact" className="faq-contact-card-link">
+                  Contact Us <span className="faq-contact-card-arrow" aria-hidden="true">→</span>
+                </Link>
               </div>
             </div>
           </div>
@@ -289,7 +322,7 @@ const Involvement = () => {
                 : `${FAQS.length} questions`}
             </p>
 
-            <div className="faq-right-card">
+            <div className="faq-right-card" ref={cardRef} onPointerMove={trackGlow}>
               {filtered.length === 0 && (
                 <div className="faq-empty">
                   <div className="faq-empty-icon"><SearchX size={22} /></div>
