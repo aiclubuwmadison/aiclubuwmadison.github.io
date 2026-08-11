@@ -818,7 +818,14 @@ body,
 
 /* ── Reduce motion: disable all animations ───────────────  */
 @media (prefers-reduced-motion: reduce) {
-  .sr-hidden { opacity: 1 !important; transition: none !important; }
+  /* Reveal targets show in their final state immediately — resetting only
+     opacity would leave them offset and blurred until they scrolled into view. */
+  .sr-hidden {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
   .atmos-nav-theme-toggle-icon { animation: none !important; }
 
   .atmos-btn-primary,

@@ -302,7 +302,7 @@
 .atmos-archive-toggle::after {
   content: ''; position: absolute; inset: 10px 0 10px 64px; z-index: -1;
   border-radius: 14px; background: transparent;
-  transition: background-color 220ms ease, transform 220ms cubic-bezier(.2,.8,.2,1);
+  transition: background-color 220ms ease, transform 220ms var(--ease-out);
 }
 .atmos-archive-toggle:hover::after { background: var(--atmos-paper-tint); }
 .atmos-archive.is-open .atmos-archive-toggle::after { background: var(--atmos-accent-glow); }
@@ -320,7 +320,7 @@
   position: relative; z-index: 1; width: 30px; height: 30px;
   border: 1px solid var(--atmos-hairline); border-radius: 50%;
   background: var(--atmos-paper); box-shadow: 0 0 0 7px var(--atmos-paper);
-  transition: border-color 220ms ease, transform 260ms cubic-bezier(.2,.8,.2,1);
+  transition: border-color 220ms ease, transform 260ms var(--ease-out);
 }
 .atmos-archive-node i {
   position: absolute; width: 3px; height: 3px; border-radius: 50%;
@@ -376,14 +376,14 @@
   width: 36px; height: 36px; display: grid; place-items: center;
   border: 1px solid var(--atmos-hairline); border-radius: 50%;
   background: var(--atmos-paper); color: var(--atmos-badger);
-  transition: transform 260ms cubic-bezier(.2,.8,.2,1), border-color 220ms ease;
+  transition: transform var(--motion-panel) var(--ease-spring), border-color 220ms ease;
 }
 .atmos-archive-glyph svg { width: 18px; height: 18px; }
 .atmos-archive.is-open .atmos-archive-glyph { transform: rotate(180deg); border-color: var(--atmos-badger); }
 
 .atmos-archive-panel {
   display: grid; grid-template-rows: 0fr; overflow: hidden; opacity: 0;
-  transition: grid-template-rows 460ms cubic-bezier(.2,.7,.2,1), opacity 300ms ease;
+  transition: grid-template-rows var(--motion-panel) var(--ease-out), opacity var(--motion-fast) ease;
 }
 .atmos-archive-panel.is-open { grid-template-rows: 1fr; opacity: 1; }
 .atmos-archive-panel > div {
