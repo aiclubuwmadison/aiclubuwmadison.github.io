@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import './Leadership.css';
+import RisingHeading from './RisingHeading';
+import { useScrollReveal, usePointerGlow } from '../utils/motion';
 
 const PORTRAIT_PLACEHOLDER = '/images/portraits/_placeholder.svg';
 
@@ -165,7 +167,7 @@ const FeaturedCard = ({ m }) => {
   const src = useResolvedPortrait(m.file);
   return (
     <div
-      className="lead-featured-card"
+      className="lead-featured-card atmos-lift atmos-glow"
       style={{ backgroundImage: `linear-gradient(to right, rgba(18,18,22,0.72) 28%, rgba(18,18,22,0.0) 55%), url('${src}')` }}
     >
       <span className="lead-card-role lead-card-role--light">{m.title}</span>
@@ -178,7 +180,7 @@ const FeaturedCard = ({ m }) => {
 const RosterCard = ({ m }) => {
   const src = useResolvedPortrait(m.file);
   return (
-    <div className="lead-team-card">
+    <div className="lead-team-card atmos-lift atmos-glow">
       <div className="lead-team-photo">
         <img
           src={src}
@@ -273,29 +275,16 @@ const Leadership = () => {
     document.title = 'Leadership | AI@UW';
   }, []);
 
-  // IntersectionObserver for scroll reveals
-  useEffect(() => {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          e.target.classList.add('sr-visible');
-          io.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.08 });
+  useScrollReveal(
+    '.lead-officers .lead-featured-card, .lead-officers .lead-team-card, .lead-archive-wrap .atmos-archive',
+    { groupSize: 4 },
+  );
+  useScrollReveal('.lead-section-head', { groupSize: 2 });
 
-    const elements = document.querySelectorAll(
-      '.lead-officers .lead-featured-card, .lead-officers .lead-team-card, .lead-archive-wrap .atmos-archive'
-    );
-
-    elements.forEach((el, i) => {
-      el.classList.add('sr-hidden');
-      el.style.transitionDelay = `${(i % 4) * 80}ms`;
-      io.observe(el);
-    });
-
-    return () => io.disconnect();
-  }, []);
+  // One listener for every roster card on the page, archives included.
+  const { ref: pageRef, onPointerMove: trackGlow } = usePointerGlow({
+    childSelector: '.lead-featured-card, .lead-team-card',
+  });
 
   const [expanded, setExpanded] = useState({ dec24Dec25Leaders: false, currentLeaders: false, pastLeaders: false });
   const toggle = (id) => setExpanded((p) => ({ ...p, [id]: !p[id] }));
@@ -377,16 +366,20 @@ const Leadership = () => {
   const team       = allCurrent.slice(2);
 
   return (
-    <div className="atmos-root atmos-leadership">
+    <div className="atmos-root atmos-leadership" ref={pageRef} onPointerMove={trackGlow}>
 
       {/* ── HERO ───────────────────────────────────────────── */}
       <section className="lead-hero">
         <div className="atmos-shell lead-hero-shell">
           <div className="lead-hero-left">
             <p className="atmos-page-hero-eyebrow">Leadership</p>
-            <h1 className="lead-hero-title">
-              The people<br /><em>behind</em> AI@UW.
-            </h1>
+            <RisingHeading
+              className="lead-hero-title"
+              lines={[
+                'The people',
+                [{ word: 'behind', as: 'em', className: 'lead-hero-em' }, 'AI@UW.'],
+              ]}
+            />
             <p className="atmos-page-hero-lede lead-hero-lede">
               Meet the students running AI@UW.
             </p>

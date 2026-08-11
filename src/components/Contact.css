@@ -84,14 +84,11 @@
   text-decoration: none;
   color: var(--atmos-ink);
   box-shadow: none;
-  transition: border-color 200ms ease, transform 200ms ease,
-    box-shadow 200ms ease, background 280ms ease;
 }
 
+/* Movement and shadow come from .atmos-lift. */
 .atmos-contact .atmos-channel-card:hover {
   border-color: rgba(197, 5, 12, 0.35);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
 }
 
 .atmos-contact .atmos-channel-icon {
@@ -103,11 +100,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: transform 220ms ease, background-color 220ms ease;
 }
 
+/* Lift comes from .atmos-icon-badge. */
 .atmos-contact .atmos-channel-card:hover .atmos-channel-icon {
-  transform: scale(1.05);
   background-color: rgba(197, 5, 12, 0.14);
 }
 
@@ -145,7 +141,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: transform 200ms ease, color 200ms ease;
+  transition: color var(--motion-fast) ease;
 }
 
 .atmos-contact .atmos-channel-arr svg {
@@ -153,9 +149,9 @@
   height: 20px;
 }
 
+/* Nudge comes from .atmos-arrow. */
 .atmos-contact .atmos-channel-card:hover .atmos-channel-arr {
   color: var(--atmos-badger);
-  transform: translateX(3px);
 }
 
 /* RIGHT COLUMN --------------------------------------------- */
@@ -224,8 +220,8 @@
 .atmos-contact .contact-form-input:focus,
 .atmos-contact .contact-form-textarea:focus {
   outline: none;
-  border-color: rgba(197, 5, 12, 0.4);
-  box-shadow: 0 0 0 3px rgba(197, 5, 12, 0.08);
+  border-color: var(--atmos-badger);
+  box-shadow: 0 0 0 4px var(--atmos-accent-glow);
 }
 
 [data-theme="dark"] .atmos-contact .contact-form-input:focus,
@@ -341,17 +337,8 @@
 
 /* Reduced motion ------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
-  .atmos-contact .atmos-channel-card,
   .atmos-contact .atmos-channel-arr {
     transition: none;
-  }
-
-  .atmos-contact .atmos-channel-card:hover {
-    transform: none;
-  }
-
-  .atmos-contact .atmos-channel-card:hover .atmos-channel-arr {
-    transform: none;
   }
 }
 
