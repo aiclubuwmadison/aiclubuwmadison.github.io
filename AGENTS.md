@@ -46,12 +46,14 @@ Entry: `src/main.jsx` → `src/App.jsx`.
 src/
 ├── main.jsx                 # Entry + SPA ?redirect= shim
 ├── App.jsx                  # Router, lazy routes, ScrollToTop
-├── App.css                  # Design tokens + shared “atmos” styles
+├── App.css                  # Design tokens + motion system + shared “atmos” styles
 ├── index.css                # Global body / #body-wrapper
 ├── components/              # Pages + Nav + Footer (flat; sibling .css)
+│   └── RisingHeading.jsx    # Display heading whose words lift out of a mask
 ├── constants/
 │   └── nav.js               # Shared NAV_ITEMS for Nav + Footer
 └── utils/
+    ├── motion.js            # useScrollReveal + usePointerGlow
     └── themeTransition.js   # View Transitions circular theme reveal
 
 public/
@@ -98,9 +100,46 @@ Conventions:
 
 - Design tokens: `src/App.css` (`:root` and `[data-theme="dark"]`).
 - Prefer CSS variables (`--atmos-*`, `--type-*`, `--motion-*`) over hard-coded colors.
-- Shared primitives: `.atmos-shell`, `.atmos-page-hero*`, `.atmos-btn-primary`, scroll-reveal classes.
+- Shared primitives: `.atmos-shell`, `.atmos-page-hero*`, `.atmos-btn-primary`, plus the motion system below.
 - Page-specific classes often use short prefixes (`about-*`, `lead-*`, `projects-*`, etc.).
 - Dark mode: default follows system (`prefers-color-scheme`). `Nav` sets `data-theme` on `<html>`; an early script in `index.html` avoids FOUC. Explicit toggle persists `localStorage` key `"theme"` (`light`|`dark`); until then the site tracks OS changes. Animation via `src/utils/themeTransition.js` (View Transitions circular wipe; respects `prefers-reduced-motion`).
+
+### Motion system
+
+Every page moves on **one** curve family and **one** set of durations, defined under `MOTION SYSTEM` in `src/App.css`. The FAQ page (`Involvement`) is the reference implementation. **Do not hand-roll a new easing or duration** — reach for a token, and if nothing fits, add one there.
+
+| Token | Use |
+|-------|-----|
+| `--ease-out` | The default. Entrances, hovers, most transitions. |
+| `--ease-mask` | Long tail — masked heading lifts, nav entrance. |
+| `--ease-spring` | Slight overshoot — chevrons, toggles, anything that “clicks”. |
+| `--motion-fast` / `--motion-base` | Colour changes / hover movement. |
+| `--motion-rise` · `--motion-word` · `--motion-panel` · `--motion-reveal` | Entrance · masked word · disclosure · scroll reveal. |
+| `--stagger` | Delay between neighbours in a cascade. |
+
+Utility classes (all reduced-motion safe):
+
+| Class | Effect |
+|-------|--------|
+| `.atmos-rise` | Rises into place on mount; set `--d` for delay, `--i` for a cascade slot. |
+| `.atmos-lift` | Standard card hover — lift + shadow. |
+| `.atmos-glow` | Accent pool that trails the cursor; pair with `usePointerGlow`. |
+| `.atmos-chip` | Pill/tab control hover. |
+| `.atmos-arrow` | Trailing arrow that nudges when its container is hovered. |
+| `.atmos-icon-badge` | Icon badge that lifts with its row. |
+| `.atmos-panel` | Disclosure panel; toggle `.is-open` (uses `grid-template-rows: 0fr → 1fr`). |
+| `.sr-hidden` / `.sr-visible` | Scroll reveal; applied by `useScrollReveal`. |
+
+Helpers:
+
+- `useScrollReveal(selector, { threshold, groupSize, resetKey })` — reveals on scroll and stamps `--i` so siblings cascade. Pass `resetKey` when a filter re-renders the list.
+- `usePointerGlow({ childSelector })` — returns `{ ref, onPointerMove }`. With `childSelector`, one listener on a grid drives the glow on whichever card the pointer is over.
+- `<RisingHeading lines={…} />` — display heading whose words lift out of their own mask. Lines are strings, or arrays of `{ word, className, as }` for accented words (`as: 'em'` keeps the semantics).
+
+Two gotchas worth knowing:
+
+- `.atmos-lift` moves with `translate`, **not** `transform`, because scroll-revealed cards are already animating `transform`. Keep it that way.
+- `transition` is a shorthand, so `.sr-hidden` restates the lift's properties and must stay **after** `.atmos-lift` in `App.css`. A page-level `transition:` on an element that also carries `.atmos-lift` will silently win — delete the page-level one instead.
 
 ### Component structure
 

@@ -11,6 +11,8 @@ import {
   Plug,
 } from 'lucide-react';
 import './Resources.css';
+import RisingHeading from './RisingHeading';
+import { useScrollReveal, usePointerGlow } from '../utils/motion';
 
 // Fallback Mock News Data
 const MOCK_NEWS_DATA = [
@@ -176,26 +178,17 @@ const Resources = () => {
     return titleMatch || authorMatch;
   });
 
-  useEffect(() => {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('sr-visible');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.08 });
+  // Re-scanned whenever the feed or the search narrows the list.
+  useScrollReveal('.res-news-card:not(.res-skeleton)', {
+    resetKey: `${news.length}|${searchQuery}|${loading}`,
+  });
+  useScrollReveal(
+    '.atmos-resources .atmos-section-head, .res-section-lede, .res-coming-soon',
+  );
 
-    const cards = document.querySelectorAll('.res-news-card:not(.res-skeleton)');
-    cards.forEach((el, i) => {
-      if (el.classList.contains('sr-visible')) return;
-      el.classList.add('sr-hidden');
-      el.style.transitionDelay = `${Math.min((i % 6) * 70, 280)}ms`;
-      io.observe(el);
-    });
-
-    return () => io.disconnect();
-  }, [news, searchQuery, loading]);
+  const { ref: streamRef, onPointerMove: trackGlow } = usePointerGlow({
+    childSelector: '.res-news-card',
+  });
 
   return (
     <div className="atmos-root atmos-resources">
@@ -203,7 +196,10 @@ const Resources = () => {
         <div className="atmos-shell">
           <div className="atmos-page-hero-content">
             <p className="atmos-page-hero-eyebrow">AI@UW Knowledge Hub</p>
-            <h1 className="atmos-page-hero-title">Learning Resources</h1>
+            <RisingHeading
+              className="atmos-page-hero-title"
+              lines={['Learning Resources']}
+            />
             <p className="atmos-page-hero-lede">
               Live AI news, agent skills, and MCP resources for building with AI.
             </p>
@@ -246,7 +242,7 @@ const Resources = () => {
 
             <button
               onClick={handleRefresh}
-              className="res-refresh-btn"
+              className="res-refresh-btn atmos-chip"
               disabled={loading}
               title="Refresh News Feed"
               type="button"
@@ -265,7 +261,7 @@ const Resources = () => {
             </div>
           )}
 
-          <div className="res-news-stream">
+          <div className="res-news-stream" ref={streamRef} onPointerMove={trackGlow}>
             {loading ? (
               Array.from({ length: 4 }).map((_, i) => (
                 <div className="res-news-card res-skeleton" key={i}>
@@ -281,7 +277,7 @@ const Resources = () => {
                   href={item.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="res-news-card"
+                  className="res-news-card atmos-lift atmos-glow"
                 >
                   <div className="res-news-header">
                     <h3 className="res-news-card-title">{item.title}</h3>

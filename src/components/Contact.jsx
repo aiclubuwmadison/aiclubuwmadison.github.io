@@ -2,6 +2,8 @@ import { useEffect, useState, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Mail, Newspaper, MapPin, ArrowRight, Check } from 'lucide-react';
 import './Contact.css';
+import RisingHeading from './RisingHeading';
+import { useScrollReveal, usePointerGlow } from '../utils/motion';
 
 const GUIDE_MS = 3000;
 
@@ -169,31 +171,11 @@ const Contact = () => {
     };
   }, [location.search, location.hash, location.state, location.key]);
 
-  // IntersectionObserver for scroll reveals
-  useEffect(() => {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          e.target.classList.add('sr-visible');
-          io.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.08 });
+  useScrollReveal('.atmos-channel-card, .atmos-contact-right', { groupSize: 4 });
 
-    const elements = document.querySelectorAll(
-      '.atmos-channel-card, .atmos-contact-right'
-    );
-
-    elements.forEach((el, i) => {
-      el.classList.add('sr-hidden');
-      if (el.classList.contains('atmos-channel-card')) {
-        el.style.transitionDelay = `${(i % 4) * 80}ms`;
-      }
-      io.observe(el);
-    });
-
-    return () => io.disconnect();
-  }, []);
+  const { ref: channelsRef, onPointerMove: trackGlow } = usePointerGlow({
+    childSelector: '.atmos-channel-card',
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -233,42 +215,44 @@ const Contact = () => {
         <div className="atmos-shell">
           <div className="atmos-contact-row">
             <div className="atmos-contact-left" id="contact-us">
-              <h1 className="atmos-contact-title">
-                Get in
-                <br />
-                <span className="atmos-contact-amp">touch.</span>
-              </h1>
+              <RisingHeading
+                className="atmos-contact-title"
+                lines={[
+                  'Get in',
+                  [{ word: 'touch.', className: 'atmos-contact-amp' }],
+                ]}
+              />
 
-              <p className="atmos-contact-lede">
+              <p className="atmos-contact-lede atmos-rise" style={{ '--d': '400ms' }}>
                 Email, Discord, or the form below.
               </p>
 
-              <ul className="atmos-channel-list">
+              <ul className="atmos-channel-list" ref={channelsRef} onPointerMove={trackGlow}>
                 <li>
                   <a
-                    className="atmos-channel-card"
+                    className="atmos-channel-card atmos-lift atmos-glow"
                     href="mailto:aiclubuwmadison@gmail.com"
                   >
-                    <span className="atmos-channel-icon" aria-hidden="true">
+                    <span className="atmos-channel-icon atmos-icon-badge" aria-hidden="true">
                       <Mail strokeWidth={1.8} />
                     </span>
                     <span className="atmos-channel-body">
                       <span className="atmos-channel-title">Email</span>
                       <span className="atmos-channel-sub">aiclubuwmadison@gmail.com</span>
                     </span>
-                    <span className="atmos-channel-arr" aria-hidden="true">
+                    <span className="atmos-channel-arr atmos-arrow" aria-hidden="true">
                       <ArrowRight strokeWidth={1.8} />
                     </span>
                   </a>
                 </li>
                 <li>
                   <a
-                    className="atmos-channel-card"
+                    className="atmos-channel-card atmos-lift atmos-glow"
                     target="_blank"
                     rel="noopener noreferrer"
                     href="https://discord.gg/TTSykcZAg4"
                   >
-                    <span className="atmos-channel-icon" aria-hidden="true">
+                    <span className="atmos-channel-icon atmos-icon-badge" aria-hidden="true">
                       <svg viewBox="0 0 24 24" fill="currentColor">
                         <path d="M19.27 5.33A18.13 18.13 0 0 0 14.7 4l-.21.42a17.3 17.3 0 0 0-4.97 0L9.3 4a18.13 18.13 0 0 0-4.57 1.33C2.05 9.27 1.32 13.1 1.68 16.88a18.4 18.4 0 0 0 5.57 2.81c.45-.61.85-1.26 1.19-1.94-.65-.24-1.27-.54-1.86-.89.16-.11.31-.23.46-.35a13 13 0 0 0 11.92 0c.15.12.3.24.46.35-.59.35-1.21.65-1.86.9.34.67.74 1.32 1.19 1.93a18.4 18.4 0 0 0 5.57-2.81c.43-4.39-.74-8.18-3.05-11.55ZM8.52 14.5c-1.1 0-2-.99-2-2.2s.88-2.2 2-2.2c1.13 0 2.03 1 2 2.2 0 1.21-.88 2.2-2 2.2Zm6.96 0c-1.1 0-2-.99-2-2.2s.88-2.2 2-2.2c1.13 0 2.03 1 2 2.2 0 1.21-.87 2.2-2 2.2Z" />
                       </svg>
@@ -277,45 +261,45 @@ const Contact = () => {
                       <span className="atmos-channel-title">Discord</span>
                       <span className="atmos-channel-sub">Join our workspace</span>
                     </span>
-                    <span className="atmos-channel-arr" aria-hidden="true">
+                    <span className="atmos-channel-arr atmos-arrow" aria-hidden="true">
                       <ArrowRight strokeWidth={1.8} />
                     </span>
                   </a>
                 </li>
                 <li>
                   <a
-                    className="atmos-channel-card"
+                    className="atmos-channel-card atmos-lift atmos-glow"
                     target="_blank"
                     rel="noopener noreferrer"
                     href="http://eepurl.com/dMyKlQ"
                   >
-                    <span className="atmos-channel-icon" aria-hidden="true">
+                    <span className="atmos-channel-icon atmos-icon-badge" aria-hidden="true">
                       <Newspaper strokeWidth={1.8} />
                     </span>
                     <span className="atmos-channel-body">
                       <span className="atmos-channel-title">Newsletter</span>
                       <span className="atmos-channel-sub">Subscribe to our updates</span>
                     </span>
-                    <span className="atmos-channel-arr" aria-hidden="true">
+                    <span className="atmos-channel-arr atmos-arrow" aria-hidden="true">
                       <ArrowRight strokeWidth={1.8} />
                     </span>
                   </a>
                 </li>
                 <li>
                   <a
-                    className="atmos-channel-card"
+                    className="atmos-channel-card atmos-lift atmos-glow"
                     target="_blank"
                     rel="noopener noreferrer"
                     href="https://maps.google.com/?q=University+of+Wisconsin-Madison"
                   >
-                    <span className="atmos-channel-icon" aria-hidden="true">
+                    <span className="atmos-channel-icon atmos-icon-badge" aria-hidden="true">
                       <MapPin strokeWidth={1.8} />
                     </span>
                     <span className="atmos-channel-body">
                       <span className="atmos-channel-title">Location</span>
                       <span className="atmos-channel-sub">UW&ndash;Madison</span>
                     </span>
-                    <span className="atmos-channel-arr" aria-hidden="true">
+                    <span className="atmos-channel-arr atmos-arrow" aria-hidden="true">
                       <ArrowRight strokeWidth={1.8} />
                     </span>
                   </a>

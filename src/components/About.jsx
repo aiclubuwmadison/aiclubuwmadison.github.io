@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './About.css';
+import RisingHeading from './RisingHeading';
+import { useScrollReveal, usePointerGlow } from '../utils/motion';
 
 // Isometric cube: (x,y) = center of top diamond, s = size
 const IsoCube = ({ x, y, s = 20, color = 'white' }) => {
@@ -128,31 +130,13 @@ const About = () => {
       : 'About | AI@UW';
   }, [pathname]);
 
-  // IntersectionObserver for scroll reveals
-  useEffect(() => {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          e.target.classList.add("sr-visible");
-          io.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.08 });
+  // Section copy and cards cascade in as each block reaches the viewport.
+  useScrollReveal('.about-reveal', { groupSize: 4 });
+  useScrollReveal('.about-stat, .about-what-card', { groupSize: 4 });
 
-    const elements = document.querySelectorAll(
-      ".about-stat, .about-what-card"
-    );
-
-    elements.forEach((el, i) => {
-      el.classList.add("sr-hidden");
-      if (el.classList.contains("about-stat") || el.classList.contains("about-what-card")) {
-        el.style.transitionDelay = `${(i % 4) * 80}ms`;
-      }
-      io.observe(el);
-    });
-
-    return () => io.disconnect();
-  }, []);
+  const { ref: cardsRef, onPointerMove: trackGlow } = usePointerGlow({
+    childSelector: '.about-what-card',
+  });
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -280,14 +264,15 @@ const About = () => {
       {/* ── HERO (unchanged) ─────────────────────────────────── */}
       <section className="about-hero">
         <div className="about-hero-left">
-          <p className="about-hero-eyebrow">AI @ UW–Madison</p>
-          <h1 className="about-hero-title">
-            A community for{' '}
-            <em>everyone</em>
-            <br />
-            curious about AI.
-          </h1>
-          <p className="about-hero-lede">
+          <p className="about-hero-eyebrow atmos-rise">AI @ UW–Madison</p>
+          <RisingHeading
+            className="about-hero-title"
+            lines={[
+              ['A', 'community', 'for', { word: 'everyone', as: 'em', className: 'about-hero-em' }],
+              'curious about AI.',
+            ]}
+          />
+          <p className="about-hero-lede atmos-rise" style={{ '--d': '460ms' }}>
             UW–Madison's student AI club. All majors welcome.
           </p>
         </div>
@@ -305,18 +290,18 @@ const About = () => {
         <div className="about-shell">
           <div className="about-story-inner">
             <div className="about-story-left">
-              <p className="about-eyebrow">Our Story</p>
-              <h2 className="about-story-title">
+              <p className="about-eyebrow about-reveal">Our Story</p>
+              <h2 className="about-story-title about-reveal">
                 Started by 7 students.<br />Now 2000+ members.
               </h2>
-              <p className="about-story-body">
+              <p className="about-story-body about-reveal">
                 AI@UW began in 2017 when seven undergrads came together with a
                 shared curiosity about artificial intelligence. Today, we've grown
                 into the largest AI club at UW-Madison — a welcoming community
                 for students from all backgrounds and academic interests.
               </p>
-              <Link className="about-story-link" to="/involvement">
-                Learn our story <span>→</span>
+              <Link className="about-story-link about-reveal" to="/involvement">
+                Learn our story <span className="atmos-arrow">→</span>
               </Link>
             </div>
 
@@ -327,7 +312,7 @@ const About = () => {
                 { icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>, num: '100+', label: 'Events' },
                 { icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>, num: '10+', label: 'Domains' },
               ].map((s) => (
-                <div className="about-stat" key={s.label}>
+                <div className="about-stat atmos-lift" key={s.label}>
                   <div className="about-stat-icon">{s.icon}</div>
                   <div className="about-stat-num">{s.num}</div>
                   <div className="about-stat-label">{s.label}</div>
@@ -341,15 +326,15 @@ const About = () => {
       {/* ── WHAT WE DO ───────────────────────────────────────── */}
       <section className="about-what">
         <div className="about-shell">
-          <p className="about-eyebrow">What We Do</p>
-          <h2 className="about-what-title">
+          <p className="about-eyebrow about-reveal">What We Do</p>
+          <h2 className="about-what-title about-reveal">
             Learn<span className="about-what-dot">.</span>{' '}
             Build<span className="about-what-dot">.</span>{' '}
             Grow<span className="about-what-dot">.</span>{' '}
             Together<span className="about-what-dot">.</span>
           </h2>
 
-          <div className="about-what-cards">
+          <div className="about-what-cards" ref={cardsRef} onPointerMove={trackGlow}>
             {[
               {
                 title: 'Research',
@@ -376,7 +361,7 @@ const About = () => {
                 to: '/involvement',
               },
             ].map(({ title, desc, Illus, to }) => (
-              <Link className="about-what-card" to={to} key={title}>
+              <Link className="about-what-card atmos-lift atmos-glow" to={to} key={title}>
                 <div className="about-what-card-visual">
                   <div className="about-what-illus-wrap" aria-hidden="true">
                     <Illus />
@@ -385,7 +370,7 @@ const About = () => {
                 <div className="about-what-card-body">
                   <h3 className="about-what-card-title">{title}</h3>
                   <p className="about-what-card-desc">{desc}</p>
-                  <span className="about-what-explore">Explore <span>→</span></span>
+                  <span className="about-what-explore">Explore <span className="atmos-arrow">→</span></span>
                 </div>
               </Link>
             ))}

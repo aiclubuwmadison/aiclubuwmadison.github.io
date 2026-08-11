@@ -39,6 +39,11 @@
   font-style: italic; color: var(--atmos-badger);
   font-size: 1.05em;
 }
+/* Italic overhangs its box; widen the word mask so the tail isn't shaved off */
+.lead-hero-title .lead-hero-em {
+  padding-right: 0.12em;
+  margin-right: -0.12em;
+}
 
 .lead-hero-lede {
   max-width: 38ch;
@@ -184,11 +189,8 @@
   background-size: cover; background-position: right center;
   display: flex; flex-direction: column; gap: 10px;
   justify-content: flex-end;
-  transition: transform 220ms cubic-bezier(0.2,0.8,0.2,1), box-shadow 220ms;
 }
-.lead-featured-card:hover {
-  box-shadow: var(--shadow-md);
-}
+/* Movement and shadow come from .atmos-lift. */
 .lead-card-role {
   font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
   text-transform: uppercase; color: var(--atmos-badger);
@@ -219,11 +221,8 @@
   border-radius: 16px; overflow: hidden;
   display: flex; flex-direction: column;
   box-shadow: none;
-  transition: transform 200ms cubic-bezier(0.2,0.8,0.2,1), box-shadow 200ms, background 280ms ease, border-color 280ms ease;
 }
-.lead-team-card:hover {
-  box-shadow: var(--shadow-md);
-}
+/* Movement and shadow come from .atmos-lift. */
 .lead-team-photo {
   aspect-ratio: 4/3; overflow: hidden; background: var(--atmos-paper-deep);
 }
@@ -260,9 +259,15 @@
   width: 30px; height: 30px; border-radius: 50%;
   background: rgba(0,0,0,0.05); color: var(--atmos-ink-soft);
   text-decoration: none; border: none;
-  transition: background 180ms, color 180ms;
+  transition:
+    background var(--motion-fast) ease,
+    color var(--motion-fast) ease,
+    transform var(--motion-base) var(--ease-out);
 }
-.lead-social-btn:hover { background: var(--atmos-badger); color: #fff; }
+.lead-social-btn:hover {
+  background: var(--atmos-badger); color: #fff;
+  transform: translateY(-2px) scale(1.06);
+}
 .lead-featured-card .lead-social-btn {
   background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.85);
   border: none;
@@ -297,7 +302,7 @@
 .atmos-archive-toggle::after {
   content: ''; position: absolute; inset: 10px 0 10px 64px; z-index: -1;
   border-radius: 14px; background: transparent;
-  transition: background-color 220ms ease, transform 220ms cubic-bezier(.2,.8,.2,1);
+  transition: background-color 220ms ease, transform 220ms var(--ease-out);
 }
 .atmos-archive-toggle:hover::after { background: var(--atmos-paper-tint); }
 .atmos-archive.is-open .atmos-archive-toggle::after { background: var(--atmos-accent-glow); }
@@ -315,7 +320,7 @@
   position: relative; z-index: 1; width: 30px; height: 30px;
   border: 1px solid var(--atmos-hairline); border-radius: 50%;
   background: var(--atmos-paper); box-shadow: 0 0 0 7px var(--atmos-paper);
-  transition: border-color 220ms ease, transform 260ms cubic-bezier(.2,.8,.2,1);
+  transition: border-color 220ms ease, transform 260ms var(--ease-out);
 }
 .atmos-archive-node i {
   position: absolute; width: 3px; height: 3px; border-radius: 50%;
@@ -371,14 +376,14 @@
   width: 36px; height: 36px; display: grid; place-items: center;
   border: 1px solid var(--atmos-hairline); border-radius: 50%;
   background: var(--atmos-paper); color: var(--atmos-badger);
-  transition: transform 260ms cubic-bezier(.2,.8,.2,1), border-color 220ms ease;
+  transition: transform var(--motion-panel) var(--ease-spring), border-color 220ms ease;
 }
 .atmos-archive-glyph svg { width: 18px; height: 18px; }
 .atmos-archive.is-open .atmos-archive-glyph { transform: rotate(180deg); border-color: var(--atmos-badger); }
 
 .atmos-archive-panel {
   display: grid; grid-template-rows: 0fr; overflow: hidden; opacity: 0;
-  transition: grid-template-rows 460ms cubic-bezier(.2,.7,.2,1), opacity 300ms ease;
+  transition: grid-template-rows var(--motion-panel) var(--ease-out), opacity var(--motion-fast) ease;
 }
 .atmos-archive-panel.is-open { grid-template-rows: 1fr; opacity: 1; }
 .atmos-archive-panel > div {
@@ -429,7 +434,9 @@
   .lead-team-grid { grid-template-columns: 1fr; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .lead-featured-card, .lead-team-card, .lead-social-btn,
+  .lead-social-btn:hover { transform: none !important; }
+
+  .lead-social-btn,
   .lead-hero-cta, .atmos-archive-toggle,
   .atmos-archive-toggle::after, .atmos-archive-panel, .atmos-archive-glyph,
   .atmos-archive-node, .atmos-archive-avatars img { transition: none !important; }

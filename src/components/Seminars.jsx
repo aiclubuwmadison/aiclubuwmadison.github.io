@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { Mic, Wrench } from 'lucide-react';
 import './Seminars.css';
+import RisingHeading from './RisingHeading';
+import { useScrollReveal, usePointerGlow } from '../utils/motion';
 
 const seminars = [];
 const workshops = [];
@@ -160,7 +162,7 @@ const SeminarCard = ({ item }) => {
   }, [calOpen]);
 
   return (
-    <div className={`atmos-sem-card${isWorkshop ? ' atmos-sem-card--workshop' : ''}`}>
+    <div className={`atmos-sem-card atmos-lift atmos-glow${isWorkshop ? ' atmos-sem-card--workshop' : ''}`}>
       <div className="atmos-sem-card-row">
         <div className={`atmos-sem-date-badge${isWorkshop ? ' atmos-sem-date-badge--workshop' : ''}`}>
           <span className="atmos-sem-date-month">{isWorkshop ? 'WS' : month}</span>
@@ -290,47 +292,38 @@ const Seminars = () => {
   const showTalks = activeTab === 'all' || activeTab === 'talks';
   const showWorkshops = activeTab === 'all' || activeTab === 'workshops';
 
-  // Scroll-reveal for seminar/workshop cards. A fresh observer is created per
-  // run and disconnected on cleanup, so React StrictMode's mount → unmount →
-  // remount cycle can't leave cards observed by a disconnected observer (which
-  // previously stranded every card at opacity:0). Cards already revealed keep
-  // `sr-visible`; only not-yet-revealed cards are hidden and (re)observed, so
-  // filter changes still animate in newly rendered cards.
-  useEffect(() => {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('sr-visible');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.08 });
+  // Re-scanned on every filter change so newly rendered cards animate in too.
+  useScrollReveal('.atmos-sem-card', {
+    resetKey: `${activeTab}|${topicFilter}|${yearFilter}|${searchQuery}`,
+  });
+  useScrollReveal('.atmos-sem-sub, .atmos-sem-coming-soon');
 
-    const cards = document.querySelectorAll('.atmos-sem-card');
-    cards.forEach((el, i) => {
-      if (el.classList.contains('sr-visible')) return;
-      el.classList.add('sr-hidden');
-      el.style.transitionDelay = `${Math.min((i % 6) * 70, 280)}ms`;
-      io.observe(el);
-    });
-
-    return () => io.disconnect();
-  }, [activeTab, topicFilter, yearFilter, searchQuery]);
+  const { ref: cardsRef, onPointerMove: trackGlow } = usePointerGlow({
+    childSelector: '.atmos-sem-card',
+  });
 
   return (
     <div className="atmos-root atmos-seminars">
-      <div className="atmos-shell">
+      {/* One listener covers both card grids; the hook resolves the hovered card. */}
+      <div className="atmos-shell" ref={cardsRef} onPointerMove={trackGlow}>
 
         {/* HERO */}
-        <header className="atmos-sem-hero atmos-reveal">
+        <header className="atmos-sem-hero">
           <div className="atmos-sem-hero-text">
-            <h1 className="atmos-sem-title">
-              Upcoming<br />
-              <span style={{color:'var(--atmos-badger)'}}>talks</span> &amp; workshops<span className="atmos-sem-title-dot">.</span>
-            </h1>
-            <p className="atmos-sem-lede">New AI@UW events are on the way.</p>
+            <RisingHeading
+              className="atmos-sem-title"
+              lines={[
+                ['Upcoming'],
+                [{ word: 'talks', className: 'atmos-sem-title-accent' }, '&', 'workshops'],
+              ]}
+              trailing={<span className="atmos-sem-title-dot">.</span>}
+            />
+            <p className="atmos-sem-lede atmos-rise" style={{ '--d': '400ms' }}>
+              New AI@UW events are on the way.
+            </p>
             <a
-              className="atmos-sem-hero-cta"
+              className="atmos-sem-hero-cta atmos-rise"
+              style={{ '--d': '500ms' }}
               href="https://discord.gg/TTSykcZAg4"
               target="_blank"
               rel="noopener noreferrer"
@@ -338,7 +331,7 @@ const Seminars = () => {
               Join Discord <IconArrow />
             </a>
           </div>
-          <div className="atmos-sem-hero-image" aria-hidden="true">
+          <div className="atmos-sem-hero-image atmos-rise" style={{ '--d': '260ms' }} aria-hidden="true">
             <img src="/images/seminars/hero.webp" alt="" width="1200" height="800" fetchPriority="high" />
           </div>
         </header>
@@ -349,19 +342,19 @@ const Seminars = () => {
           <div className="atmos-sem-filter-bar">
             <div className="atmos-sem-tabs-pill">
               <button
-                className={`atmos-sem-tab${activeTab === 'all' ? ' active' : ''}`}
+                className={`atmos-sem-tab atmos-chip${activeTab === 'all' ? ' active' : ''}`}
                 onClick={() => setActiveTab('all')}
               >
                 <IconGrid /> All
               </button>
               <button
-                className={`atmos-sem-tab${activeTab === 'talks' ? ' active' : ''}`}
+                className={`atmos-sem-tab atmos-chip${activeTab === 'talks' ? ' active' : ''}`}
                 onClick={() => setActiveTab('talks')}
               >
                 <IconMic /> Talks
               </button>
               <button
-                className={`atmos-sem-tab${activeTab === 'workshops' ? ' active' : ''}`}
+                className={`atmos-sem-tab atmos-chip${activeTab === 'workshops' ? ' active' : ''}`}
                 onClick={() => setActiveTab('workshops')}
               >
                 <IconWrench /> Workshops
@@ -437,7 +430,7 @@ const Seminars = () => {
               <div className="atmos-sem-tag-cloud">
                 <button
                   type="button"
-                  className={`atmos-sem-cloud-tag${!topicFilter ? ' active' : ''}`}
+                  className={`atmos-sem-cloud-tag atmos-chip${!topicFilter ? ' active' : ''}`}
                   onClick={() => setTopicFilter('')}
                 >
                   All
@@ -446,7 +439,7 @@ const Seminars = () => {
                   <button
                     key={tag}
                     type="button"
-                    className={`atmos-sem-cloud-tag${topicFilter === tag ? ' active' : ''}`}
+                    className={`atmos-sem-cloud-tag atmos-chip${topicFilter === tag ? ' active' : ''}`}
                     onClick={() => setTopicFilter(tag === topicFilter ? '' : tag)}
                   >
                     {tag}
