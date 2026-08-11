@@ -292,12 +292,6 @@ const Seminars = () => {
   const showTalks = activeTab === 'all' || activeTab === 'talks';
   const showWorkshops = activeTab === 'all' || activeTab === 'workshops';
 
-  // Scroll-reveal for seminar/workshop cards. A fresh observer is created per
-  // run and disconnected on cleanup, so React StrictMode's mount → unmount →
-  // remount cycle can't leave cards observed by a disconnected observer (which
-  // previously stranded every card at opacity:0). Cards already revealed keep
-  // `sr-visible`; only not-yet-revealed cards are hidden and (re)observed, so
-  // filter changes still animate in newly rendered cards.
   // Re-scanned on every filter change so newly rendered cards animate in too.
   useScrollReveal('.atmos-sem-card', {
     resetKey: `${activeTab}|${topicFilter}|${yearFilter}|${searchQuery}`,
