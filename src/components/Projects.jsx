@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Cpu, MessageSquare, Eye, Sparkles, FolderGit2 } from 'lucide-react';
 import './Projects.css';
+import RisingHeading from './RisingHeading';
+import { useScrollReveal, usePointerGlow } from '../utils/motion';
 
 const Github = ({ size = 16, className = '' }) => (
   <svg
@@ -107,32 +109,15 @@ const Projects = () => {
     ? PROJECTS_DATA
     : PROJECTS_DATA.filter((p) => p.category === activeTab);
 
-  // Scroll-reveal for the project cards grid. A fresh observer is created per
-  // run and disconnected on cleanup, so React StrictMode's mount → unmount →
-  // remount cycle can't leave cards observed by a disconnected observer (which
-  // previously stranded every card at opacity:0). Cards already revealed keep
-  // `sr-visible`; only not-yet-revealed cards are hidden and (re)observed, so
-  // category filter changes still animate in newly rendered cards.
-  useEffect(() => {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('sr-visible');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.08 });
+  // Re-scanned on tab change so newly rendered cards animate in too.
+  useScrollReveal('.project-card', { resetKey: activeTab });
+  useScrollReveal(
+    '.atmos-projects .atmos-section-head, .projects-section-lede, .projects-coming-soon, .projects-notice-banner',
+  );
 
-    const cards = document.querySelectorAll('.project-card');
-    cards.forEach((el, i) => {
-      if (el.classList.contains('sr-visible')) return;
-      el.classList.add('sr-hidden');
-      el.style.transitionDelay = `${Math.min((i % 6) * 70, 280)}ms`;
-      io.observe(el);
-    });
-
-    return () => io.disconnect();
-  }, [activeTab]);
+  const { ref: gridRef, onPointerMove: trackGlow } = usePointerGlow({
+    childSelector: '.project-card',
+  });
 
   return (
     <div className="atmos-root atmos-projects">
@@ -140,7 +125,10 @@ const Projects = () => {
         <div className="atmos-shell">
           <div className="atmos-page-hero-content">
             <p className="atmos-page-hero-eyebrow">AI@UW Showcase</p>
-            <h1 className="atmos-page-hero-title">Student Projects</h1>
+            <RisingHeading
+              className="atmos-page-hero-title"
+              lines={['Student Projects']}
+            />
             <p className="atmos-page-hero-lede">
               Real AI systems built by UW students.
             </p>
@@ -194,7 +182,7 @@ const Projects = () => {
                     <button
                       key={cat}
                       type="button"
-                      className={`projects-tab${activeTab === cat ? ' active' : ''}`}
+                      className={`projects-tab atmos-chip${activeTab === cat ? ' active' : ''}`}
                       onClick={() => setActiveTab(cat)}
                     >
                       {getCategoryIcon(cat)}
@@ -205,9 +193,9 @@ const Projects = () => {
               </div>
 
               {/* Projects Grid */}
-              <div className="projects-grid">
+              <div className="projects-grid" ref={gridRef} onPointerMove={trackGlow}>
                 {filteredProjects.map((p) => (
-                  <div className="project-card" key={p.id}>
+                  <div className="project-card atmos-lift atmos-glow" key={p.id}>
                     {/* Visual Header */}
                     <div className={`project-card-visual visual-${p.colorPreset}`}>
                       <ProjectVisual preset={p.colorPreset} />
@@ -245,7 +233,7 @@ const Projects = () => {
                         >
                           <Github size={16} />
                           <span>View Repository</span>
-                          <span className="project-repo-arrow">→</span>
+                          <span className="atmos-arrow">→</span>
                         </a>
                       )}
                     </div>
