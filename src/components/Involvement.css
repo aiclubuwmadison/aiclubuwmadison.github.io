@@ -65,17 +65,11 @@
   align-items: flex-start;
   gap: 16px;
   box-shadow: var(--shadow-sm);
-  transition:
-    border-color var(--motion-base, 280ms) var(--ease-out, ease),
-    box-shadow var(--motion-base, 280ms) var(--ease-out, ease),
-    transform var(--motion-base, 280ms) var(--ease-out, ease),
-    background 280ms ease;
 }
 
+/* Movement comes from .atmos-lift; only the accent border is local. */
 .faq-contact-card:hover {
   border-color: rgba(197, 5, 12, 0.28);
-  box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
 }
 
 .faq-contact-card-icon {
@@ -216,7 +210,6 @@
   font-size: 28px;
   font-weight: 400;
   line-height: 1;
-  transition: transform 300ms cubic-bezier(.2,.7,.2,1), color 300ms ease;
 }
 
 .atmos-faq-toggle-icon.is-open {
@@ -224,22 +217,7 @@
   color: var(--atmos-badger);
 }
 
-.atmos-faq-answer-panel {
-  display: grid;
-  grid-template-rows: 0fr;
-  overflow: hidden;
-  opacity: 0;
-  transition: grid-template-rows 300ms cubic-bezier(.2,.7,.2,1), opacity 200ms ease;
-}
-
-.atmos-faq-answer-panel.is-open {
-  grid-template-rows: 1fr;
-  opacity: 1;
-}
-
-.atmos-faq-answer-inner {
-  min-height: 0;
-}
+/* Open/close geometry comes from .atmos-panel. */
 
 .atmos-faq-a {
   padding: 0 24px 20px 80px;
@@ -259,18 +237,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .faq-contact-card,
-  .faq-contact-card:hover {
-    transform: none !important;
-    transition: border-color 200ms ease, box-shadow 200ms ease, background 200ms ease !important;
-  }
-
   .atmos-faq-toggle-icon {
     transition: color 200ms ease !important;
-  }
-
-  .atmos-faq-answer-panel {
-    transition: none !important;
   }
 }
 
@@ -349,21 +317,10 @@
 }
 
 /* ── Accordion motion ──────────────────────────────────── */
-@keyframes faqRowIn {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
 .atmos-faq-row {
   position: relative;
-  animation: faqRowIn 520ms var(--ease-out) both;
-  animation-delay: calc(var(--i, 0) * 55ms);
+  animation: atmosRise var(--motion-rise) var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * var(--stagger));
   transition:
     background-color var(--motion-fast) ease,
     border-color var(--motion-fast) ease;
@@ -395,16 +352,8 @@
   border-radius: var(--radius-md);
 }
 
-/* Icon badge: lifts on hover, fills when open */
-.faq-row-icon {
-  transition:
-    transform 320ms var(--ease-out),
-    background-color 320ms var(--ease-out),
-    color 320ms var(--ease-out);
-}
-
+/* Icon badge: lifts on hover (.atmos-icon-badge), fills when open */
 .atmos-faq-row:hover .faq-row-icon {
-  transform: translateY(-2px) scale(1.06);
   background: color-mix(in srgb, var(--atmos-badger) 13%, transparent);
 }
 
@@ -433,7 +382,7 @@
 
 .atmos-faq-toggle-icon {
   transition:
-    transform 340ms cubic-bezier(0.34, 1.32, 0.64, 1),
+    transform var(--motion-panel) var(--ease-spring),
     color 300ms ease;
 }
 
@@ -466,13 +415,11 @@
   }
 
   .atmos-faq-row::before,
-  .faq-row-icon,
   .faq-row-text-wrap,
   .atmos-faq-a {
     transition: none !important;
   }
 
-  .atmos-faq-row:hover .faq-row-icon,
   .atmos-faq-row:hover .faq-row-text-wrap {
     transform: none;
   }
@@ -610,17 +557,12 @@
   border-radius: 999px;
   padding: 8px 14px;
   cursor: pointer;
-  transition:
-    color var(--motion-fast) ease,
-    border-color var(--motion-fast) ease,
-    background-color var(--motion-fast) ease,
-    transform var(--motion-base) var(--ease-out);
 }
 
+/* Lift comes from .atmos-chip. */
 .faq-chip:hover {
   color: var(--atmos-ink);
   border-color: color-mix(in srgb, var(--atmos-badger) 35%, var(--atmos-hairline));
-  transform: translateY(-1px);
 }
 
 .faq-chip.is-active {
@@ -682,21 +624,10 @@
 }
 
 /* ── Empty state ───────────────────────────────────────── */
-@keyframes faqEmptyIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
 .faq-empty {
   padding: clamp(36px, 6vw, 56px) 28px;
   text-align: center;
-  animation: faqEmptyIn 420ms var(--ease-out) both;
+  animation: atmosRise 420ms var(--ease-out) both;
 }
 
 .faq-empty-icon {
@@ -792,8 +723,6 @@
     animation: none !important;
   }
 
-  .faq-chip,
-  .faq-chip:hover,
   .faq-search-clear,
   .faq-search-clear:hover,
   .faq-empty-reset:hover {
@@ -812,62 +741,23 @@
 }
 
 /* ── Left column entrance ──────────────────────────────── */
-@keyframes faqRise {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes faqWordRise {
-  from {
-    transform: translateY(110%);
-  }
-  to {
-    transform: none;
-  }
-}
-
 .atmos-faq-left > .faq-label {
-  animation: faqRise 520ms var(--ease-out) both;
-}
-
-.faq-heading-line {
-  display: block;
-}
-
-/* Each word lifts out of its own mask; padding keeps descenders intact */
-.faq-heading-word {
-  display: inline-block;
-  overflow: hidden;
-  vertical-align: bottom;
-  padding-bottom: 0.14em;
-  margin-bottom: -0.14em;
-}
-
-.faq-heading-word > span {
-  display: inline-block;
-  animation: faqWordRise 760ms cubic-bezier(0.22, 1, 0.36, 1) both;
-  animation-delay: calc(90ms + var(--d, 0ms));
+  animation: atmosRise var(--motion-rise) var(--ease-out) both;
 }
 
 .faq-heading-period {
   display: inline-block;
-  animation: faqRise 420ms var(--ease-out) both;
+  animation: atmosRise 420ms var(--ease-out) both;
   animation-delay: 560ms;
 }
 
 .atmos-faq-left > .faq-subtitle {
-  animation: faqRise 560ms var(--ease-out) both;
+  animation: atmosRise 560ms var(--ease-out) both;
   animation-delay: 460ms;
 }
 
 .atmos-faq-left > .faq-contact-card {
-  animation: faqRise 560ms var(--ease-out) both;
+  animation: atmosRise 560ms var(--ease-out) both;
   animation-delay: 560ms;
 }
 
@@ -881,40 +771,7 @@
   transform: scale(1.06) rotate(-6deg);
 }
 
-.faq-contact-card-arrow {
-  display: inline-block;
-  transition: transform 260ms var(--ease-out);
-}
-
-.faq-contact-card-link:hover .faq-contact-card-arrow {
-  transform: translateX(4px);
-}
-
-/* ── Cursor glow across the question card ──────────────── */
-.faq-right-card {
-  position: relative;
-}
-
-.faq-right-card::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0;
-  background: radial-gradient(
-    320px circle at var(--mx, 50%) var(--my, 50%),
-    var(--atmos-accent-glow),
-    transparent 70%
-  );
-  transition: opacity 360ms ease;
-}
-
-.faq-right-card:hover::after {
-  opacity: 1;
-}
-
 @media (hover: none) {
-  .faq-right-card::after,
   .faq-search-kbd {
     display: none;
   }
@@ -922,21 +779,17 @@
 
 @media (prefers-reduced-motion: reduce) {
   .atmos-faq-left > .faq-label,
-  .faq-heading-word > span,
   .faq-heading-period,
   .atmos-faq-left > .faq-subtitle,
   .atmos-faq-left > .faq-contact-card {
     animation: none !important;
   }
 
-  .faq-contact-card-icon,
-  .faq-contact-card-arrow,
-  .faq-right-card::after {
+  .faq-contact-card-icon {
     transition: none !important;
   }
 
-  .faq-contact-card:hover .faq-contact-card-icon,
-  .faq-contact-card-link:hover .faq-contact-card-arrow {
+  .faq-contact-card:hover .faq-contact-card-icon {
     transform: none;
   }
 }

@@ -1,6 +1,8 @@
-import { Fragment, useState, useEffect, useMemo, useRef } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import './Involvement.css';
 import { Link } from 'react-router-dom';
+import RisingHeading from './RisingHeading';
+import { useScrollReveal, usePointerGlow } from '../utils/motion';
 import {
   User,
   Calendar,
@@ -130,10 +132,7 @@ const FAQS = [
 
 const TOPICS = ['All', 'Getting started', 'Meetings', 'Projects', 'Community'];
 
-const HEADING_LINES = [
-  ['Ask', 'anything.'],
-  ["We're", 'here', 'to', 'help'],
-];
+const HEADING_LINES = ['Ask anything.', "We're here to help"];
 
 const topicCount = (topic) =>
   topic === 'All' ? FAQS.length : FAQS.filter((f) => f.topic === topic).length;
@@ -158,16 +157,9 @@ const Involvement = () => {
   const [query, setQuery] = useState('');
   const [topic, setTopic] = useState('All');
   const searchRef = useRef(null);
-  const cardRef = useRef(null);
 
   /* Soft glow that trails the cursor across the question card. */
-  const trackGlow = (e) => {
-    const el = cardRef.current;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    el.style.setProperty('--mx', `${e.clientX - rect.left}px`);
-    el.style.setProperty('--my', `${e.clientY - rect.top}px`);
-  };
+  const { ref: cardRef, onPointerMove: trackGlow } = usePointerGlow();
 
   const toggleFaq = (q) => setOpenFaq((prev) => (prev === q ? null : q));
 
@@ -208,24 +200,7 @@ const Involvement = () => {
     return () => window.removeEventListener('keydown', onKeyDown);
   }, []);
 
-  useEffect(() => {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          e.target.classList.add("sr-visible");
-          io.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.08 });
-
-    const elements = document.querySelectorAll(".atmos-reveal");
-    elements.forEach((el) => {
-      el.classList.add("sr-hidden");
-      io.observe(el);
-    });
-
-    return () => io.disconnect();
-  }, []);
+  useScrollReveal('.atmos-involvement .atmos-reveal');
 
   return (
     <div className="atmos-root atmos-involvement">
@@ -234,29 +209,14 @@ const Involvement = () => {
 
           <div className="atmos-faq-left">
             <span className="faq-label">FAQ</span>
-            <h1 className="faq-heading">
-              {HEADING_LINES.map((line, li) => (
-                <span className="faq-heading-line" key={li}>
-                  {line.map((word, wi) => (
-                    <Fragment key={word}>
-                      {wi > 0 && ' '}
-                      <span
-                        className="faq-heading-word"
-                        style={{ '--d': `${(li * 2 + wi) * 70}ms` }}
-                      >
-                        <span>{word}</span>
-                      </span>
-                    </Fragment>
-                  ))}
-                  {li === HEADING_LINES.length - 1 && (
-                    <span className="faq-heading-period">.</span>
-                  )}
-                </span>
-              ))}
-            </h1>
+            <RisingHeading
+              className="faq-heading"
+              lines={HEADING_LINES}
+              trailing={<span className="faq-heading-period">.</span>}
+            />
             <p className="faq-subtitle">Joining, meetings, projects, and mailing list.</p>
 
-            <div className="faq-contact-card">
+            <div className="faq-contact-card atmos-lift">
               <div className="faq-contact-card-icon">
                 <MessageCircle size={20} />
               </div>
@@ -264,7 +224,7 @@ const Involvement = () => {
                 <p className="faq-contact-card-title">Still have questions?</p>
                 <p className="faq-contact-card-body">Can't find what you're looking for? Reach out to us — we'd love to hear from you.</p>
                 <Link to="/contact" className="faq-contact-card-link">
-                  Contact Us <span className="faq-contact-card-arrow" aria-hidden="true">→</span>
+                  Contact Us <span className="atmos-arrow" aria-hidden="true">→</span>
                 </Link>
               </div>
             </div>
@@ -305,7 +265,7 @@ const Involvement = () => {
                   <button
                     key={t}
                     type="button"
-                    className={`faq-chip${topic === t ? ' is-active' : ''}`}
+                    className={`faq-chip atmos-chip${topic === t ? ' is-active' : ''}`}
                     onClick={() => setTopic(t)}
                     aria-pressed={topic === t}
                   >
@@ -322,7 +282,7 @@ const Involvement = () => {
                 : `${FAQS.length} questions`}
             </p>
 
-            <div className="faq-right-card" ref={cardRef} onPointerMove={trackGlow}>
+            <div className="faq-right-card atmos-glow" ref={cardRef} onPointerMove={trackGlow}>
               {filtered.length === 0 && (
                 <div className="faq-empty">
                   <div className="faq-empty-icon"><SearchX size={22} /></div>
@@ -361,7 +321,7 @@ const Involvement = () => {
                           aria-controls={panelId}
                         >
                           <div className="faq-row-inner">
-                            <div className="faq-row-icon"><item.Icon size={17} /></div>
+                            <div className="faq-row-icon atmos-icon-badge"><item.Icon size={17} /></div>
                             <div className="faq-row-text-wrap">
                               <h2 className="atmos-faq-q">{highlight(item.q, term)}</h2>
                             </div>
@@ -372,7 +332,7 @@ const Involvement = () => {
                           id={panelId}
                           role="region"
                           aria-labelledby={btnId}
-                          className={`atmos-faq-answer-panel${isOpen ? ' is-open' : ''}`}
+                          className={`atmos-faq-answer-panel atmos-panel${isOpen ? ' is-open' : ''}`}
                         >
                           <div className="atmos-faq-answer-inner">
                             <div className="atmos-faq-a">

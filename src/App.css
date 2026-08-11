@@ -110,7 +110,17 @@ button:focus-visible,
   --motion-fast: 200ms;
   --motion-base: 280ms;
   --motion-slow: 460ms;
+  /* Motion system — durations shared by every page (see "MOTION SYSTEM") */
+  --motion-rise: 520ms;    /* element settling into place on entrance */
+  --motion-word: 760ms;    /* display word lifting out of its mask */
+  --motion-panel: 340ms;   /* accordion / disclosure open + close */
+  --motion-reveal: 640ms;  /* scroll-triggered reveal */
+  --stagger: 55ms;         /* delay between neighbours in a cascade */
   --ease-out: cubic-bezier(0.25, 0.1, 0.25, 1);
+  /* Long tail — the curve behind the masked heading lift */
+  --ease-mask: cubic-bezier(0.22, 1, 0.36, 1);
+  /* Slight overshoot — chevrons, toggles, anything that "clicks" into place */
+  --ease-spring: cubic-bezier(0.34, 1.32, 0.64, 1);
   --radius-sm: 10px;
   --radius-md: 16px;
   --radius-lg: 24px;
@@ -261,11 +271,35 @@ button:focus-visible,
   cursor: pointer;
   font-family: inherit;
   padding: 0;
-  transition: gap 220ms ease;
+  transition: gap 220ms var(--ease-out), color 220ms ease;
 }
 
 .atmos-page-hero-cta:hover {
   gap: 10px;
+}
+
+/* Hero entrance cascade — eyebrow first, then lede, then CTA.
+   The title lifts word by word on its own (see RisingHeading). */
+.atmos-page-hero-eyebrow {
+  animation: atmosRise var(--motion-rise) var(--ease-out) both;
+}
+
+.atmos-page-hero-lede {
+  animation: atmosRise 560ms var(--ease-out) both;
+  animation-delay: 400ms;
+}
+
+.atmos-page-hero-cta {
+  animation: atmosRise 560ms var(--ease-out) both;
+  animation-delay: 500ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .atmos-page-hero-eyebrow,
+  .atmos-page-hero-lede,
+  .atmos-page-hero-cta {
+    animation: none !important;
+  }
 }
 
 /* ── Glass surface utilities (solid panels; glass only on chrome) ─ */
@@ -487,22 +521,227 @@ body,
 }
 
 /* ══════════════════════════════════════════════════════════
-   GLOBAL ANIMATIONS & UX ENHANCEMENTS
+   MOTION SYSTEM
+   One curve family, one set of durations, used site-wide.
+
+   The FAQ page set the house style: things rise into place
+   rather than fading, lists cascade rather than popping, and
+   surfaces answer the cursor. These primitives are that
+   vocabulary, factored out so every page moves the same way.
+   The JS half lives in `src/utils/motion.js`.
    ══════════════════════════════════════════════════════════ */
 
+@keyframes atmosRise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes atmosWordRise {
+  from {
+    transform: translateY(110%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+/* ── Entrance: rises into place on mount ──────────────────
+   Set `--d` for a delay, `--i` for a place in a cascade.     */
+.atmos-rise {
+  animation: atmosRise var(--motion-rise) var(--ease-out) both;
+  animation-delay: calc(var(--d, 0ms) + var(--i, 0) * var(--stagger));
+}
+
+/* ── Masked word lift (see RisingHeading.jsx) ─────────────
+   Each word rides up out of its own clipped box. The padding
+   keeps descenders from being shaved off by the mask.        */
+.atmos-word-line {
+  display: block;
+}
+
+.atmos-word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+}
+
+.atmos-word > span {
+  display: inline-block;
+  animation: atmosWordRise var(--motion-word) var(--ease-mask) both;
+  animation-delay: calc(90ms + var(--d, 0ms));
+}
+
 /* ── Scroll-reveal base + triggered state ─────────────────
-   Applied dynamically by ScrollReveal in About/Involvement. */
+   Applied by `useScrollReveal`, which also stamps `--i`.     */
 .sr-hidden {
   opacity: 0;
   transform: translateY(18px);
   filter: blur(3px);
-  transition: opacity 650ms var(--ease-out), transform 650ms var(--ease-out), filter 650ms var(--ease-out);
+  transition:
+    opacity var(--motion-reveal) var(--ease-out),
+    transform var(--motion-reveal) var(--ease-out),
+    filter var(--motion-reveal) var(--ease-out);
+  transition-delay: calc(var(--i, 0) * var(--stagger));
 }
 .sr-visible {
   opacity: 1 !important;
   transform: translateY(0);
   filter: blur(0);
 }
+
+/* ── Lift: the standard card hover ────────────────────────  */
+.atmos-lift {
+  transition:
+    transform var(--motion-base) var(--ease-out),
+    box-shadow var(--motion-base) var(--ease-out),
+    border-color var(--motion-base) var(--ease-out),
+    background-color var(--motion-base) var(--ease-out);
+}
+
+.atmos-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.atmos-lift:active {
+  transform: translateY(0);
+}
+
+/* ── Glow: a soft accent pool that trails the cursor ──────
+   Coordinates come from `usePointerGlow`. Sits behind the
+   content (z-index 0) so text stays crisp on top.            */
+.atmos-glow {
+  position: relative;
+}
+
+.atmos-glow::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    var(--glow-size, 320px) circle at var(--mx, 50%) var(--my, 50%),
+    var(--atmos-accent-glow),
+    transparent 70%
+  );
+  transition: opacity 360ms ease;
+}
+
+.atmos-glow:hover::after,
+.atmos-glow:focus-within::after {
+  opacity: 1;
+}
+
+/* Nothing to trail without a pointer */
+@media (hover: none) {
+  .atmos-glow::after {
+    display: none;
+  }
+}
+
+/* ── Arrow: nudges forward when its container is hovered ──  */
+.atmos-arrow {
+  display: inline-block;
+  transition: transform 260ms var(--ease-out);
+}
+
+:where(a, button, .atmos-lift, .atmos-nudge):hover .atmos-arrow {
+  transform: translateX(4px);
+}
+
+/* ── Icon badge: lifts and warms with its row ─────────────  */
+.atmos-icon-badge {
+  transition:
+    transform 320ms var(--ease-out),
+    background-color 320ms var(--ease-out),
+    color 320ms var(--ease-out);
+}
+
+:where(a, button, li, .atmos-lift, .atmos-nudge):hover > .atmos-icon-badge,
+:where(a, button, li, .atmos-lift, .atmos-nudge):hover .atmos-icon-badge {
+  transform: translateY(-2px) scale(1.06);
+}
+
+/* ── Chip / pill controls ─────────────────────────────────  */
+.atmos-chip {
+  transition:
+    color var(--motion-fast) ease,
+    border-color var(--motion-fast) ease,
+    background-color var(--motion-fast) ease,
+    box-shadow var(--motion-fast) ease,
+    transform var(--motion-base) var(--ease-out);
+}
+
+.atmos-chip:hover {
+  transform: translateY(-1px);
+}
+
+.atmos-chip:active {
+  transform: translateY(0);
+}
+
+/* ── Disclosure panel: height animated via grid rows ──────
+   `grid-template-rows: 0fr → 1fr` animates to the content's
+   natural height without measuring it in JS.                 */
+.atmos-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    grid-template-rows var(--motion-panel) var(--ease-out),
+    opacity var(--motion-fast) ease;
+}
+
+.atmos-panel.is-open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.atmos-panel > * {
+  min-height: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .atmos-rise,
+  .atmos-word > span {
+    animation: none !important;
+  }
+
+  .atmos-lift,
+  .atmos-lift:hover,
+  .atmos-lift:active,
+  .atmos-chip,
+  .atmos-chip:hover,
+  .atmos-chip:active,
+  .atmos-arrow,
+  :where(a, button, .atmos-lift, .atmos-nudge):hover .atmos-arrow,
+  .atmos-icon-badge,
+  :where(a, button, li, .atmos-lift, .atmos-nudge):hover > .atmos-icon-badge,
+  :where(a, button, li, .atmos-lift, .atmos-nudge):hover .atmos-icon-badge {
+    transform: none !important;
+  }
+
+  .atmos-glow::after,
+  .atmos-panel {
+    transition: none !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════
+   GLOBAL ANIMATIONS & UX ENHANCEMENTS
+   ══════════════════════════════════════════════════════════ */
 
 /* ── Shared buttons ─────────────────────────────────────── */
 .atmos-btn-primary {
