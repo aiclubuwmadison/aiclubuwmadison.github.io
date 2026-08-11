@@ -10,8 +10,9 @@ import { Fragment } from 'react';
  * there too.
  *
  * `lines` is an array of lines. A line may be a plain string (split on spaces)
- * or an array of items, where each item is a word or `{ word, className }` for
- * words that need their own colour or emphasis.
+ * or an array of items, where each item is a word or `{ word, className, as }`
+ * for words that need their own colour or emphasis — `as: 'em'` keeps the
+ * semantics of emphasised text while the word still rides up out of its mask.
  *
  * @param {object} props
  * @param {import('react').ElementType} [props.as]  Tag to render (default h1).
@@ -48,7 +49,7 @@ const RisingHeading = ({
       {splitLines.map((words, li) => {
         return (
           <span className="atmos-word-line" key={li}>
-            {words.map(({ word, className: wordClass }, wi) => {
+            {words.map(({ word, className: wordClass, as: Inner = 'span' }, wi) => {
               const d = delay + (lineOffsets[li] + wi) * step;
 
               return (
@@ -58,7 +59,7 @@ const RisingHeading = ({
                     className={`atmos-word${wordClass ? ` ${wordClass}` : ''}`}
                     style={{ '--d': `${d}ms` }}
                   >
-                    <span>{word}</span>
+                    <Inner>{word}</Inner>
                   </span>
                 </Fragment>
               );

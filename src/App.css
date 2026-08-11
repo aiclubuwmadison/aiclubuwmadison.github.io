@@ -573,46 +573,60 @@ body,
   margin-bottom: -0.14em;
 }
 
-.atmos-word > span {
+/* Any inner tag works — em/strong keep their meaning while still riding up. */
+.atmos-word > * {
   display: inline-block;
   animation: atmosWordRise var(--motion-word) var(--ease-mask) both;
   animation-delay: calc(90ms + var(--d, 0ms));
 }
 
-/* ── Scroll-reveal base + triggered state ─────────────────
-   Applied by `useScrollReveal`, which also stamps `--i`.     */
-.sr-hidden {
-  opacity: 0;
-  transform: translateY(18px);
-  filter: blur(3px);
-  transition:
-    opacity var(--motion-reveal) var(--ease-out),
-    transform var(--motion-reveal) var(--ease-out),
-    filter var(--motion-reveal) var(--ease-out);
-  transition-delay: calc(var(--i, 0) * var(--stagger));
-}
-.sr-visible {
-  opacity: 1 !important;
-  transform: translateY(0);
-  filter: blur(0);
-}
-
-/* ── Lift: the standard card hover ────────────────────────  */
+/* ── Lift: the standard card hover ────────────────────────
+   The lift uses `translate`, not `transform`, on purpose: a
+   scroll-revealed card is already animating `transform`, and
+   two rules fighting over one property makes the hover
+   inherit the reveal's much slower timing.                   */
 .atmos-lift {
   transition:
-    transform var(--motion-base) var(--ease-out),
+    translate var(--motion-base) var(--ease-out),
     box-shadow var(--motion-base) var(--ease-out),
     border-color var(--motion-base) var(--ease-out),
     background-color var(--motion-base) var(--ease-out);
 }
 
 .atmos-lift:hover {
-  transform: translateY(-2px);
+  translate: 0 -2px;
   box-shadow: var(--shadow-md);
 }
 
 .atmos-lift:active {
+  translate: 0;
+}
+
+/* ── Scroll-reveal base + triggered state ─────────────────
+   Applied by `useScrollReveal`, which also stamps `--i`.
+
+   `transition` is a shorthand, so this has to restate the
+   lift's properties (and sit after `.atmos-lift`) — otherwise
+   whichever rule came last would silently drop the other's
+   transitions. The stagger delay is per-property so it never
+   holds up a hover.                                          */
+.sr-hidden {
+  opacity: 0;
+  transform: translateY(18px);
+  filter: blur(3px);
+  transition:
+    opacity var(--motion-reveal) var(--ease-out) calc(var(--i, 0) * var(--stagger)),
+    transform var(--motion-reveal) var(--ease-out) calc(var(--i, 0) * var(--stagger)),
+    filter var(--motion-reveal) var(--ease-out) calc(var(--i, 0) * var(--stagger)),
+    translate var(--motion-base) var(--ease-out),
+    box-shadow var(--motion-base) var(--ease-out),
+    border-color var(--motion-base) var(--ease-out),
+    background-color var(--motion-base) var(--ease-out);
+}
+.sr-visible {
+  opacity: 1 !important;
   transform: translateY(0);
+  filter: blur(0);
 }
 
 /* ── Glow: a soft accent pool that trails the cursor ──────
@@ -715,13 +729,16 @@ body,
 
 @media (prefers-reduced-motion: reduce) {
   .atmos-rise,
-  .atmos-word > span {
+  .atmos-word > * {
     animation: none !important;
   }
 
   .atmos-lift,
   .atmos-lift:hover,
-  .atmos-lift:active,
+  .atmos-lift:active {
+    translate: none !important;
+  }
+
   .atmos-chip,
   .atmos-chip:hover,
   .atmos-chip:active,
