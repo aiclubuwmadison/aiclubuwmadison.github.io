@@ -72,10 +72,10 @@ button:focus-visible,
   --atmos-hairline-soft: #ebe8e3;
   --atmos-badger: #C5050C;
   --atmos-accent-glow: rgba(197, 5, 12, 0.12);
-  --atmos-font: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --atmos-serif: "Newsreader", Georgia, serif;
+  --atmos-font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --atmos-serif: "Instrument Serif", Georgia, serif;
   --atmos-sans: var(--atmos-font);
-  --atmos-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  --atmos-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
   --atmos-max: 1280px;
   --atmos-gutter: clamp(20px, 4vw, 56px);
   /* Nav offset — page roots pad content; backgrounds still paint under fixed chrome */

@@ -33,7 +33,7 @@ Vite + React 19 SPA for the AI@UW club site:
 | Routing | `react-router-dom` v7 (`BrowserRouter`) |
 | UI | `lucide-react` icons; hand-rolled mobile nav (no UI component library) |
 | Language | JSX only (no TypeScript) |
-| Fonts | Space Grotesk, Instrument Serif, Space Mono (Google Fonts via `index.html`) |
+| Fonts | Instrument Serif, Inter, JetBrains Mono (Google Fonts via `index.html`) |
 | Styling | Vanilla CSS only — co-located `.css` next to each `.jsx` |
 
 Entry: `src/main.jsx` → `src/App.jsx`.
