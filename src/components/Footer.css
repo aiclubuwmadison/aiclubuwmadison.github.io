@@ -1,13 +1,10 @@
 /* =========================================================
    ATMOSPHERIC MODERN — Footer
-   Paper colophon with stronger ink contrast for readability.
-   Tokens (--atmos-*) are declared globally in App.css.
+   Refined colophon with crisp typography and balanced grid.
    ========================================================= */
 
 .atmos-footer {
   background: var(--atmos-paper-deep);
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
   color: var(--atmos-ink);
   font-family: var(--atmos-sans);
   margin-top: 0;
@@ -16,48 +13,60 @@
   border-top: 1px solid var(--atmos-hairline);
 }
 
+.atmos-footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 120px;
+  height: 2px;
+  background: var(--atmos-badger);
+}
+
 .atmos-footer-shell {
   max-width: var(--atmos-max);
   margin: 0 auto;
   padding: 0 var(--atmos-gutter);
 }
 
-/* TOP — centered stack */
+/* TOP — Brand & Social Links */
 .atmos-footer-top {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 24px;
-  padding: 48px 0 32px;
-  text-align: center;
+  justify-content: space-between;
+  gap: 32px;
+  padding: clamp(48px, 6vw, 72px) 0 32px;
 }
 
 .atmos-footer-brand {
   display: flex;
   align-items: center;
-  gap: clamp(14px, 2vw, 22px);
+  gap: 16px;
 }
 
 .atmos-footer-logo {
-  width: clamp(48px, 5vw, 60px);
-  height: auto;
+  width: 44px;
+  height: 44px;
   display: block;
   flex: 0 0 auto;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--atmos-badger) 8%, transparent);
+  padding: 4px;
+  box-sizing: border-box;
 }
 
 .atmos-footer-brand-text {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  min-width: 0;
+  gap: 4px;
 }
 
 .atmos-footer-wordmark {
   font-family: var(--atmos-sans);
   font-weight: 700;
-  font-size: clamp(26px, 2.8vw, 34px);
+  font-size: 24px;
   line-height: 1;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
   color: var(--atmos-ink);
   margin: 0;
 }
@@ -70,200 +79,133 @@
 
 .atmos-footer-eyebrow {
   font-family: var(--atmos-sans);
-  font-size: 12.5px;
+  font-size: 13px;
   font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--atmos-ink-soft);
+  color: var(--atmos-ink-mute);
   margin: 0;
 }
 
+.atmos-footer-links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.atmos-footer-link {
+  color: var(--atmos-ink-soft);
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--atmos-hairline);
+  background: color-mix(in srgb, var(--atmos-paper) 60%, transparent);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  transition:
+    color var(--motion-fast) var(--ease-out),
+    background-color var(--motion-fast) var(--ease-out),
+    border-color var(--motion-fast) var(--ease-out),
+    transform var(--motion-fast) var(--ease-out);
+}
+
+.atmos-footer-link:hover {
+  color: var(--atmos-ink);
+  background: var(--atmos-paper);
+  border-color: var(--atmos-ink-mute);
+  transform: translateY(-1.5px);
+}
+
+.atmos-footer-link svg {
+  transition: transform 200ms var(--ease-spring);
+}
+
+.atmos-footer-link:hover svg {
+  transform: scale(1.15);
+}
+
+/* NAV LINKS */
 .atmos-footer-nav {
   display: flex;
   align-items: center;
-  justify-content: center;
   flex-wrap: wrap;
-  gap: clamp(16px, 3vw, 32px);
-  padding: 0 0 48px;
+  gap: 8px 24px;
+  padding: 24px 0;
+  border-top: 1px solid var(--atmos-hairline);
+  border-bottom: 1px solid var(--atmos-hairline);
 }
 
 .atmos-footer-nav-link {
   font-family: var(--atmos-sans);
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  font-size: 13.5px;
+  font-weight: 500;
   color: var(--atmos-ink-soft);
   text-decoration: none;
-  padding: 8px 14px;
-  border-radius: 999px;
-  transition:
-    color var(--motion-fast, 200ms) var(--ease-out, ease),
-    background var(--motion-fast, 200ms) var(--ease-out, ease),
-    box-shadow var(--motion-fast, 200ms) var(--ease-out, ease);
+  padding: 4px 0;
+  transition: color var(--motion-fast) var(--ease-out);
 }
 
 .atmos-footer-nav-link:hover {
   color: var(--atmos-badger);
-  background: rgba(197, 5, 12, 0.08);
 }
 
-[data-theme="dark"] .atmos-footer-nav-link:hover {
-  background: rgba(255, 110, 117, 0.12);
-}
-
-.atmos-footer-links {
-  display: inline-flex;
+/* BOTTOM BAR */
+.atmos-footer-bottom {
+  display: flex;
   align-items: center;
+  justify-content: space-between;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 0;
-  font-family: var(--atmos-sans);
-  font-weight: 500;
-  font-size: clamp(14px, 1.2vw, 16px);
-  line-height: 1.4;
-  letter-spacing: 0.01em;
+  gap: 12px;
+  padding: 24px 0 36px;
+  font-size: 12.5px;
+  color: var(--atmos-ink-mute);
 }
 
-.atmos-footer-link {
-  color: var(--atmos-ink);
-  text-decoration: none;
-  position: relative;
-  padding: 4px 18px;
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  transition: color var(--motion-fast) var(--ease-out);
+.atmos-footer-copy {
+  margin: 0;
 }
 
-.atmos-footer-link:first-child { padding-left: 0; }
-.atmos-footer-link:last-child  { padding-right: 0; }
-
-.atmos-footer-link + .atmos-footer-link {
-  border-left: 1px solid var(--atmos-hairline);
-}
-
-.atmos-footer-link::after {
-  content: "";
-  position: absolute;
-  left: 18px;
-  right: 18px;
-  bottom: -2px;
-  height: 1px;
-  background: var(--atmos-badger);
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform 260ms var(--ease-out);
-}
-.atmos-footer-link:first-child::after { left: 0; }
-.atmos-footer-link:last-child::after  { right: 0; }
-
-.atmos-footer-link:hover::after { transform: scaleX(1); }
-
-.atmos-footer-link:hover {
-  color: var(--atmos-badger);
-}
-
-/* Social Icon SVG Hover Animations */
-.atmos-footer-link svg {
-  transition: transform 220ms var(--ease-out);
-}
-.atmos-footer-link:hover svg {
-  transform: scale(1.15) translateY(-1.5px);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .atmos-footer-nav-link,
-  .atmos-footer-link,
-  .atmos-footer-link svg {
-    transition: color 200ms ease, background 200ms ease !important;
-  }
-
-  .atmos-footer-link:hover svg {
-    transform: none !important;
-  }
-
-  .atmos-footer-link::after {
-    transition: none !important;
-  }
+.atmos-footer-tagline {
+  margin: 0;
+  font-family: var(--atmos-mono);
+  font-size: 11px;
 }
 
 /* RESPONSIVE */
-@media (max-width: 760px) {
+@media (max-width: 860px) {
   .atmos-footer-top {
+    flex-direction: column;
+    align-items: flex-start;
     gap: 20px;
-    padding: 36px 0;
+    padding: 36px 0 24px;
   }
+
   .atmos-footer-links {
-    gap: 16px;
-    justify-content: center;
+    width: 100%;
   }
-  .atmos-footer-link {
-    padding: 4px 8px;
-  }
-  .atmos-footer-link:first-child { padding-left: 8px; }
-  .atmos-footer-link:last-child { padding-right: 8px; }
-  .atmos-footer-link + .atmos-footer-link {
-    border-left: none;
-  }
-  .atmos-footer-link::after {
-    left: 8px !important;
-    right: 8px !important;
+
+  .atmos-footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
   }
 }
 
-/* ── Dark mode (footer only) ───────────────────────────── */
+/* ── Dark Mode ──────────────────────────────────────────── */
 [data-theme="dark"] .atmos-footer {
-  --atmos-paper-deep: #0a0a0a;
-  --atmos-ink: #f1f5f9;
-  --atmos-ink-soft: #cbd5e1;
-  --atmos-ink-mute: #64748b;
-  --atmos-hairline: rgba(255, 255, 255, 0.10);
+  --atmos-paper-deep: #0e0d0c;
+  --atmos-ink: #f5f2ed;
+  --atmos-ink-soft: #c4beb7;
+  --atmos-ink-mute: #8c867f;
+  --atmos-hairline: rgba(255, 255, 255, 0.08);
 }
 
-/* ── Research colophon ─────────────────────────────────── */
-.atmos-footer {
-  background:
-    linear-gradient(90deg, var(--atmos-badger) 0 86px, transparent 86px) top left / 100% 3px no-repeat,
-    var(--atmos-paper-deep);
+[data-theme="dark"] .atmos-footer-link {
+  background: rgba(255, 255, 255, 0.03);
 }
 
-.atmos-footer-top {
-  display: grid;
-  grid-template-columns: minmax(280px, 1fr) auto;
-  text-align: left;
-  align-items: end;
-  padding: clamp(56px, 8vw, 88px) 0 42px;
+[data-theme="dark"] .atmos-footer-link:hover {
+  background: rgba(255, 255, 255, 0.08);
 }
-
-.atmos-footer-brand { justify-self: start; }
-.atmos-footer-links { justify-content: flex-end; }
-.atmos-footer-wordmark {
-  font-weight: 700;
-  font-size: clamp(28px, 3vw, 36px);
-  letter-spacing: -0.03em;
-}
-.atmos-footer-eyebrow,
-.atmos-footer-nav-link {
-  font-family: var(--atmos-mono);
-}
-.atmos-footer-nav {
-  justify-content: flex-start;
-  border-top: 1px solid var(--atmos-hairline);
-  padding: 24px 0 38px;
-}
-.atmos-footer-nav-link {
-  padding: 7px 0;
-  border-radius: 0;
-  font-size: 11px;
-  letter-spacing: 0.09em;
-}
-.atmos-footer-nav-link:hover { background: transparent; }
-
-@media (max-width: 760px) {
-  .atmos-footer-top { grid-template-columns: 1fr; align-items: start; }
-  .atmos-footer-links { justify-content: flex-start; }
-  .atmos-footer-nav { justify-content: flex-start; gap: 12px 22px; }
-}
-
-/* Social links use global badger hover via .atmos-footer-link */

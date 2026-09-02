@@ -114,6 +114,15 @@ const Footer = () => {
             </Link>
           ))}
         </nav>
+
+        <div className="atmos-footer-bottom">
+          <p className="atmos-footer-copy">
+            © {new Date().getFullYear()} AI@UW • University of Wisconsin–Madison
+          </p>
+          <p className="atmos-footer-tagline">
+            Built with passion by students curious about the future of AI.
+          </p>
+        </div>
       </div>
     </footer>
   );
