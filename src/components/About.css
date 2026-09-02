@@ -663,3 +663,94 @@
   --node-red-stroke: #c5050c;
   --node-edge: #30363d;
 }
+
+/* ── One section per screen ───────────────────────────────
+   The document is the snap container, so this page must clip
+   horizontally rather than scroll: overflow-x: clip avoids
+   creating the intervening scroll container that overflow-x:
+   hidden would, which would swallow the snap points. */
+html:has(.atmos-about) {
+  scroll-snap-type: y mandatory;
+  scroll-padding-top: var(--atmos-nav-height);
+}
+
+.atmos-about {
+  overflow-x: clip;
+  /* The hero is the tallest section, so its display type has to answer to
+     viewport height too or it outgrows a short screen. */
+  --type-display: clamp(40px, min(7.2vw, 10vh), 94px);
+}
+
+.atmos-about > section {
+  /* border-box so the section is exactly one screen, padding included,
+     and a tighter block padding so the hero's content still fits. */
+  box-sizing: border-box;
+  min-height: calc(100svh - var(--atmos-nav-height));
+  padding-block: clamp(24px, 4vh, 80px);
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* Full-bleed sections centre their shell in the taller box. */
+.atmos-about > .about-story,
+.atmos-about > .about-what {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Without a snap point of its own the footer is unreachable
+   under mandatory snapping. */
+html:has(.atmos-about) .atmos-footer {
+  scroll-snap-align: start;
+}
+
+/* Keep What We Do to a single row of cards wherever there is width for one,
+   and let the card art give up height on short screens, so the section still
+   lands inside a single viewport. */
+@media (min-width: 860px) {
+  .atmos-about .about-what-cards {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.atmos-about .about-what-card-visual {
+  height: clamp(96px, 15vh, 190px);
+}
+
+/* Between the hero's stacking breakpoint and full desktop, the graphic's
+   420px floor starves the copy column and the title wraps to six lines.
+   Let the graphic give way instead so the hero stays one screen tall. */
+@media (min-width: 861px) and (max-width: 1180px) {
+  .atmos-about .about-hero {
+    grid-template-columns: minmax(0, 1.15fr) minmax(220px, 0.85fr);
+  }
+}
+
+/* On phones a single column of four cards (or four stats) is three screens
+   tall. Pair them up so each section still resolves to one viewport. */
+@media (max-width: 700px) {
+  .atmos-about .about-story-stats,
+  .atmos-about .about-what-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .atmos-about .about-what-card-visual {
+    height: clamp(64px, 9vh, 104px);
+  }
+
+  /* At half a phone's width the blurbs wrap to eight lines and push the
+     section past a screen; three lines is enough to choose a card. */
+  .atmos-about .about-what-card-body {
+    padding: 14px 14px 12px;
+    gap: 6px;
+  }
+
+  .atmos-about .about-what-card-desc {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
