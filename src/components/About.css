@@ -269,7 +269,7 @@
 
 /* ── WHAT WE DO ─────────────────────────────────────────── */
 .about-what {
-  background: var(--atmos-paper);
+  background: var(--atmos-paper-deep);
   padding: var(--space-section-y) 0;
 }
 
