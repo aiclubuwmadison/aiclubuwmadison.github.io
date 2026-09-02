@@ -261,10 +261,14 @@ const About = () => {
   return (
     <div className="atmos-root atmos-about">
 
-      {/* ── HERO (unchanged) ─────────────────────────────────── */}
+      {/* ── HERO ─────────────────────────────────────────────── */}
       <section className="about-hero">
         <div className="about-hero-left">
-          <p className="about-hero-eyebrow atmos-rise">AI @ UW–Madison</p>
+          <div className="about-hero-badge atmos-rise">
+            <span className="about-badge-pip" aria-hidden="true" />
+            <span>AI @ UW–Madison • Active Spring 2026</span>
+          </div>
+
           <RisingHeading
             className="about-hero-title"
             lines={[
@@ -273,8 +277,18 @@ const About = () => {
             ]}
           />
           <p className="about-hero-lede atmos-rise" style={{ '--d': '460ms' }}>
-            UW–Madison's student AI club. All majors welcome.
+            UW–Madison's premier student artificial intelligence organization. Research reading groups, hands-on engineering teams, guest seminars, and an inclusive community for all majors.
           </p>
+
+          <div className="about-hero-actions atmos-rise" style={{ '--d': '540ms' }}>
+            <Link to="/seminars" className="about-btn-primary">
+              <span>Explore Events</span>
+              <span className="atmos-arrow" aria-hidden="true">→</span>
+            </Link>
+            <Link to="/projects" className="about-btn-secondary">
+              <span>View Projects</span>
+            </Link>
+          </div>
         </div>
 
         <div className="about-hero-right" aria-hidden="true">

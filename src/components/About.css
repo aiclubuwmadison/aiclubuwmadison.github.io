@@ -58,16 +58,33 @@
 .about-hero-left {
   display: flex;
   flex-direction: column;
-  gap: clamp(20px, 2.5vw, 32px);
+  gap: clamp(16px, 2.2vw, 28px);
 }
 
-.about-hero-eyebrow {
+.about-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  padding: 6px 14px 6px 10px;
+  border-radius: 9999px;
+  border: 1px solid color-mix(in srgb, var(--atmos-badger) 22%, var(--atmos-hairline));
+  background: color-mix(in srgb, var(--atmos-badger) 6%, var(--atmos-paper));
+  color: var(--atmos-ink-soft);
   font-family: var(--atmos-mono);
-  font-size: 12px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--atmos-badger);
-  margin: 0;
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+}
+
+.about-badge-pip {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.7);
+  flex-shrink: 0;
 }
 
 .about-hero-title {
@@ -90,11 +107,87 @@
 
 .about-hero-lede {
   font-family: var(--atmos-sans);
-  font-size: clamp(16px, 1.4vw, 18px);
+  font-size: clamp(16px, 1.35vw, 18px);
   line-height: 1.6;
   color: var(--atmos-ink-soft);
   margin: 0;
-  max-width: 48ch;
+  max-width: 52ch;
+}
+
+.about-hero-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-top: 6px;
+}
+
+.about-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 22px;
+  border-radius: 12px;
+  background: var(--atmos-badger);
+  color: #ffffff;
+  font-family: var(--atmos-sans);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow:
+    0 2px 6px rgba(197, 5, 12, 0.2),
+    0 8px 20px -4px rgba(197, 5, 12, 0.35);
+  transition:
+    background-color var(--motion-fast) var(--ease-out),
+    transform var(--motion-fast) var(--ease-out),
+    box-shadow var(--motion-fast) var(--ease-out);
+}
+
+.about-btn-primary:hover {
+  background: #a8040a;
+  transform: translateY(-1.5px);
+  box-shadow:
+    0 4px 10px rgba(197, 5, 12, 0.25),
+    0 12px 28px -4px rgba(197, 5, 12, 0.45);
+}
+
+.about-btn-primary:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.about-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 20px;
+  border-radius: 12px;
+  border: 1px solid var(--atmos-hairline);
+  background: color-mix(in srgb, var(--atmos-paper) 70%, transparent);
+  color: var(--atmos-ink);
+  font-family: var(--atmos-sans);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  transition:
+    background-color var(--motion-fast) var(--ease-out),
+    border-color var(--motion-fast) var(--ease-out),
+    transform var(--motion-fast) var(--ease-out);
+}
+
+.about-btn-secondary:hover {
+  background: var(--atmos-paper);
+  border-color: var(--atmos-ink-mute);
+  transform: translateY(-1.5px);
+}
+
+.about-btn-secondary:active {
+  transform: translateY(0) scale(0.98);
 }
 
 /* RIGHT COLUMN — spiral canvas */
