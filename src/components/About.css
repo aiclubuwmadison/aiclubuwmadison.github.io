@@ -569,7 +569,7 @@
   left: 50%;
   transform: translateX(-50%);
   width: 100vw;
-  background: #0a0a0a;
+  background: var(--about-ground);
 }
 
 [data-theme="dark"] .about-spiral-center {
@@ -584,7 +584,7 @@
 /* ── Dark mode (Our Story + What We Do) ──────────────────── */
 [data-theme="dark"] .about-story,
 [data-theme="dark"] .about-what {
-  --atmos-paper-deep: #0a0a0a;
+  --atmos-paper-deep: var(--about-ground);
   --atmos-ink: #f1f5f9;
   --atmos-ink-soft: #cbd5e1;
   --atmos-ink-mute: #64748b;
@@ -621,6 +621,11 @@
 }
 
 [data-theme="dark"] .atmos-about {
+  /* One ground for the whole page: the root strip under the nav, the hero
+     band, Our Story and What We Do all paint this, so no seams. */
+  --about-ground: #0a0a0a;
+  background: var(--about-ground);
+
   --cube-white-top: #22252a;
   --cube-white-right: #1c1e22;
   --cube-white-left: #16181b;
