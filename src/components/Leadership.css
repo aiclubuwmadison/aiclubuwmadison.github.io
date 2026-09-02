@@ -448,7 +448,7 @@
 .lead-hero-title {
   font-weight: 600;
   line-height: .96;
-  letter-spacing: -.045em;
+  letter-spacing: var(--ls-display);
 }
 .lead-collage { border-radius: 32px; }
 .lead-cc {
@@ -461,7 +461,7 @@
 .lead-section-title {
   font-family: var(--atmos-serif);
   font-weight: 600;
-  letter-spacing: -.035em;
+  letter-spacing: var(--ls-title);
 }
 .lead-featured-card,
 .lead-team-card {

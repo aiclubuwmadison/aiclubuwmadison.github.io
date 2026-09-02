@@ -929,7 +929,7 @@
 .atmos-seminars .atmos-sem-title {
   font-weight: 600;
   line-height: .96;
-  letter-spacing: -.045em;
+  letter-spacing: var(--ls-display);
 }
 .atmos-seminars .atmos-sem-hero-image img {
   border-radius: 32px 32px 32px 8px;
@@ -948,7 +948,7 @@
 .atmos-seminars .atmos-sem-sub-title {
   font-family: var(--atmos-serif);
   font-weight: 600;
-  letter-spacing: -.035em;
+  letter-spacing: var(--ls-title);
 }
 .atmos-seminars .atmos-sem-card {
   border-radius: var(--radius-lg);

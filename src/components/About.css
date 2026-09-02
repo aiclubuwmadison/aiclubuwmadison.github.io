@@ -535,7 +535,7 @@
 .about-stat { background: var(--atmos-paper); }
 .about-stat-num,
 .about-story-title,
-.about-what-title { font-family: var(--atmos-serif); letter-spacing: -.035em; }
+.about-what-title { font-family: var(--atmos-serif); letter-spacing: var(--ls-title); }
 .about-what-card { background: var(--atmos-paper-tint); }
 .about-what-card:hover { box-shadow: var(--shadow-md); }
 

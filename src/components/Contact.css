@@ -347,7 +347,7 @@
 .atmos-contact .atmos-contact-title {
   font-weight: 600;
   line-height: .96;
-  letter-spacing: -.045em;
+  letter-spacing: var(--ls-display);
 }
 .atmos-contact .atmos-contact-row {
   grid-template-columns: minmax(0, .9fr) minmax(360px, 1.1fr);

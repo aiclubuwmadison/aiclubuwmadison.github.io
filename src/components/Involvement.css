@@ -261,7 +261,7 @@
 .atmos-faq-layout { grid-template-columns: minmax(260px, .86fr) minmax(0, 1.4fr); }
 .faq-heading {
   font-weight: 600;
-  letter-spacing: -.045em;
+  letter-spacing: var(--ls-display);
   line-height: .96;
 }
 .faq-label { font-family: var(--atmos-mono); font-weight: 500; }
