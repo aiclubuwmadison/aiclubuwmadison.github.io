@@ -24,7 +24,6 @@ button:focus-visible,
   .atmos-sem-view-all,
   .atmos-channel-card,
   .atmos-footer-link,
-  .atmos-footer-nav-link,
   .res-reading-link,
   .res-refresh-btn,
   input,
@@ -136,8 +135,9 @@ button:focus-visible,
 
 [data-theme="dark"] {
   color-scheme: dark;
-  --atmos-paper:        #11100f;
-  --atmos-paper-deep:   #0b0a09;
+  /* One ground for every page — the deep black the home page set. */
+  --atmos-paper:        #0a0a0a;
+  --atmos-paper-deep:   #0a0a0a;
   --atmos-paper-tint:   #1a1817;
   --atmos-ink:          #f5f2ed;
   --atmos-ink-soft:     #c4beb7;
@@ -199,19 +199,6 @@ button:focus-visible,
     --atmos-glass-edge-outer: rgba(255, 255, 255, 0.08);
     --atmos-glass-specular: transparent;
   }
-}
-
-/* Elevated card surfaces on dark page wrappers */
-[data-theme="dark"] .atmos-projects,
-[data-theme="dark"] .atmos-resources,
-[data-theme="dark"] .atmos-seminars,
-[data-theme="dark"] .atmos-leadership,
-[data-theme="dark"] .atmos-contact,
-[data-theme="dark"] .atmos-involvement {
-  background: var(--atmos-paper);
-  --atmos-paper: #141414;
-  --atmos-paper-deep: #0a0a0a;
-  --atmos-paper-tint: #1e1e1e;
 }
 
 /* ── Shared centered page hero ───────────────────────────── */
@@ -430,12 +417,7 @@ body,
   z-index: 0;
   display: block;
   height: min(760px, 70vh);
-  background:
-    radial-gradient(circle at 86% 16%, var(--atmos-accent-glow), transparent 26%),
-    linear-gradient(90deg, transparent 49.92%, color-mix(in srgb, var(--atmos-badger) 9%, transparent) 50%, transparent 50.08%),
-    linear-gradient(color-mix(in srgb, var(--atmos-hairline) 55%, transparent) 1px, transparent 1px),
-    linear-gradient(90deg, color-mix(in srgb, var(--atmos-hairline) 55%, transparent) 1px, transparent 1px);
-  background-size: auto, auto, 48px 48px, 48px 48px;
+  background: radial-gradient(circle at 86% 16%, var(--atmos-accent-glow), transparent 26%);
   mask-image: linear-gradient(to bottom, #000 0%, transparent 94%);
   pointer-events: none;
 }

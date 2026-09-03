@@ -17,8 +17,9 @@
   content: "";
   position: absolute;
   top: 0;
-  left: 0;
-  width: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 96px;
   height: 2px;
   background: var(--atmos-badger);
 }
@@ -29,81 +30,69 @@
   padding: 0 var(--atmos-gutter);
 }
 
-/* TOP — Brand & Social Links */
-.atmos-footer-top {
+/* A centred colophon: mark, who we are, where to find us, one line of credit. */
+.atmos-footer-shell {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  gap: 32px;
-  padding: clamp(48px, 6vw, 72px) 0 32px;
+  text-align: center;
+  padding-block: clamp(48px, 6vw, 72px) clamp(32px, 4vw, 44px);
 }
 
 .atmos-footer-brand {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
 }
 
 .atmos-footer-logo {
-  width: 44px;
-  height: 44px;
-  display: block;
-  flex: 0 0 auto;
-  border-radius: 12px;
-  background: color-mix(in srgb, var(--atmos-badger) 8%, transparent);
-  padding: 4px;
-  box-sizing: border-box;
-}
-
-.atmos-footer-brand-text {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  object-fit: contain;
 }
 
 .atmos-footer-wordmark {
-  font-family: var(--atmos-sans);
+  margin: 0;
+  font-size: 21px;
   font-weight: 700;
-  font-size: 24px;
-  line-height: 1;
   letter-spacing: -0.02em;
   color: var(--atmos-ink);
-  margin: 0;
 }
 
 .atmos-footer-wordmark .atmos-footer-at {
-  font-style: normal;
   color: var(--atmos-badger);
-  font-weight: 700;
 }
 
 .atmos-footer-eyebrow {
-  font-family: var(--atmos-sans);
-  font-size: 13px;
-  font-weight: 500;
+  margin: 10px 0 0;
+  font-family: var(--atmos-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: var(--atmos-ink-mute);
-  margin: 0;
 }
 
 .atmos-footer-links {
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 14px;
+  margin-top: clamp(28px, 3.5vw, 40px);
 }
 
 .atmos-footer-link {
+  width: 46px;
+  height: 46px;
   color: var(--atmos-ink-soft);
   text-decoration: none;
-  padding: 8px 14px;
-  border-radius: 10px;
+  border-radius: 50%;
   border: 1px solid var(--atmos-hairline);
   background: color-mix(in srgb, var(--atmos-paper) 60%, transparent);
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  font-weight: 500;
+  justify-content: center;
   transition:
     color var(--motion-fast) var(--ease-out),
     background-color var(--motion-fast) var(--ease-out),
@@ -112,10 +101,10 @@
 }
 
 .atmos-footer-link:hover {
-  color: var(--atmos-ink);
-  background: var(--atmos-paper);
-  border-color: var(--atmos-ink-mute);
-  transform: translateY(-1.5px);
+  color: var(--atmos-badger);
+  background: color-mix(in srgb, var(--atmos-badger) 8%, transparent);
+  border-color: color-mix(in srgb, var(--atmos-badger) 45%, transparent);
+  transform: translateY(-2px);
 }
 
 .atmos-footer-link svg {
@@ -126,76 +115,20 @@
   transform: scale(1.15);
 }
 
-/* NAV LINKS */
-.atmos-footer-nav {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px 24px;
-  padding: 24px 0;
-  border-top: 1px solid var(--atmos-hairline);
-  border-bottom: 1px solid var(--atmos-hairline);
-}
-
-.atmos-footer-nav-link {
-  font-family: var(--atmos-sans);
-  font-size: 13.5px;
-  font-weight: 500;
-  color: var(--atmos-ink-soft);
-  text-decoration: none;
-  padding: 4px 0;
-  transition: color var(--motion-fast) var(--ease-out);
-}
-
-.atmos-footer-nav-link:hover {
-  color: var(--atmos-badger);
-}
-
-/* BOTTOM BAR */
-.atmos-footer-bottom {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
-  padding: 24px 0 36px;
-  font-size: 12.5px;
-  color: var(--atmos-ink-mute);
-}
-
 .atmos-footer-copy {
-  margin: 0;
-}
-
-.atmos-footer-tagline {
-  margin: 0;
+  margin: clamp(28px, 3.5vw, 40px) 0 0;
+  padding-top: clamp(20px, 2.5vw, 28px);
+  border-top: 1px solid var(--atmos-hairline);
+  width: min(420px, 100%);
   font-family: var(--atmos-mono);
   font-size: 11px;
-}
-
-/* RESPONSIVE */
-@media (max-width: 860px) {
-  .atmos-footer-top {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
-    padding: 36px 0 24px;
-  }
-
-  .atmos-footer-links {
-    width: 100%;
-  }
-
-  .atmos-footer-bottom {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
-  }
+  letter-spacing: 0.06em;
+  color: var(--atmos-ink-mute);
 }
 
 /* ── Dark Mode ──────────────────────────────────────────── */
 [data-theme="dark"] .atmos-footer {
-  --atmos-paper-deep: #0e0d0c;
+  --atmos-paper-deep: #0a0a0a;
   --atmos-ink: #f5f2ed;
   --atmos-ink-soft: #c4beb7;
   --atmos-ink-mute: #8c867f;

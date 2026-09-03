@@ -423,11 +423,7 @@
 .project-card:nth-child(3n + 1) { transform-origin: left center; }
 .project-card-visual {
   height: 210px;
-  background:
-    linear-gradient(var(--atmos-hairline-soft) 1px, transparent 1px),
-    linear-gradient(90deg, var(--atmos-hairline-soft) 1px, transparent 1px),
-    var(--atmos-paper);
-  background-size: 32px 32px;
+  background: var(--atmos-paper);
 }
 .project-card-category-badge,
 .project-tech-chip { font-family: var(--atmos-mono); letter-spacing: .04em; }

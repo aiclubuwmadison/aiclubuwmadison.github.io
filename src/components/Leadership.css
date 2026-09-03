@@ -100,32 +100,6 @@
 /* Keep the in-collage bg div inert (no longer draws anything) */
 .lead-collage-bg { display: none; }
 
-@keyframes slow-rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-/* Club logo spiral — right of photos, inside white circle */
-.lead-collage-spiral {
-  position: absolute;
-  bottom: 26%; right: -4%;
-  width: clamp(120px, 15vw, 175px);
-  height: clamp(120px, 15vw, 175px);
-  z-index: 5;
-  background: rgba(255, 255, 255, 0.65);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--atmos-hairline);
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
-}
-.lead-collage-spiral img {
-  width: 72%; height: 72%; object-fit: contain;
-  filter: brightness(0) saturate(100%) invert(9%) sepia(96%) saturate(5500%) hue-rotate(355deg) brightness(88%);
-  animation: slow-rotate 24s linear infinite;
-}
-
 /* Straight staggered 2×2 — no rotation */
 .lead-cc-1 { width: 36%; aspect-ratio: 2/3;   top: 0;    left: 14%;  transform: none; z-index: 2; }
 .lead-cc-2 { width: 30%; aspect-ratio: 2/2.8; top: 0;    right: 20%; transform: none; z-index: 2; }
@@ -440,7 +414,6 @@
   .lead-hero-cta, .atmos-archive-toggle,
   .atmos-archive-toggle::after, .atmos-archive-panel, .atmos-archive-glyph,
   .atmos-archive-node, .atmos-archive-avatars img { transition: none !important; }
-  .lead-collage-spiral img { animation: none; }
 }
 
 /* ── New UI 2: people behind the signal ────────────────── */
@@ -456,7 +429,6 @@
   border: 1px solid color-mix(in srgb, var(--atmos-hairline) 75%, transparent);
   box-shadow: var(--shadow-md);
 }
-.lead-collage-spiral { border-radius: 20px; transform: rotate(4deg); }
 .lead-section-head { border-top: 1px solid var(--atmos-hairline); }
 .lead-section-title {
   font-family: var(--atmos-serif);
@@ -477,10 +449,6 @@
 .lead-team-name { font-family: var(--atmos-serif); letter-spacing: -.02em; }
 .atmos-archive { border-color: var(--atmos-hairline); }
 
-@media (max-width: 860px) {
-  .lead-collage-spiral { transform: none; }
-}
-
 /* ── Dark mode (entire Leadership page) ──────────────────── */
 /* Hero photo collage: fade bottom edge to dark instead of white */
 [data-theme="dark"] .lead-cc::after {
@@ -493,13 +461,6 @@
 }
 
 /* Spiral badge: keep glassmorphism with dark background and render the logo in white */
-[data-theme="dark"] .lead-collage-spiral {
-  background: rgba(13, 17, 23, 0.65);
-  border-color: rgba(255, 255, 255, 0.1);
-}
-[data-theme="dark"] .lead-collage-spiral img {
-  filter: brightness(0) invert(1);
-}
 
 /* Stat row hover */
 [data-theme="dark"] .lead-stat:hover {
@@ -536,4 +497,38 @@
 }
 [data-theme="dark"] .atmos-archive-avatars img {
   border-color: var(--atmos-paper);
+}
+
+/* ── Hero collage entrance ────────────────────────────────
+   Armed from JS so the photos are never hidden without it. */
+.lead-collage.is-armed .lead-cc {
+  opacity: 0;
+}
+
+.lead-collage.is-revealed .lead-cc {
+  animation: leadCollageIn var(--motion-word) var(--ease-mask) both;
+  animation-delay: calc(var(--i, 0) * var(--stagger));
+}
+
+.lead-cc-1 { --i: 0; }
+.lead-cc-2 { --i: 1; }
+.lead-cc-3 { --i: 2; }
+.lead-cc-4 { --i: 3; }
+
+@keyframes leadCollageIn {
+  from {
+    opacity: 0;
+    transform: translateY(26px) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lead-collage .lead-cc {
+    opacity: 1;
+    animation: none;
+  }
 }

@@ -1,6 +1,3 @@
-import { Link } from 'react-router-dom';
-import { NAV_ITEMS } from '../constants/nav';
-import { prefetchRoute } from '../utils/routePrefetch';
 import './Footer.css';
 
 const DISCORD_URL = 'https://discord.gg/TTSykcZAg4';
@@ -39,90 +36,65 @@ const Footer = () => {
   return (
     <footer className="atmos-footer">
       <div className="atmos-footer-shell">
-        <div className="atmos-footer-top">
-          <div className="atmos-footer-brand">
-            <img
-              className="atmos-footer-logo"
-              src="/images/logo.webp"
-              alt=""
-              aria-hidden="true"
-              loading="lazy"
-            />
-            <div className="atmos-footer-brand-text">
-              <p className="atmos-footer-wordmark">
-                AI<span className="atmos-footer-at">@</span>UW
-              </p>
-              <p className="atmos-footer-eyebrow">
-                The Artificial Intelligence Club at UW&ndash;Madison
-              </p>
-            </div>
-          </div>
-
-          <div className="atmos-footer-links">
-            <a
-              className="atmos-footer-link"
-              href={DISCORD_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Discord"
-            >
-              <IconDiscord />
-              Discord
-            </a>
-            <a
-              className="atmos-footer-link"
-              href="https://www.instagram.com/aiclubuw/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-            >
-              <IconInstagram />
-              Instagram
-            </a>
-            <a
-              className="atmos-footer-link"
-              href="https://www.linkedin.com/company/aiclub-uwmadison"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-            >
-              <IconLinkedIn />
-              LinkedIn
-            </a>
-            <a
-              className="atmos-footer-link"
-              href="https://docs.google.com/forms/d/e/1FAIpQLSdpbz1I_cmMtlJIx5LDufsIFybab7qvBPqHW42fXVBLcDGZNQ/viewform?usp=publish-editor"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Suggestions Box"
-            >
-              <IconSuggestions />
-              Suggestions
-            </a>
-          </div>
-        </div>
-        <nav className="atmos-footer-nav" aria-label="Site">
-          {NAV_ITEMS.map(({ to, label }) => (
-            <Link
-              key={to}
-              className="atmos-footer-nav-link"
-              to={to}
-              onMouseEnter={() => prefetchRoute(to)}
-              onFocus={() => prefetchRoute(to)}
-            >
-              {label}
-            </Link>
-          ))}
-        </nav>
-
-        <div className="atmos-footer-bottom">
-          <p className="atmos-footer-copy">
-            © {new Date().getFullYear()} AI@UW • University of Wisconsin–Madison
-          </p>
-          <p className="atmos-footer-tagline">
-            Built with passion by students curious about the future of AI.
+        <div className="atmos-footer-brand">
+          <img
+            className="atmos-footer-logo"
+            src="/images/logo.webp"
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+          />
+          <p className="atmos-footer-wordmark">
+            AI<span className="atmos-footer-at">@</span>UW
           </p>
         </div>
+
+        <p className="atmos-footer-eyebrow">
+          The Artificial Intelligence Club at UW&ndash;Madison
+        </p>
+
+        <div className="atmos-footer-links">
+          <a
+            className="atmos-footer-link"
+            href={DISCORD_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Discord"
+          >
+            <IconDiscord />
+          </a>
+          <a
+            className="atmos-footer-link"
+            href="https://www.instagram.com/aiclubuw/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+          >
+            <IconInstagram />
+          </a>
+          <a
+            className="atmos-footer-link"
+            href="https://www.linkedin.com/company/aiclub-uwmadison"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+          >
+            <IconLinkedIn />
+          </a>
+          <a
+            className="atmos-footer-link"
+            href="https://docs.google.com/forms/d/e/1FAIpQLSdpbz1I_cmMtlJIx5LDufsIFybab7qvBPqHW42fXVBLcDGZNQ/viewform?usp=publish-editor"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Suggestions Box"
+          >
+            <IconSuggestions />
+          </a>
+        </div>
+
+        <p className="atmos-footer-copy">
+          &copy; {new Date().getFullYear()} AI@UW
+        </p>
       </div>
     </footer>
   );
