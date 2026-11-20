@@ -299,7 +299,8 @@ const Involvement = () => {
                 </div>
               )}
 
-              <ul className="atmos-faq-list" key={`${topic}|${term}`}>
+              {/* Keyed on the topic only: switching chips replays the cascade, typing doesn't. */}
+              <ul className="atmos-faq-list" key={topic}>
                 {filtered.map((item, i) => {
                   const isOpen = openFaq === item.q;
                   const btnId = `faq-btn-${i}`;

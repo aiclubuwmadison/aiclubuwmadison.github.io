@@ -113,10 +113,13 @@ button:focus-visible,
   /* Motion system — durations shared by every page (see "MOTION SYSTEM") */
   --motion-rise: 520ms;    /* element settling into place on entrance */
   --motion-word: 760ms;    /* display word lifting out of its mask */
-  --motion-panel: 340ms;   /* accordion / disclosure open + close */
+  --motion-panel: 260ms;   /* accordion / disclosure open */
+  --motion-panel-exit: 200ms; /* accordion / disclosure close — exits beat entrances */
+  --motion-press: 140ms;   /* :active press feedback */
+  --motion-exit: 160ms;    /* popover / menu close */
   --motion-reveal: 640ms;  /* scroll-triggered reveal */
   --stagger: 55ms;         /* delay between neighbours in a cascade */
-  --ease-out: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   /* Long tail — the curve behind the masked heading lift */
   --ease-mask: cubic-bezier(0.22, 1, 0.36, 1);
   /* Slight overshoot — chevrons, toggles, anything that "clicks" into place */
@@ -259,11 +262,21 @@ button:focus-visible,
   cursor: pointer;
   font-family: inherit;
   padding: 0;
-  transition: gap 220ms var(--ease-out), color 220ms ease;
+  transition: color var(--motion-fast) var(--ease-out);
 }
 
-.atmos-page-hero-cta:hover {
-  gap: 10px;
+/* The trailing arrow nudges on hover (transform, not gap — gap is layout). */
+.atmos-page-hero-cta > span,
+.atmos-page-hero-cta .atmos-arrow {
+  display: inline-block;
+  transition: transform var(--motion-base) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .atmos-page-hero-cta:hover > span,
+  .atmos-page-hero-cta:hover .atmos-arrow {
+    transform: translateX(4px);
+  }
 }
 
 /* Hero entrance cascade — eyebrow first, then lede, then CTA.
@@ -286,7 +299,14 @@ button:focus-visible,
   .atmos-page-hero-eyebrow,
   .atmos-page-hero-lede,
   .atmos-page-hero-cta {
-    animation: none !important;
+    animation-name: atmosFade !important;
+  }
+
+  .atmos-page-hero-cta > span,
+  .atmos-page-hero-cta .atmos-arrow,
+  .atmos-page-hero-cta:hover > span,
+  .atmos-page-hero-cta:hover .atmos-arrow {
+    transform: none !important;
   }
 }
 
@@ -488,10 +508,7 @@ body,
 
 @media (prefers-reduced-motion: reduce) {
   .atmos-reveal {
-    animation: none !important;
-    opacity: 1 !important;
-    transform: none !important;
-    filter: none !important;
+    animation-name: atmosFade !important;
   }
 }
 
@@ -522,6 +539,16 @@ body,
   to {
     opacity: 1;
     transform: none;
+  }
+}
+
+/* Reduced-motion stand-in: same timing, opacity only. */
+@keyframes atmosFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
@@ -576,9 +603,11 @@ body,
     background-color var(--motion-base) var(--ease-out);
 }
 
-.atmos-lift:hover {
-  translate: 0 -2px;
-  box-shadow: var(--shadow-md);
+@media (hover: hover) and (pointer: fine) {
+  .atmos-lift:hover {
+    translate: 0 -2px;
+    box-shadow: var(--shadow-md);
+  }
 }
 
 .atmos-lift:active {
@@ -596,11 +625,9 @@ body,
 .sr-hidden {
   opacity: 0;
   transform: translateY(18px);
-  filter: blur(3px);
   transition:
     opacity var(--motion-reveal) var(--ease-out) calc(var(--i, 0) * var(--stagger)),
     transform var(--motion-reveal) var(--ease-out) calc(var(--i, 0) * var(--stagger)),
-    filter var(--motion-reveal) var(--ease-out) calc(var(--i, 0) * var(--stagger)),
     translate var(--motion-base) var(--ease-out),
     box-shadow var(--motion-base) var(--ease-out),
     border-color var(--motion-base) var(--ease-out),
@@ -609,7 +636,6 @@ body,
 .sr-visible {
   opacity: 1 !important;
   transform: translateY(0);
-  filter: blur(0);
 }
 
 /* ── Glow: a soft accent pool that trails the cursor ──────
@@ -632,7 +658,7 @@ body,
     var(--atmos-accent-glow),
     transparent 70%
   );
-  transition: opacity 360ms ease;
+  transition: opacity var(--motion-base) var(--ease-out);
 }
 
 .atmos-glow:hover::after,
@@ -650,24 +676,28 @@ body,
 /* ── Arrow: nudges forward when its container is hovered ──  */
 .atmos-arrow {
   display: inline-block;
-  transition: transform 260ms var(--ease-out);
+  transition: transform var(--motion-base) var(--ease-out);
 }
 
-:where(a, button, .atmos-lift, .atmos-nudge):hover .atmos-arrow {
-  transform: translateX(4px);
+@media (hover: hover) and (pointer: fine) {
+  :where(a, button, .atmos-lift, .atmos-nudge):hover .atmos-arrow {
+    transform: translateX(4px);
+  }
 }
 
 /* ── Icon badge: lifts and warms with its row ─────────────  */
 .atmos-icon-badge {
   transition:
-    transform 320ms var(--ease-out),
-    background-color 320ms var(--ease-out),
-    color 320ms var(--ease-out);
+    transform var(--motion-base) var(--ease-out),
+    background-color var(--motion-base) var(--ease-out),
+    color var(--motion-base) var(--ease-out);
 }
 
-:where(a, button, li, .atmos-lift, .atmos-nudge):hover > .atmos-icon-badge,
-:where(a, button, li, .atmos-lift, .atmos-nudge):hover .atmos-icon-badge {
-  transform: translateY(-2px) scale(1.06);
+@media (hover: hover) and (pointer: fine) {
+  :where(a, button, li, .atmos-lift, .atmos-nudge):hover > .atmos-icon-badge,
+  :where(a, button, li, .atmos-lift, .atmos-nudge):hover .atmos-icon-badge {
+    transform: translateY(-2px) scale(1.06);
+  }
 }
 
 /* ── Chip / pill controls ─────────────────────────────────  */
@@ -680,12 +710,21 @@ body,
     transform var(--motion-base) var(--ease-out);
 }
 
-.atmos-chip:hover {
-  transform: translateY(-1px);
+@media (hover: hover) and (pointer: fine) {
+  .atmos-chip:hover {
+    transform: translateY(-1px);
+  }
 }
 
+/* Press feedback: quick and shallow. */
 .atmos-chip:active {
-  transform: translateY(0);
+  transform: scale(0.97);
+  transition-duration:
+    var(--motion-fast),
+    var(--motion-fast),
+    var(--motion-fast),
+    var(--motion-fast),
+    var(--motion-press);
 }
 
 /* ── Disclosure panel: height animated via grid rows ──────
@@ -696,14 +735,18 @@ body,
   grid-template-rows: 0fr;
   overflow: hidden;
   opacity: 0;
+  /* Closing — exits run faster than entrances */
   transition:
-    grid-template-rows var(--motion-panel) var(--ease-out),
-    opacity var(--motion-fast) ease;
+    grid-template-rows var(--motion-panel-exit) var(--ease-out),
+    opacity var(--motion-panel-exit) var(--ease-out);
 }
 
 .atmos-panel.is-open {
   grid-template-rows: 1fr;
   opacity: 1;
+  transition:
+    grid-template-rows var(--motion-panel) var(--ease-out),
+    opacity var(--motion-fast) var(--ease-out);
 }
 
 .atmos-panel > * {
@@ -711,9 +754,10 @@ body,
 }
 
 @media (prefers-reduced-motion: reduce) {
+  /* Keep the fade, drop the movement */
   .atmos-rise,
   .atmos-word > * {
-    animation: none !important;
+    animation-name: atmosFade !important;
   }
 
   .atmos-lift,
@@ -733,9 +777,10 @@ body,
     transform: none !important;
   }
 
-  .atmos-glow::after,
-  .atmos-panel {
-    transition: none !important;
+  /* Rows snap; the opacity fade stays */
+  .atmos-panel,
+  .atmos-panel.is-open {
+    transition: opacity var(--motion-fast) var(--ease-out) !important;
   }
 }
 
@@ -769,16 +814,24 @@ body,
   white-space: nowrap;
 }
 
-.atmos-btn-primary:hover {
-  background: transparent;
-  color: var(--atmos-badger);
-  box-shadow: var(--shadow-md);
-  transform: translateY(-1px);
+@media (hover: hover) and (pointer: fine) {
+  .atmos-btn-primary:hover {
+    background: transparent;
+    color: var(--atmos-badger);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+  }
 }
 
 .atmos-btn-primary:active {
-  transform: translateY(0) scale(0.98);
+  transform: scale(0.97);
   box-shadow: var(--shadow-sm);
+  transition-duration:
+    var(--motion-fast),
+    var(--motion-fast),
+    var(--motion-fast),
+    var(--motion-fast),
+    var(--motion-press);
 }
 
 /* ── Global link underline animation ─────────────────────
@@ -801,15 +854,11 @@ body,
 
 /* ── Reduce motion: disable all animations ───────────────  */
 @media (prefers-reduced-motion: reduce) {
-  /* Reveal targets show in their final state immediately — resetting only
-     opacity would leave them offset and blurred until they scrolled into view. */
+  /* Reveal targets keep their fade but never move. */
   .sr-hidden {
-    opacity: 1 !important;
     transform: none !important;
-    filter: none !important;
-    transition: none !important;
+    transition: opacity var(--motion-base) var(--ease-out) !important;
   }
-  .atmos-nav-theme-toggle-icon { animation: none !important; }
 
   .atmos-btn-primary,
   .atmos-btn-primary:hover,

@@ -104,15 +104,30 @@
   color: var(--atmos-badger);
   background: color-mix(in srgb, var(--atmos-badger) 8%, transparent);
   border-color: color-mix(in srgb, var(--atmos-badger) 45%, transparent);
-  transform: translateY(-2px);
 }
 
 .atmos-footer-link svg {
   transition: transform 200ms var(--ease-spring);
 }
 
-.atmos-footer-link:hover svg {
-  transform: scale(1.15);
+@media (hover: hover) and (pointer: fine) {
+  .atmos-footer-link:hover {
+    transform: translateY(-2px);
+  }
+
+  .atmos-footer-link:hover svg {
+    transform: scale(1.15);
+  }
+}
+
+/* Press feedback */
+.atmos-footer-link:active {
+  transform: scale(0.97);
+  transition-duration:
+    var(--motion-fast),
+    var(--motion-fast),
+    var(--motion-fast),
+    var(--motion-press);
 }
 
 .atmos-footer-copy {
@@ -141,4 +156,15 @@
 
 [data-theme="dark"] .atmos-footer-link:hover {
   background: rgba(255, 255, 255, 0.08);
+}
+
+/* Reduced motion: colour still crossfades, nothing moves */
+@media (prefers-reduced-motion: reduce) {
+  .atmos-footer-link,
+  .atmos-footer-link:hover,
+  .atmos-footer-link:active,
+  .atmos-footer-link svg,
+  .atmos-footer-link:hover svg {
+    transform: none !important;
+  }
 }

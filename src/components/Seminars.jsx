@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useMemo } from 'react';
+import { useState, useEffect, useLayoutEffect, useRef, useMemo } from 'react';
 import { Mic, Wrench } from 'lucide-react';
 import './Seminars.css';
 import RisingHeading from './RisingHeading';
@@ -147,6 +147,8 @@ const SeminarCard = ({ item }) => {
   const [expanded, setExpanded] = useState(false);
   const [calOpen, setCalOpen] = useState(false);
   const calRef = useRef(null);
+  const calBtnRef = useRef(null);
+  const calMenuRef = useRef(null);
   const { month, year } = splitDate(item.displayDate);
   const isWorkshop = item.type === 'workshop';
 
@@ -157,8 +159,32 @@ const SeminarCard = ({ item }) => {
         setCalOpen(false);
       }
     };
+    const onKey = (e) => {
+      if (e.key === 'Escape') {
+        setCalOpen(false);
+        calBtnRef.current?.focus();
+      }
+    };
     document.addEventListener('click', handler);
-    return () => document.removeEventListener('click', handler);
+    document.addEventListener('keydown', onKey);
+    return () => {
+      document.removeEventListener('click', handler);
+      document.removeEventListener('keydown', onKey);
+    };
+  }, [calOpen]);
+
+  // Grow the menu out of its trigger: point transform-origin at the centre of
+  // the button's top edge. offset* ignore transforms, so the closed menu's
+  // scale doesn't skew the measurement. Both share .atmos-sem-cal-wrapper as
+  // offsetParent; the menu sits 6px above the button.
+  useLayoutEffect(() => {
+    if (!calOpen) return;
+    const btn = calBtnRef.current;
+    const menu = calMenuRef.current;
+    if (!btn || !menu) return;
+    const x = btn.offsetLeft + btn.offsetWidth / 2 - menu.offsetLeft;
+    const y = menu.offsetHeight + 6;
+    menu.style.setProperty('--cal-origin', `${x}px ${y}px`);
   }, [calOpen]);
 
   return (
@@ -188,6 +214,7 @@ const SeminarCard = ({ item }) => {
 
         <div className="atmos-sem-cal-wrapper" ref={calRef}>
           <button 
+            ref={calBtnRef}
             type="button"
             className="atmos-sem-cal-btn" 
             onClick={() => setCalOpen((v) => !v)}
@@ -197,29 +224,34 @@ const SeminarCard = ({ item }) => {
             <IconCalendar /> Add to Calendar
           </button>
           
-          {calOpen && (
-            <div className="atmos-sem-cal-dropdown" role="menu">
-              <a 
-                href={makeGoogleCalendarUrl(item)} 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                role="menuitem"
-                onClick={() => setCalOpen(false)}
-              >
-                <IconExternalLink /> Google Calendar
-              </a>
-              <button 
-                type="button"
-                role="menuitem"
-                onClick={() => {
-                  handleIcsDownload(item);
-                  setCalOpen(false);
-                }}
-              >
-                <IconDownload /> Apple / Outlook (.ics)
-              </button>
-            </div>
-          )}
+          {/* Always mounted so it can transition out; inert keeps focus off it while closed. */}
+          <div
+            ref={calMenuRef}
+            className={`atmos-sem-cal-dropdown${calOpen ? ' is-open' : ''}`}
+            role="menu"
+            inert={!calOpen}
+            aria-hidden={!calOpen}
+          >
+            <a 
+              href={makeGoogleCalendarUrl(item)} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              role="menuitem"
+              onClick={() => setCalOpen(false)}
+            >
+              <IconExternalLink /> Google Calendar
+            </a>
+            <button 
+              type="button"
+              role="menuitem"
+              onClick={() => {
+                handleIcsDownload(item);
+                setCalOpen(false);
+              }}
+            >
+              <IconDownload /> Apple / Outlook (.ics)
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -238,6 +270,8 @@ const Seminars = () => {
   const [autocompleteOpen, setAutocompleteOpen] = useState(false);
   const [topicsExpanded, setTopicsExpanded] = useState(false);
   const searchWrapRef = useRef(null);
+  const searchInputRef = useRef(null);
+  const autocompleteRef = useRef(null);
 
   const allTopics = useMemo(() => {
     const set = new Set();
@@ -260,6 +294,30 @@ const Seminars = () => {
       item.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
   }, [searchQuery]);
+
+  // The list stays mounted so it can fade out. Keep showing the last non-empty
+  // matches while it closes, so the exit isn't an empty box.
+  const [shownMatches, setShownMatches] = useState(autocompleteMatches);
+  if (autocompleteMatches.length > 0 && autocompleteMatches !== shownMatches) {
+    setShownMatches(autocompleteMatches);
+  }
+  const autocompleteVisible = autocompleteOpen && autocompleteMatches.length > 0;
+
+  // Grow the list down out of the search field: origin at the input's centre,
+  // 6px above the list's top edge. Re-measured on resize (≤760px it goes full width).
+  useLayoutEffect(() => {
+    if (!autocompleteVisible) return;
+    const measure = () => {
+      const input = searchInputRef.current;
+      const list = autocompleteRef.current;
+      if (!input || !list) return;
+      const x = input.offsetLeft + input.offsetWidth / 2 - list.offsetLeft;
+      list.style.setProperty('--ac-origin', `${x}px -6px`);
+    };
+    measure();
+    window.addEventListener('resize', measure);
+    return () => window.removeEventListener('resize', measure);
+  }, [autocompleteVisible]);
 
   useEffect(() => {
     const handler = (e) => {
@@ -374,6 +432,7 @@ const Seminars = () => {
               </select>
               <div className="atmos-sem-search-wrap" ref={searchWrapRef}>
                 <input
+                  ref={searchInputRef}
                   className="atmos-sem-search"
                   placeholder="Search talks..."
                   value={searchQuery}
@@ -384,9 +443,15 @@ const Seminars = () => {
                   onFocus={() => setAutocompleteOpen(true)}
                 />
                 <span className="atmos-sem-search-icon"><IconSearch /></span>
-                {autocompleteOpen && autocompleteMatches.length > 0 && (
-                  <div className="atmos-sem-autocomplete-dropdown" role="listbox">
-                    {autocompleteMatches.map((item) => (
+                {shownMatches.length > 0 && (
+                  <div
+                    ref={autocompleteRef}
+                    className={`atmos-sem-autocomplete-dropdown${autocompleteVisible ? ' is-open' : ''}`}
+                    role="listbox"
+                    inert={!autocompleteVisible}
+                    aria-hidden={!autocompleteVisible}
+                  >
+                    {shownMatches.map((item) => (
                       <button
                         key={`${item.title}-${item.date}`}
                         type="button"

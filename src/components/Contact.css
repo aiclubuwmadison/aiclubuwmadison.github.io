@@ -239,7 +239,8 @@
   cursor: not-allowed;
 }
 
-.atmos-contact .contact-form-submit-btn:active:not(:disabled) {
+/* Enabled presses get .atmos-btn-primary's scale(0.97); disabled ones don't. */
+.atmos-contact .contact-form-submit-btn:disabled:active {
   transform: none;
 }
 
@@ -295,12 +296,21 @@
   border-radius: 8px;
   padding: 8px 16px;
   cursor: pointer;
-  transition: all 180ms ease;
+  transition:
+    background-color var(--motion-fast) var(--ease-out),
+    border-color var(--motion-fast) var(--ease-out),
+    transform var(--motion-press) var(--ease-out);
 }
 
-.atmos-contact .contact-success-back-btn:hover {
-  background: var(--atmos-paper-tint);
-  border-color: var(--atmos-ink-soft);
+@media (hover: hover) and (pointer: fine) {
+  .atmos-contact .contact-success-back-btn:hover {
+    background: var(--atmos-paper-tint);
+    border-color: var(--atmos-ink-soft);
+  }
+}
+
+.atmos-contact .contact-success-back-btn:active {
+  transform: scale(0.97);
 }
 
 /* RESPONSIVE ----------------------------------------------- */
@@ -339,6 +349,10 @@
 @media (prefers-reduced-motion: reduce) {
   .atmos-contact .atmos-channel-arr {
     transition: none;
+  }
+
+  .atmos-contact .contact-success-back-btn:active {
+    transform: none;
   }
 }
 

@@ -189,6 +189,13 @@
   cursor: not-allowed;
 }
 
+/* No chip lift or press while it's refreshing. */
+.res-refresh-btn:disabled,
+.res-refresh-btn:disabled:hover,
+.res-refresh-btn:disabled:active {
+  transform: none;
+}
+
 .res-refreshing {
   animation: spin 1s linear infinite;
 }
@@ -296,11 +303,15 @@
   align-items: center;
   gap: 6px;
   transform: translateY(100%);
-  transition: transform var(--motion-base) var(--ease-out);
+  transition:
+    transform var(--motion-base) var(--ease-out),
+    opacity var(--motion-base) var(--ease-out);
 }
 
-.res-news-card:hover .res-news-hover-hint {
-  transform: translateY(0);
+@media (hover: hover) and (pointer: fine) {
+  .res-news-card:hover .res-news-hover-hint {
+    transform: translateY(0);
+  }
 }
 
 .res-news-empty {
@@ -325,11 +336,22 @@
   border: none;
   border-radius: 999px;
   cursor: pointer;
-  transition: transform 200ms ease;
+  transition: transform var(--motion-fast) var(--ease-out);
 }
 
-.res-reset-search-btn:hover {
-  transform: scale(1.02);
+.res-reset-search-btn:active {
+  transform: scale(0.97);
+  transition-duration: var(--motion-press);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .res-reset-search-btn:hover {
+    transform: scale(1.02);
+  }
+
+  .res-reset-search-btn:hover:active {
+    transform: scale(0.97);
+  }
 }
 
 /* SKELETON ANIMATION -------------------------------------- */
@@ -462,6 +484,23 @@
   .res-skeleton-title::after,
   .res-skeleton-row::after {
     animation: none !important;
+  }
+
+  /* Hover hint fades in place instead of sliding up. */
+  .res-news-hover-hint {
+    transform: none !important;
+    opacity: 0;
+  }
+
+  .res-news-card:hover .res-news-hover-hint {
+    opacity: 1;
+  }
+
+  .res-reset-search-btn,
+  .res-reset-search-btn:hover,
+  .res-reset-search-btn:active {
+    transform: none !important;
+    transition: none;
   }
 }
 

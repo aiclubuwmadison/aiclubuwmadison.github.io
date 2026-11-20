@@ -119,11 +119,13 @@
   width: 100%;
   height: 100%;
   display: block;
-  transition: transform 380ms var(--ease-out);
+  transition: transform var(--motion-base) var(--ease-out);
 }
 
-.project-card:hover .project-card-visual-svg {
-  transform: scale(1.05);
+@media (hover: hover) and (pointer: fine) {
+  .project-card:hover .project-card-visual-svg {
+    transform: scale(1.05);
+  }
 }
 
 /* Background Gradients for Visual Header */

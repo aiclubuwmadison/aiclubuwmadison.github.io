@@ -77,11 +77,25 @@
   color: var(--atmos-badger);
   text-decoration: none;
   width: fit-content;
-  transition: gap 220ms ease;
 }
 
-.atmos-seminars .atmos-sem-hero-cta:hover {
-  gap: 10px;
+/* The arrow nudges instead of the gap growing (gap would re-layout). */
+.atmos-seminars .atmos-sem-hero-cta > svg,
+.atmos-seminars .atmos-sem-view-all > svg,
+.atmos-seminars .atmos-sem-view-link > svg {
+  transition: transform var(--motion-base) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .atmos-seminars .atmos-sem-hero-cta:hover > svg {
+    transform: translateX(4px);
+  }
+  .atmos-seminars .atmos-sem-view-all:hover > svg {
+    transform: translateX(3px);
+  }
+  .atmos-seminars .atmos-sem-view-link:hover > svg {
+    transform: translateX(3px);
+  }
 }
 
 
@@ -239,11 +253,19 @@
   cursor: pointer;
   font-family: var(--atmos-sans);
   text-align: left;
-  transition: background 160ms ease;
+  transition:
+    background-color 160ms ease,
+    transform var(--motion-press) var(--ease-out);
 }
 
-.atmos-seminars .atmos-sem-topics-toggle:hover {
-  background: rgba(15, 23, 42, 0.03);
+@media (hover: hover) and (pointer: fine) {
+  .atmos-seminars .atmos-sem-topics-toggle:hover {
+    background: rgba(15, 23, 42, 0.03);
+  }
+}
+
+.atmos-seminars .atmos-sem-topics-toggle:active {
+  transform: scale(0.97);
 }
 
 .atmos-seminars .atmos-sem-topics-toggle-label {
@@ -276,7 +298,7 @@
   border-right: 1.5px solid var(--atmos-ink-soft);
   border-bottom: 1.5px solid var(--atmos-ink-soft);
   transform: rotate(45deg) translateY(-2px);
-  transition: transform var(--motion-panel) var(--ease-spring);
+  transition: transform 250ms var(--ease-spring);
 }
 
 .atmos-seminars .atmos-sem-topics--open .atmos-sem-topics-chevron {
@@ -366,11 +388,11 @@
   cursor: pointer;
   font-family: inherit;
   padding: 0;
-  transition: gap 180ms ease;
+  transition: transform var(--motion-press) var(--ease-out);
 }
 
-.atmos-seminars .atmos-sem-view-all:hover {
-  gap: 9px;
+.atmos-seminars .atmos-sem-view-all:active {
+  transform: scale(0.97);
 }
 
 /* ── CARD GRID ───────────────────────────────────────────── */
@@ -516,12 +538,12 @@
   border: none;
   padding: 0;
   cursor: pointer;
-  transition: gap 180ms ease;
+  transition: transform var(--motion-press) var(--ease-out);
   font-family: inherit;
 }
 
-.atmos-seminars .atmos-sem-view-link:hover {
-  gap: 8px;
+.atmos-seminars .atmos-sem-view-link:active {
+  transform: scale(0.97);
 }
 
 /* Coming soon panels (match Resources Skills/MCP + Projects) */
@@ -709,13 +731,23 @@
   padding: 6px 12px;
   cursor: pointer;
   font-family: inherit;
-  transition: border-color 180ms ease, color 180ms ease, background-color 180ms ease;
+  transition:
+    border-color 180ms ease,
+    color 180ms ease,
+    background-color 180ms ease,
+    transform var(--motion-press) var(--ease-out);
 }
 
-.atmos-seminars .atmos-sem-cal-btn:hover {
-  color: var(--atmos-ink);
-  border-color: var(--atmos-ink-soft);
-  background-color: var(--atmos-paper-tint);
+@media (hover: hover) and (pointer: fine) {
+  .atmos-seminars .atmos-sem-cal-btn:hover {
+    color: var(--atmos-ink);
+    border-color: var(--atmos-ink-soft);
+    background-color: var(--atmos-paper-tint);
+  }
+}
+
+.atmos-seminars .atmos-sem-cal-btn:active {
+  transform: scale(0.97);
 }
 
 .atmos-seminars .atmos-sem-cal-dropdown {
@@ -734,12 +766,28 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
-  animation: dropdownFadeIn var(--motion-fast) var(--ease-out) both;
+  /* Grows from the trigger; Seminars.jsx measures --cal-origin on open. */
+  transform-origin: var(--cal-origin, right bottom);
+  opacity: 0;
+  transform: translateY(4px) scale(0.97);
+  visibility: hidden;
+  pointer-events: none;
+  /* Exit: faster than the entrance; visibility flips after the fade. */
+  transition:
+    opacity var(--motion-exit) var(--ease-out),
+    transform var(--motion-exit) var(--ease-out),
+    visibility 0s linear var(--motion-exit);
 }
 
-@keyframes dropdownFadeIn {
-  from { opacity: 0; transform: translateY(4px); }
-  to   { opacity: 1; transform: translateY(0); }
+.atmos-seminars .atmos-sem-cal-dropdown.is-open {
+  opacity: 1;
+  transform: none;
+  visibility: visible;
+  pointer-events: auto;
+  transition:
+    opacity 180ms var(--ease-out),
+    transform 180ms var(--ease-out),
+    visibility 0s;
 }
 
 .atmos-seminars .atmos-sem-cal-dropdown a,
@@ -769,8 +817,10 @@
 }
 
 /* Dark mode overrides for calendar dropdown */
-[data-theme="dark"] .atmos-seminars .atmos-sem-cal-btn:hover {
-  background-color: rgba(255, 255, 255, 0.05);
+@media (hover: hover) and (pointer: fine) {
+  [data-theme="dark"] .atmos-seminars .atmos-sem-cal-btn:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
 }
 
 [data-theme="dark"] .atmos-seminars .atmos-sem-cal-dropdown {
@@ -795,8 +845,10 @@
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
 }
 
-[data-theme="dark"] .atmos-seminars .atmos-sem-topics-toggle:hover {
-  background: rgba(255, 255, 255, 0.04);
+@media (hover: hover) and (pointer: fine) {
+  [data-theme="dark"] .atmos-seminars .atmos-sem-topics-toggle:hover {
+    background: rgba(255, 255, 255, 0.04);
+  }
 }
 
 [data-theme="dark"] .atmos-seminars .atmos-sem-cloud-tag {
@@ -828,7 +880,38 @@
   flex-direction: column;
   gap: 2px;
   box-sizing: border-box;
-  animation: dropdownFadeIn var(--motion-fast) var(--ease-out) both;
+  /* Grows down from the search field; Seminars.jsx measures --ac-origin. */
+  transform-origin: var(--ac-origin, right top);
+  opacity: 0;
+  transform: translateY(-4px) scale(0.97);
+  visibility: hidden;
+  pointer-events: none;
+  /* Snappier than the calendar menu: it opens while typing. 100ms exit. */
+  transition:
+    opacity 100ms var(--ease-out),
+    transform 100ms var(--ease-out),
+    visibility 0s linear 100ms;
+}
+
+.atmos-seminars .atmos-sem-autocomplete-dropdown.is-open {
+  opacity: 1;
+  transform: none;
+  visibility: visible;
+  pointer-events: auto;
+  /* 150ms enter. */
+  transition:
+    opacity 150ms var(--ease-out),
+    transform 150ms var(--ease-out),
+    visibility 0s;
+}
+
+/* The first keystroke can mount the list already open; start it from the
+   closed pose so that first appearance animates too. */
+@starting-style {
+  .atmos-seminars .atmos-sem-autocomplete-dropdown.is-open {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.97);
+  }
 }
 
 @media (max-width: 760px) {
@@ -918,9 +1001,46 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .atmos-seminars .atmos-sem-hero-cta,
-  .atmos-seminars .atmos-sem-view-all {
-    transition: color 200ms ease !important;
+  /* No arrow nudge, no press scale. */
+  .atmos-seminars .atmos-sem-hero-cta > svg,
+  .atmos-seminars .atmos-sem-view-all > svg,
+  .atmos-seminars .atmos-sem-view-link > svg {
+    transition: none;
+    transform: none !important;
+  }
+  .atmos-seminars .atmos-sem-view-all,
+  .atmos-seminars .atmos-sem-view-link {
+    transition: none;
+  }
+  .atmos-seminars .atmos-sem-view-all:active,
+  .atmos-seminars .atmos-sem-view-link:active,
+  .atmos-seminars .atmos-sem-cal-btn:active,
+  .atmos-seminars .atmos-sem-topics-toggle:active {
+    transform: none;
+  }
+  .atmos-seminars .atmos-sem-cal-btn {
+    transition: border-color 180ms ease, color 180ms ease, background-color 180ms ease;
+  }
+  .atmos-seminars .atmos-sem-topics-toggle {
+    transition: background-color 160ms ease;
+  }
+
+  /* Chevron snaps between states. */
+  .atmos-seminars .atmos-sem-topics-chevron {
+    transition: none;
+  }
+
+  /* Dropdowns: opacity fade only, no scale or slide. */
+  .atmos-seminars .atmos-sem-cal-dropdown,
+  .atmos-seminars .atmos-sem-cal-dropdown.is-open,
+  .atmos-seminars .atmos-sem-autocomplete-dropdown,
+  .atmos-seminars .atmos-sem-autocomplete-dropdown.is-open {
+    transform: none;
+  }
+  @starting-style {
+    .atmos-seminars .atmos-sem-autocomplete-dropdown.is-open {
+      transform: none;
+    }
   }
 }
 
