@@ -123,8 +123,10 @@
   object-fit: contain;
 }
 
-.atmos-nav-brand:hover .atmos-nav-brand-mark {
-  transform: rotate(8deg) scale(1.06);
+@media (hover: hover) and (pointer: fine) {
+  .atmos-nav-brand:hover .atmos-nav-brand-mark {
+    transform: rotate(8deg) scale(1.06);
+  }
 }
 
 .atmos-nav-wordmark {
@@ -228,7 +230,7 @@
 }
 
 .atmos-nav-link-active .atmos-nav-signal {
-  animation: signalResolve 320ms var(--ease-mask) both;
+  animation: signalResolve 240ms var(--ease-mask) both;
 }
 
 /* ── Actions ────────────────────────────────────────────── */
@@ -269,12 +271,20 @@
 .atmos-nav-mobile-cta:hover {
   background: #a8040a;
   box-shadow: var(--shadow-md);
-  transform: translateY(-1px);
 }
 
+@media (hover: hover) and (pointer: fine) {
+  .atmos-nav-cta:hover,
+  .atmos-nav-mobile-cta:hover {
+    transform: translateY(-1px);
+  }
+}
+
+/* Press feedback */
 .atmos-nav-cta:active,
 .atmos-nav-mobile-cta:active {
-  transform: translateY(0) scale(0.98);
+  transform: scale(0.97);
+  transition-duration: var(--motion-fast), var(--motion-fast), var(--motion-press);
 }
 
 .atmos-nav-cta-arrow {
@@ -309,26 +319,38 @@
 .atmos-nav-mobile-close:hover {
   border-color: var(--atmos-ink-mute);
   background: var(--atmos-paper);
-  transform: rotate(-8deg);
 }
 
+@media (hover: hover) and (pointer: fine) {
+  .atmos-nav-theme-toggle:hover,
+  .atmos-nav-mobile-close:hover {
+    transform: rotate(-8deg);
+  }
+}
+
+/* Press feedback (the hover tilt gives way to a straight press) */
+.atmos-nav-theme-toggle:active,
+.atmos-nav-mobile-close:active {
+  transform: scale(0.97);
+  transition-duration:
+    var(--motion-fast),
+    var(--motion-fast),
+    var(--motion-fast),
+    var(--motion-press);
+}
+
+/* The icon is re-keyed on every toggle, so @starting-style plays each swap. */
 .atmos-nav-theme-toggle-icon {
   display: inline-flex;
-  animation: atmosThemeIconIn 480ms var(--ease-spring) forwards;
+  transition:
+    opacity 240ms var(--ease-out),
+    transform 240ms var(--ease-out);
 }
 
-@keyframes atmosThemeIconIn {
-  0% {
+@starting-style {
+  .atmos-nav-theme-toggle-icon {
     opacity: 0;
-    transform: scale(0) rotate(-90deg);
-  }
-  55% {
-    opacity: 1;
-    transform: scale(1.15) rotate(8deg);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) rotate(0);
+    transform: scale(0.9) rotate(-45deg);
   }
 }
 
@@ -345,6 +367,11 @@
   background: var(--atmos-glass-control);
   color: var(--atmos-ink);
   cursor: pointer;
+  transition: transform var(--motion-press) var(--ease-out);
+}
+
+.atmos-nav-burger:active {
+  transform: scale(0.97);
 }
 
 .atmos-nav-burger-bar {
@@ -410,12 +437,15 @@
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transform: translateY(-8px) scale(0.985);
-  transform-origin: top right;
+  transform: translateY(-8px) scale(0.97);
+  /* Grows from the burger — Nav.jsx measures the burger's centre into
+     --nav-panel-origin. Fallback: the corner nearest the burger. */
+  transform-origin: var(--nav-panel-origin, top right);
+  /* Closing: quicker than opening */
   transition:
-    opacity 220ms var(--ease-out),
-    transform 220ms var(--ease-out),
-    visibility 0s linear 220ms;
+    opacity var(--motion-exit) var(--ease-out),
+    transform var(--motion-exit) var(--ease-out),
+    visibility 0s linear var(--motion-exit);
 }
 
 .atmos-nav-mobile-panel.atmos-nav-mobile-open {
@@ -423,7 +453,10 @@
   visibility: visible;
   pointer-events: auto;
   transform: translateY(0) scale(1);
-  transition-delay: 0s;
+  transition:
+    opacity 220ms var(--ease-out),
+    transform 220ms var(--ease-out),
+    visibility 0s;
 }
 
 .atmos-nav-mobile-heading {
@@ -441,8 +474,14 @@
   text-transform: uppercase;
 }
 
-.atmos-nav-mobile-close:hover {
-  transform: rotate(8deg);
+@media (hover: hover) and (pointer: fine) {
+  .atmos-nav-mobile-close:hover {
+    transform: rotate(8deg);
+  }
+}
+
+.atmos-nav-mobile-close:active {
+  transform: scale(0.97);
 }
 
 .atmos-nav-mobile-links {
@@ -470,8 +509,7 @@
   text-decoration: none;
   transition:
     color var(--motion-fast) var(--ease-out),
-    background-color var(--motion-fast) var(--ease-out),
-    padding var(--motion-fast) var(--ease-out);
+    background-color var(--motion-fast) var(--ease-out);
 }
 
 .atmos-nav-mobile-link::before {
@@ -495,15 +533,28 @@
   transition: transform var(--motion-fast) var(--ease-out), opacity var(--motion-fast) ease;
 }
 
+.atmos-nav-mobile-link > span:first-child {
+  transition: transform var(--motion-fast) var(--ease-out);
+}
+
 .atmos-nav-mobile-link:hover {
   color: var(--atmos-ink);
   background: var(--atmos-paper-tint);
-  padding-left: 18px;
 }
 
 .atmos-nav-mobile-link:hover > span:last-child {
   opacity: 0.8;
-  transform: translate(2px, -2px);
+}
+
+/* The label's 4px hover indent (was a padding change) moves on transform. */
+@media (hover: hover) and (pointer: fine) {
+  .atmos-nav-mobile-link:not(.atmos-nav-link-active):hover > span:first-child {
+    transform: translateX(4px);
+  }
+
+  .atmos-nav-mobile-link:hover > span:last-child {
+    transform: translate(2px, -2px);
+  }
 }
 
 .atmos-nav-mobile-link.atmos-nav-link-active {
@@ -540,6 +591,11 @@
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
+  transition: transform var(--motion-press) var(--ease-out);
+}
+
+.atmos-nav-mobile-theme-toggle:active {
+  transform: scale(0.97);
 }
 
 .atmos-nav-mobile-cta {
@@ -632,7 +688,6 @@
     padding: 16px;
     padding-bottom: max(16px, env(safe-area-inset-bottom));
     border-radius: 20px;
-    transform-origin: top center;
   }
 }
 
@@ -702,9 +757,19 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .atmos-nav-inner,
+  /* Keep the fade, drop the movement */
+  .atmos-nav-inner {
+    animation-name: atmosFade !important;
+  }
+
   .atmos-nav-theme-toggle-icon {
-    animation: none !important;
+    transform: none !important;
+  }
+
+  .atmos-nav-mobile-panel,
+  .atmos-nav-mobile-panel.atmos-nav-mobile-open {
+    transform: none !important;
+    transition: opacity var(--motion-fast) var(--ease-out) !important;
   }
 
   .atmos-nav-link-active .atmos-nav-signal {
@@ -718,9 +783,11 @@
   .atmos-nav-mobile-close,
   .atmos-nav-cta,
   .atmos-nav-mobile-cta,
+  .atmos-nav-burger,
   .atmos-nav-burger-bar,
-  .atmos-nav-mobile-panel,
+  .atmos-nav-mobile-theme-toggle,
   .atmos-nav-mobile-link,
+  .atmos-nav-mobile-link > span:first-child,
   .atmos-nav-mobile-link > span:last-child {
     transition: none !important;
     transform: none !important;

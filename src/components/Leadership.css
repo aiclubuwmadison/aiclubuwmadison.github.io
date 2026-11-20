@@ -49,7 +49,7 @@
   max-width: 38ch;
 }
 
-.lead-hero-cta:hover { gap: 10px; }
+/* Arrow nudge on hover comes from .atmos-page-hero-cta (App.css). */
 
 /* Photo collage */
 .lead-hero-right {
@@ -84,9 +84,11 @@
   object-fit: cover; object-position: center 20%;
   display: block;
   filter: grayscale(100%) contrast(1.05);
-  transition: filter 400ms ease;
+  transition: filter var(--motion-base) var(--ease-out);
 }
-.lead-cc:hover img { filter: grayscale(0%) contrast(1); }
+@media (hover: hover) and (pointer: fine) {
+  .lead-cc:hover img { filter: grayscale(0%) contrast(1); }
+}
 
 /* Wave canvas — covers the full hero-right column */
 .lead-wave-canvas {
@@ -202,9 +204,11 @@
 }
 .lead-team-photo img {
   width: 100%; height: 100%; object-fit: cover; display: block;
-  transition: transform 400ms ease;
+  transition: transform var(--motion-base) var(--ease-out);
 }
-.lead-team-card:hover .lead-team-photo img { transform: scale(1.04); }
+@media (hover: hover) and (pointer: fine) {
+  .lead-team-card:hover .lead-team-photo img { transform: scale(1.04); }
+}
 
 .lead-team-card > .lead-card-role {
   margin: 16px 16px 0;
@@ -238,16 +242,26 @@
     color var(--motion-fast) ease,
     transform var(--motion-base) var(--ease-out);
 }
-.lead-social-btn:hover {
-  background: var(--atmos-badger); color: #fff;
-  transform: translateY(-2px) scale(1.06);
+.lead-social-btn:active {
+  transform: scale(0.97);
+  transition:
+    background var(--motion-fast) ease,
+    color var(--motion-fast) ease,
+    transform var(--motion-press) var(--ease-out);
 }
 .lead-featured-card .lead-social-btn {
   background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.85);
   border: none;
 }
-.lead-featured-card .lead-social-btn:hover {
-  background: rgba(255,255,255,0.9); color: var(--atmos-badger);
+@media (hover: hover) and (pointer: fine) {
+  .lead-social-btn:hover {
+    background: var(--atmos-badger); color: #fff;
+    transform: translateY(-2px) scale(1.06);
+  }
+  .lead-social-btn:hover:active { transform: translateY(-2px) scale(1.03); }
+  .lead-featured-card .lead-social-btn:hover {
+    background: rgba(255,255,255,0.9); color: var(--atmos-badger);
+  }
 }
 
 /* ── ARCHIVE ─────────────────────────────────────────────── */
@@ -305,10 +319,15 @@
 .atmos-archive-node i:nth-child(3) { top: 12px; left: 12px; width: 5px; height: 5px; opacity: 1; }
 .atmos-archive-node i:nth-child(4) { bottom: 6px; left: 13px; }
 .atmos-archive-node i:nth-child(5) { top: 13px; left: 6px; }
-.atmos-archive-toggle:hover .atmos-archive-node,
 .atmos-archive.is-open .atmos-archive-node {
   border-color: color-mix(in srgb, var(--atmos-badger) 42%, var(--atmos-hairline));
   transform: scale(1.08);
+}
+@media (hover: hover) and (pointer: fine) {
+  .atmos-archive-toggle:hover .atmos-archive-node {
+    border-color: color-mix(in srgb, var(--atmos-badger) 42%, var(--atmos-hairline));
+    transform: scale(1.08);
+  }
 }
 
 .atmos-archive-label {
@@ -350,16 +369,24 @@
   width: 36px; height: 36px; display: grid; place-items: center;
   border: 1px solid var(--atmos-hairline); border-radius: 50%;
   background: var(--atmos-paper); color: var(--atmos-badger);
-  transition: transform var(--motion-panel) var(--ease-spring), border-color 220ms ease;
+  transition: transform 250ms var(--ease-spring), border-color 220ms ease;
 }
 .atmos-archive-glyph svg { width: 18px; height: 18px; }
 .atmos-archive.is-open .atmos-archive-glyph { transform: rotate(180deg); border-color: var(--atmos-badger); }
 
 .atmos-archive-panel {
   display: grid; grid-template-rows: 0fr; overflow: hidden; opacity: 0;
-  transition: grid-template-rows var(--motion-panel) var(--ease-out), opacity var(--motion-fast) ease;
+  /* Closing: faster than opening. */
+  transition:
+    grid-template-rows var(--motion-panel-exit) var(--ease-out),
+    opacity var(--motion-panel-exit) var(--ease-out);
 }
-.atmos-archive-panel.is-open { grid-template-rows: 1fr; opacity: 1; }
+.atmos-archive-panel.is-open {
+  grid-template-rows: 1fr; opacity: 1;
+  transition:
+    grid-template-rows var(--motion-panel) var(--ease-out),
+    opacity var(--motion-panel) var(--ease-out);
+}
 .atmos-archive-panel > div {
   min-height: 0; margin: 0 0 24px 64px;
   border: 1px solid var(--atmos-hairline); border-radius: 16px;
@@ -408,12 +435,22 @@
   .lead-team-grid { grid-template-columns: 1fr; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .lead-social-btn:hover { transform: none !important; }
+  .lead-social-btn:hover,
+  .lead-social-btn:active,
+  .lead-social-btn:hover:active,
+  .lead-team-card:hover .lead-team-photo img { transform: none !important; }
 
   .lead-social-btn,
   .lead-hero-cta, .atmos-archive-toggle,
-  .atmos-archive-toggle::after, .atmos-archive-panel, .atmos-archive-glyph,
-  .atmos-archive-node, .atmos-archive-avatars img { transition: none !important; }
+  .atmos-archive-toggle::after, .atmos-archive-glyph,
+  .atmos-archive-node, .atmos-archive-avatars img,
+  .lead-team-photo img { transition: none !important; }
+
+  /* Archive panel: snaps open/closed in height, keeps the opacity fade. */
+  .atmos-archive-panel,
+  .atmos-archive-panel.is-open {
+    transition: opacity var(--motion-fast) ease !important;
+  }
 }
 
 /* ── New UI 2: people behind the signal ────────────────── */
@@ -526,9 +563,9 @@
   }
 }
 
+/* Reduced motion: the photos fade in place, no rise or scale. */
 @media (prefers-reduced-motion: reduce) {
-  .lead-collage .lead-cc {
-    opacity: 1;
-    animation: none;
+  .lead-collage.is-revealed .lead-cc {
+    animation-name: atmosFade;
   }
 }

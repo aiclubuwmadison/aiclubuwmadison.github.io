@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import './Leadership.css';
 import RisingHeading from './RisingHeading';
-import { useScrollReveal, usePointerGlow, prefersReducedMotion } from '../utils/motion';
+import { useScrollReveal, usePointerGlow } from '../utils/motion';
 
 const PORTRAIT_PLACEHOLDER = '/images/portraits/_placeholder.svg';
 
@@ -281,32 +281,13 @@ const Leadership = () => {
   );
   useScrollReveal('.lead-section-head', { groupSize: 2 });
 
-  // The hero collage replays its entrance every time it comes back into view:
-  // on load, on arriving from another route, and on scrolling back up to it.
+  // The hero collage plays its entrance once per visit to the page. Armed from
+  // JS so the photos are never hidden without it; reduced motion gets an
+  // opacity-only fade from CSS.
   useEffect(() => {
     const collage = document.querySelector('.lead-collage');
-    if (!collage || prefersReducedMotion()) return undefined;
-
-    // Revealed up front so the photos are visible even if the observer never
-    // reports (background tab, no layout yet); it only re-arms once we have
-    // actually seen the collage leave the viewport.
+    if (!collage) return;
     collage.classList.add('is-armed', 'is-revealed');
-
-    let seen = false;
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          seen = true;
-          collage.classList.add('is-revealed');
-        } else if (seen) {
-          collage.classList.remove('is-revealed');
-        }
-      },
-      { threshold: 0.25 },
-    );
-    io.observe(collage);
-
-    return () => io.disconnect();
   }, []);
 
   // One listener for every roster card on the page, archives included.

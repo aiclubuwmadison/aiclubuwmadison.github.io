@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import { flushSync } from "react-dom";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { Sun, Moon, X } from "lucide-react";
@@ -104,6 +104,30 @@ const Nav = () => {
       cancelAnimationFrame(rafId);
     };
   }, []);
+
+  // The mobile menu grows out of the burger: measure the burger's centre
+  // relative to the panel's untransformed box and hand it to CSS as the
+  // transform-origin. Measured on mount, on resize and whenever the menu
+  // toggles, so the closed state already carries the right origin before
+  // the open transition starts. offsetLeft/offsetTop ignore transforms and,
+  // for a position: fixed panel, are viewport-relative.
+  useLayoutEffect(() => {
+    const panel = panelRef.current;
+    const burger = burgerRef.current;
+    if (!panel || !burger) return undefined;
+
+    const measure = () => {
+      const rect = burger.getBoundingClientRect();
+      if (rect.width === 0 && rect.height === 0) return; // burger hidden (desktop)
+      const originX = rect.left + rect.width / 2 - panel.offsetLeft;
+      const originY = rect.top + rect.height / 2 - panel.offsetTop;
+      panel.style.setProperty("--nav-panel-origin", `${originX}px ${originY}px`);
+    };
+
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, [mobileOpen]);
 
   useEffect(() => {
     if (!mobileOpen) return;

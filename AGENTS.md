@@ -110,12 +110,24 @@ Every page moves on **one** curve family and **one** set of durations, defined u
 
 | Token | Use |
 |-------|-----|
-| `--ease-out` | The default. Entrances, hovers, most transitions. |
+| `--ease-out` | The default — `cubic-bezier(0.23, 1, 0.32, 1)`. Entrances, exits, hovers, most transitions. |
 | `--ease-mask` | Long tail — masked heading lifts, nav entrance. |
 | `--ease-spring` | Slight overshoot — chevrons, toggles, anything that “clicks”. |
+| `--motion-press` | `:active` press feedback (`scale(0.97)`). |
 | `--motion-fast` / `--motion-base` | Colour changes / hover movement. |
-| `--motion-rise` · `--motion-word` · `--motion-panel` · `--motion-reveal` | Entrance · masked word · disclosure · scroll reveal. |
+| `--motion-exit` | Menus and popovers closing — always quicker than they open. |
+| `--motion-rise` · `--motion-word` · `--motion-panel` · `--motion-reveal` | Entrance · masked word · disclosure open · scroll reveal. |
+| `--motion-panel-exit` | Disclosure close. |
 | `--stagger` | Delay between neighbours in a cascade. |
+
+Rules the motion follows (Emil Kowalski's animation standards):
+
+- Anything a button opens (menu, dropdown, popover) grows from its trigger: set `transform-origin` to the trigger, measured in JS when the trigger can move (see `Nav.jsx` and `Seminars.jsx`). Modals and full-screen sheets stay centred.
+- Enter from `opacity: 0` + `scale(0.97)`, never `scale(0)`. UI motion stays under 300ms; page entrances may run longer.
+- Toggles and menus use transitions (or `@starting-style`), not keyframes, so they can be interrupted.
+- Animate `transform` and `opacity` only (grid-row height is the allowed exception). No `transition: all`, no animated `gap`/`padding`.
+- Hover movement lives inside `@media (hover: hover) and (pointer: fine)`. Colour-only hovers may stay ungated.
+- Reduced motion keeps opacity fades (`atmosFade`) and drops movement.
 
 Utility classes (all reduced-motion safe):
 

@@ -335,7 +335,7 @@
   background: var(--atmos-badger);
   transform: scaleY(0);
   transform-origin: top;
-  transition: transform 420ms var(--ease-out);
+  transition: transform var(--motion-base) var(--ease-out);
 }
 
 .atmos-faq-row.is-open::before {
@@ -365,11 +365,13 @@
 }
 
 .faq-row-text-wrap {
-  transition: transform 320ms var(--ease-out);
+  transition: transform var(--motion-base) var(--ease-out);
 }
 
-.atmos-faq-row:hover .faq-row-text-wrap {
-  transform: translateX(3px);
+@media (hover: hover) and (pointer: fine) {
+  .atmos-faq-row:hover .faq-row-text-wrap {
+    transform: translateX(3px);
+  }
 }
 
 .atmos-faq-q {
@@ -382,7 +384,7 @@
 
 .atmos-faq-toggle-icon {
   transition:
-    transform var(--motion-panel) var(--ease-spring),
+    transform 250ms var(--ease-spring),
     color 300ms ease;
 }
 
@@ -394,29 +396,31 @@
   color: var(--atmos-badger);
 }
 
-/* Answer copy settles in just behind the panel opening */
+/* Answer copy settles in just behind the panel opening; it leaves faster. */
 .atmos-faq-a {
   opacity: 0;
   transform: translateY(-8px);
   transition:
-    opacity 200ms ease,
-    transform 340ms var(--ease-out);
+    opacity var(--motion-panel-exit) var(--ease-out),
+    transform var(--motion-panel-exit) var(--ease-out);
 }
 
 .atmos-faq-answer-panel.is-open .atmos-faq-a {
   opacity: 1;
   transform: none;
-  transition-delay: 90ms;
+  transition:
+    opacity 200ms ease 90ms,
+    transform var(--motion-panel) var(--ease-out) 90ms;
 }
 
 @media (prefers-reduced-motion: reduce) {
+  /* Fade in place instead of rising. */
   .atmos-faq-row {
-    animation: none !important;
+    animation-name: atmosFade !important;
   }
 
   .atmos-faq-row::before,
-  .faq-row-text-wrap,
-  .atmos-faq-a {
+  .faq-row-text-wrap {
     transition: none !important;
   }
 
@@ -424,8 +428,9 @@
     transform: none;
   }
 
-  .atmos-faq-a {
-    opacity: 1;
+  /* Answer copy keeps its fade, drops the slide. */
+  .atmos-faq-a,
+  .atmos-faq-answer-panel.is-open .atmos-faq-a {
     transform: none;
   }
 }
@@ -513,10 +518,24 @@
     background-color var(--motion-fast) ease;
 }
 
-.faq-search-clear:hover {
-  color: var(--atmos-badger);
-  background: color-mix(in srgb, var(--atmos-badger) 14%, transparent);
-  transform: rotate(90deg);
+.faq-search-clear:active {
+  transform: scale(0.97);
+  transition:
+    transform var(--motion-press) var(--ease-out),
+    color var(--motion-fast) ease,
+    background-color var(--motion-fast) ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .faq-search-clear:hover {
+    color: var(--atmos-badger);
+    background: color-mix(in srgb, var(--atmos-badger) 14%, transparent);
+    transform: rotate(90deg);
+  }
+
+  .faq-search-clear:hover:active {
+    transform: rotate(90deg) scale(0.97);
+  }
 }
 
 .faq-search-kbd {
@@ -680,9 +699,22 @@
     filter var(--motion-fast) ease;
 }
 
-.faq-empty-reset:hover {
-  transform: translateY(-1px);
-  filter: brightness(1.08);
+.faq-empty-reset:active {
+  transform: scale(0.97);
+  transition:
+    transform var(--motion-press) var(--ease-out),
+    filter var(--motion-fast) ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .faq-empty-reset:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.08);
+  }
+
+  .faq-empty-reset:hover:active {
+    transform: translateY(-1px) scale(0.97);
+  }
 }
 
 .faq-empty-link {
@@ -720,12 +752,15 @@
 
 @media (prefers-reduced-motion: reduce) {
   .faq-empty {
-    animation: none !important;
+    animation-name: atmosFade !important;
   }
 
   .faq-search-clear,
   .faq-search-clear:hover,
-  .faq-empty-reset:hover {
+  .faq-search-clear:active,
+  .faq-empty-reset,
+  .faq-empty-reset:hover,
+  .faq-empty-reset:active {
     transform: none !important;
   }
 }
@@ -763,12 +798,14 @@
 
 .faq-contact-card-icon {
   transition:
-    transform 380ms var(--ease-out),
-    background-color 380ms var(--ease-out);
+    transform var(--motion-base) var(--ease-out),
+    background-color var(--motion-base) var(--ease-out);
 }
 
-.faq-contact-card:hover .faq-contact-card-icon {
-  transform: scale(1.06) rotate(-6deg);
+@media (hover: hover) and (pointer: fine) {
+  .faq-contact-card:hover .faq-contact-card-icon {
+    transform: scale(1.06) rotate(-6deg);
+  }
 }
 
 @media (hover: none) {
@@ -782,11 +819,11 @@
   .faq-heading-period,
   .atmos-faq-left > .faq-subtitle,
   .atmos-faq-left > .faq-contact-card {
-    animation: none !important;
+    animation-name: atmosFade !important;
   }
 
   .faq-contact-card-icon {
-    transition: none !important;
+    transition: background-color var(--motion-base) var(--ease-out) !important;
   }
 
   .faq-contact-card:hover .faq-contact-card-icon {
